@@ -73,7 +73,7 @@
 
             <!-- Footer -->
             <div id="footer">
-                <script>$('#footer').load('./include/footer.html')</script>
+                <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
             </div>
             <!-- End of Footer -->
 

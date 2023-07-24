@@ -6,7 +6,7 @@
     <!-- 사이드바 화이트 로고 Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="index.html">
         <div class="">
-            <img src="/img/logo2.png" class="mw-100">
+            <img src="${path }/resources/img/logo2.png" class="mw-100">
         </div>
     </a>
 
@@ -98,7 +98,7 @@
 
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+        <img class="sidebar-card-illustration mb-2" src="${path }/resources/img/undraw_rocket.svg" alt="...">
         <p class="text-center mb-2"><strong>JOIN OFFICE</strong> 를 통해<br>효율적이고 편리한<br>
             업무관리를 시작해 보세요!<br><br>문의사항 02-2687-1245</p>
     </div>
