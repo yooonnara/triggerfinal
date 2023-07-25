@@ -52,17 +52,21 @@
 		</div></li>
 
 	<!-- 전자결재 사이드바 -->
-	<li class="nav-item"><a class="nav-link collapsed" href="#"
-		data-toggle="collapse" data-target="#collapsePages"
-		aria-expanded="true" aria-controls="collapsePages"> <i
-			class="bi bi-pencil-square"></i> <span>전자결재</span>
-	</a>
-		<div id="collapsePages" class="collapse"
-			aria-labelledby="headingPages" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="">결재 문서 관리</a>
-			</div>
-		</div></li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="bi bi-pencil-square"></i>
+            <span>전자결재</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="#">결재 문서 관리</a>
+                <a href=""><h6 class="collapse-header">- 연차 문서 관리</h6></a>
+                <a href=""><h6 class="collapse-header">- 출장 문서 관리</h6></a>
+                <a class="collapse-item" href="#">결재 문서 현황</a>
+            </div>
+        </div>
+    </li>
 
 	<!-- 커뮤니티 사이드바 -->
 	<li class="nav-item"><a class="nav-link collapsed" href="#"

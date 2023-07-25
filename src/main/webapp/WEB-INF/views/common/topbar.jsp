@@ -11,33 +11,27 @@
 		<i class="fa fa-bars"></i>
 	</button>
 
-	<!-- 탑바 검색창 Topbar Search -->
-	<form
-		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-		<div class="input-group">
-			<input type="text" class="form-control bg-light border-0 small"
-				placeholder="Search for..." aria-label="Search"
-				aria-describedby="basic-addon2">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="button">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
-			</div>
-		</div>
-	</form>
-
+	<!-- 관리자페이지 이동 -->
+	<div class="input-group" style="justify-content: right">
+		<a href="${path }/admin">
+			<span class="mr-2 d-none d-lg-inline small text-primary">관리자 페이지</span>
+		</a>
+	</div>
+	
 	<!-- 로그인 프로필 시작 Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
 
 		<!-- Nav Item - User Information -->
-		<li class="nav-item dropdown no-arrow"><a
-			class="nav-link dropdown-toggle" href="#" id="userDropdown"
-			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"> <span
-				class="mr-2 d-none d-lg-inline text-gray-600 small">윤나라</span> <img
-				class="img-profile rounded-circle"
-				src="${path }/resources/img/undraw_profile.svg">
-		</a> <!-- Dropdown - User Information -->
+		
+
+		<li class="nav-item dropdown no-arrow">
+			<a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+				<span class="mr-2 d-none d-lg-inline text-gray-600 small">윤나라</span>
+				<img class="img-profile rounded-circle" src="${path }/resources/img/undraw_profile.svg">
+			</a> 
+			
+			<!-- Dropdown - User Information -->
 			<div
 				class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 				aria-labelledby="userDropdown">
@@ -50,11 +44,14 @@
 					class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 					로그아웃
 				</a>
-			</div></li>
+			</div>
+		</li>
 
 	</ul>
 
 </nav>
+
+
 
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">

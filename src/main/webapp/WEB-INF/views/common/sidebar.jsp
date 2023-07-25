@@ -84,7 +84,7 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="">전체게시판</a>
-                <a class="collapse-item" href="/notice.html">공지사항</a>
+                <a class="collapse-item" href="${path }/notice">공지사항</a>
                 <a class="collapse-item" href="">자유게시판</a>
             </div>
         </div>
