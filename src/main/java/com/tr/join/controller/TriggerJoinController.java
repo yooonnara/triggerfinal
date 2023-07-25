@@ -2,18 +2,19 @@ package com.tr.join.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TriggerJoinController {
 
 	@GetMapping("/")
 	public String mainPage() {
-		return "index";
+		return "login/login";
 	}
 	
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public String loginPage() {
-		return "login/login";
+		return "mainpage";
 	}
 	
 	@GetMapping("/admin")

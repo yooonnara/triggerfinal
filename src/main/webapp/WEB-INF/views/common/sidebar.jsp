@@ -4,18 +4,19 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion h-100" id="accordionSidebar">
 
     <!-- 사이드바 화이트 로고 Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="index.html">
-        <div class="">
-            <img href="${path }/" src="${path }/resources/img/logo2.png" class="mw-100">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="#">
+        <div class="logo-area">
+            <img src="${path }/resources/img/logo2.png" class="mw-100">
         </div>
     </a>
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="${path }/">
+        <a class="nav-link" href="#">
             <i class="bi bi-house-door-fill"></i>
             <span>홈</span></a>
     </li>
