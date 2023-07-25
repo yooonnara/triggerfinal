@@ -68,6 +68,11 @@
 											name="userId" id=""></td>
 									</tr>
 									<tr>
+										<td>입사일</td>
+										<td><input class="form-control ml-5" type="date"
+											placeholder="" readonly></td>
+									</tr>
+									<tr>
 										<td>부서</td>
 										<td><input class="form-control ml-5" type="text"
 											placeholder="개발팀" readonly></td>
