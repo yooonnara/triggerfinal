@@ -36,4 +36,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
+<script
+	src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script
+	src="${path }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="${path }/resources/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="${path }/resources/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="${path }/resources/js/demo/chart-area-demo.js"></script>
+<script src="${path }/resources/js/demo/chart-pie-demo.js"></script>
+
 </head>
