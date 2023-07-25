@@ -28,6 +28,22 @@ public class AttendanceController {
 	@GetMapping("/businessTripList")
 	public String businessTripList() {
 		return "attendance/businessTripList";
+}
 	
+	
+/*----------------------관리자 페이지----------------------*/
+	
+	@GetMapping("/adminWorkTime")
+	public String adminWorkTime() {
+		return "admin/adminWorkTime";
+}
+	@GetMapping("/adminDayoff")
+	public String adminDayoff() {
+		return "admin/adminDayoff";
+}
+	
+	@GetMapping("/adminBusinessTrip")
+	public String adminBusinessTrip() {
+		return "admin/adminBusinessTrip";
 }
 }
