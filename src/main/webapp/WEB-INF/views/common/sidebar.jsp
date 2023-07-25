@@ -49,9 +49,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">근태현황</a>
-                <a class="collapse-item" href="">연차현황</a>
-                <a class="collapse-item" href="">출장현황</a>
+                <a class="collapse-item" href="${path }/workTimeMain">근태현황</a>
+                <a class="collapse-item" href="${path }/dayoffList">연차현황</a>
+                <a class="collapse-item" href="${path }/businessTripList">출장현황</a>
             </div>
         </div>
     </li>
