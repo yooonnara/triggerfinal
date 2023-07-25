@@ -3,7 +3,7 @@
 
 <!-- 헤드 태그 -->
 <div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+   <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 </div>
 
 <body id="page-top">
@@ -146,52 +146,64 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body ml-4">
                                 <form class="user">
-                                    <table>
-                                        <tr>
+                                    <table class="">
+                                        <tr class="">
                                             <td>사번</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="">
+                                                <input type="text" class="form-control ml-5" name="userId" id="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>이름(한글)</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="">
+                                                <input type="text" class="form-control ml-5" name="userId" id="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>아이디</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="영문, 숫자 4글자 이상">
+                                                <input type="text" class="form-control ml-5" name="userId" id="" placeholder="영문, 숫자 4글자 이상">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>비밀번호</td>
                                             <td>
-                                                <input type="password" class="form-control ml-5 mb-3" name="userId" id="">
+                                                <input type="password" class="form-control ml-5" name="userId" id="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>비밀번호 확인</td>
                                             <td>
-                                                <input type="password" class="form-control ml-5 mb-3" name="userId" id="">
+                                                <input type="password" class="form-control ml-5" name="userId" id="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>계정상태</td>
                                             <td>
-                                                <select class="form-control ml-5 mb-3" aria-label="Default select example">
+                                                <select class="form-control ml-5" aria-label="Default select example">
                                                     <option value="1" selected>정상</option>
                                                     <option value="2">중지</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>입사일</td>
+                                            <td>
+                                                <input type="date" class="form-control ml-5" name="userId" id="">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>퇴사일</td>
+                                            <td>
+                                                <input type="date" class="form-control ml-5" name="userId" id="">
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>부서</td>
                                             <td>
-                                                <select class="form-control ml-5 mb-3" aria-label="Default select example">
+                                                <select class="form-control ml-5" aria-label="Default select example">
                                                     <option selected>미지정</option>
                                                     <option value="1">운영팀</option>
                                                     <option value="2">개발팀</option>
@@ -202,7 +214,7 @@
                                         <tr>
                                             <td>직급</td>
                                             <td>
-                                                <select class="form-control ml-5 mb-3" aria-label="Default select example">
+                                                <select class="form-control ml-5" aria-label="Default select example">
                                                     <option selected>사원</option>
                                                     <option value="1">대리</option>
                                                     <option value="2">과장</option>
@@ -216,13 +228,13 @@
                                         <tr>
                                             <td>이메일</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="">
+                                                <input type="text" class="form-control ml-5" name="userId" id="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>전화번호</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="- 없이 입력">
+                                                <input type="text" class="form-control ml-5" name="userId" id="" placeholder="- 없이 입력">
                                             </td>
                                         </tr>
                                        
@@ -253,13 +265,13 @@
 
     <!-- Scroll to Top Button-->
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
-		<i class="fas fa-angle-up"></i>
-	</a>
+      <i class="fas fa-angle-up"></i>
+   </a>
 
     <!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
+   <div id="bootstrap">
+      <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+   </div>
 
 </body>
 

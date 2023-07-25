@@ -32,6 +32,11 @@ public class TriggerJoinController {
 		return "mypage/mypage";
 	}
 	
+	@GetMapping("/notice")
+	public String noticePage() {
+		return "board/notice";
+	}
+	
 	
 	
 	

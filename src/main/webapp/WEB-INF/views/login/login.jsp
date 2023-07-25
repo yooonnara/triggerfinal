@@ -26,7 +26,7 @@
                                     </div>
                                     <form class="user" action="${path }/login" method='post'>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp" placeholder="아이디">
                                         </div>
                                         <div class="form-group">
