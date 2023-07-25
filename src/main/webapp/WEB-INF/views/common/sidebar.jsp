@@ -4,18 +4,19 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion h-100" id="accordionSidebar">
 
     <!-- 사이드바 화이트 로고 Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="index.html">
-        <div class="">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="#">
+        <div class="logo-area">
             <img src="${path }/resources/img/logo2.png" class="mw-100">
         </div>
     </a>
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
             <i class="bi bi-house-door-fill"></i>
             <span>홈</span></a>
     </li>
@@ -32,7 +33,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">내 정보 수정</a>
+                <a class="collapse-item" href="${path }/mypage">내 정보 수정</a>
 
             </div>
         </div>
@@ -64,8 +65,10 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">결재 요청하기</a>
-                <a class="collapse-item" href="">결재 문서 현황</a>
+                <a class="collapse-item" href="#">결재 요청하기</a>
+                <a href=""><h6 class="collapse-header">- 연차 신청</h6></a>
+                <a href=""><h6 class="collapse-header">- 출장 신청</h6></a>
+                <a class="collapse-item" href="#">결재 문서 현황</a>
             </div>
         </div>
     </li>
