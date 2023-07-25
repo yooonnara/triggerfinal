@@ -16,7 +16,7 @@
             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                 aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-dark" type="button">
                     <i class="fas fa-search fa-sm"></i>
                 </button>
             </div>
@@ -30,17 +30,12 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">윤나라</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
                 <img class="img-profile rounded-circle" src="${path }/resources/img/undraw_profile.svg">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="${path }/mypage">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    기본정보
-                </a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     로그아웃

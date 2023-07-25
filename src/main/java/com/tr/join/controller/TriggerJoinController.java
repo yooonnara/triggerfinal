@@ -7,8 +7,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TriggerJoinController {
 
 	@GetMapping("/")
-	public String mainpage() {
+	public String mainPage() {
 		return "index";
 	}
+	
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login/login";
+	}
+	
+	@GetMapping("/admin")
+	public String adminPage() {
+		return "admin/adminMain";
+	}
+	
+	@GetMapping("/adminMember")
+	public String adminMemberPage() {
+		return "admin/adminMember";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypagePage() {
+		return "mypage/mypage";
+	}
+	
+	
+	
 	
 }

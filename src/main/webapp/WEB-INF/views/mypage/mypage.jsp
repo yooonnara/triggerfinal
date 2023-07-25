@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
 
@@ -26,15 +26,12 @@
 <!-- Custom styles for this template-->
 <link href="${page }/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${page }/resources/css/sb-admin-2.css" rel="stylesheet">
-<script src="js/jquery-3.7.0.min.js"></script>
+<script src="${page }/resources/js/jquery-3.7.0.min.js"></script>
 
 <!--부트스트랩 아이콘-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
-<!-- 글꼴 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -66,40 +63,72 @@
 				<div class="container-fluid pl-5 pr-5">
 
 					<!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark mt-5 mb-5">HOME</h1>
+					<h1 class="h3 text-dark mt-5 mb-5">내 정보 수정</h1>
 
-					<div class="main-container row">
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<p class="h6 mb-0 font-weight-bold text-gray-800">결재현황</p><br>
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												대기
-											</div>
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												승인
-											</div>
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												반려
-											</div>
-											
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="mypage-area row mb-3">
+						<div class="mypage-container col-12 d-flex justify-content-center">
+
+							<form class="user">
+								<table class="table-sm">
+									<tr>
+										<td>사번</td>
+										<td><input class="form-control ml-5" type="text"
+											placeholder="J002" readonly></td>
+									</tr>
+									<tr>
+										<td>이름(한글)</td>
+										<td><input class="form-control ml-5" type="text"
+											placeholder="윤나라" readonly></td>
+									</tr>
+									<tr>
+										<td>아이디</td>
+										<td><input class="form-control ml-5" type="text"
+											placeholder="yooonnara" readonly></td>
+									</tr>
+									<tr>
+										<td>비밀번호</td>
+										<td><input type="password" class="form-control ml-5"
+											name="userId" id=""></td>
+									</tr>
+									<tr>
+										<td>비밀번호 확인</td>
+										<td><input type="password" class="form-control ml-5"
+											name="userId" id=""></td>
+									</tr>
+									<tr>
+										<td>부서</td>
+										<td><input class="form-control ml-5" type="text"
+											placeholder="개발팀" readonly></td>
+									</tr>
+									<tr>
+										<td>직급</td>
+										<td><input class="form-control ml-5" type="text"
+											placeholder="대리" readonly></td>
+									</tr>
+									<tr>
+										<td>이메일</td>
+										<td><input type="text" class="form-control ml-5"
+											name="userId" id=""></td>
+									</tr>
+									<tr>
+										<td>전화번호</td>
+										<td><input type="text" class="form-control ml-5"
+											name="userId" id="" placeholder="- 없이 입력"></td>
+									</tr>
+
+								</table>
+							</form>
 						</div>
-
 					</div>
-
+					<div class="modal-footer">
+						<a class="btn btn-primary" href="#">저장</a>
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">취소</button>
+					</div>
 				</div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
-
 			</div>
+
 
 			<!-- Footer -->
 			<div id="footer">

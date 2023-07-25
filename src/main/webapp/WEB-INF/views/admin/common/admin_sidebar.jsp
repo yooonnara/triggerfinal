@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion h-100" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion h-100" id="accordionSidebar">
 
     <!-- 사이드바 화이트 로고 Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="index.html">
         <div class="">
-            <img href="${path }/" src="${path }/resources/img/logo2.png" class="mw-100">
+            <img src="${path }/resources/img/logo2.png" class="mw-100">
         </div>
     </a>
 
@@ -15,7 +15,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="${path }/">
+        <a class="nav-link" href="${path }/admin">
             <i class="bi bi-house-door-fill"></i>
             <span>홈</span></a>
     </li>
@@ -28,11 +28,11 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="bi bi-person-fill"></i>
-            <span>내 정보</span>
+            <span>멤버관리</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${path }/mypage">내 정보 수정</a>
+                <a class="collapse-item" href="${path }/adminMember">멤버 통합관리</a>
 
             </div>
         </div>
@@ -48,9 +48,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">근태현황</a>
-                <a class="collapse-item" href="">연차현황</a>
-                <a class="collapse-item" href="">출장현황</a>
+                <a class="collapse-item" href="">멤버 근태현황</a>
+                <a class="collapse-item" href="">멤버 연차현황</a>
+                <a class="collapse-item" href="">멤버 출장현황</a>
             </div>
         </div>
     </li>
@@ -64,10 +64,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">결재 요청하기</a>
-                <a href=""><h6 class="collapse-header">- 연차 신청</h6></a>
-                <a href=""><h6 class="collapse-header">- 출장 신청</h6></a>
-                <a class="collapse-item" href="#">결재 문서 현황</a>
+                <a class="collapse-item" href="">결재 문서 관리</a>
             </div>
         </div>
     </li>
@@ -77,14 +74,14 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCommunity"
             aria-expanded="true" aria-controls="collapseCommunity">
             <i class="bi bi-chat-square-text-fill"></i>
-            <span>커뮤니티</span>
+            <span>게시판 관리</span>
         </a>
         <div id="collapseCommunity" class="collapse" aria-labelledby="headingCommunity"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">전체게시판</a>
-                <a class="collapse-item" href="/notice.html">공지사항</a>
-                <a class="collapse-item" href="">자유게시판</a>
+                <a class="collapse-item" href="">전체게시판 현황</a>
+                <a class="collapse-item" href="">공지사항 관리</a>
+                <a class="collapse-item" href="">자유게시판 관리</a>
             </div>
         </div>
     </li>
@@ -100,7 +97,7 @@
 
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="${path }/resources/img/undraw_rocket.svg" alt="...">
+        <img class="sidebar-card-illustration mb-2" src="${path }/resources/img/undraw_team.svg" alt="...">
         <p class="text-center mb-2"><strong>JOIN OFFICE</strong> 를 통해<br>효율적이고 편리한<br>
             업무관리를 시작해 보세요!<br><br>문의사항 02-2687-1245</p>
     </div>
