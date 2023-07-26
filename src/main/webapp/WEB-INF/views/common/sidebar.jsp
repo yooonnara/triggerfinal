@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion h-100" id="accordionSidebar">
 
     <!-- 사이드바 화이트 로고 Sidebar - Brand -->
@@ -98,12 +99,13 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
+    
+    <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+    
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
         <img class="sidebar-card-illustration mb-2" src="${path }/resources/img/undraw_rocket.svg" alt="...">
         <p class="text-center mb-2"><strong>JOIN OFFICE</strong> 를 통해<br>효율적이고 편리한<br>
             업무관리를 시작해 보세요!<br><br>문의사항 02-2687-1245</p>
     </div>
-
 </ul>

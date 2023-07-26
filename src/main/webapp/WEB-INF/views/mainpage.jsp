@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<!-- 헤드 태그 -->
-<div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
-
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -85,6 +80,7 @@
 	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
+
 	
 </body>
 </html>

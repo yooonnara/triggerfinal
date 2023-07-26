@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<!-- 헤드 태그 -->
-<div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
 
 <body id="page-top">
 
@@ -106,11 +101,8 @@
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
 
-
 			<!-- Footer -->
-			<div id="footer">
 				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-			</div>
 			<!-- End of Footer -->
 
 		</div>

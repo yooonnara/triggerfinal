@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!-- 헤드 태그 -->
-<div id="headTag">
-   <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
+<link href="${path }/resources/css/nara.css" rel="stylesheet">
 
 <body id="page-top">
 
@@ -149,8 +145,17 @@
                             <div class="modal-body">
                                 <form class="user">
                                     <table class="table text-dark table-borderless">
-	                                    <tbody>
-	                                        <tr class="">
+	                                    <tbody class="text-left">
+	                                    	<tr class="text-center">
+	                                            <td colspan='2'>
+	                                            	<div class="box">
+														<img src="${path }/resources/img/user_profile.png" 
+																class="profile rounded enter-block mb-3" 
+																style="width: 80px; height: 80px">	     
+													</div>                                       
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
 	                                            <td class="align-middle">사번</td>
 	                                            <td>
 	                                                <input type="text" class="form-control" name="no" id="">
@@ -164,10 +169,10 @@
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">성별</td>
-	                                            <td>
-	                                            	<input type="radio" class="" name="gender" id="">&nbsp;남
+	                                            <td class="text-left">
+	                                            	<input type="radio" name="gender" id="">&nbsp;남
 													&nbsp;&nbsp;&nbsp;&nbsp;
-	                                            	<input type="radio" class="" name="gender" id="">&nbsp;여
+	                                            	<input type="radio" name="gender" id="">&nbsp;여
 												</td>
 	                                        </tr>
 	                                        <tr>
@@ -261,9 +266,7 @@
 
 
             <!-- Footer -->
-            <div id="footer">
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-            </div>
             <!-- End of Footer -->
 
         </div>
@@ -276,7 +279,6 @@
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>
    </a>
-
 
 </body>
 
