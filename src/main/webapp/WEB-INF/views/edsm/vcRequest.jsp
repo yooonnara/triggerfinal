@@ -56,98 +56,81 @@
                 <!-- 상단바 종료 End of Topbar -->
  
 
-                <!-- 수정할 컨테이너 Begin Page Content -->
-   <div class="container-fluid">
+ 
+                       <!-- 수정할 컨테이너 Begin Page Content -->
+    <div class="container-fluid pl-5 pr-5">
 
-                    <!-- 타이틀 Page Heading -->
-                 <h1 class="h3 font-weight-bold text-dark  my-5 ml-5">결재요청하기 >연차신청</h1>
+        <!-- 타이틀 Page Heading -->
+        <h1 class="h3 text-dark mt-5 mb-5">연차신청하기</h1>
 
-         <div class="edsm-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
-                    
-                    <p class="h5 text-center font-weight-bold ">연차 일정, 필수정보 입력 </h5>
-					
-					<form>
-						  <div class="form-group row ">
-						    <label for="staticName" class="col-sm-2 col-form-label ">신청자</label>
-						    <div class="col-sm-10">
-						      <input type="text" readonly class="form-control-plaintext" id="staticName" value="나빈">
-						    </div>
-						     <label for="staticDept" class="col-sm-2 col-form-label">소속</label>
-						    <div class="col-sm-10">
-						      <input type="text" readonly class="form-control-plaintext" id="staticDept" value="인사부">
-						    </div>
-						  </div>
-					</form>		
-		<div class="form_text">
-			<p class="h5 text-center font-weight-bold  py-3">연차 구분 </h5>
-		</div>
-				<div class="select-box py-2">
-					<select class="custom-select col-sm-4">
-					  <option selected>연차 종류를 선택해주세요</option>
-					  <option value="1">결혼</option>
-					  <option value="2">연차</option>
-					  <option value="3">조의</option>
-					</select>
-				</div>	  
-				
-		<div class="form_text">
-			<p class="h5 text-center font-weight-bold py-3">연차 신청 기간 </h5>
-		</div>
-			
-		<form>
-		<div class="date-form py-3">
-			<label>
-				시작일 
-			</label>
-				<input type="date" name="start" min="2023-07-23" max="2023-08-30"/>	
-			<label>
-				종료일
-			</label>
-				<input type="date" name="end" min="2023-07-23" max="2023-08-30"/>	
-			</div>
-		</form>		  
-          
-       <form>
- 		 <div class="text-center form-group text py-4 ">
-    		<label for="exampleFormControlFile1">파일 첨부 </label>
-  			  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-  		</div>
-	</form>
+        <div class="vcRequest-area row mt-6 mb-6">
+            <div class="mypage-container col-12 d-flex justify-content-center">
+
+                <form class="vc shadow px-5 py-5 ">
+                    <table class="table-sm ml-1 mr-5"">
+                      
+                        <tr>
+                            <td>문서번호</td>
+                            <td><input class="form-control ml-5 mb-1" type="text"
+                                placeholder="nr423" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>이름(한글)</td>
+                            <td><input class="form-control ml-5 mb-1" type="text"
+                                placeholder="나빈" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>부서</td>
+                            <td><input class="form-control ml-5 mb-1" type="text"
+                                placeholder="개발팀" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>직급</td>
+                            <td><input class="form-control ml-5 mb-1" type="text"
+                                placeholder="대리" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>연차 구분</td>
+                            <td> <select class="custom-select ml-5 mb-1" col-sm-12">
+                                <option selected>연차 종류를 선택하세요</option>
+                                <option value="1">결혼</option>
+                                <option value="2">연차</option>
+                                <option value="3">조의</option>
+                              </select>
+                        </tr>
+                        
+                         <tr>
+                        <td>신청 내용</td>
+                       <td>
+                            <textarea class="form-control ml-5 mb-1" name="exampleFormControlTextarea1" rows="4"></textarea>
+                        </td>
+                        </tr>
             
-            
-            <!--등록 여부 확인  -->
-   
+                        
+                      <tr>
+                        <td>연차시작날짜</td>
+                        
+	                     <td>
+	                    <input type="date" class="form-control ml-5 mb-1" name="enroll_date" id="">   </td>
+	                    </tr>
+	                         <tr>
+	                         <td class="align-middle">연차시작끝날짜</td>
+	                               
+                             <td> <input type="date" class="form-control ml-5 mb-1" name="resign_date" id=""></td>
+	                            
+                            </tr>
+                           
+                    </table>
+                    <div class="req-btn d-flex justify-content-around pt-5  ">
+                        <a class="align-text-bottom btn btn-primary " href="#">등록</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    <!-- 수정할 컨테이너 종료 End of Main Content -->
+</div>
 
-           
-           <div class="req-btn py-5 ">
-         	  <button type="button" class="btn btn-primary">등록</button>
-          	 <button type="button" class="btn btn-primary">수정</button>
-           </div>
-           
-           <style>
-           .req-btn{
-           margin-right: 5rem;
-           text-align:right;}
-           
-           
-           
-           </style>
-           
-           
-    
-    
-    
-    
-    
-    
-    </div>
-
-
-
-  </div>
-                <!-- 수정할 컨테이너 종료 End of Main Content -->
-
-      </div>
 
             <!-- Footer -->
             <div id="footer">
