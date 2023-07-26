@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<!-- 헤드 태그 -->
-<div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
 
 <body id="page-top">
 
@@ -68,6 +63,11 @@
 											name="userId" id=""></td>
 									</tr>
 									<tr>
+										<td>입사일</td>
+										<td><input class="form-control ml-5" type="date"
+											placeholder="" readonly></td>
+									</tr>
+									<tr>
 										<td>부서</td>
 										<td><input class="form-control ml-5" type="text"
 											placeholder="개발팀" readonly></td>
@@ -101,11 +101,8 @@
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
 
-
 			<!-- Footer -->
-			<div id="footer">
 				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-			</div>
 			<!-- End of Footer -->
 
 		</div>
@@ -118,11 +115,6 @@
 	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
-
-	<!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
 
 </body>
 

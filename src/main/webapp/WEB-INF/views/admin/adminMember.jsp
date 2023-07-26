@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!-- 헤드 태그 -->
-<div id="headTag">
-   <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
+<link href="${path }/resources/css/nara.css" rel="stylesheet">
 
 <body id="page-top">
 
@@ -146,98 +142,116 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body ml-4">
+                            <div class="modal-body">
                                 <form class="user">
-                                    <table class="">
-                                        <tr class="">
-                                            <td>사번</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>이름(한글)</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>아이디</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5" name="userId" id="" placeholder="영문, 숫자 4글자 이상">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>비밀번호</td>
-                                            <td>
-                                                <input type="password" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>비밀번호 확인</td>
-                                            <td>
-                                                <input type="password" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>계정상태</td>
-                                            <td>
-                                                <select class="form-control ml-5" aria-label="Default select example">
-                                                    <option value="1" selected>정상</option>
-                                                    <option value="2">중지</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>입사일</td>
-                                            <td>
-                                                <input type="date" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>퇴사일</td>
-                                            <td>
-                                                <input type="date" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>부서</td>
-                                            <td>
-                                                <select class="form-control ml-5" aria-label="Default select example">
-                                                    <option selected>미지정</option>
-                                                    <option value="1">운영팀</option>
-                                                    <option value="2">개발팀</option>
-                                                    <option value="3">인사팀</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>직급</td>
-                                            <td>
-                                                <select class="form-control ml-5" aria-label="Default select example">
-                                                    <option selected>사원</option>
-                                                    <option value="1">대리</option>
-                                                    <option value="2">과장</option>
-                                                    <option value="3">차장</option>
-                                                    <option value="3">부장</option>
-                                                    <option value="3">이사</option>
-                                                    <option value="3">대표</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>이메일</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5" name="userId" id="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>전화번호</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5" name="userId" id="" placeholder="- 없이 입력">
-                                            </td>
-                                        </tr>
-                                       
+                                    <table class="table text-dark table-borderless">
+	                                    <tbody class="text-left">
+	                                    	<tr class="text-center">
+	                                            <td colspan='2'>
+	                                            	<div class="box">
+														<img src="${path }/resources/img/user_profile.png" 
+																class="profile rounded enter-block mb-3" 
+																style="width: 80px; height: 80px">	     
+													</div>                                       
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">사번</td>
+	                                            <td>
+	                                                <input type="text" class="form-control" name="no" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">이름(한글)</td>
+	                                            <td>
+	                                                <input type="text" class="form-control" name="name" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">성별</td>
+	                                            <td class="text-left">
+	                                            	<input type="radio" name="gender" id="">&nbsp;남
+													&nbsp;&nbsp;&nbsp;&nbsp;
+	                                            	<input type="radio" name="gender" id="">&nbsp;여
+												</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">아이디</td>
+	                                            <td>
+	                                                <input type="text" class="form-control" name="id" id="" placeholder="영문, 숫자 4글자 이상">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">비밀번호</td>
+	                                            <td>
+	                                                <input type="password" class="form-control" name="password" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">비밀번호 확인</td>
+	                                            <td>
+	                                                <input type="password" class="form-control" name="password" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">계정상태</td>
+	                                            <td>
+	                                                <select class="form-control" aria-label="Default select example">
+	                                                    <option value="1" selected>정상</option>
+	                                                    <option value="2">중지</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">입사일</td>
+	                                            <td>
+	                                                <input type="date" class="form-control" name="enroll_date" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">퇴사일</td>
+	                                            <td>
+	                                                <input type="date" class="form-control" name="resign_date" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">부서</td>
+	                                            <td>
+	                                                <select class="form-control" aria-label="Default select example">
+	                                                    <option selected>미지정</option>
+	                                                    <option value="1">운영팀</option>
+	                                                    <option value="2">개발팀</option>
+	                                                    <option value="3">인사팀</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">직급</td>
+	                                            <td>
+	                                                <select class="form-control" aria-label="Default select example">
+	                                                    <option selected>사원</option>
+	                                                    <option value="1">대리</option>
+	                                                    <option value="2">과장</option>
+	                                                    <option value="3">차장</option>
+	                                                    <option value="3">부장</option>
+	                                                    <option value="3">이사</option>
+	                                                    <option value="3">대표</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">이메일</td>
+	                                            <td>
+	                                                <input type="email" class="form-control" name="email" id="">
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="align-middle">전화번호</td>
+	                                            <td>
+	                                                <input type="number" class="form-control" name="phone" id="" placeholder="- 없이 입력">
+	                                            </td>
+	                                        </tr>
+                                       </tbody>
                                     </table>
                                 </form>
                             </div>
@@ -252,9 +266,7 @@
 
 
             <!-- Footer -->
-            <div id="footer">
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-            </div>
             <!-- End of Footer -->
 
         </div>
@@ -267,11 +279,6 @@
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>
    </a>
-
-    <!-- 부트스트랩 스크립트 -->
-   <div id="bootstrap">
-      <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-   </div>
 
 </body>
 
