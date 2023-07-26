@@ -176,8 +176,7 @@
                                     </table>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-primary" href="#">목록</a>
+                            <div class="modal-footer">  <a class="btn btn-primary" href="#">목록</a>
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                             </div>
                         </div>
