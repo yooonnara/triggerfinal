@@ -27,7 +27,7 @@
 <!-- Custom styles for this template-->
 <link href="${page }/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${page }/resources/css/sb-admin-2.css" rel="stylesheet">
-<script src="js/jquery-3.7.0.min.js"></script>
+<script src="${page }/resources/js/jquery-3.7.0.min.js"></script>
 
 <!--부트스트랩 아이콘-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
