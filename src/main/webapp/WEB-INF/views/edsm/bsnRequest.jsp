@@ -1,11 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Border Utilities</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,120 +72,90 @@
                 <!-- 상단바 종료 End of Topbar -->
  
 
-                <!-- 수정할 컨테이너 Begin Page Content -->
+                                         <!-- 수정할 컨테이너 Begin Page Content -->
    <div class="container-fluid">
 
-                    <!-- 타이틀 Page Heading -->
-                 <h1 class="h3 font-weight-bold text-dark  my-5 ml-5">결재요청하기 >연차신청</h1>
+    <!-- 타이틀 Page Heading -->
+ <h1 class="h3 font-weight-bold text-dark  my-5 ml-5">결재요청하기 >연차신청</h1>
 
-         <div class="edsm-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
-                    
-                    <p class="h5 text-center font-weight-bold ">연차 일정, 필수정보 입력 </h5>
-					
-					<form>
-						  <div class="form-group row ">
-						    <label for="staticName" class="col-sm-2 col-form-label ">신청자</label>
-						    <div class="col-sm-10">
-						      <input type="text" readonly class="form-control-plaintext" id="staticName" value="나빈">
-						    </div>
-						     <label for="staticDept" class="col-sm-2 col-form-label">소속</label>
-						    <div class="col-sm-10">
-						      <input type="text" readonly class="form-control-plaintext" id="staticDept" value="인사부">
-						    </div>
-						  </div>
-					</form>		
-		<div class="form_text">
-			<p class="h5 text-center font-weight-bold  py-3">연차 구분 </h5>
-		</div>
-				<div class="select-box py-2">
-					<select class="custom-select col-sm-4">
-					  <option selected>연차 종류를 선택해주세요</option>
-					  <option value="1">결혼</option>
-					  <option value="2">연차</option>
-					  <option value="3">조의</option>
-					</select>
-				</div>	  
-				
-		<div class="form_text">
-			<p class="h5 text-center font-weight-bold py-3">연차 신청 기간 </h5>
-		</div>
-			
-		<form>
-			<div class="date-form py-3">
-			<label>
-				시작일 
-			</label>
-				<input type="date" name="start" min="2023-07-23" max="2023-08-30"/>	
-			<label>
-				종료일
-			</label>
-				<input type="date" name="end" min="2023-07-23" max="2023-08-30"/>	
+<div class="edsm-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+    
+    <div class="container row" style="float:none; margin:100 auto;">
+        <div class="col-md-5" style="float: none; margin:0 auto;">
+    <p class="h5 font-weight-bold ">연차 일정, 필수정보 입력 </p></h5>
+     
+    <form>
+          <div class="form-group row ">
+            <label for="staticName" class="col-sm-3 col-form-label ">신청자</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticName" value="나빈">
+            </div>
+             <label for="staticDept" class="col-sm-3 col-form-label">소속</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticDept" value="인사부">
+            </div>
+          </div>
+    </form>		
+			<div class="form_text">
+			<p class="h5 font-weight-bold  py-3">연차 구분 </h5>
 			</div>
-		</form>		
-		
+			<div class="select-box py-2">
+			    <select class="custom-select col-sm-10">
+			      <option selected>연차 종류를 선택하세요</option>
+			      <option value="1">결혼</option>
+			      <option value="2">연차</option>
+			      <option value="3">조의</option>
+			    </select>
+			</div>	  
+
+		<div class="form_text">
+			<p class="h5 font-weight-bold py-3">연차 신청 기간 </h5>
+		</div>
+
+<form>
+	<div class="date-form py-3">
+		<label>시작일 </label>
+			<input type="date" name="start" min="2023-07-23" max="2023-08-30"/>	<br>
+			<label>종료일</label>
+			<input type="date" name="end" min="2023-07-23" max="2023-08-30"/>	
+	</div>
+</form>		  
+
 		<form>
-			<div class="from-group">
-    			<label for="exampleFormControlTextarea1">신청내용</label>
-    			<textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-			  </div>
-		</form>
-			
-			
-			
-			
+			<div class=" form-group text py-4 ">
+			<label for="exampleFormControlFile1">파일 첨부 </label>
+			<input type="file" class="form-control-file" id="exampleFormControlFile1">
 			</div>
-		
 		</form>
-		
-		  
-          
-       <form>
- 		 <div class="text-center form-group text py-4 ">
-    		<label for="exampleFormControlFile1">파일 첨부 </label>
-  			  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-  		</div>
-	</form>
-            
-            
-            <!--등록 여부 확인  -->
-   
 
-           
-           <div class="req-btn py-5 ">
-         	  <button type="button" class="btn btn-primary">등록</button>
-          	 <button type="button" class="btn btn-primary">수정</button>
-           </div>
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           <style>
-           .req-btn{
-           margin-right: 5rem;
-           text-align:right;}
-           
-           
-           
-           </style>
-           
-           
-    
-    
-    
-    
-    
-    
-    </div>
+</div>
+</div>
+
+								<!--등록 여부 확인  -->
+							<div class="req-btn py-8 ">
+								<button type="button" class="btn btn-primary">등록</button>
+								<button type="button" class="btn btn-primary">수정</button>
+							</div>
+
+						<style>
+						.req-btn {
+							margin-right: 5rem;
+							text-align: right;
+						}
+						</style>
 
 
 
-  </div>
+
+
+
+
+
+					</div>
+
+
+
+</div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 
       </div>

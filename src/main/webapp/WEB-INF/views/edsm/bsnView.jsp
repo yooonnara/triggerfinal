@@ -60,7 +60,7 @@
                 <div class="container-fluid pl-5 pr-5">
 
                     <!-- 타이틀 Page Heading -->
-                    <h1 class="h3 text-dark mt-5 mb-5">전자결재>휴가신청</h1>
+                    <h1 class="h3 text-dark mt-5 mb-5">전자결재>출장관리</h1>
 
                     <div class="edsm-container">
 
@@ -115,82 +115,9 @@
                                         <td>2023-07-22</td>
                                         <td>조의</td>
                                         <td>nr423</td>
-                                        <td><a href="">제목</a></td>
+                                       <td><a href="#" data-toggle="modal" data-target="#viewEdsmModal">제목</a></td>
                                       <td><img src="resources/img/#"></td>
-                                        <td><a href="">결재대기</a></td>
-                                    </tr>
-                                    <tr>
-                                         <td>2023-07-20</td>
-                                         <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목</a></td>
-                                        <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>2023-07-20</td>
-                                      <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                      <tr>
-                                       	<td>2023-07-20</td>
-                                      	<td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                     <tr>
-                                       <td>2023-07-20</td>
-                                     	  <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>2023-07-20</td>
-                                       <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                    
-                                     <tr>
-                                       <td>2023-07-20</td>
-                                      <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                   <tr>
-                                       <td>2023-07-20</td>
-                                      <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                      <tr>
-                                       <td>2023-07-20</td>
-                                       <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
-                                    </tr>
-                                     <tr>
-                                       <td>2023-07-20</td>
-                                       <td>조의</td>
-                                        <td>nr422</td>
-                                         <td><a href="">제목입니다.</a></td>
-                                         <td><img src="resources/img/#"></td>
-                                       <td><a href="">결재대기</a></td>
+                                      <td><a href="#" data-toggle="modal" data-target="#viewEdsmModal">결재대기</a></td>                                 
                                     </tr>
                                 </tbody>
                             </table>
@@ -224,6 +151,75 @@
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 
+            </div>
+
+  <!-- 멤버생성 모달-->
+            <div id="viewEdsm">
+                <div class="modal fade text-center" id="viewEdsmModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">전자 결재 조회</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="user">
+                                    <table>
+                                        <tr>
+                                            <td>기안자</td>
+                                            <td>
+                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>소속</td>
+                                            <td>
+                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>기안일</td>
+                                            <td>
+                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>문서번호</td>
+                                            <td>
+                                                <input type="number" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>휴가기간 </td>
+                                            <td>
+                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>휴가사유 </td>
+                                            <td>
+                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>첨부파일 </td>
+                                            <td>
+                                                <input type="file" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>  
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-primary" href="#">목록</a>
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
              <!-- Footer -->
