@@ -4,6 +4,10 @@
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+	<!-- 풀캘린더 -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <!-- 풀캘린더 언어 CDN -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 </div>
 <body id="page-top">
 	<div id="wrapper">
@@ -98,14 +102,25 @@
 									</table>
 								</div>
 								<!-- 캘린더 -->
-								<div class="border border-secondary" id="wt-calander"></div>
+								<div class="wt-calender border border-secondary" id="calendar"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
- 
-
+			
+			
+ 			<!-- 캘린더  -->
+		  	<script>
+		    	document.addEventListener('DOMContentLoaded', function() {
+		    	  var calendarEl = document.getElementById('calendar');
+		    	  var calendar = new FullCalendar.Calendar(calendarEl, {
+		    	    initialView: 'dayGridMonth',
+		    	  });
+		     	 calendar.render();
+		   	 });
+		  	</script>
+		  	
 		   <!-- 오늘 날짜와 시간 출력 -->
 		   <script>
 		        $(function(){
