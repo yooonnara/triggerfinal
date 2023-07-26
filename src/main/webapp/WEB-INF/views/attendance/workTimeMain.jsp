@@ -4,33 +4,26 @@
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-	
+	<!-- 풀캘린더 -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <!-- 풀캘린더 언어 CDN -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 </div>
-
 <body id="page-top">
-
-	<!-- Page Wrapper -->
 	<div id="wrapper">
-
-		<!-- 사이드바 시작 Sidebar -->
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
 			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
 		</div>
-		<!-- 사이드바 종료 End of Sidebar -->
-
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
-
 			<!-- Main Content -->
 			<div id="content">
-
-				<!-- 상단바 시작 Topbar -->
+				<!-- 상단바 시작 -->
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 				</div>
-				<!-- 상단바 종료 End of Topbar -->
 
 
 				<!-- 수정할 컨테이너 Begin Page Content -->
@@ -45,23 +38,34 @@
 								<div class="button-div border border-secondary ml-3 "
 									id="wtm-button">
 									<p id="wk-title">근태 관리</p>
-									<p id="wk-date">2023년 07월 24일(일)</p>
-									<p id="wk-todate">18:25:30</p>
+									<p id="wk-date"></p>
+									<p id="wk-todate"></p>
+									
 									<div class="startendTable">
 										<table id="startTime">
 											<tr>
 												<td>출근 시간</td>
-												<td>08:57:00</td>
+												<td id="startResult">
+												08:57:00
+												<!-- 시작시간이 비어있지 않을 떄, 출력 
+													아닐 때, 시작 시간 출력(아마 00:00:00?)
+												 -->
+												</td>
 											</tr>
 											<tr>
 												<td>퇴근 시간</td>
-												<td>18:13:00</td>
+												<td id="endResult">
+												08:57:00
+												<!-- 끝나는 시간이 비어있지 않을 떄, 출력 
+													아닐 때, 끝나는 시간 출력
+												 -->
+												</td>
 											</tr>
 										</table>
 									</div>
 									<div class="startendBtn mt-4">
-										<button class="btn btn-primary btn-sm mr-2">출근</button>
-										<button class="btn btn-primary btn-sm">퇴근</button>
+										<button class="btn btn-primary btn-sm mr-2" id="startBtn" onclick="startResult()">출근</button>
+										<button class="btn btn-primary btn-sm" id="endBtn" onclick="endResult()">퇴근</button>
 									</div>
 								</div>
 								<!-- 사이드바 페이지 -->
@@ -98,13 +102,74 @@
 									</table>
 								</div>
 								<!-- 캘린더 -->
-								<div class="border border-secondary" id="wt-calander"></div>
+								<div class="wt-calender border border-secondary" id="calendar"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
+			
+			
+ 			<!-- 캘린더  -->
+		  	<script>
+		    	document.addEventListener('DOMContentLoaded', function() {
+		    	  var calendarEl = document.getElementById('calendar');
+		    	  var calendar = new FullCalendar.Calendar(calendarEl, {
+		    	    initialView: 'dayGridMonth',
+		    	  });
+		     	 calendar.render();
+		   	 });
+		  	</script>
+		  	
+		   <!-- 오늘 날짜와 시간 출력 -->
+		   <script>
+		        $(function(){
+		            var today = new Date();
+		            var year = today.getFullYear();
+		            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		            var day = ('0' + today.getDate()).slice(-2);
+		            var week = new Array('일', '월', '화', '수', '목', '금', '토');
+		
+		            var dateString = year + '년 ' + month  + '월 ' + day + '일' + '(' + week[today.getDay()] + ')';
+		            $("#wk-date").text(dateString);
+		        })
+		    </script>
+			<script>
+					setInterval(()=>{
+						const date = new Date();
+						$("#wk-todate").text(changeDouble(date.getHours())+":"
+								+changeDouble(date.getMinutes())+":"
+								+changeDouble(date.getSeconds()));
+					}),1000	 
+					function changeDouble(number){
+						if(number<10){
+							return "0"+number;
+						}
+						return number;
+					}
+			</script>
+			<!-- 근태 버튼 -->
+			<!-- 1. 시작시간이 비어있지 않으면 시작 버튼을 누를 수 없도록 -->
+			<!-- 2. 버튼을 누르면 누른 시간이 출력되는 로직 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 			<!-- Footer -->
