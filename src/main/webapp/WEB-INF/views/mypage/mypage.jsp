@@ -37,6 +37,15 @@
 
 							<form class="user">
 								<table class="table-sm">
+									<tr class="text-center">
+                                        <td colspan='2'>
+                                        	<div class="box">
+												<img src="${path }/resources/img/user_profile.png" 
+													class="profile rounded enter-block mb-3" 
+													style="width: 80px; height: 80px">	     
+											</div>                                       
+                                        </td>
+                                    </tr>
 									<tr>
 										<td>사번</td>
 										<td><input class="form-control ml-5" type="text"
