@@ -78,7 +78,7 @@
 
                                 <thead>
                                     <tr class="bg-dark text-white">
-                                        <th>선택</th>
+                                        <th class="align-middle"><input type="checkbox" id="member-check"></th>
                                         <th>번호</th>
                                         <th>이름</th>
                                         <th>부서</th>
@@ -90,9 +90,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input type="checkbox" id="member-check"></td>
+                                        <td class="align-middle"><input type="checkbox" id="member-check"></td>
                                    		<td>1</td>
-                                        <td><a href="#" data-toggle="modal" data-target="#insertMemberModal">윤나라</a></td>
+                                        <td>
+                                        	<a href="#" data-toggle="modal" data-target="#insertMemberModal">윤나라</a>
+                                        </td>
                                         <td>미지정</td>
                                         <td>대표이사</td>
                                         <td>010-4727-6729</td>
@@ -161,39 +163,41 @@
 	                                        <tr>
 	                                            <td class="align-middle">사번</td>
 	                                            <td>
-	                                                <input type="text" class="form-control" name="no" id="">
+	                                                <input type="text" class="form-control" name="emp_no" id="emp_no" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">이름(한글)</td>
 	                                            <td>
-	                                                <input type="text" class="form-control" name="name" id="">
+	                                                <input type="text" class="form-control" name="name" id="name" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">성별</td>
 	                                            <td class="text-left">
-	                                            	<input type="radio" name="gender" id="">&nbsp;남
-													&nbsp;&nbsp;&nbsp;&nbsp;
-	                                            	<input type="radio" name="gender" id="">&nbsp;여
+	                                            	<input type="radio" name="gender" id="gender1" value="M">&nbsp;
+	                                            		<label for="gender1">남</label>
+															&nbsp;&nbsp;&nbsp;&nbsp;
+	                                            	<input type="radio" name="gender" id="gender2" value="F">&nbsp;
+	                                            		<label for="gender2">여</label>
 												</td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">아이디</td>
 	                                            <td>
-	                                                <input type="text" class="form-control" name="id" id="" placeholder="영문, 숫자 4글자 이상">
+	                                                <input type="text" class="form-control" name="id" id="id" placeholder="영문, 숫자 4글자 이상" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">비밀번호</td>
 	                                            <td>
-	                                                <input type="password" class="form-control" name="password" id="">
+	                                                <input type="password" class="form-control" name="password1" id="">
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">비밀번호 확인</td>
 	                                            <td>
-	                                                <input type="password" class="form-control" name="password" id="">
+	                                                <input type="password" class="form-control" name="password2" id="">
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
@@ -245,22 +249,23 @@
 	                                        <tr>
 	                                            <td class="align-middle">이메일</td>
 	                                            <td>
-	                                                <input type="email" class="form-control" name="email" id="">
+	                                                <input type="email" class="form-control" name="email" id="email" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td class="align-middle">전화번호</td>
 	                                            <td>
-	                                                <input type="number" class="form-control" name="phone" id="" placeholder="- 없이 입력">
+	                                                <input type="number" class="form-control" name="phone" id="phone" 
+	                                                		placeholder="- 없이 입력" maxlength="11" required>
 	                                            </td>
 	                                        </tr>
                                        </tbody>
                                     </table>
+		                            <div class="modal-footer">
+		                                <button class="btn btn-dark" type="submit" data-dismiss="modal">저장</button>
+		                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+		                            </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-dark" href="#">저장</a>
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                             </div>
                         </div>
                     </div>
