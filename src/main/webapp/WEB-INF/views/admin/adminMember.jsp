@@ -66,18 +66,20 @@
 
                                 <!-- 테이블 칸 크기 -->
                                 <colgroup>
+                                    <col width="5%" />
                                     <col width="8%" />
                                     <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="15%" />
+                                    <col width="20%" />
+                                    <col width="20%" />
                                     <col width="12%" />
-                                    <col width="15%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
-                                    <col width="15%" />
                                 </colgroup>
 
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th>선택</th>
+                                        <th>번호</th>
                                         <th>이름</th>
                                         <th>부서</th>
                                         <th>직급</th>
@@ -89,6 +91,7 @@
                                 <tbody>
                                     <tr>
                                         <td><input type="checkbox" id="member-check"></td>
+                                   		<td>1</td>
                                         <td><a href="#" data-toggle="modal" data-target="#insertMemberModal">윤나라</a></td>
                                         <td>미지정</td>
                                         <td>대표이사</td>
