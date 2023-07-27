@@ -1,18 +1,63 @@
 package com.tr.join.attendance.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.tr.join.attendance.model.service.AttendanceService;
+import com.tr.join.attendance.model.vo.Attendance;
 
 
 @Controller
 public class AttendanceController {
+	
+	private AttendanceService service;
+	
+	public AttendanceController(AttendanceService service) {
+		this.service=service;
+	}
 	
 	@GetMapping("/workTimeMain")
 	public String workTimeMain() {
 		return "attendance/workTimeMain";
 	}
 
+	@RequestMapping("/att/startInsert")
+	@ResponseBody
+	//버튼을 누르면 현재 시각이 찍힌다. -> 입력과 출력을 동시에
+	public Attendance startInsertAttendance(String startTime, HttpSession session, Model m) { //startTime-ajax의 data가 넘긴 값 
+		Map<String,Object> startTimeParam=new HashMap();
+		startTimeParam.put("startTime", startTime);
+		startTimeParam.put("empNo","J001"); //임의 정보 
+		Attendance attendanceResult = service.startInsertAttendance(startTimeParam);
+		//System.out.println(result);
+		//Attendance at = service.selectAttendance(a);
+		//저장이 되면 객체가 반환되고, 저장실패하면 null값반환.
+		return attendanceResult;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/workTimeWeekly")
 		public String workTimeWeekly() {
 			return "attendance/workTimeWeekly";

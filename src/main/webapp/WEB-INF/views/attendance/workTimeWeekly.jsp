@@ -198,12 +198,6 @@
 	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
-
-	<!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
-
 </body>
 
 </html>

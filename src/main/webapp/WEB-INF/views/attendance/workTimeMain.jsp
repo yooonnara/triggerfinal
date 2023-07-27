@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 헤드 태그 -->
 <div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 	<!-- 풀캘린더 -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     <!-- 풀캘린더 언어 CDN -->
@@ -13,7 +12,7 @@
 	<div id="wrapper">
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
+			<link href="${path }/resources/css/yelin.css" rel="stylesheet">
 		</div>
 
 		<!-- Content Wrapper -->
@@ -29,7 +28,7 @@
 				<!-- 수정할 컨테이너 Begin Page Content -->
 				<div class="container-fluid">
 					<!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark my-5 ml-5"></h1>
+					<h1 class="h3 text-dark ml-5"></h1>
 					
 					<div class="workingTimeMain-container"> 
 						<div class="full-div row">
@@ -42,20 +41,16 @@
 									<p id="wk-todate"></p>
 									
 									<div class="startendTable">
-										<table id="startTime">
+										<table id="startTimes">
 											<tr>
 												<td>출근 시간</td>
-												<td id="startResult">
-												08:57:00
-												<!-- 시작시간이 비어있지 않을 떄, 출력 
-													아닐 때, 시작 시간 출력(아마 00:00:00?)
-												 -->
+												<td id="startResult">												
 												</td>
 											</tr>
 											<tr>
 												<td>퇴근 시간</td>
 												<td id="endResult">
-												08:57:00
+												${empNo.endTime }
 												<!-- 끝나는 시간이 비어있지 않을 떄, 출력 
 													아닐 때, 끝나는 시간 출력
 												 -->
@@ -64,7 +59,8 @@
 										</table>
 									</div>
 									<div class="startendBtn mt-4">
-										<button class="btn btn-primary btn-sm mr-2" id="startBtn" onclick="startResult()">출근</button>
+										<button class="btn btn-primary btn-sm mr-2" id="startBtn" 
+											onclick="startResult();">출근</button>
 										<button class="btn btn-primary btn-sm" id="endBtn" onclick="endResult()">퇴근</button>
 									</div>
 								</div>
@@ -80,9 +76,9 @@
 							</div>
 							<div class="right-div mt-2" id="rightDiv">
 								<!-- 오늘 날짜 -->
-								<h3 class="row justify-content-center text-dark font-weight-bold mb-4">2023-07-21</h3>
+								<h3 class="row justify-content-center text-dark font-weight-bold mb-4" id="main-date"></h3>
 								<!-- 누적 시간 테이블 -->
-								<div class="row justify-content-center mb-4" id="timeTable">
+								<div class="row justify-content-center mb-5" id="timeTable">
 									<table id="timeMain">
 										<tr>
 											<td class="border-dark border-right">이번주 누적</td>
@@ -114,8 +110,39 @@
 		  	<script>
 		    	document.addEventListener('DOMContentLoaded', function() {
 		    	  var calendarEl = document.getElementById('calendar');
+		    	  
 		    	  var calendar = new FullCalendar.Calendar(calendarEl, {
 		    	    initialView: 'dayGridMonth',
+		    	    height:'580px', //calendar 높이 설정
+			    	headerToolbar: {
+			    		left: '',
+			    		center: 'prev title next',
+			    		right:'',
+			    	},
+			    	locale: 'ko', //한국어
+			    	/* eventLimit: true, */ //달력 셀 크기보다 이벤트가 많이 등록되어 있는 경우 'more'로 표기 
+			    	events: 
+			    	[
+			    		
+			    		{ //정상 출근 시 회색
+			    			title: '①출근' + ' ' + '08:55:00',
+			    			start: '2023-07-27',
+			    			color:'rgb(224, 224, 224)',
+		                    textColor:'rgb(51,51,51)',
+			    		},
+			    		{
+			    			title: '②퇴근' + ' ' + '18:20:00',
+			    			start: '2023-07-27',
+			    			color:'rgb(224, 224, 224)',
+		                    textColor:'rgb(51,51,51)',
+			    		},
+			    		{ //지각 시 초록색 
+			    			title: '②퇴근' + ' ' + '18:20:00',
+			    			start: '2023-07-26',
+			    			color:'rgba(28, 148, 64, 0.72)',
+		                    textColor:'rgb(50,50,50)',
+			    		}
+			    	]
 		    	  });
 		     	 calendar.render();
 		   	 });
@@ -132,6 +159,9 @@
 		
 		            var dateString = year + '년 ' + month  + '월 ' + day + '일' + '(' + week[today.getDay()] + ')';
 		            $("#wk-date").text(dateString);
+		            
+		            var mainDate = year + "-" + month + "-" + day
+		            $("#main-date").text(mainDate);
 		        })
 		    </script>
 			<script>
@@ -148,12 +178,56 @@
 						return number;
 					}
 			</script>
+			
 			<!-- 근태 버튼 -->
 			<!-- 1. 시작시간이 비어있지 않으면 시작 버튼을 누를 수 없도록 -->
+			<script>
+			$(function(){
+				if(${not empty start.startTime}){ //시작시간이 비어 있지 않으면 시작 버튼을 누를 수 없다
+					$("#startBtn").attr("disabled", true);
+				}
+				if(${not empty start.startTime}){
+					$("#endBtn").attr("disabled", true);
+				}
+			})
 			<!-- 2. 버튼을 누르면 누른 시간이 출력되는 로직 -->
-
-
-
+			function startResult(){
+				$.ajax({
+					url:"${path}/att/startInsert",
+					data:{"startTime":$("#wk-todate").text()},
+					success:function(start){
+						console.log(start);
+						const $td =$("<td>");
+						$td.text(start.startTime);
+						$("#startResult").append($td);
+						$("#startBtn").attr("disabled", true);
+					},
+					
+					error:function(){
+						console.log("출근시간입력 ajax통신 실패");
+					}
+				})
+			}
+			
+			
+			
+			
+			
+			function endResult(no){
+				$.ajax({
+					url:"${path}/att/endInsert",
+					success:function(end){
+						console.log(end);
+						location.replace("attendance/workTimeList");
+					},
+					error:function(){
+						console.log("퇴근시간입력 ajax통신 실패");
+					}
+				})
+			}
+			</script>
+			
+			
 
 
 
@@ -189,10 +263,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
+
 
 </body>
 
