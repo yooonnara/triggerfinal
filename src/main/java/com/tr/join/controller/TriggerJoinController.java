@@ -8,15 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class TriggerJoinController {
 
 
-	@PostMapping("/login")
-	public String loginPage() {
-		return "mainpage";
-	}
-	
-	@GetMapping("/mypage")
-	public String mypagePage() {
-		return "mypage/mypage";
-	}
 	
 	@GetMapping("/notice")
 	public String noticePage() {
