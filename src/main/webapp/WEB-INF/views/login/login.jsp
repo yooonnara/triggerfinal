@@ -24,11 +24,11 @@
                                     <form class="user" action="${path }/login" method='post'>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp" placeholder="아이디">
+                                                name="userId" id="userId" aria-describedby="emailHelp" placeholder="아이디">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="비밀번호">
+                                               name="password" id="password" placeholder="비밀번호">
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block">
                                             Login

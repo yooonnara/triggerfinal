@@ -4,7 +4,7 @@
 		"oracle_thin-189911ffe87-4f8ae758041d28bd": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
-			"name": "14.36.141.71",
+			"name": "triggerjoin",
 			"save-password": true,
 			"configuration": {
 				"host": "14.36.141.71",
