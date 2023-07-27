@@ -4,6 +4,38 @@
 
 <body id="page-top">
 
+<!-- <script>
+      $(function(){
+        $("#frm").submit(function(){
+          if($("#id").val().trim() == ""){
+            alert("아이디를 입력하세요.");
+            $("#id").focus();
+            return false;
+          }
+          if($("#pwd1").val().trim() == ""){
+            alert("비밀번호를 입력하세요.");
+            $("#pwd1").focus();
+            return false;
+          }
+          if($("#pwd2").val() != $("#pwd1").val()){
+            alert("비밀번호가 일치하지 않습니다.");
+            $("#pwd2").focus();
+            return false;
+          }
+          if($("#name").val().trim() == ""){
+            alert("이름을 입력하세요.");
+            $("#name").focus();
+            return false;
+          }
+          if($("#phone").val().trim() == ""){
+            alert("전화번호를 입력하세요.");
+            $("#phone").focus();
+            return false;
+          }
+        });
+      });
+    </script> -->
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -89,6 +121,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
                                     <tr>
                                         <td class="align-middle"><input type="checkbox" id="member-check"></td>
                                    		<td>1</td>
@@ -148,7 +181,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form class="user">
+                                <form id="frm" name="frm" class="user" action="${path }/insertMember" method="post">
                                     <table class="table text-dark table-borderless">
 	                                    <tbody class="text-left">
 	                                    	<tr class="text-center">
@@ -156,24 +189,25 @@
 	                                            	<div class="box">
 														<img src="${path }/resources/img/user_profile.png" 
 																class="profile rounded enter-block mb-3" 
-																style="width: 80px; height: 80px">	     
+																style="width: 80px; height: 80px">
+														<input type="file" accept=".jpg, .png">     
 													</div>                                       
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">사번</td>
+	                                            <th class="align-middle">사번</th>
 	                                            <td>
 	                                                <input type="text" class="form-control" name="emp_no" id="emp_no" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">이름(한글)</td>
+	                                            <th class="align-middle">이름(한글)</th>
 	                                            <td>
 	                                                <input type="text" class="form-control" name="name" id="name" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">성별</td>
+	                                            <th class="align-middle">성별</th>
 	                                            <td class="text-left">
 	                                            	<input type="radio" name="gender" id="gender1" value="M">&nbsp;
 	                                            		<label for="gender1">남</label>
@@ -183,25 +217,25 @@
 												</td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">아이디</td>
+	                                            <th class="align-middle">아이디</th>
 	                                            <td>
 	                                                <input type="text" class="form-control" name="id" id="id" placeholder="영문, 숫자 4글자 이상" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">비밀번호</td>
+	                                            <th class="align-middle">비밀번호</th>
 	                                            <td>
-	                                                <input type="password" class="form-control" name="password1" id="">
+	                                                <input type="password" class="form-control" name="pwd1" id="">
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">비밀번호 확인</td>
+	                                            <th class="align-middle">비밀번호 확인</th>
 	                                            <td>
-	                                                <input type="password" class="form-control" name="password2" id="">
+	                                                <input type="password" class="form-control" name="pwd2" id="">
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">계정상태</td>
+	                                            <th class="align-middle">계정상태</th>
 	                                            <td>
 	                                                <select class="form-control" aria-label="Default select example">
 	                                                    <option value="1" selected>정상</option>
@@ -210,19 +244,19 @@
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">입사일</td>
+	                                            <th class="align-middle">입사일</th>
 	                                            <td>
 	                                                <input type="date" class="form-control" name="enroll_date" id="">
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">퇴사일</td>
+	                                            <th class="align-middle">퇴사일</th>
 	                                            <td>
 	                                                <input type="date" class="form-control" name="resign_date" id="">
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">부서</td>
+	                                            <th class="align-middle">부서</th>
 	                                            <td>
 	                                                <select class="form-control" aria-label="Default select example">
 	                                                    <option selected>미지정</option>
@@ -233,7 +267,7 @@
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">직급</td>
+	                                            <th class="align-middle">직급</th>
 	                                            <td>
 	                                                <select class="form-control" aria-label="Default select example">
 	                                                    <option selected>사원</option>
@@ -247,15 +281,15 @@
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">이메일</td>
+	                                            <th class="align-middle">이메일</th>
 	                                            <td>
 	                                                <input type="email" class="form-control" name="email" id="email" required>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td class="align-middle">전화번호</td>
+	                                            <th class="align-middle">전화번호</th>
 	                                            <td>
-	                                                <input type="number" class="form-control" name="phone" id="phone" 
+	                                                <input type="tel" class="form-control" name="phone" id="phone" 
 	                                                		placeholder="- 없이 입력" maxlength="11" required>
 	                                            </td>
 	                                        </tr>
@@ -263,7 +297,7 @@
                                     </table>
 		                            <div class="modal-footer">
 		                                <button class="btn btn-dark" type="submit" data-dismiss="modal">저장</button>
-		                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+		                                <button class="btn btn-secondary" type="reset" data-dismiss="modal">취소</button>
 		                            </div>
                                 </form>
                             </div>
@@ -287,6 +321,9 @@
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>
    </a>
+   
+
+
 
 </body>
 
