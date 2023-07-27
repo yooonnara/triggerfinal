@@ -113,7 +113,7 @@
 	                    <input type="date" class="form-control ml-5 mb-1" name="enroll_date" id="">   </td>
 	                    </tr>
 	                         <tr>
-	                         <td class="align-middle">연차시작끝날짜</td>
+	                         <td class="align-middle">연차끝날짜</td>
 	                               
                              <td> <input type="date" class="form-control ml-5 mb-1" name="resign_date" id=""></td>
 	                            

@@ -31,7 +31,7 @@
                 <!-- 상단바 종료 End of Topbar -->
  
 
-                <!-- 수정할 컨테이너 Begin Page Content -->
+        <!-- 수정할 컨테이너 Begin Page Content -->
                 <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전자결재관리</h1>
@@ -51,43 +51,45 @@
                                             <option value="4">결재반려</option>
                                         </select>
                                         <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
-                                        <button type="button" class="btn btn-primary btn-sm ">검색</button>
+                                        <button type="button" class="btn btn-dark btn-sm ">검색</button>
                                     </div>
                                 </form>
                             </div>
-                    
+                      
+                                <div class="btn-member col-4 ">
+                                    <button type="button" class="btn btn-dark btn-sm  ml-1 float-right">반려</button>
+                                     <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">승인</button>
+                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">대기</button>
+                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">전체</button>
+                                      
+                                </div>
+                            </div>
                        
                             <!-- 검색하기 버튼 -->
-                            <div class="btn-member search-area col-4">
-                                <button type="button" class="btn btn-dark">전체</button>
-                            	 <button type="button" class="btn btn-outline-dark">대기</button>
-                            	  <button type="button" class="btn btn-outline-dark">승인</button>
-                             	 <button type="button" class="btn btn-outline-dark">반려</button>
-                             	 
-                            </div>
                             
                             
-                                 <div class="board-container">
+                            
+                           <div class="board-container">
                             <table class="table table-sm shadow table-hover text-center">
 
                                 <!-- 테이블 칸 크기 -->
                                 <colgroup>
-                                    <col width="10%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
                                     <col width="15%" />
-                                    <col width="40%" />
+                                    <col width="15%" />
+                                    <col width="15%" />
+                                    <col width="15%" />
+                                    <col width="10%" />
+                                    <col width="30%" />
                                 </colgroup>
 
                                 <thead>
-                                    <tr class="bg-primary text-white">
+                                    <tr class="bg-dark text-white">
                                         <th>기안일</th>
                                         <th>문서번호</th>
                                         <th>구분</th>
                                         <th>이름</th>
                                         <th>첨부</th>
-                                        <th>결재상테></th>
+                                        <th>결재상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,114 +130,91 @@
                             </nav>
                         </div>
                     </div>
-                </div>
+                  </div>
+                
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 
             </div>
+         
 
-  <!-- page view 모달-->
-            <div id="viewEdsm">
-                <div class="modal fade text-center" id="#viewBsnModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">전자 결재 조회</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form class="user">
-                                    <table>
-                                        <tr>
-                                            <td>기안자</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>소속</td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>기안일</td>
-                                            <td>
-                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>문서번호</td>
-                                            <td>
-                                                <input type="number" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>출장 기간 </td>
-                                            <td>
-                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>상세 내용 </td>
-                                            <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                          <tr>
-                                            <td>첨부파일 </td>
-                                            <td>
-                                                <input type="file" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>  
-                                    </table>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-dark" href="#">결제승인</a>
-                                <button class="btn btn-danger" type="button" data-dismiss="modal">승인반려</button>
-                               <a class="btn btn-dark" href="#">승인반려</button>
-                            </div>
-                            
-                            <div class="modal" tabindex="-1">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title">결재 반려 페이지</h5>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							          <span aria-hidden="true">&times;</span>
-							        </button>
-							      </div>
-							      <div class="modal-body">
-							        <p>출장 신청을 반려하시겠습니까?</p>
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">예</button>
-							         <a class="btn btn-primary" href="#">아니오</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-                        </div>
-                    </div>
+  <!-- 생성 모달-->
+<div id="viewEdsm">
+    <div class="modal fade text-center" id="viewBsnModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">전자 결재 조회</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
+                <div class="modal-body px-3 py-3">
+                    <form class="user">
+                        <table class="table text-dark table-borderless">
+                            <tbody class="text-left">
+                                <tr class="text-center">
+                                    <td colspan='2'></td>
+                            	</tr>
+                            <tr>
+                                <td class="align-middle">기안자</td>
+                                <td>
+                                    <input type="text" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">소속</td>
+                                <td>
+                                    <input type="text" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">기안일</td>
+                                <td>
+                                    <input type="date" class="form-control mr-5 my-1"name="userId" id="" placeholder="" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">문서번호</td>
+                                <td>
+                                    <input type="number" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">출장기간</td>
+                                <td>
+                                    <input type="date" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                            <td class="from-group align-middle">신청내용</td>
+                               <td>
+                                <textarea class="form-control mr-5 my-1" name="content" id="" rows="4" placeholder="" readonly></textarea>
+                            </td>
+                            </tr>
+                              <tr>
+                                <td class="align-middle">첨부파일</td>
+                                <td>
+                                    <input type="file" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+                                </td>
+                               </tr>
+                         </tbody> 
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                			   <button class="btn btn-dark" href="#">결재승인</a>
+                      		 <button class="btn btn-danger" href="#">승인 반려</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+               </div>
             </div>
-   </div>
-
-                  
-               
-               
+        </div>
+    </div>
 </div>
-                <!-- 수정할 컨테이너 종료 End of Main Content -->
 
-            </div>
 
             <!-- Footer -->
-            <div id="footer">
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-            </div>
             <!-- End of Footer -->
 
         </div>
@@ -245,15 +224,10 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+   <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
+      <i class="fas fa-angle-up"></i>
+   </a>
 
-    <!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
-	
 </body>
 
 </html>

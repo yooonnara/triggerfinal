@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +46,7 @@
     <link href="${page }/resources/css/sb-admin-2.css" rel="stylesheet">
     <script src="js/jquery-3.7.0.min.js"></script>
 
-    <!--부트스트랩 아이콘-->
+    <!--ë¶í¸ì¤í¸ë© ìì´ì½-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
 </head>
@@ -52,11 +56,11 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- 사이드바 시작 Sidebar -->
+        <!-- ì¬ì´ëë° ìì Sidebar -->
         <div id="sidebar">
            <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
         </div>
-        <!-- 사이드바 종료 End of Sidebar -->
+        <!-- ì¬ì´ëë° ì¢ë£ End of Sidebar -->
 
 
         <!-- Content Wrapper -->
@@ -65,17 +69,17 @@
             <!-- Main Content -->
      <div id="content">
 
-                <!-- 상단바 시작 Topbar -->
+                <!-- ìë¨ë° ìì Topbar -->
                 <div id="topbar">
                     <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
                 </div>
-                <!-- 상단바 종료 End of Topbar -->
+                <!-- ìë¨ë° ì¢ë£ End of Topbar -->
  
 
-                              <!-- 수정할 컨테이너 Begin Page Content -->
+                              <!-- - Begin Page Content -->
     <div class="container-fluid pl-5 pr-5">
 
-        <!-- 타이틀 Page Heading -->
+        <!-- íì´í Page Heading -->
         <h1 class="h3 text-dark mt-5 mb-5">출장신청하기</h1>
 
         <div class="vcRequest-area row mt-6 mb-6">
@@ -85,41 +89,41 @@
                     <table class="table-sm ml-1 mr-5"">
                       
                         <tr>
-                            <td>문서번호</td>
+                            <td>ë¬¸ìë²í¸</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
                                 placeholder="nr423" readonly></td>
                         </tr>
                         <tr>
-                            <td>이름(한글)</td>
+                            <td>ì´ë¦(íê¸)</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="나빈" readonly></td>
+                                placeholder="" readonly></td>
                         </tr>
                         <tr>
-                            <td>부서</td>
+                            <td>ë¶ì</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="개발팀" readonly></td>
+                                placeholder="" readonly></td>
                         </tr>
                         <tr>
-                            <td>직급</td>
+                            <td>ì§ê¸</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="대리" readonly></td>
+                                placeholder="" readonly></td>
                         </tr>
                         
                          <tr>
-                        <td>출장 내용</td>
+                        <td>내용</td>
                        <td>
                             <textarea class="form-control ml-5 mb-1" name="exampleFormControlTextarea1" rows="4"></textarea>
                         </td>
                         </tr>
             
                       <tr>
-                        <td>출장시작날짜</td>
+                        <td>출장시작날짜</td>
                         
 	                     <td>
 	                    <input type="date" class="form-control ml-5 mb-1" name="enroll_date" id="">   </td>
 	                    </tr>
 	                       <tr>
-	                         <td >출장시작끝날짜</td>
+	                         <td >출장끝날짜</td>
 	                               
                              <td> <input type="date" class="form-control ml-5 mb-1" name="resign_date" id=""></td>
 	                            
@@ -138,7 +142,7 @@
             </div>
         </div>
         
-    <!-- 수정할 컨테이너 종료 End of Main Content -->
+    <!-- ìì í  ì»¨íì´ë ì¢ë£ End of Main Content -->
 </div>
 
 
@@ -159,7 +163,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- 로그아웃 확인창 Logout Modal-->
+    <!-- ë¡ê·¸ìì íì¸ì°½ Logout Modal-->
     <div id="logoutCheck">
         <script>$('#logoutCheck').load('./include/logout.html')</script>
     </div>

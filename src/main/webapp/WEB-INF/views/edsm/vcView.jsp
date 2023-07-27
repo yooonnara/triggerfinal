@@ -61,12 +61,12 @@
 
                                 <!-- 테이블 칸 크기 -->
                                 <colgroup>
-                                    <col width="10%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
+                                   <col width="15%" />
                                     <col width="15%" />
-                                    <col width="40%" />
+                                    <col width="10%" />
+                                    <col width="15%" />
+                                    <col width="10%" />
+                                    <col width="25%" />
                                 </colgroup>
 
                                 <thead>
@@ -176,7 +176,8 @@
                                     </table>
                                 </form>
                             </div>
-                            <div class="modal-footer">  <a class="btn btn-primary" href="#">목록</a>
+                            <div class="modal-footer"> 
+                             <a class="btn btn-primary" href="#">목록</a>
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                             </div>
                         </div>

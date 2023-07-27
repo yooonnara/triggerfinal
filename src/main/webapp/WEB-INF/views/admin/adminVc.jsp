@@ -31,12 +31,12 @@
                 <!-- 상단바 종료 End of Topbar -->
  
 
-                <!-- 수정할 컨테이너 Begin Page Content -->
+               <!-- 수정할 컨테이너 Begin Page Content -->
                 <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전자결재관리</h1>
                     
-                     <div class="edsmBsn-container">
+                     <div class="edsmVc-container">
 
                         <!-- 검색창 & 작성하기 영역 -->
                         <div class="search-write-area row mb-3">
@@ -55,16 +55,18 @@
                                     </div>
                                 </form>
                             </div>
-                    
+                      
+                                <div class="btn-member col-4 ">
+                                    <button type="button" class="btn btn-dark btn-sm  ml-1 float-right">반려</button>
+                                     <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">승인</button>
+                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">대기</button>
+                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">전체</button>
+                                      
+                                </div>
+                            </div>
                        
                             <!-- 검색하기 버튼 -->
-                            <div class="btn-member search-area col-4">
-                                <button type="button" class="btn btn-dark">전체</button>
-                            	 <button type="button" class="btn btn-outline-dark">대기</button>
-                            	  <button type="button" class="btn btn-outline-dark">승인</button>
-                             	 <button type="button" class="btn btn-outline-dark">반려</button>
-                             	 
-                            </div>
+                            
                             
                             
                                  <div class="board-container">
@@ -72,22 +74,22 @@
 
                                 <!-- 테이블 칸 크기 -->
                                 <colgroup>
-                                    <col width="10%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
                                     <col width="15%" />
-                                    <col width="40%" />
+                                    <col width="15%" />
+                                    <col width="10%" />
+                                    <col width="15%" />
+                                    <col width="10%" />
+                                    <col width="25%" />
                                 </colgroup>
 
                                 <thead>
-                                    <tr class="bg-primary text-white">
+                                    <tr class="bg-dark text-white">
                                         <th>기안일</th>
                                         <th>문서번호</th>
                                         <th>구분</th>
                                         <th>이름</th>
                                         <th>첨부</th>
-                                        <th>결재상태></th>
+                                        <th>결재상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,7 +128,8 @@
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+                        
+                   		 </div>
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
@@ -134,8 +137,8 @@
             </div>
 
   <!-- page view 모달-->
-            <div id="viewEdsm">
-                <div class="modal fade text-center" id="#viewVcModal" tabindex="-1" role="dialog"
+            <div id="viewBd">
+                <div class="modal fade text-center" id="viewVcModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -145,90 +148,67 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body px-3 py-3">
                                 <form class="user">
-                                    <table>
+                                <table class="table text-dark table-borderless">
+                           			 <tbody class="text-left">
+                                <tr class="text-center">
+                                    <td colspan='2'></td>
+                                 </tr>
                                         <tr>
                                             <td>기안자</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                                <input type="text" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>소속</td>
                                             <td>
-                                                <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                                <input type="text" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>기안일</td>
                                             <td>
-                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                                <input type="date" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>문서번호</td>
                                             <td>
-                                                <input type="number" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                                <input type="number" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>휴가기간 </td>
                                             <td>
-                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                                <input type="date" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
                                             </td>
                                         </tr>
-                                          <tr>
-                                            <td>첨부파일 </td>
-                                            <td>
-                                                <input type="file" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>  
+                                         <tr>
+			                                <td class="align-middle">구분</td>
+			                                <td>
+			                                    <input type="number" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+			                              	</td>
+                          			  </tr>
+                                        </tbody> 
                                     </table>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-dark" href="#">결제승인</a>
-                                <button class="btn btn-danger" type="button" data-dismiss="modal">승인반려</button>
+                          <div class="modal-footer">
+                                  <button class="btn btn-dark" href="#">결재승인</button>
+                      		 <button class="btn btn-danger" href="#">승인 반려</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                             </div>
-                            
-                            <div class="modal" tabindex="-1">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title">결재 반려 페이지</h5>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							          <span aria-hidden="true">&times;</span>
-							        </button>
-							      </div>
-							      <div class="modal-body">
-							        <p>휴가 신청을 반려하시겠습니까?</p>
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">예</button>
-							         <a class="btn btn-primary" href="#">아니오</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-   </div>
-
-                  
-               
-               
-</div>
-                <!-- 수정할 컨테이너 종료 End of Main Content -->
-
+                          </div>
+                      </div>
+				</div>
             </div>
 
             <!-- Footer -->
-            <div id="footer">
+        
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-            </div>
+            
             <!-- End of Footer -->
 
         </div>
