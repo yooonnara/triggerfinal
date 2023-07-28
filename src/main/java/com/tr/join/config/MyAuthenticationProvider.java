@@ -1,6 +1,7 @@
 package com.tr.join.config;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,17 +16,15 @@ import com.tr.join.employee.model.vo.Employee;
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider{
 	
-	private BCryptPasswordEncoder encoder;
+	private BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
 	private EmployeeDao dao;
 	private SqlSessionTemplate session;
 
-	public void setEncoder(SqlSessionTemplate session,BCryptPasswordEncoder encoder) {
-		this.encoder = encoder;
-		this.session=session;
-	}
-
-	public void setDao(EmployeeDao dao) {
+	
+	public MyAuthenticationProvider(EmployeeDao dao, SqlSessionTemplate session) {
+		super();
 		this.dao = dao;
+		this.session = session;
 	}
 
 	@Override
