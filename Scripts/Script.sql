@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SELECT * FROM attendance;
 UPDATE ATTENDANCE
 			SET start_time = to_char(SYSDATE, 'HH24:MI:SS')
@@ -80,3 +81,5 @@ select *
 		
 		SELECT * FROM ATTENDANCE a ;
 	UPDATE ATTENDANCE SET START_TIME ='09:00:00';
+SELECT * FROM EMPLOYEE;
+
