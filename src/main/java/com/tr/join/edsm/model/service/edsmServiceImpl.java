@@ -28,5 +28,11 @@ public class edsmServiceImpl implements edsmService {
 		
 		return dao.selectEmployeeByno(session,no);
 	}
+	
+	@Override
+	public int insertEmployee(Employee e) {
+	return dao.insertEmployee(session,e);
+	
 
+}
 }

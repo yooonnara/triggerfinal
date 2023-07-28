@@ -12,5 +12,9 @@ public class edsmDaoImpl implements edsmDao {
 		
 		return session.selectOne("employee.selectEmployeeByno,no");
 	}
+	@Override
+	public int insertEmployee(SqlSession session, Employee e) {
+		return session.insert("employee.insertEmployee,e");
+	}
 
 }

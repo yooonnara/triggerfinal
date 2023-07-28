@@ -6,5 +6,5 @@ public interface edsmService {
 
  Employee selectEmployeeByNo(int no);
 	
-	
+ int insertEmployee(Employee e);
 }

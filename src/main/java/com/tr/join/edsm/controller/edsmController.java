@@ -32,14 +32,14 @@ public class edsmController {
 	return "edsm/bsnRequest";
 	}
 	
-	//@PostMapping("/bsnRequest")
-	//public String insertEmployee(Employee e) {
-	//	int result = service.insertEmployee(e);
-	//	if(result==0) {
-	//		return "common/msg";
-	//	}
-	//	return "redirect:/edsm/bsnView";
-	//}
+	@PostMapping("/bsnRequest")
+	public String insertEmployee(Employee e) {
+		int result = service.insertEmployee(e);
+		if(result==0) {
+			return "common/msg";
+		}
+		return "redirect:/edsm/bsnView";
+	}
 	
 
 		@GetMapping("/adminVc")

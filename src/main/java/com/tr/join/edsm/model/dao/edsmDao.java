@@ -11,5 +11,7 @@ public interface edsmDao {
 		Employee selectEmployeeByno(SqlSession session, int no) 
 			
 		;
+		
+		int insertEmployee(SqlSession session, Employee e);
 }
 
