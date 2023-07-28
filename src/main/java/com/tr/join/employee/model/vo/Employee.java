@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class Employee implements UserDetails{
 	
 	private int no;
-	private String eNum; // 사번
+	private String empNum; // 사번
 	
 	@NotEmpty(message = "아이디를 입력해 주세요.")
 	@Size(min=4, message = "아이디를 4글자 이상 입력해 주세요.")

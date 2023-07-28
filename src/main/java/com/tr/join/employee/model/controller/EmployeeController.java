@@ -23,7 +23,7 @@ public class EmployeeController {
 		return "login/login";
 	}
 
-	@PostMapping("/login") 
+	@GetMapping("/main") 
 	 public String mainPage() { 
 		 return "mainpage"; 
 	}
