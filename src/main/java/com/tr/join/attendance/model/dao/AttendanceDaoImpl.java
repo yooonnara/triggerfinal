@@ -1,5 +1,6 @@
 package com.tr.join.attendance.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,6 +24,11 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	@Override
 	public int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam) {
 		return session.update("attendance.endInsertAttendance", endTimeParam);
+	}
+	
+	@Override
+	public List<Attendance> workCalendarAttendance(SqlSession session, String empNo){
+		return session.selectList("attendance.workCalendarAttendance", empNo);
 	}
 	
 }

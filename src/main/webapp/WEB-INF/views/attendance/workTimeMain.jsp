@@ -123,7 +123,7 @@
 			    	events: 
 			    	[
 			    		
-			    		{ //정상 출근 시 회색
+			    		/* { //정상 출근 시 회색
 			    			title: '①출근' + ' ' + '08:55:00',
 			    			start: '2023-07-27',
 			    			color:'rgb(224, 224, 224)',
@@ -140,7 +140,20 @@
 			    			start: '2023-07-26',
 			    			color:'rgba(28, 148, 64, 0.72)',
 		                    textColor:'rgb(50,50,50)',
-			    		}
+			    		} */
+			    		
+			    		
+			    		$(function(){
+			    			$.ajax({
+			    				url:"/att/workCalendar",
+			    				success:function(map){
+			    					console.log(map.attendance[0].attDate);
+			    				},
+			    				error:function(){
+									console.log("근태캘린더 ajax통신 실패");
+								}
+			    			})
+			    		})
 			    	]
 		    	  });
 		     	 calendar.render();
@@ -179,7 +192,6 @@
 			</script>
 			
 			<!-- 근태 출퇴근 버튼 -->
-			<!-- 1. 시작시간이 비어있지 않으면 시작 버튼을 누를 수 없도록 -->
 			<script>
 			//$(function(){
 			//	if(${not empty start.startTime}){ //시작시간이 비어 있지 않으면 시작 버튼을 누를 수 없다
@@ -220,7 +232,7 @@
 						$td.text(end.endTime);
 						$("#endResult").append($td);
 						//퇴근시간이 비어있지 않으면 버튼버튼을 누를 수 없다
-						$("endBtn").attr("disabled", true);
+						$("#endBtn").attr("disabled", true);
 					},
 					error:function(){
 						console.log("퇴근시간입력 ajax통신 실패");

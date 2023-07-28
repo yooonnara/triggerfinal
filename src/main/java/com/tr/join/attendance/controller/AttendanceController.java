@@ -1,9 +1,11 @@
 package com.tr.join.attendance.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,7 +52,7 @@ public class AttendanceController {
 	@ResponseBody
 	public Attendance endInsertAttendance(String endTime) {
 		log.debug(endTime); //결과나옴 
-		Map<String,Object> endTimeParam = new HashMap(); //왜못넘김???
+		Map<String,Object> endTimeParam = new HashMap();
 		endTimeParam.put("endTime", endTime);
 		endTimeParam.put("empNo","J001");
 		
@@ -60,7 +62,19 @@ public class AttendanceController {
 	}
 	
 	
-	
+	//근태 캘린더
+	@RequestMapping("/att/workCalendar")
+	@ResponseBody
+	public String workCalendar(String empNo, Model m) {
+		
+		//받아올 것. 사원번호, 근태 객체, 연차객체, 출장객체 
+		
+		List<Attendance> workCalendar = service.workCalendarAttendance(empNo);
+		m.addAttribute("workCalendar", workCalendar);
+
+		
+		return "attendance/workTimeMain";
+	}
 	
 	
 	
