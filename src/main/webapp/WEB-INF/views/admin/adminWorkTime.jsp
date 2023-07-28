@@ -77,10 +77,10 @@
                             <!-- table-active -->
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th>NO.</th>
+                                    <th>번호</th>
                                     <th>사번</th>
-                                    <th>소속</th>
-                                    <th>직위</th>
+                                    <th>부서</th>
+                                    <th>직급</th>
                                     <th>이름</th>
                                     <th>근무일자</th>
                                     <th>출근시간</th>

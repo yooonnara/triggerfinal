@@ -101,22 +101,22 @@
     text-align: center;
 }
 
-#startTime{
+#startTimes{
     width:300px;
     height:100px;
     border-style: hidden;
     text-align: center;
 
 }
-#startTime td:first-child{
+#startTimes td:first-child{
     font-weight: bold;
     color:black;
     font-size: 20px;
 }
 
-#startTime td:last-child{
+#startTimes td:last-child{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 /* 출퇴근 버튼 */
@@ -197,10 +197,32 @@
 /* 달력  */
 .wt-calender{
     width:860px;
-    height:500px;
+    height:550px;
     border-radius: 15px;
 
 }
+
+.fc-toolbar-chunk{
+	display: flex;     
+    align-items: center;
+    font-size:15px;
+    margin-top: 18px;
+    margin-bottom:5px;
+}
+
+.fc-toolbar-chunk button{
+	width:25px;
+	height:25px;
+	/*background-color:#428EFF !important; */
+	background-color:transparent !important; 
+	border: none !important; 
+}
+.fc-toolbar-chunk span{
+	color:black !important; 
+	}
+
+
+
 
 #timeMain{
     width:860px;
