@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!-- 헤드 태그 -->
-<div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 
 <body id="page-top">
 
@@ -88,12 +84,9 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    
+	<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
-    <!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
-	
 </body>
 
 </html>

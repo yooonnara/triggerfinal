@@ -21,14 +21,11 @@ public class edsmController {
 		this.service=service;
 	}
 	
-
-	
-	
 	@RequestMapping("/bsnRequest")
-	//public String selectEmployeeByNo(Model m, int no) {
-	//	m.addAttribute("edsm",service.selectEmployeeByNo(no));
-	//	return "edsm/bsnRequest";
-	//}
+	public String selectEmployeeByNo(Model m, int no) {
+//	m.addAttribute("edsm",service.selectEmployeeByNo(no));
+	return "edsm/bsnRequest";
+	}
 	
 
 		@GetMapping("/adminVc")

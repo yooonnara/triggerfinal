@@ -26,7 +26,7 @@
                                     </div>
                                     <form class="user" action="${path }/login" method='post'>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp" placeholder="아이디">
                                         </div>
                                         <div class="form-group">
@@ -112,11 +112,6 @@
             </div>
         </div>
     </div>
-
-	<!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
 
 </body>
 

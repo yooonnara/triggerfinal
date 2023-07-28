@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 
 <ul
 	class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion h-100"
@@ -45,24 +46,28 @@
 		<div id="collapseUtilities" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="">멤버 근태현황</a> <a
-					class="collapse-item" href="">멤버 연차현황</a> <a class="collapse-item"
-					href="">멤버 출장현황</a>
+				<a class="collapse-item" href="${path }/adminWorkTime">멤버 근태현황</a> <a
+					class="collapse-item" href="${path }/adminDayoff">멤버 연차현황</a> <a class="collapse-item"
+					href="${path }/adminBusinessTrip">멤버 출장현황</a>
 			</div>
 		</div></li>
 
 	<!-- 전자결재 사이드바 -->
-	<li class="nav-item"><a class="nav-link collapsed" href="#"
-		data-toggle="collapse" data-target="#collapsePages"
-		aria-expanded="true" aria-controls="collapsePages"> <i
-			class="bi bi-pencil-square"></i> <span>전자결재</span>
-	</a>
-		<div id="collapsePages" class="collapse"
-			aria-labelledby="headingPages" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="">결재 문서 관리</a>
-			</div>
-		</div></li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="bi bi-pencil-square"></i>
+            <span>전자결재</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="#">결재 문서 관리</a>
+                <a href=""><h6 class="collapse-header">- 연차 문서 관리</h6></a>
+                <a href=""><h6 class="collapse-header">- 출장 문서 관리</h6></a>
+                <a class="collapse-item" href="#">결재 문서 현황</a>
+            </div>
+        </div>
+    </li>
 
 	<!-- 커뮤니티 사이드바 -->
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
@@ -87,6 +92,8 @@
 	<div class="text-center d-none d-md-inline">
 		<button class="rounded-circle border-0" id="sidebarToggle"></button>
 	</div>
+
+<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
 	<!-- Sidebar Message -->
 	<div class="sidebar-card d-none d-lg-flex">

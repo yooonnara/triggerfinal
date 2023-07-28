@@ -1,0 +1,285 @@
+
+
+
+/* adminDayOff html */
+/* #big-table{
+    margin-left:150px;
+    margin-right:150px;
+}
+#big-search{
+    margin-left:150px;
+    margin-right:150px;
+} */
+
+/* businessTripList */
+#ccbtn{
+    width:65px;
+    height: 28px;
+    border-radius: 8px;
+    font-weight:500;
+    
+}
+#searchEmp{
+    width:70px;
+}
+
+#countForm{
+    width:50px;
+}
+
+
+#dayOffTable{
+    margin-left:50px;
+}
+
+#dayOffTable td{
+    text-align:left;
+}
+
+#dayOffTable tr{
+    margin-top:30px;
+}
+
+#dayOffTable th{
+    text-align:left;
+   padding:12px;
+}
+
+#dayOffTextarea{
+    width:250px;
+}
+
+
+/* workingTimeList.html */
+
+#startDate{
+    width:130px;
+}
+#endDate{
+    width:130px;
+}
+
+/* dayOffCounting.html */
+
+#mineCountingTable td{
+    padding:6px;
+}
+
+#mineCountingTable td{
+    font-size:18px;
+    color:black;
+}
+
+#df-num{
+    font-size:27px;
+    font-weight: bold;
+   
+}
+
+/* workingTimeMain */
+
+/* 출퇴근 버튼창 */
+#wk-title{
+    margin: 25px 0px 15px 30px;
+    font-size: 23px;
+    font-weight: bold;
+    color:black;
+
+}
+#wk-date{
+    margin:10px 0px 5px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+#wk-todate{
+    margin:0px 0px 0px 0px;
+    font-size: 50px;
+    font-weight: bold;
+    color:black;
+    text-align: center;
+}
+
+#startTime{
+    width:300px;
+    height:100px;
+    border-style: hidden;
+    text-align: center;
+
+}
+#startTime td:first-child{
+    font-weight: bold;
+    color:black;
+    font-size: 20px;
+}
+
+#startTime td:last-child{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 출퇴근 버튼 */
+.startendBtn button{
+    width:120px;
+    height:50px;
+    border-radius: 15px;
+    font-size: 18px;
+
+}
+
+.startendBtn{
+    text-align: center;
+}
+#wtm-button{
+    width:300px;
+    height:395px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    margin-top:58px;
+}
+
+
+#rightDiv{
+    margin-left:50px;
+}
+#sidebar-div{
+    width:300px;
+    height:200px;
+    border-radius: 15px;
+}
+
+#timeTable{
+    border-radius: 15px;
+}
+
+/* 근태 시간 누적 테이블 */
+#wt-table{
+    width:860px;
+    height:100px;
+    
+  
+}
+#wt-table td{
+    padding:6px;
+    border-right:1px;
+    font-size:18px;
+    color:black;
+}
+
+/* 사이드바 글씨 */
+#fP{
+    font-size: 18px;
+    color:black;
+    margin:20px 0px 10px 35px;
+    font-weight: bold;
+}
+
+#sP{
+    margin:0px 0px 5px 35px;
+    font-weight: bold;
+}
+
+#tP {
+    margin:0px 0px 5px 55px;
+    font-weight: bold;
+}
+
+#fiP{
+    margin:0px 0px 5px 55px;
+    font-weight: bold;
+}
+
+#siP{
+    margin:18px 0px 5px 35px;
+    font-weight: bold;
+}
+/* 달력  */
+.wt-calender{
+    width:860px;
+    height:500px;
+    border-radius: 15px;
+
+}
+
+#timeMain{
+    width:860px;
+    height:100px;
+    border:1px;
+    border-radius: 15px;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px gray;
+    text-align: center;
+}
+
+#timeMain tr:first-child{
+   color:black;
+   font-weight: bold;
+   font-size: 18px;
+
+}
+
+ 
+
+
+
+/* workingTimeWeekly */
+
+ /* #accordionTable{
+   
+        width: 95%;
+        border-collapse: collapse;
+        margin:auto;
+}
+
+#accordionTable th{
+    border-bottom: 1px solid lightgrey;
+    padding:35px;
+    }
+    #accordionTable tr{
+        text-align:center;
+        padding:35px;
+        border-bottom: 1px solid lightgrey;
+    
+    }
+
+    #accordionTable th{
+        padding: 20px;
+        text-align:center;
+        
+    } */
+
+    #accordionTable th{
+        border-top:none;
+    }
+
+    #accordionTable{
+        width: 1100px;
+        
+        margin-left:50px;
+    }
+
+ .card button{
+    font-weight: bold;
+    color:black;
+ }
+
+ .bbtn{
+    text-align: left;
+    display: inline-block;
+ }
+ #timetxt{
+    display: inline-block;
+    float:right;
+    font-size:16px;
+    font-weight: bold;
+    color:black;
+    margin-top:10px;
+ }
+
+ #timetxt strong{
+    margin-left:15px;
+    color:gray;
+ }
+
+

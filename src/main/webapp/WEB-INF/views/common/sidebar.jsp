@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion h-100" id="accordionSidebar">
 
     <!-- 사이드바 화이트 로고 Sidebar - Brand -->
@@ -49,9 +50,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">근태현황</a>
-                <a class="collapse-item" href="">연차현황</a>
-                <a class="collapse-item" href="">출장현황</a>
+                <a class="collapse-item" href="${path }/workTimeMain">근태현황</a>
+                <a class="collapse-item" href="${path }/dayoffList">연차현황</a>
+                <a class="collapse-item" href="${path }/businessTripList">출장현황</a>
             </div>
         </div>
     </li>
@@ -65,10 +66,10 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">결재 요청하기</a>
-                <a href=""><h6 class="collapse-header">- 연차 신청</h6></a>
-                <a href=""><h6 class="collapse-header">- 출장 신청</h6></a>
-                <a class="collapse-item" href="#">결재 문서 현황</a>
+                <a class="collapse-item" href="${path }/edsmMain">결재 요청하기</a>
+                <a href="${path }/vcRequest"><h6 class="collapse-header">- 연차 신청</h6></a>
+                <a href="${path }/bsnRequest"><h6 class="collapse-header">- 출장 신청</h6></a>
+                <a class="collapse-item" href="${path }/bsnView">결재 문서 현황</a>
             </div>
         </div>
     </li>
@@ -84,7 +85,7 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="">전체게시판</a>
-                <a class="collapse-item" href="/notice.html">공지사항</a>
+                <a class="collapse-item" href="${path }/notice">공지사항</a>
                 <a class="collapse-item" href="">자유게시판</a>
             </div>
         </div>
@@ -98,12 +99,13 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
+    
+    <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+    
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
         <img class="sidebar-card-illustration mb-2" src="${path }/resources/img/undraw_rocket.svg" alt="...">
         <p class="text-center mb-2"><strong>JOIN OFFICE</strong> 를 통해<br>효율적이고 편리한<br>
             업무관리를 시작해 보세요!<br><br>문의사항 02-2687-1245</p>
     </div>
-
 </ul>
