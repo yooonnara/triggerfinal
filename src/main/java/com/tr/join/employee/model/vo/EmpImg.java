@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class EmpImg {
 	
 	private int no;
+	private int empNo;
 	private String fileName;
 	private String saveFileName;
 
