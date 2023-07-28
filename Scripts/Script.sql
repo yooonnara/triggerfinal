@@ -33,14 +33,7 @@ select * from attendance WHERE EMP_NO='J001' AND ATT_DATE=TO_CHAR(SYSDATE,'YYYY.
 					WHEN TO_DATE('09:00:10', 'HH24:MI:SS') > TO_DATE('09:10:00','HH24:MI:SS') THEN 1
 		END); 	
 			--
-	
-	
-		INSERT INTO attendance(no, emp_no, att_date, start_time, status)
-		VALUES(seq_no.nextval,#{empNo},TO_CHAR(SYSDATE,'YYYY.MM.DD'),#{startTime},
-		CASE 
-					WHEN TO_DATE(#{startTime}, 'HH24:MI:SS') <= TO_DATE('09:10:00','HH24:MI:SS') THEN 0
-					WHEN TO_DATE(#{startTime}, 'HH24:MI:SS') > TO_DATE('09:10:00','HH24:MI:SS') THEN 1
-		END); 
+
 	
 	
 		
@@ -67,3 +60,23 @@ select *
 		WHERE EMP_NO='J001'
 			AND ATT_DATE=TO_CHAR(SYSDATE,'YYYY.MM.DD')
 			
+			
+			
+	UPDATE attendance
+			SET end_time = '18:00:00'
+			, status = CASE WHEN TO_DATE(start_time,'HH24:MI:SS') <= TO_DATE('09:10:00','HH24:MI:SS') 
+									AND TO_DATE('09:00:10','HH24:MI:SS') < TO_DATE('18:00:00','HH24:MI:SS') then 2
+							WHEN TO_DATE(start_time,'HH24:MI:SS') <= TO_DATE('09:10:00','HH24:MI:SS') 
+									AND TO_DATE('09:00:10','HH24:MI:SS') > TO_DATE('18:00:00','HH24:MI:SS') then 0
+							WHEN TO_DATE(start_time,'HH24:MI:SS') > TO_DATE('09:10:00','HH24:MI:SS') 
+									AND TO_DATE('09:00:10','HH24:MI:SS') < TO_DATE('18:00:00','HH24:MI:SS') then 2
+							WHEN TO_DATE(start_time,'HH24:MI:SS') > TO_DATE('09:10:00','HH24:MI:SS') 
+									AND TO_DATE('09:00:10','HH24:MI:SS') >= TO_DATE('18:00:00','HH24:MI:SS') then 1
+						END
+			WHERE emp_no = 'J001' AND att_date = TO_CHAR(SYSDATE,'YYYY.MM.DD');
+			
+		update attendance set end_time = '00:000:00'
+		where emp_no = 'J001'
+		
+		SELECT * FROM ATTENDANCE a ;
+	UPDATE ATTENDANCE SET START_TIME ='09:00:00';

@@ -27,15 +27,23 @@ public class AttendanceServiceImpl implements AttendanceService {
 		
 	//출근 버튼 
 	@Override
-	public Attendance startInsertAttendance(Map<String,Object> startTimeParam) {
-		int result=dao.startInsertAttendance(session, startTimeParam);
+	public Attendance startInsertAttendance(Map<String,Object> startTimeParam) { //dao로 보내주는거
+		int result=dao.startInsertAttendance(session, startTimeParam); //dao에서 돌려받는 값
 		if(result>0) {
 			return dao.selectAttendance(session, (String)startTimeParam.get("empNo"));
 		}
 		return null;
 	}
 	
-	
+	//퇴근 버튼
+	@Override
+	public Attendance endInsertAttendance(Map<String,Object> endTimeParam) {
+		int result=dao.endInsertAttendance(session, endTimeParam);
+		if(result>0) {
+			return dao.selectAttendance(session,(String)endTimeParam.get("empNo"));
+		}
+		return null;
+	}
 	
 
 }

@@ -19,6 +19,10 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	public int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam) {
 		return session.insert("attendance.startInsertAttendance", startTimeParam);
 	}
-
+	
+	@Override
+	public int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam) {
+		return session.update("attendance.endInsertAttendance", endTimeParam);
+	}
 	
 }

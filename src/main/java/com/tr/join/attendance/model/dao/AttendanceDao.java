@@ -7,10 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import com.tr.join.attendance.model.vo.Attendance;
 
 public interface AttendanceDao {
-	int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam);
 	
 	 Attendance selectAttendance(SqlSession session, String empNo);
-	
+	 int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam);
+	 int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam);
 }
 
 

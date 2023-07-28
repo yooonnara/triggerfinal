@@ -44,24 +44,23 @@
 										<table id="startTimes">
 											<tr>
 												<td>출근 시간</td>
-												<td id="startResult">												
-												</td>
+												<td id="startResult"></td>
 											</tr>
 											<tr>
 												<td>퇴근 시간</td>
-												<td id="endResult">
-												${empNo.endTime }
+												<td id="endResult"></td>
 												<!-- 끝나는 시간이 비어있지 않을 떄, 출력 
 													아닐 때, 끝나는 시간 출력
 												 -->
-												</td>
+												
 											</tr>
 										</table>
 									</div>
 									<div class="startendBtn mt-4">
 										<button class="btn btn-primary btn-sm mr-2" id="startBtn" 
 											onclick="startResult();">출근</button>
-										<button class="btn btn-primary btn-sm" id="endBtn" onclick="endResult()">퇴근</button>
+										<button class="btn btn-primary btn-sm" id="endBtn" 
+											onclick="endResult();">퇴근</button>
 									</div>
 								</div>
 								<!-- 사이드바 페이지 -->
@@ -179,52 +178,62 @@
 					}
 			</script>
 			
-			<!-- 근태 버튼 -->
+			<!-- 근태 출퇴근 버튼 -->
 			<!-- 1. 시작시간이 비어있지 않으면 시작 버튼을 누를 수 없도록 -->
 			<script>
-			$(function(){
-				if(${not empty start.startTime}){ //시작시간이 비어 있지 않으면 시작 버튼을 누를 수 없다
-					$("#startBtn").attr("disabled", true);
-				}
-				if(${not empty start.startTime}){
-					$("#endBtn").attr("disabled", true);
-				}
-			})
-			<!-- 2. 버튼을 누르면 누른 시간이 출력되는 로직 -->
+			//$(function(){
+			//	if(${not empty start.startTime}){ //시작시간이 비어 있지 않으면 시작 버튼을 누를 수 없다
+			//		$("#startBtn").attr("disabled", true);
+			//	}
+			//	if(${not empty start.startTime}){
+			//		$("#endBtn").attr("disabled", true);
+			//	}
+			//})
+			<!-- 출근 버튼 -->
 			function startResult(){
 				$.ajax({
 					url:"${path}/att/startInsert",
-					data:{"startTime":$("#wk-todate").text()},
-					success:function(start){
+					data:{"startTime":$("#wk-todate").text()}, //화면에 출력되는 시간 startTime으로 전달 
+					success:function(start){ //attendanceResult에 담긴 값이 start로 들어온다 
 						console.log(start);
 						const $td =$("<td>");
-						$td.text(start.startTime);
+						$td.text(start.startTime); 
 						$("#startResult").append($td);
-						$("#startBtn").attr("disabled", true);
+						//시작시간이 비어있지 않으면 시작 버튼을 누를 수 없도록
+						$("#startBtn").attr("disabled", true); 
 					},
-					
 					error:function(){
 						console.log("출근시간입력 ajax통신 실패");
 					}
 				})
 			}
-			
-			
-			
-			
-			
-			function endResult(no){
+			</script>
+			<!-- 퇴근 버튼 -->
+			<script>
+			function endResult(){
 				$.ajax({
 					url:"${path}/att/endInsert",
+					data:{"endTime":$("#wk-todate").text()},
 					success:function(end){
 						console.log(end);
-						location.replace("attendance/workTimeList");
+						const $td = $("<td>");
+						$td.text(end.endTime);
+						$("#endResult").append($td);
+						//퇴근시간이 비어있지 않으면 버튼버튼을 누를 수 없다
+						$("endBtn").attr("disabled", true);
 					},
 					error:function(){
 						console.log("퇴근시간입력 ajax통신 실패");
+						
+						
 					}
 				})
 			}
+			
+			
+			
+			
+			
 			</script>
 			
 			
