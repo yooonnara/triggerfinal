@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!-- 헤드 태그 -->
-<div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-</div>
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+
 
 <body>
     <div class="container">
@@ -27,11 +24,11 @@
                                     <form class="user" action="${path }/login" method='post'>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp" placeholder="아이디">
+                                                name="userId" id="userId" aria-describedby="emailHelp" placeholder="아이디">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="비밀번호">
+                                               name="password" id="password" placeholder="비밀번호">
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block">
                                             Login
@@ -42,7 +39,9 @@
                                                 <label class="custom-control-label" for="customCheck">아이디 저장 &nbsp;
                                                     &#124; &nbsp;</label>
                                                 <label class="">
-                                                    <a href="#" data-toggle="modal" data-target="#passwordModal">비밀번호 찾기</a>
+                                                    <a href="#" data-toggle="modal" data-target="#passwordModal" class="text-primary">
+                                                    	비밀번호 찾기
+                                                    </a>
                                                     </label>
                                             </div>
                                         </div>
@@ -112,6 +111,9 @@
             </div>
         </div>
     </div>
+
+
+	<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
 </body>
 
