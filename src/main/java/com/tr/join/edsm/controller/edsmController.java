@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tr.join.edsm.model.dao.edsmService;
+
+import com.tr.join.edsm.model.service.edsmService;
+import com.tr.join.employee.model.vo.Employee;
+
+import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/edsm")
 @Controller
+@Slf4j
 public class edsmController {
 	
 	@Autowired
@@ -26,6 +31,15 @@ public class edsmController {
 //	m.addAttribute("edsm",service.selectEmployeeByNo(no));
 	return "edsm/bsnRequest";
 	}
+	
+	//@PostMapping("/bsnRequest")
+	//public String insertEmployee(Employee e) {
+	//	int result = service.insertEmployee(e);
+	//	if(result==0) {
+	//		return "common/msg";
+	//	}
+	//	return "redirect:/edsm/bsnView";
+	//}
 	
 
 		@GetMapping("/adminVc")
