@@ -57,10 +57,10 @@ public class Employee implements UserDetails{
 	private Date resignDate; // 퇴사일
 	
 	@NotEmpty
-	private int accountStatus; // 계정상태
+	private int accStatus; // 계정상태 0=정상, 1=중지
 	
 	@NotEmpty
-	private int type; // 관리자 여부
+	private int type; // 관리자 여부 0=일반, 1=관리자
 	
 	private EmpImg empImg;
 	
