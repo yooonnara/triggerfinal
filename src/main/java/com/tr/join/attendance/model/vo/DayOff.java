@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DayOffCount {
+public class DayOff {
 
 	private int No; //연차번호
 	private String empNo; //사원번호
@@ -17,4 +17,12 @@ public class DayOffCount {
 	private int totalDoCount; //총 연차부여일수
 	private int usedDoCount; //사용 연차일수
 	private int remainDoCount; //남은 연차일수 
+	
+	
+
+	
+	
+	//sql문에서 0(연차)인 경우~ 목록 가져오기. 
+	
+	
 }
