@@ -35,7 +35,7 @@
 					<div class="mypage-area row mb-3">
 						<div class="mypage-container col-12 d-flex justify-content-center">
 
-							<form class="user">
+							<form class="user" name="employeeUpdate" action="${path }/insertEmployee" method="post">
 								<table class="table-sm">
 									<tr class="text-center">
                                         <td colspan='2'>
@@ -48,13 +48,12 @@
                                     </tr>
 									<tr>
 										<td>사번</td>
-										<td><input class="form-control ml-5" type="text"
-											placeholder="J002" readonly></td>
+										<td><input class="form-control ml-5" type="text" readonly>${empInfo.empNum}</td>
 									</tr>
 									<tr>
 										<td>이름(한글)</td>
 										<td><input class="form-control ml-5" type="text"
-											placeholder="윤나라" readonly></td>
+											value="${empInfo.name}" readonly></td>
 									</tr>
 									<tr>
 										<td>아이디</td>

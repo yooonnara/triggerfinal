@@ -1,10 +1,17 @@
 package com.tr.join.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.tr.join.admin.model.service.AdminEmployeeService;
+
 @Controller
-public class AdminController {
+public class AdminEmployeeController {
+	
+	@Autowired
+	private AdminEmployeeService service;
 	
 	// 메인
 	@GetMapping("/admin")
@@ -18,6 +25,5 @@ public class AdminController {
 		return "admin/adminMember";
 	}
 	
-	//
 
 }

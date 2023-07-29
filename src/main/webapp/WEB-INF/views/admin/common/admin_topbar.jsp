@@ -45,7 +45,7 @@
 			</div>
 			<div class="modal-body">정말 로그아웃 하시겠습니까?</div>
 			<div class="modal-footer">
-				<a class="btn btn-dark" href="login.html">로그아웃</a>
+				<button class="btn btn-dark">로그아웃</button>
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
 			</div>
 		</div>
