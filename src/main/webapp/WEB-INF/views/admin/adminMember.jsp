@@ -4,38 +4,6 @@
 
 <body id="page-top">
 
-<!-- <script>
-      $(function(){
-        $("#frm").submit(function(){
-          if($("#id").val().trim() == ""){
-            alert("아이디를 입력하세요.");
-            $("#id").focus();
-            return false;
-          }
-          if($("#pwd1").val().trim() == ""){
-            alert("비밀번호를 입력하세요.");
-            $("#pwd1").focus();
-            return false;
-          }
-          if($("#pwd2").val() != $("#pwd1").val()){
-            alert("비밀번호가 일치하지 않습니다.");
-            $("#pwd2").focus();
-            return false;
-          }
-          if($("#name").val().trim() == ""){
-            alert("이름을 입력하세요.");
-            $("#name").focus();
-            return false;
-          }
-          if($("#phone").val().trim() == ""){
-            alert("전화번호를 입력하세요.");
-            $("#phone").focus();
-            return false;
-          }
-        });
-      });
-    </script> -->
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -84,9 +52,9 @@
                                 </form>
                             </div>
                             <!-- 작성하기 버튼 -->
-                            <div class="btn-member wirte-area col-4">
+                            <div class="btn-employee wirte-area col-4">
                                 <a href="#" class="btn btn-dark btn-sm float-right">멤버삭제</a>
-                                <a href="#" data-toggle="modal" data-target="#insertMemberModal"
+                                <a href="#" data-toggle="modal" data-target="#insertEmployeeModal"
                                 class="btn btn-dark btn-sm mr-1 float-right">멤버생성</a>
                             </div>
                         </div>
@@ -109,7 +77,7 @@
 
                                 <thead>
                                     <tr class="bg-dark text-white">
-                                        <th class="align-middle"><input type="checkbox" id="member-check"></th>
+                                        <th class="align-middle"><input type="checkbox" id="employee-check"></th>
                                         <th>번호</th>
                                         <th>이름</th>
                                         <th>부서</th>
@@ -122,10 +90,10 @@
                                 <tbody>
                                 
                                     <tr>
-                                        <td class="align-middle"><input type="checkbox" id="member-check"></td>
+                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
                                    		<td>1</td>
                                         <td>
-                                        	<a href="#" data-toggle="modal" data-target="#insertMemberModal">윤나라</a>
+                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal">윤나라</a>
                                         </td>
                                         <td>미지정</td>
                                         <td>대표이사</td>
@@ -168,151 +136,154 @@
             </div>
 
             <!-- 멤버생성 모달-->
-            <div id="insertMember">
-                <div class="modal fade text-center" id="insertMemberModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">멤버 생성</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="frm" name="frm" class="user" action="${path }/insertMember" method="post">
-                                    <table class="table text-dark table-borderless">
-	                                    <tbody class="text-left">
-	                                    	<tr class="text-center">
-	                                            <td colspan='2'>
-	                                            	<div class="box">
-														<img src="${path }/resources/img/user_profile.png" 
-																class="profile rounded enter-block mb-3" 
-																style="width: 80px; height: 80px">
-														<input type="file" accept=".jpg, .png">     
-													</div>                                       
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">사번</th>
-	                                            <td>
-	                                                <input type="text" class="form-control" name="emp_no" id="emp_no" required>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">이름(한글)</th>
-	                                            <td>
-	                                                <input type="text" class="form-control" name="name" id="name" required>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">성별</th>
-	                                            <td class="text-left">
-	                                            	<input type="radio" name="gender" id="gender1" value="M">&nbsp;
-	                                            		<label for="gender1">남</label>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-	                                            	<input type="radio" name="gender" id="gender2" value="F">&nbsp;
-	                                            		<label for="gender2">여</label>
+            <div id="insertEmployee">
+				<div class="modal fade text-center" id="insertEmployeeModal"
+					tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">멤버 생성</h5>
+								<button class="close" type="button" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form id="frm" name="frm" class="user"
+									action="${path }/insertEmployee" method="post">
+									<table class="table text-dark table-borderless">
+										<tbody class="text-left">
+											<tr class="text-center">
+												<td colspan='2'>
+													<div class="box" style="cursor: pointer">
+														<img src="${path }/resources/img/user_profile.png"
+															class="profile rounded enter-block profile_img"
+															style="width: 80px; height: 80px" id="profile_img">
+														<i class="bi bi-gear-fill profile_img"></i> <input
+															id="profile_img_file" type="file" accept=".jpg, .png"
+															style="display: none;">
+													</div>
 												</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">아이디</th>
-	                                            <td>
-	                                                <input type="text" class="form-control" name="id" id="id" placeholder="영문, 숫자 4글자 이상" required>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">비밀번호</th>
-	                                            <td>
-	                                                <input type="password" class="form-control" name="pwd1" id="">
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">비밀번호 확인</th>
-	                                            <td>
-	                                                <input type="password" class="form-control" name="pwd2" id="">
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">계정상태</th>
-	                                            <td>
-	                                                <select class="form-control" aria-label="Default select example">
-	                                                    <option value="1" selected>정상</option>
-	                                                    <option value="2">중지</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">입사일</th>
-	                                            <td>
-	                                                <input type="date" class="form-control" name="enroll_date" id="">
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">퇴사일</th>
-	                                            <td>
-	                                                <input type="date" class="form-control" name="resign_date" id="">
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">부서</th>
-	                                            <td>
-	                                                <select class="form-control" aria-label="Default select example">
-	                                                    <option selected>미지정</option>
-	                                                    <option value="1">운영팀</option>
-	                                                    <option value="2">개발팀</option>
-	                                                    <option value="3">인사팀</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">직급</th>
-	                                            <td>
-	                                                <select class="form-control" aria-label="Default select example">
-	                                                    <option selected>사원</option>
-	                                                    <option value="1">대리</option>
-	                                                    <option value="2">과장</option>
-	                                                    <option value="3">차장</option>
-	                                                    <option value="3">부장</option>
-	                                                    <option value="3">이사</option>
-	                                                    <option value="3">대표</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">관리자여부</th>
-	                                            <td>
-	                                                <select class="form-control" aria-label="Default select example">
-	                                                    <option value="1">Y</option>
-	                                                    <option value="2">N</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">이메일</th>
-	                                            <td>
-	                                                <input type="email" class="form-control" name="email" id="email" required>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th class="align-middle">전화번호</th>
-	                                            <td>
-	                                                <input type="tel" class="form-control" name="phone" id="phone" 
-	                                                		placeholder="- 없이 입력" maxlength="11" required>
-	                                            </td>
-	                                        </tr>
-                                       </tbody>
-                                    </table>
-		                            <div class="modal-footer">
-		                                <button class="btn btn-dark" type="submit" data-dismiss="modal">저장</button>
-		                                <button class="btn btn-secondary" type="reset" data-dismiss="modal">취소</button>
-		                            </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+											</tr>
+											<tr>
+												<th class="align-middle">사번</th>
+												<td><input type="text" class="form-control"
+													name="emp_num" id="emp_num" requireda readonly></td>
+											</tr>
+											<tr>
+												<th class="align-middle">이름(한글)</th>
+												<td>
+													<input type="text" class="form-control" name="emp_name" id="emp_name" required>
+													<span class="emp-name-msg small text-danger" style="display: none" >이름을 입력해 주세요.</span>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">성별</th>
+												<td class="text-left">
+													<input type="radio" name="gender" id="gender1" value="M">&nbsp;
+													<label for="gender1">남</label>
+													&nbsp;&nbsp;&nbsp;&nbsp; 
+													<input type="radio" name="gender" id="gender2" value="F">&nbsp;
+													<label for="gender2">여</label><br>
+													<span class="gender-msg small text-danger" style="display: none">성별을 선택해 주세요.</span>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">아이디</th>
+												<td>
+													<input type="text" class="form-control" name="emp_id"
+														id="emp_id" placeholder="영문, 숫자 4글자 이상" required
+														onKeyup="checkId(this.value)">
+													<span class="emp-id-msg small text-danger"></span>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">비밀번호</th>
+												<td>
+													<input type="password" class="form-control" name="pwd1" id="pwd1">
+													<span class="pwd1-msg small" style="display: none">비밀번호를 입력해 주세요.</span>
+												</td>
+													
+											</tr>
+											<tr>
+												<th class="align-middle">비밀번호 확인</th>
+												<td>
+													<input onKeyup="checkPwd(this.value)" type="password" class="form-control" name="pwd2" id="pwd2">
+													<span class="pwd2-msg small" style="display: none">비밀번호를 입력해 주세요.</span>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">계정상태</th>
+												<td><select class="form-control"
+													aria-label="Default select example">
+														<option value="1" selected>정상</option>
+														<option value="2">중지</option>
+												</select></td>
+											</tr>
+											<tr>
+												<th class="align-middle">입사일</th>
+												<td>
+													<input type="date" class="form-control" name="enroll_date" id="enroll_date">
+													<span class="enroll-date-msg small text-danger" >입사일을 입력해 주세요.</span>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">퇴사일</th>
+												<td>
+													<input type="date" class="form-control" name="resign_date" id="resign_date">
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">부서</th>
+												<td>
+													<select id="dept_list" name="dept_list" class="form-control" aria-label="Default select example">
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">직급</th>
+												<td>
+													<select id="job_list" name="job_list" class="form-control" aria-label="Default select example">
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">관리자여부</th>
+												<td><select class="form-control"
+													aria-label="Default select example">
+														<option value="1">Y</option>
+														<option value="2">N</option>
+												</select></td>
+											</tr>
+											<tr>
+												<th class="align-middle">이메일</th>
+												<td>
+													<input type="email" class="form-control" name="email" id="email" required>
+													<span class="email-msg small text-danger" >이메일을 입력해 주세요.</span>
+												</td>
+											</tr>
+											<tr>
+												<th class="align-middle">전화번호</th>
+												<td>
+												<input type="tel" class="form-control" name="phone" id="phone" placeholder="- 없이 입력" maxlength="11" required>
+												<span class="phone-msg small text-danger" >전화번호를 입력해 주세요.</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="modal-footer">
+										<button class="btn btn-dark" type="button" id="submit_btn"
+											data-dismiss="modal">저장</button>
+										<button class="btn btn-secondary" type="reset"
+											data-dismiss="modal">취소</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
             <!-- Footer -->
@@ -329,6 +300,152 @@
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>
    </a>
+   
+<script>
+
+$(".profile_img").on('click', function() {
+	$('#profile_img_file').click();
+})
+
+// 모달 오픈 시 이벤트
+$('#insertEmployee').on('shown.bs.modal', function() {
+	getDept();
+	getJob();
+	// 수정으로 오픈되었을 경우 이벤트
+})
+
+function getDept() {
+	$.ajax({
+		url: "${path}/admin/ajax/getDept",
+		success: data => {
+			$('#dept_list').empty();
+			for (var i = 0; i < data.length; i++) {
+				const no = data[i]['no'];
+				const title = data[i]['title'];
+				const option = $("<option></option>").attr("value", no).text(title);
+				$('#dept_list').append(option);
+			}
+		}
+	})
+}
+
+function getJob() {
+	$.ajax({
+		url: "${path}/admin/ajax/getJob",
+		success: data => {
+			$('#job_list').empty();
+			for (var i = 0; i < data.length; i++) {
+				const no = data[i]['no'];
+				const title = data[i]['title'];
+				const option = $("<option></option>").attr("value", no).text(title);
+				$('#job_list').append(option);
+			}
+		}
+	})
+}
+
+// 저장 버튼 눌렀을 때 값 전체 검사
+$("#submit_btn").on('click', function() {
+	let msg = '';
+	let regex = /^[ㄱ-ㅎ|가-힣]+$/;
+	if ($("#emp_name").val().trim() == "" || $("#emp_name").val() == null || $("#emp_name").val().length < 1) {
+		$(".emp-name-msg").text('이름을 입력해 주세요.').show();
+		$("#emp_name").focus();
+		return false;
+	} else {
+		if(!regex.test($("#emp_name").val())) {
+			$(".emp-name-msg").text('한글만 입력해 주세요.').show();
+			$("#emp_name").focus();
+			return false;
+		} else {
+			$(".emp-name-msg").hide();
+		}
+	}
+	
+	if (!$('input[name=gender]').is(":checked")){
+		$(".gender-msg").show();
+		$("#gender1").focus();
+		return false;
+	} else {
+		$(".gender-msg").hide();
+	}
+	
+	if(checkId($("#emp_id").val()) == false){
+		$("#emp_id").focus();
+		return false;
+	}
+	
+	
+	if ($("#pwd1").val().trim() == "" || $("#pwd1").val() == null || $("#pwd1").val().length < 1) {
+		msg = "<span class='text-danger small'>비밀번호를 입력해 주세요.</span>";
+		$('#pwd1').after(msg);
+		$("#pwd1").focus();
+		return false;
+	} else {
+		$('#pwd1 + span').hide();
+	}
+	
+	if ($("#pwd2").val().trim() == "" || $("#pwd2").val() == null || $("#pwd2").val().length < 1) {
+		msg = "<span class='text-danger small'>비밀번호를 입력해 주세요.</span>";
+		$('#pwd2').after(msg);
+		$("#pwd2").focus();
+		return false;
+	} else {
+		$('#pwd2 + span').hide();
+	}
+
+	
+});
+
+// 비밀번호 일치 여부 확인 (keyup)
+function checkPwd(str){
+
+	
+	if($('#pwd1').val() != str){
+		$('.pwd-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호가 일치하지 않습니다.');
+	} else {
+		$('.pwd-msg').removeClass('text-danger').addClass('text-primary').text('비밀번호가 일치합니다.');
+	}
+}
+
+// 아이디 사용 가능 여부 확인 (keyup , 전체 검사에서도 사용)
+function checkId(str){
+	// 글자수 검사
+	if(str.length < 4 || str.length > 12){
+		$('.emp-id-msg').text('아이디는 4~12글자로 입력해 주세요.').show();
+		return false;
+	} else {
+		$('.emp-id-msg').hide();
+	}
+	// 영문 숫자 검사
+	var regex = /^[a-z0-9+]+$/; 
+	if(!regex.test(str)) {
+		$('.emp-id-msg').text('영소문자와 숫자만 입력해 주세요.').show();
+		return false;
+	} else {
+		$('.emp-id-msg').hide();
+	}
+	
+	// 중복 검사
+	console.log('중복검사할 id : ',str);
+	$.ajax({
+		url: "${path}/admin/ajax/checkDuplicationId",
+		data : {
+			'id' : str
+		},
+		success: data => {
+			console.log(data);
+			
+			if(data < 1){ // 중복없음
+				$('.emp-id-msg').hide();
+			} else { // 중복있음
+				$('.emp-id-msg').text('이미 존재하는 아이디입니다.').show();
+			}
+		}
+	});
+	
+}
+</script>
    
 
 
