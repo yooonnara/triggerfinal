@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Department {
-	private int no;
-	private String title;
+	private int deptNo;
+	private String deptTitle;
 
 }

@@ -62,13 +62,19 @@ public class Employee implements UserDetails{
 	@NotEmpty
 	private int type; // 관리자 여부 0=일반, 1=관리자
 	
-	private EmpImg empImg;
 	
-	@NotEmpty
-	private Department dept;
+	private int deptNo;
+	private String deptTitle;
+	private int jobNo;
+	private String jobTitle;
 	
-	@NotEmpty
-	private Job job;
+//	private EmpImg empImg;
+//	
+//	@NotEmpty
+//	private Department dept;
+//	
+//	@NotEmpty
+//	private Job job;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

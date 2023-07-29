@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Job {
-	private int no;
-	private String title;
+	private int jobNo;
+	private String jobTitle;
 }
