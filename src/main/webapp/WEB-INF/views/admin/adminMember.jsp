@@ -75,9 +75,8 @@
                                     <div class="search-area d-flex">
                                         <select name="notice-search" aria-label="Default select example" class="mr-1">
                                             <option selected value="1">이름</option>
-                                            <option value="2">사번</option>
-                                            <option value="3">전화번호</option>
-                                            <option value="3">이메일</option>
+                                            <option value="3">부서</option>
+                                            <option value="3">직급</option>
                                         </select>
                                         <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
                                         <button type="button" class="btn btn-dark btn-sm ">검색</button>
@@ -99,13 +98,13 @@
                                 <!-- 테이블 칸 크기 -->
                                 <colgroup>
                                     <col width="5%" />
-                                    <col width="8%" />
+                                    <col width="10%" />
                                     <col width="10%" />
                                     <col width="10%" />
                                     <col width="15%" />
-                                    <col width="20%" />
-                                    <col width="20%" />
-                                    <col width="12%" />
+                                    <col width="15%" />
+                                    <col width="15%" />
+                                    <col width="15%" />
                                 </colgroup>
 
                                 <thead>
@@ -115,9 +114,9 @@
                                         <th>이름</th>
                                         <th>부서</th>
                                         <th>직급</th>
-                                        <th>전화번호</th>
                                         <th>이메일</th>
                                         <th>계정상태</th>
+                                        <th>관리자여부</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -130,9 +129,9 @@
                                         </td>
                                         <td>미지정</td>
                                         <td>대표이사</td>
-                                        <td>010-4727-6729</td>
                                         <td>yooonnara@gmail.com</td>
                                         <td>정상</td>
+                                        <td>Y</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -277,6 +276,15 @@
 	                                                    <option value="3">부장</option>
 	                                                    <option value="3">이사</option>
 	                                                    <option value="3">대표</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <th class="align-middle">관리자여부</th>
+	                                            <td>
+	                                                <select class="form-control" aria-label="Default select example">
+	                                                    <option value="1">Y</option>
+	                                                    <option value="2">N</option>
 	                                                </select>
 	                                            </td>
 	                                        </tr>
