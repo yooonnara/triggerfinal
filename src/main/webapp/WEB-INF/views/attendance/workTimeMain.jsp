@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<!-- 풀캘린더 -->
@@ -80,14 +81,13 @@
 								<div class="row justify-content-center mb-5" id="timeTable">
 									<table id="timeMain">
 										<tr>
-											<td class="border-dark border-right">이번주 누적</td>
+											<td class="border-dark border-right" id="weekWork">이번주 누적</td>
 											<td class="border-dark border-right">이번주 초과</td>
 											<td class="border-dark border-right">이번주 잔여</td>
 											<td class="border-dark ">이번달 누적</td>
 										</tr>
 										<tr>
-											<td class="border-dark border-right" id="df-num">30시 40분
-												00초</td>
+											<td class="border-dark border-right" id="df-num">${week.weekTime}</td>
 											<td class="border-dark border-right" id="df-num">1시 30분
 												00초</td>
 											<td class="border-dark border-right" id="df-num">7시 40분
@@ -109,7 +109,6 @@
 		  	<script>
 		    	document.addEventListener('DOMContentLoaded', function() {
 		    	  var calendarEl = document.getElementById('calendar');
-		    	  
 		    	  var calendar = new FullCalendar.Calendar(calendarEl, {
 		    	    initialView: 'dayGridMonth',
 		    	    height:'580px', //calendar 높이 설정
@@ -123,12 +122,13 @@
 			    	events: 
 			    	[
 			    		
-			    		/* { //정상 출근 시 회색
+			    	/* 	 { //정상 출근 시 회색
 			    			title: '①출근' + ' ' + '08:55:00',
 			    			start: '2023-07-27',
 			    			color:'rgb(224, 224, 224)',
 		                    textColor:'rgb(51,51,51)',
-			    		},
+			    		}, */
+			    		 /*
 			    		{
 			    			title: '②퇴근' + ' ' + '18:20:00',
 			    			start: '2023-07-27',
@@ -146,14 +146,26 @@
 			    		$(function(){
 			    			$.ajax({
 			    				url:"/att/workCalendar",
-			    				success:function(map){
-			    					console.log(map.attendance[0].attDate);
-			    				},
+			    				success:function(model){
+			    					console.log(model.attInfo[0].status);
+			    					console.log(model.attInfo[1].attDate); //2023.07.29
+			    					
+			    					
+			    					for(i=0; i<model.attInfo.length; i++){
+				    						calendar.addEvent({
+				    						title: "출근 ",
+				    						start: '2023-07-28',//model.attInfo[1].attDate,
+				    						color:'rgba(192, 57, 43, 0.79)',
+				                            textColor:'rgb(255, 255, 255)'
+				    						}) 
+			    					}		
+		    				}, //success 닫기
 			    				error:function(){
 									console.log("근태캘린더 ajax통신 실패");
 								}
 			    			})
 			    		})
+			    		
 			    	]
 		    	  });
 		     	 calendar.render();
@@ -193,21 +205,13 @@
 			
 			<!-- 근태 출퇴근 버튼 -->
 			<script>
-			//$(function(){
-			//	if(${not empty start.startTime}){ //시작시간이 비어 있지 않으면 시작 버튼을 누를 수 없다
-			//		$("#startBtn").attr("disabled", true);
-			//	}
-			//	if(${not empty start.startTime}){
-			//		$("#endBtn").attr("disabled", true);
-			//	}
-			//})
 			<!-- 출근 버튼 -->
 			function startResult(){
 				$.ajax({
 					url:"${path}/att/startInsert",
 					data:{"startTime":$("#wk-todate").text()}, //화면에 출력되는 시간 startTime으로 전달 
 					success:function(start){ //attendanceResult에 담긴 값이 start로 들어온다 
-						console.log(start);
+						//console.log(start);
 						const $td =$("<td>");
 						$td.text(start.startTime); 
 						$("#startResult").append($td);
@@ -227,7 +231,7 @@
 					url:"${path}/att/endInsert",
 					data:{"endTime":$("#wk-todate").text()},
 					success:function(end){
-						console.log(end);
+						//console.log(end);
 						const $td = $("<td>");
 						$td.text(end.endTime);
 						$("#endResult").append($td);
@@ -242,12 +246,15 @@
 				})
 			}
 			
+		</script>
+	<!-- 	<script>
+		$(function(){
+           
 			
 			
-			
-			
-			</script>
-			
+            $("#main-date").text(mainDate);
+        })
+		</script> -->
 			
 
 
