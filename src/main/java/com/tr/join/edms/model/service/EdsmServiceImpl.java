@@ -1,38 +1,28 @@
-package com.tr.join.edsm.model.service;
+package com.tr.join.edms.model.service;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tr.join.edsm.model.dao.edsmDao;
-import com.tr.join.employee.model.vo.Employee;
-
-import lombok.extern.slf4j.Slf4j;
-
+import com.tr.join.edms.model.dao.EdmsDao;
+import com.tr.join.edms.model.dto.Edms;
 @Service
-@Slf4j
-public class edsmServiceImpl implements edsmService {
+public class EdsmServiceImpl implements EdmsService {
 
-	
-	private edsmDao dao;
+		@Autowired
+	private EdmsDao dao;
+		@Autowired
 	private SqlSession session;
 	
 	
-	public edsmServiceImpl(edsmDao dao, SqlSession session) {
-		this.dao= dao;
-		this.session=session;
-	}
-	
-	
-	@Override
-	public Employee selectEmployeeByNo(int no) {
-		
-		return dao.selectEmployeeByno(session,no);
-	}
+	/*
+	 * public EdsmServiceImpl(EdsmDao dao, SqlSession session) { this.dao= dao;
+	 * this.session=session; }
+	 */
 	
 	@Override
-	public int insertEmployee(Employee e) {
-	return dao.insertEmployee(session,e);
-	
-
+	public int insertbsn(Edms e) {
+		return dao.insertbsn(session, e);
 }
+
 }

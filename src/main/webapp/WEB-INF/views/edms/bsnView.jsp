@@ -64,7 +64,7 @@
                 <!-- 타이틀 Page Heading -->
                 <h1 class="h3 text-dark mt-5 mb-5">전자결재>휴가신청</h1>
 
-                <div class="edsm-container">
+                <div class="edms-container">
 
                     <!-- 검색창 & 작성하기 영역 -->
                     <div class="search-write-area row mb-3">
@@ -117,9 +117,9 @@
                                     <td>2023-07-22</td>
                                     <td>nr423</td>
                                     <td>휴가</td>
-                                   <td><a href="#" data-toggle="modal" data-target="#viewEdsmModal">제목</a></td>
+                                   <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">제목</a></td>
                                   <td><img src="resources/img/#"></td>
-                                  <td><a href="#" data-toggle="modal" data-target="#viewEdsmModal">결재대기</a></td>                                 
+                                  <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">결재대기</a></td>                                 
                                 </tr>
                             </tbody>
                         </table>
@@ -156,8 +156,8 @@
         </div>
 
 <!-- 멤버생성 모달-->
-        <div id="viewEdsm">
-            <div class="modal fade text-center" id="viewEdsmModal" tabindex="-1" role="dialog"
+        <div id="viewEdms">
+            <div class="modal fade text-center" id="viewEdmsModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
@@ -173,51 +173,56 @@
                                     <tbody class="text-left">
                                         <tr class="text-center">
                                             <td colspan='2'>
-
-                                    <tr>
-                                        <td class="align-middle">기안자</td>
-                                        <td>
-                                            <input type="text" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle">소속</td>
-                                        <td>
-                                            <input type="text" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
+ 									 <tr>
                                         <td class="align-middle">기안일</td>
                                         <td>
                                             <input type="date" class="form-control mr-5 my-1"name="userId" id="" placeholder="" readonly>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="align-middle">문서번호</td>
-                                        <td>
-                                            <input type="number" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
-                                        </td>
+                                        <td class="align-middle">번호</td>
+                                        <td><input class="form-control ml-5 mb-1" type="text"
+                               				value="${loginEmp.no }" placeholder="" readonly></td>
                                     </tr>
                                     <tr>
-                                        <td class="align-middle">출장기간</td>
-                                        <td>
-                                            <input type="date" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
-                                        </td>
+                                        <td class="align-middle">이름</td>
+                                       <td><input class="form-control ml-5 mb-1" type="text"
+                            				value="${loginEmp.name }"   placeholder="" readonly></td>
+                                    </tr>
+                              
+                                    <tr>
+                                        <td class="align-middle">부서</td>
+                                           <td><input class="form-control ml-5 mb-1" type="text"
+                             				 value="${loginEmp. }"   placeholder="개발팀" readonly></td>  
                                     </tr>
                                     <tr>
-                                    <td class="from-group align-middle">신청내용</td>
-                                       <td>
-                                        <textarea class="form-control mr-5 my-1" name="content" id="" rows="4" placeholder="" readonly></textarea>
-                                    </td>
+	                                     <td class="align-middle">직급</td>
+	                                     <td><input class="form-control ml-5 mb-1" type="text"
+	                               			 placeholder="대리" readonly></td>
+                               		 </tr>
+                               		 <tr>
+                                    <td class="from-group align-middle">제목</td> 
+                                        <td> <textarea class="form-control mr-5 my-1" name="title" id="" rows="1" placeholder="" readonly></textarea></td>
+                                    </tr>
+                               		 <tr>
+                                    	<td class="from-group align-middle">신청내용</td>
+                                       <td><textarea class="form-control mr-5 my-1" name="content" id="" rows="4" placeholder="" readonly></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">출장기간-시작일</td>
+                                        <td><input type="date" class="form-control mr-5 my-1" name="startDate" id="" placeholder="" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">출장기간-종료일</td>
+                                        <td> <input type="date" class="form-control mr-5 my-1" name="endDate" id="" placeholder="" readonly> </td>
                                     </tr>
                                       <tr>
-                                        <td class="align-middle">첨부파일</td>
-                                        <td>
-                                            <input type="file" class="class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
-                                        </td>
-                                        </tr>
-                                        </td>
-                                    </tr> 
+	                                        <td class="align-middle">첨부파일</td>
+	                                        <td> <input type="file" class="class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
+	                                        </td>
+                                       </tr>
+                                    </td>
+                                  </tr> 
                                  </tbody> 
                                 </table>
                             </form>

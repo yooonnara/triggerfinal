@@ -69,11 +69,7 @@
                 <form class="vc shadow px-5 py-5 ">
                     <table class="table-sm ml-1 mr-5"">
                       
-                        <tr>
-                            <td>문서번호</td>
-                            <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="nr423" readonly></td>
-                        </tr>
+                      
                         <tr>
                             <td>이름(한글)</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
@@ -91,11 +87,12 @@
                         </tr>
                         <tr>
                             <td>연차 구분</td>
-                            <td> <select class="custom-select ml-5 mb-1" col-sm-12">
+                            <td> <select id="type" onchange="bsnFn()" class="custom-select ml-5 mb-1" col-sm-12">
                                 <option selected>연차 종류를 선택하세요</option>
-                                <option value="1">결혼</option>
-                                <option value="2">연차</option>
-                                <option value="3">조의</option>
+                                <option name="type" value="1">연차-결혼</option>
+                                <option name="type" value="2">연차-휴가</option>
+                                <option name="type" value="3">연차-조의</option>
+                                <option name="type" value="4">출장</option>
                               </select>
                         </tr>
                         
@@ -126,6 +123,15 @@
                 </form>
             </div>
         </div>
+        
+<!-- <script>
+function bsnFn(){
+	var type=documnet.getElementById("type");
+	var value=()
+	
+}
+
+</script> -->
         
     <!-- 수정할 컨테이너 종료 End of Main Content -->
 </div>

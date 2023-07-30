@@ -31,7 +31,7 @@
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전자결재>휴가신청</h1>
 
-                    <div class="edsm-container">
+                    <div class="edms-container">
 
                         <!-- 검색창 & 작성하기 영역 -->
                         <div class="search-write-area row mb-3">
@@ -84,9 +84,9 @@
                                         <td>2023-07-22</td>
                                         <td>조의</td>
                                         <td>nr423</td>
-                                       <td><a href="#" data-toggle="modal" data-target="#viewEdsmModal">제목</a></td>
+                                       <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">제목</a></td>
                                       <td><img src="resources/img/#"></td>
-                                      <td><a href="#" data-toggle="modal" data-target="#viewEdsmModal">결재대기</a></td>                                 
+                                      <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">결재대기</a></td>                                 
                                     </tr>
                                 </tbody>
                             </table>
@@ -123,8 +123,8 @@
             </div>
 
   <!-- 멤버생성 모달-->
-            <div id="viewEdsm">
-                <div class="modal fade text-center" id="viewEdsmModal" tabindex="-1" role="dialog"
+            <div id="viewEdms">
+                <div class="modal fade text-center" id="viewEdmsModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -137,6 +137,12 @@
                             <div class="modal-body">
                                 <form class="user">
                                     <table>
+                                    <tr>
+                                            <td>기안일</td>
+                                            <td>
+                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>기안자</td>
                                             <td>
@@ -147,12 +153,6 @@
                                             <td>소속</td>
                                             <td>
                                                 <input type="text" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>기안일</td>
-                                            <td>
-                                                <input type="date" class="form-control ml-5 mb-3" name="userId" id="" placeholder="Readonly input here…" readonly>
                                             </td>
                                         </tr>
                                         <tr>

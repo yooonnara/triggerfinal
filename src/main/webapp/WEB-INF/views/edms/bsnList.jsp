@@ -62,7 +62,7 @@
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전자결재>휴가신청</h1>
 
-                    <div class="edsmBsn-container">
+                    <div class="edmsBsn-container">
 
                         <!-- 검색창 & 작성하기 영역 -->
                         <div class="search-write-area row mb-3">
