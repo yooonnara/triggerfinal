@@ -10,7 +10,6 @@
             <img src="${path }/resources/img/logo2.png" class="mw-100">
         </div>
     </a>
-    
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">

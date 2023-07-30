@@ -1,6 +1,7 @@
 package com.tr.join.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tr.join.admin.model.dao.AdminEmployeeDao;
 import com.tr.join.employee.model.vo.Department;
+import com.tr.join.employee.model.vo.Employee;
 import com.tr.join.employee.model.vo.Job;
 
 @Service
@@ -33,6 +35,14 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 	public int checkDuplicationId(String id) {
 		return dao.checkDuplicationId(session, id);
 	}
+
+
+	@Override
+	public List<Employee> selectEmployeeAll() {
+		return dao.selectEmployeeAll(session);
+	}
+	
+	
 
 	
 	

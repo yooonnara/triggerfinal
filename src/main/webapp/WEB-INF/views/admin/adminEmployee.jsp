@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link href="${path }/resources/css/nara.css" rel="stylesheet">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <body id="page-top">
 
@@ -88,19 +90,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
-                                    <tr>
-                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
-                                   		<td>1</td>
-                                        <td>
-                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal">윤나라</a>
-                                        </td>
-                                        <td>미지정</td>
-                                        <td>대표이사</td>
-                                        <td>yooonnara@gmail.com</td>
-                                        <td>정상</td>
-                                        <td>Y</td>
-                                    </tr>
+                               		<c:if test="${not empty employees}">
+            							<c:forEach var="e" items="${employees}">
+		                                    <tr>
+		                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
+		                                   		<td>${e.no}</td>
+		                                        <td>
+		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal">${e.name}</a>
+		                                        </td>
+		                                        <td>${e.deptTitle}</td>
+		                                        <td>${e.jobTitle}</td>
+		                                        <td>${e.email}</td>
+		                                        <td>${e.accStatus}</td>
+		                                        <td>${e.type}</td>
+		                                    </tr>
+	                                	</c:forEach>
+                                    </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -174,7 +179,7 @@
 											<tr>
 												<th class="align-middle">이름(한글)</th>
 												<td>
-													<input type="text" class="form-control" name="emp_name" id="emp_name" required>
+													<input onKeyup="checkName(this.value)" type="text" class="form-control" name="emp_name" id="emp_name" required>
 													<span class="emp-name-msg small text-danger" style="display: none" >이름을 입력해 주세요.</span>
 												</td>
 											</tr>
@@ -201,31 +206,35 @@
 											<tr>
 												<th class="align-middle">비밀번호</th>
 												<td>
-													<input type="password" class="form-control" name="pwd1" id="pwd1">
-													<span class="pwd1-msg small" style="display: none">비밀번호를 입력해 주세요.</span>
+													<input onKeyup="checkPwd1(this.value)" type="password" 
+															class="form-control" name="pwd1" id="pwd1">
+													<span class="pwd1-msg small text-danger"></span>
 												</td>
-													
 											</tr>
 											<tr>
 												<th class="align-middle">비밀번호 확인</th>
 												<td>
-													<input onKeyup="checkPwd(this.value)" type="password" class="form-control" name="pwd2" id="pwd2">
-													<span class="pwd2-msg small" style="display: none">비밀번호를 입력해 주세요.</span>
+													<input onKeyup="checkPwd2(this.value)" type="password" 
+															class="form-control" name="pwd2" id="pwd2">
+													<span class="pwd2-msg small text-danger"></span>
 												</td>
 											</tr>
 											<tr>
 												<th class="align-middle">계정상태</th>
-												<td><select class="form-control"
-													aria-label="Default select example">
-														<option value="1" selected>정상</option>
-														<option value="2">중지</option>
-												</select></td>
+												<td>
+													<select onKeyup="accStatus(this.value)" class="form-control" aria-label="Default select example">
+														<option value="" selected disabled hidden>선택</option>
+														<option value="1" name="acc_status" id="acc_status1">정상</option>
+														<option value="2" name="acc_status" id="acc_status2">중지</option>
+													</select>
+													<span class="acc-status-msg small text-danger" style="display: none">계정상태를 선택해 주세요.</span>
+												</td>
 											</tr>
 											<tr>
 												<th class="align-middle">입사일</th>
 												<td>
 													<input type="date" class="form-control" name="enroll_date" id="enroll_date">
-													<span class="enroll-date-msg small text-danger" >입사일을 입력해 주세요.</span>
+													<span class="enroll-date-msg small text-danger" style="display: none">입사일을 입력해 주세요.</span>
 												</td>
 											</tr>
 											<tr>
@@ -239,6 +248,7 @@
 												<td>
 													<select id="dept_list" name="dept_list" class="form-control" aria-label="Default select example">
 													</select>
+													<span class="dept-msg small text-danger" style="display: none">부서를 선택해 주세요.</span>
 												</td>
 											</tr>
 											<tr>
@@ -246,15 +256,18 @@
 												<td>
 													<select id="job_list" name="job_list" class="form-control" aria-label="Default select example">
 													</select>
+													<span class="job-msg small text-danger" style="display: none">직급을 선택해 주세요.</span>
 												</td>
 											</tr>
 											<tr>
 												<th class="align-middle">관리자여부</th>
-												<td><select class="form-control"
-													aria-label="Default select example">
-														<option value="1">Y</option>
-														<option value="2">N</option>
-												</select></td>
+												<td>
+													<select class="form-control" aria-label="Default select example">
+															<option value="1">Y</option>
+															<option value="2">N</option>
+													</select>
+													<span class="job-msg small text-danger" style="display: none">관리자여부를 선택해 주세요.</span>
+												</td>
 											</tr>
 											<tr>
 												<th class="align-middle">이메일</th>
@@ -346,22 +359,12 @@ function getJob() {
 
 // 저장 버튼 눌렀을 때 값 전체 검사
 $("#submit_btn").on('click', function() {
-	let msg = '';
-	let regex = /^[ㄱ-ㅎ|가-힣]+$/;
-	if ($("#emp_name").val().trim() == "" || $("#emp_name").val() == null || $("#emp_name").val().length < 1) {
-		$(".emp-name-msg").text('이름을 입력해 주세요.').show();
+	// 이름
+	if(checkId($("#emp_name").val()) == false){
 		$("#emp_name").focus();
 		return false;
-	} else {
-		if(!regex.test($("#emp_name").val())) {
-			$(".emp-name-msg").text('한글만 입력해 주세요.').show();
-			$("#emp_name").focus();
-			return false;
-		} else {
-			$(".emp-name-msg").hide();
-		}
 	}
-	
+	// 성별
 	if (!$('input[name=gender]').is(":checked")){
 		$(".gender-msg").show();
 		$("#gender1").focus();
@@ -370,42 +373,76 @@ $("#submit_btn").on('click', function() {
 		$(".gender-msg").hide();
 	}
 	
-	if(checkId($("#emp_id").val()) == false){
+ 	if(checkId($("#emp_id").val()) == false){
 		$("#emp_id").focus();
 		return false;
 	}
 	
-	
-	if ($("#pwd1").val().trim() == "" || $("#pwd1").val() == null || $("#pwd1").val().length < 1) {
-		msg = "<span class='text-danger small'>비밀번호를 입력해 주세요.</span>";
-		$('#pwd1').after(msg);
+	if(checkPwd1($("#pwd1").val()) == false){
 		$("#pwd1").focus();
 		return false;
-	} else {
-		$('#pwd1 + span').hide();
 	}
 	
-	if ($("#pwd2").val().trim() == "" || $("#pwd2").val() == null || $("#pwd2").val().length < 1) {
-		msg = "<span class='text-danger small'>비밀번호를 입력해 주세요.</span>";
-		$('#pwd2').after(msg);
+	if(checkPwd2($("#pwd2").val()) == false){
 		$("#pwd2").focus();
 		return false;
-	} else {
-		$('#pwd2 + span').hide();
 	}
+	
+	if (!$('select[name=acc_status]').is(":selected")){
+		$(".acc-status-msg").show();
+		$("#acc_status1").focus();
+		return false;
+	} else {
+		$(".acc-status-msg").hide();
+	}
+	
+/* 	if (!$('select[name=enroll_date]').is(":selected")){
+		$(".enroll-date-msg").show();
+		$("#enroll_date").focus();
+		return false;
+	} else {
+		$(".enroll-date-msg").hide();
+	} */
+	
 
 	
 });
+// 이름 사용 가능 여부 확인
+function checkName(str){
+	
+	let regex = /^[ㄱ-ㅎ|가-힣]{2,}$/;
+		if(!regex.test(str)) {
+			$('.emp-name-msg').text('2글자 이상 입력해 주세요. (한글만 가능)').show();
+			return false;
+		} else {
+			$('.emp-name-msg').hide();
+		}
+}
+
+
+//비밀번호 사용 가능 여부 확인 (keyup, 전체 검사에서도 사용)
+function checkPwd1(str){
+	// 비밀번호
+	var regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,16}$/
+	if(!regex.test(str)) {
+		$('.pwd1-msg').text('8~16글자로 입력해 주세요. (영문, 숫자, 특수문자 포함)').show();
+		return false;
+	} else {
+		$('.pwd1-msg').hide();
+	}
+}
 
 // 비밀번호 일치 여부 확인 (keyup)
-function checkPwd(str){
-
+function checkPwd2(str){
 	
 	if($('#pwd1').val() != str){
-		$('.pwd-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호가 일치하지 않습니다.');
+		$('.pwd2-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호가 일치하지 않습니다.');
+		return false;
 	} else {
-		$('.pwd-msg').removeClass('text-danger').addClass('text-primary').text('비밀번호가 일치합니다.');
+		$('.pwd2-msg').removeClass('text-danger').addClass('text-primary').text('비밀번호가 일치합니다.');
 	}
+	
+	
 }
 
 // 아이디 사용 가능 여부 확인 (keyup , 전체 검사에서도 사용)
@@ -427,7 +464,6 @@ function checkId(str){
 	}
 	
 	// 중복 검사
-	console.log('중복검사할 id : ',str);
 	$.ajax({
 		url: "${path}/admin/ajax/checkDuplicationId",
 		data : {
