@@ -5,9 +5,9 @@
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">멤버 수정</h5>
-					<button class="close" type="button" data-dismiss="modal"
+				<div class="modal-header bg-dark text-white">
+					<h5 class="modal-title" id="exampleModalLabel">멤버 생성</h5>
+					<button class="close text-white" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>

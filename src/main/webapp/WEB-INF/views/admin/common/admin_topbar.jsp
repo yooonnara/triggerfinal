@@ -47,9 +47,9 @@
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header bg-dark text-white">
 				<h5 class="modal-title" id="exampleModalLabel">로그아웃</h5>
-				<button class="close" type="button" data-dismiss="modal"
+				<button class="close text-white" type="button" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>

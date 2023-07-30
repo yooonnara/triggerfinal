@@ -32,11 +32,11 @@
 					<!-- 타이틀 Page Heading -->
 					<h1 class="h3 text-dark mt-5 mb-5">내 정보 수정</h1>
 
-					<div class="mypage-area row mb-3">
-						<div class="mypage-container col-12 d-flex justify-content-center">
+					<div class="mypage-area row mb-3 justify-content-center">
+						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
 							<form class="user" name="employeeUpdate" action="${path }/insertEmployee" method="post">
-								<table class="table-sm">
+								<table class="table-sm mt-5 mb-5">
 									<tr class="text-center">
                                         <td colspan='2'>
                                         	<div class="box">

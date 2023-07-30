@@ -100,7 +100,7 @@
 		                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
 		                                   		<td>${e.no}</td>
 		                                        <td>
-		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal">${e.name}</a>
+		                                        	<a href="#" data-toggle="modal" data-target="#updateEmployeeModal">${e.name}</a>
 		                                        </td>
 		                                        <td>${e.deptTitle}</td>
 		                                        <td>${e.jobTitle}</td>
@@ -155,8 +155,11 @@
 
             </div>
 
-            <!-- 멤버생성 모달-->
+            <!-- 멤버생성 모달 -->
 			<jsp:include page="/WEB-INF/views/admin/insertMemberModal.jsp"/>
+			
+			<!-- 멤버수정 모달, 이름 클릭 시 -->
+			<jsp:include page="/WEB-INF/views/admin/updateMemberModal.jsp"/>
 
 
             <!-- Footer -->
