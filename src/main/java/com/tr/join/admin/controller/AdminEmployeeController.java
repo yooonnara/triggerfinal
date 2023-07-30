@@ -49,14 +49,17 @@ public class AdminEmployeeController {
 		List<Job> list = service.selectJob();
 		return list;
 	}
-
-//	@GetMapping("/admin/ajax/checkDuplicationId")
-//	@ResponseBody
-//	public int checkDuplicationId(@RequestParam Map param) {
-//		String id = (String)param.get("id");
-//		int result = service.checkDuplicationId(id);
-//		return result;
-//	}
+	
+	// 아이디 중복검사
+	@GetMapping("/admin/ajax/checkDuplicationId")
+	@ResponseBody
+	public int checkDuplicationId(@RequestParam Map param) {
+		String id = (String)param.get("id");
+		int result = service.checkDuplicationId(id);
+		return result;
+	}
+	
+	
 	// 마지막 값을 가져오고.
 	// 앞에 있는 J 를 날려
 	// 그리고 남은 숫자를 INT로 변환
