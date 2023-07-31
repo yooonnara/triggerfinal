@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.attendance.model.vo.Edms;
 
 public interface AttendanceDao {
 	
@@ -15,8 +15,8 @@ public interface AttendanceDao {
 	 int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam);
 	 int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam);
 	 List<Attendance> workCalendarAttendance(SqlSession session, int no);
-	 List<Edsm> workCalendarDayoff(SqlSession session, int no);
-	 List<Edsm> workCalendarTrip(SqlSession session, int no);
+	 List<Edms> workCalendarDayoff(SqlSession session, int no);
+	 List<Edms> workCalendarTrip(SqlSession session, int no);
 	 Attendance selectWeekWorkTime(SqlSession session, int no);
 	 Attendance selectOverWorkTime(SqlSession session, int no);
 	 Attendance selectRemainTime(SqlSession session, int no);
@@ -36,6 +36,10 @@ public interface AttendanceDao {
 	 
 //---------------휴가
 	 List<DayOff> selectDayoffAll(SqlSession session, int no);
+
+
+//---------------출장
+	List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param);
+	int selectBusinessTripCount(SqlSession session);
+
 }
-
-

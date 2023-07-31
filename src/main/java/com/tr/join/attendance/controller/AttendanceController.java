@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.attendance.model.vo.Edms;
 import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Employee;
 
@@ -78,8 +78,8 @@ public class AttendanceController {
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 List<Attendance> attendanceInfo = service.workCalendarAttendance(loginNo.getNo());
-		 List<Edsm> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
-		 List<Edsm> tripInfo = service.workCalendarTrip(loginNo.getNo());
+		 List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
+		 List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
@@ -179,7 +179,25 @@ public class AttendanceController {
 	  
 	  
 	  
-	  
+//----------출장-----------------
+	  @GetMapping("/att/businessTrip")
+	  public String selectBusinessTrip(@RequestParam(value="cPage",defaultValue="1") int cPage, 
+				@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+				Model m){
+		  
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<Edms> edsm = service.selectBusinessTrip(Map.of("loginNo",loginNo,"cPage",cPage,"numPerpage",numPerpage));
+		  int totalData = service.selectBusinessTripCount();
+		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
+		  m.addAttribute("totalData",totalData);
+		  
+		  System.out.println(edsm);
+		  System.out.println(totalData);
+		  return "attendance/businessTripList";
+		  
+	  }
 	  
 	  
 	  

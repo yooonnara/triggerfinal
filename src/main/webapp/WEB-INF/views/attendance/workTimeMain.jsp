@@ -156,7 +156,7 @@
 				    						color:'rgba(192, 57, 43, 0.79)',
 				                            textColor:'rgb(255, 255, 255)'
 				    						}) 
-			    						}else if(model.attInfo[i].status == 1){ //출근 상태일 때
+			    						}else if(model.attInfo[i].status == 1 || model.attInfo[i].status == 2){ //출근 상태일 때
 			    								calendar.addEvent({
 					    						title: "①출근 " + model.attInfo[i].startTime,
 					    						start: model.attInfo[i].attDate.replaceAll(".","-"),

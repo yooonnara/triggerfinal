@@ -6,7 +6,8 @@ import java.util.Map;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.attendance.model.vo.Edms;
+import com.tr.join.attendance.model.vo.Edms;
 
 public interface AttendanceService {
 	
@@ -16,8 +17,8 @@ public interface AttendanceService {
 	Attendance startInsertAttendance(Map<String,Object> startTimeParam);
 	Attendance endInsertAttendance(Map<String,Object> endTimeParam);
 	List<Attendance> workCalendarAttendance(int no);
-	List<Edsm> workCalendarDayoff(int no);
-	List<Edsm> workCalendarTrip(int no);
+	List<Edms> workCalendarDayoff(int no);
+	List<Edms> workCalendarTrip(int no);
 	Attendance selectWeekWorkTime(int no);
 	Attendance selectOverWorkTime(int no);
 	Attendance selectRemainTime(int no);
@@ -36,7 +37,9 @@ public interface AttendanceService {
 //---------------연차---------------------
 	List<DayOff> selectDayoffAll(int no);
 	
-	
+//-----------출장-------------------------
+	List<Edms> selectBusinessTrip(Map<String,Object> param);
+	int selectBusinessTripCount();
 	
 	
 }

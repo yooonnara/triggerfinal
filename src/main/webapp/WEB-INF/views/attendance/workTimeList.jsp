@@ -50,10 +50,10 @@
                               <input type="radio" name="options" id="option2" value="0" >정상
                             </label>
                             <label class="btn btn-outline-primary">
-                              <input type="radio" name="options" id="option3" value="2">지각
+                              <input type="radio" name="options" id="option3" value="3">조퇴
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="options" id="option3" value="4">결근
+                                <input type="radio" name="options" id="option4" value="4">결근
                               </label>
                         </div>
 
@@ -91,15 +91,15 @@
                             	<c:forEach var="w" items="${wt }">
                              	<tr>
                                     <td>${w.attDate }</td>
-                                    <td>${w.status }</td>
-                                    <td>${w.startTime }</td>
                                     <td>
-										<c:if test="${w.status == '0'}">-</c:if>
+                                   		<c:if test="${w.status == '0'}">정상 출근</c:if>
                                     	<c:if test="${w.status == '1'}">출근</c:if>
                                     	<c:if test="${w.status == '2'}">지각</c:if>
                                     	<c:if test="${w.status == '3'}">조퇴</c:if>
                                     	<c:if test="${w.status == '4'}">결근</c:if>
-									</td>
+                                    </td>
+                                    <td>${w.startTime }</td>
+                                    <td>${w.endTime }</td>
                                     <td>9시간 50분 00초</td>
                                 </tr> 
                                 </c:forEach>

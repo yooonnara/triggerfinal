@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.attendance.model.vo.Edms;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
 
@@ -36,12 +36,12 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	}
 	 
 	 @Override
-	 public  List<Edsm> workCalendarDayoff(SqlSession session, int no){
+	 public  List<Edms> workCalendarDayoff(SqlSession session, int no){
 		 return session.selectList("attendance.workCalendarDayoff",no);
 	 }
 	 
 	 @Override
-	 public  List<Edsm> workCalendarTrip(SqlSession session, int no){
+	 public  List<Edms> workCalendarTrip(SqlSession session, int no){
 		 return session.selectList("attendance.workCalendarTrip",no);
 	 }
 	 
@@ -85,7 +85,7 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 //관리자
 	 @Override
 	 public List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param){
-		//map 이기 때문에 
+		 	//map 이기 때문에 
 			int cPage=(int)param.get("cPage");
 			int numPerpage=(int)param.get("numPerpage");
 			RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
@@ -102,5 +102,18 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 @Override
 	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
 		 return session.selectList("dayoff.selectDayoffAll",no);
+	 }
+	 
+//------------출장--------------
+	 @Override
+	 public List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param){
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("attendance.selectBusinessTrip",null, rb);
+	 }
+	 @Override
+	 public int selectBusinessTripCount(SqlSession session) {
+		 return session.selectOne("attendance.selectBusinessTripCount");
 	 }
 }

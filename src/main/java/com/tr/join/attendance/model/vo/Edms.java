@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Edsm {
+public class Edms {
 	
 	private int no;
 	private Date createDate;
