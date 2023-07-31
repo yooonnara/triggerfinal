@@ -17,8 +17,8 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 	
 	
 	@Override
-	public int insertEmployee(SqlSessionTemplate session) {
-		return session.insert("adminEmployee.insertEmployee");
+	public int insertEmployee(SqlSessionTemplate session, Map param) {
+		return session.insert("adminEmployee.insertEmployee", param);
 	}
 
 	@Override
@@ -48,6 +48,13 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 	public int selectEmployeeCount(SqlSessionTemplate session) {
 		return session.selectOne("adminEmployee.selectEmployeeCount");
 	}
+
+	@Override
+	public String makeEmpNum(SqlSessionTemplate session) {
+		return session.selectOne("adminEmployee.makeEmpNum");
+	}
+	
+	
 	
 	
 	
