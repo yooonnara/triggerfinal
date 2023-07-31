@@ -3,10 +3,12 @@ package com.tr.join.attendance.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.tr.join.attendance.model.vo.Attendance;
+import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.attendance.model.vo.Edsm;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
@@ -61,5 +63,40 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 @Override
 	 public Attendance selectMonthTime(SqlSession session, int no) {
 		 return session.selectOne("attendance.selectMonthTime",no);
+	 }
+	 
+	 //근태 리스트
+	 @Override
+	 public List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param) {
+		 return session.selectList("attendance.selectWorkTimeAll",param);
+	 }
+	 
+	 @Override
+	 public int selectWorkTimeCount(SqlSession session){
+		 return session.selectOne("attendance.selectWorkTimeCount");
+	 }
+	 
+	 
+	 
+	 //관리자
+	 @Override
+	 public List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param){
+		//map 이기 때문에 
+			int cPage=(int)param.get("cPage");
+			int numPerpage=(int)param.get("numPerpage");
+			RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		 
+		 return session.selectList("attendance.selectAttendanceAll",null, rb);
+	 }
+	 
+	 @Override
+	 public int selectAttendanceCount(SqlSession session) {
+		 return session.selectOne("attendance.selectAttendanceCount");
+	 }
+//------------휴가--------------
+	 
+	 @Override
+	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
+		 return session.selectList("dayoff.selectDayoffAll",no);
 	 }
 }

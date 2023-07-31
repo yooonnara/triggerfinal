@@ -36,7 +36,7 @@
 
                     <div class="dayOffCounting-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
                         <!-- 오늘 날짜 -->
-                        <h3 class="row justify-content-center text-dark font-weight-bold mb-5">2023-07-21</h3>
+                        <h3 class="row justify-content-center text-dark font-weight-bold mb-5" id="toDate"></h3>
                         <!-- 사용 내역 테이블 -->
                         <div class="row justify-content-center" id="mineCountingTable">
                             <table class="border border-dark col-5 text-center bg-white">
@@ -90,41 +90,10 @@
                                     <td>홍보 2팀</td>
                                     <td>결혼</td>
                                     <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>2</td>
+                                    <td>${dayoff.year}</td>
                                     <td>승인</td>
                                 </tr>
-                                <tr>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>결혼</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>2</td>
-                                    <td>승인</td>
-                                </tr>
-                                <tr>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>결혼</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>2</td>
-                                    <td>대기</td>
-                                </tr>
-                                <tr>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>결혼</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>2</td>
-                                    <td>대기</td>
-                                </tr>
-                                <tr>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>결혼</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>2</td>
-                                    <td>대기</td>
-                                </tr>
+                         
                             </tbody>
                         </table>
                     </div>
@@ -156,6 +125,20 @@
                 </div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
+			
+			<!-- 오늘 날짜와 시간 출력 -->
+		   <script>
+		        $(function(){
+		            var today = new Date();
+		            var year = today.getFullYear();
+		            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		            var day = ('0' + today.getDate()).slice(-2);
+		            var week = new Array('일', '월', '화', '수', '목', '금', '토');
+
+		            var mainDate = year + "-" + month + "-" + day
+		            $("#toDate").text(mainDate);
+		        })
+		    </script>
 
 
 			<!-- Footer -->

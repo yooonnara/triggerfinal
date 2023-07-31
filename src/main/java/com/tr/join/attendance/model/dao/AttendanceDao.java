@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.tr.join.attendance.model.vo.Attendance;
+import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.attendance.model.vo.Edsm;
 
 public interface AttendanceDao {
@@ -20,6 +21,18 @@ public interface AttendanceDao {
 	 Attendance selectOverWorkTime(SqlSession session, int no);
 	 Attendance selectRemainTime(SqlSession session, int no);
 	 Attendance selectMonthTime(SqlSession session, int no);
+	 
+	 
+	 //근태 리스트
+	 List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param);
+	 int selectWorkTimeCount(SqlSession session);
+	 
+	 //관리자
+	 List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param);
+	 int selectAttendanceCount(SqlSession session);
+	 
+//---------------휴가
+	 List<DayOff> selectDayoffAll(SqlSession session, int no);
 }
 
 

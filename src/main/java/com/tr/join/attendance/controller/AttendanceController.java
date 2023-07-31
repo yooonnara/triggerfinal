@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
+import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Employee;
 
 import lombok.extern.slf4j.Slf4j;
@@ -90,7 +92,7 @@ public class AttendanceController {
 	  //근태 누적/초과/잔여 시간
 	  @GetMapping("/workTimeMain")
 	  public String workingTime(Model m) { 
-	  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
 		 Attendance week = service.selectWeekWorkTime(loginNo.getNo()); //이번주 누적 근무 시간
 		 Attendance overWeek = service.selectOverWorkTime(loginNo.getNo()); //이번주 초과 근무 시간
@@ -103,11 +105,79 @@ public class AttendanceController {
 		 m.addAttribute("month",month);
 		 System.out.println(month); 
 		  
-		  return "attendance/workTimeMain";
+		 return "attendance/workTimeMain";
 		
 		 }
 		
-	
+	  //근태 리스트 
+	  @GetMapping("/WorkTimeList")
+	  public String selectWorkTimeAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
+										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+										Model m) {
+		  
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  List<Attendance> wt=service.selectWorkTimeAll(Map.of("loginNo",loginNo,"cPage",cPage,"numPerpage",numPerpage));
+		  int totalData=service.selectWorkTimeCount();  //전체 자료수
+		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
+		  m.addAttribute("wt",wt);
+		  m.addAttribute("totalData",totalData);
+		  System.out.println(m);
+		  
+		  return "attendance/workTimeList";
+		  
+	  }
+	  
+	  
+	  
+	  //관리자 페이지
+	  @GetMapping("/adminWorkTime")
+	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
+										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+										Model m) {
+		  
+		  List<Attendance> att=service.selectAttendanceAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
+		  int totalData=service.selectAttendanceCount();  //전체 자료수
+		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
+		  m.addAttribute("att",att);
+		  m.addAttribute("totalData",totalData);
+		  System.out.println(m);
+		  
+		  return "admin/adminWorkTime";
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+//-----------------------연차 관리-------------------------------
+	  
+	  
+	  
+	  @RequestMapping("/dayoffList")
+	  @ResponseBody
+	  public String selectDayoffAll(Model m) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<DayOff> dayoff = service.selectDayoffAll(loginNo.getNo());
+		  
+		  m.addAttribute("dayoff",dayoff);
+		  
+		  System.out.println(m);
+		  
+		  return "attendance/dayoffList";
+	  }
 
 	
 	
@@ -137,7 +207,7 @@ public class AttendanceController {
 	
 /*----------------------관리자 페이지----------------------*/
 	
-	@GetMapping("/adminWorkTime")
+//	@GetMapping("/adminWorkTime")
 	public String adminWorkTime() {
 		return "admin/adminWorkTime";
 }

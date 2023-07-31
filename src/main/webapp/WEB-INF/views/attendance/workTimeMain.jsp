@@ -67,11 +67,12 @@
 								<!-- 사이드바 페이지 -->
 								<div class="sidebar-div border border-secondary ml-3"
 									id="sidebar-div">
-									<p id="fP">근태 현황</p>
+									<a href="${path }/workTimeMain"><p id="fP">근태 현황</p></a>
 									<p id="sP">내 근태 현황</p>
-									<p id="tP">주차별 근태 조회</p>
-									<p id="fiP">일자별 근태 조회</p>
-									<p id="siP">내 연차 현황</p>
+									<a href="${path }/workTimeWeekly"><p id="tP">주차별 근태 조회</p></a>
+									<a href="${path }/workTimeList"><p id="fiP">일자별 근태 조회</p></a>
+									<a href="${path }/dayoffList"><p id="siP">내 연차 현황</p></a>
+									
 								</div>
 							</div>
 							<div class="right-div mt-2" id="rightDiv">
@@ -94,7 +95,6 @@
 										</tr>
 									</table>
 								</div>
-								<!-- 캘린더 -->
 								<div class="wt-calender border border-secondary" id="calendar"></div>
 							</div>
 						</div>
@@ -146,13 +146,13 @@
 			    				url:"/att/workCalendar",
 			    				success:function(model){
 			    					console.log(model.attInfo[0].status);
-			    					console.log(model.attInfo[1].attDate); //2023.07.29
+			    					console.log(model.attInfo[1].attDate.replace(".","-")); //2023.07.29
 			    					
 			    					
 			    					for(i=0; i<model.attInfo.length; i++){
 				    						calendar.addEvent({
-				    						title: "출근 ",
-				    						start: '2023-07-28',//model.attInfo[1].attDate,
+				    						title: "조퇴 ",
+				    						start: model.attInfo[i].attDate.replaceAll(".","-"),//형태를 맞춰줘야 한다 !!!!
 				    						color:'rgba(192, 57, 43, 0.79)',
 				                            textColor:'rgb(255, 255, 255)'
 				    						}) 
@@ -245,30 +245,6 @@
 			}
 			
 		</script>
-	<!-- 	<script>
-		$(function(){
-           
-			
-			
-            $("#main-date").text(mainDate);
-        })
-		</script> -->
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
