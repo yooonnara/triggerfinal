@@ -31,7 +31,7 @@
 								<tr>
 									<th class="align-middle">사번</th>
 									<td><input type="text" class="form-control"
-										name="emp_num" id="emp_num" requireda readonly></td>
+										name="emp_num" id="emp_num" required></td>
 								</tr>
 								<tr>
 									<th class="align-middle">이름(한글)</th>

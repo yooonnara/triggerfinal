@@ -43,7 +43,6 @@ public class AdminEmployeeController {
 	public String adminEmployeePage(Model md) {
 		List<Employee> employees = service.selectEmployeeAll();
 		md.addAttribute("employees",employees);
-		System.out.println(employees);
 		return "admin/adminEmployee";
 	}
 	
