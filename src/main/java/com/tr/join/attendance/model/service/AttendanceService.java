@@ -18,6 +18,10 @@ public interface AttendanceService {
 	List<Edsm> workCalendarDayoff(int no);
 	List<Edsm> workCalendarTrip(int no);
 	Attendance selectWeekWorkTime(int no);
+	Attendance selectOverWorkTime(int no);
+	Attendance selectRemainTime(int no);
+	Attendance selectMonthTime(int no);
+	
 	
 	
 	
