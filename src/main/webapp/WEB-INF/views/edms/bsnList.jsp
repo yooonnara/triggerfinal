@@ -62,7 +62,7 @@
             <div class="container-fluid pl-5 pr-5">
 
                 <!-- 타이틀 Page Heading -->
-                <h1 class="h3 text-dark mt-5 mb-5">전자결재>휴가신청</h1>
+                <h1 class="h3 text-dark mt-5 mb-5">전자결재조회</h1>
 
                 <div class="edms-container">
 
@@ -94,21 +94,25 @@
 
                             <!-- 테이블 칸 크기 -->
                             <colgroup>
-                                	<col width="15%" />
-                                    <col width="15%" />
+                                	<col width="10%" />
                                     <col width="10%" />
-                                    <col width="15%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
                                     <col width="20%" />
-                                    <col width="25%" />
+                                    <col width="10%" />
+                                    <col width="20%" />
                             </colgroup>
 						
                             <thead>
                                 <tr class="bg-primary text-white">
+                                    <th>문서번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
+                                    <th>직급</th>
                                     <th>이름</th>
+                                     <th>제목</th>
                                     <th>구분</th>
-                                    <th>제목</th>
                                     <th>결재상태</th>
                                 </tr>
                             </thead>
@@ -116,17 +120,25 @@
                             <c:if test="${not empty edms}">
                             <c:forEach var="e" items="${edms}">
                                 <tr>
+                                	<td>${e.no }</td>
                                     <td>${e.createDate }</td>
-                                    <td>${e.emp.name }</td>
+                                    <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.deptTitle }</td>
-                                   <td></td>
-                                  <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">${e.title }</a></td>
+                                    <td>${e.emp.name }</td>
+                                    <td>${e.title }</td>
+                                    <td>
+                                    <c:choose>
+                                    	<c:when test="${e.type==0 }">연차</c:when>
+                                    	<c:when test="${e.type==1 }">출장</c:when>
+                                    	<c:otherwise>미정</c:otherwise>
+                                    </c:choose>
+                                    </td>
                                   <td>
                                   <a href="#" data-toggle="modal" data-target="#viewEdmsModal">
                                   <c:choose>
-                                  	<c:when test="${e.appStatus==1 }">결제대기</c:when>
-                                  	<c:when test="${e.appStatus==2 }">승인</c:when>
-                                  	<c:when test="${e.appStatus==3 }">반려</c:when>
+                                  	<c:when test="${e.appStatus==0 }">결재대기</c:when>
+                                  	<c:when test="${e.appStatus==1 }">승인</c:when>
+                                  	<c:when test="${e.appStatus==2 }">반려</c:when>
                                   	<c:otherwise>미정</c:otherwise>
                                   </c:choose>
                                   </a>
