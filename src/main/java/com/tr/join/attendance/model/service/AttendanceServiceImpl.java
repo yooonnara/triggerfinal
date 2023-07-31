@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tr.join.attendance.model.dao.AttendanceDao;
 import com.tr.join.attendance.model.vo.Attendance;
+import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.attendance.model.vo.Edsm;
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -91,6 +92,25 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 	
 	
+	//관리자
+	@Override
+	public List<Attendance> selectAttendanceAll(Map<String,Object> param){
+		return dao.selectAttendanceAll(session, param);
+	}
+	
+	@Override
+	public int selectAttendanceCount() {
+		return dao.selectAttendanceCount(session);
+	}
+	
+	
+	
+//--------연차---------------------------
+	
+	@Override
+	public List<DayOff> selectDayoffAll(int no){
+		return dao.selectDayoffAll(session, no);
+	}
 	
 	
 

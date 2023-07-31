@@ -94,7 +94,6 @@
 										</tr>
 									</table>
 								</div>
-								<!-- 캘린더 -->
 								<div class="wt-calender border border-secondary" id="calendar"></div>
 							</div>
 						</div>
@@ -146,13 +145,13 @@
 			    				url:"/att/workCalendar",
 			    				success:function(model){
 			    					console.log(model.attInfo[0].status);
-			    					console.log(model.attInfo[1].attDate); //2023.07.29
+			    					console.log(model.attInfo[1].attDate.replace(".","-")); //2023.07.29
 			    					
 			    					
 			    					for(i=0; i<model.attInfo.length; i++){
 				    						calendar.addEvent({
-				    						title: "출근 ",
-				    						start: '2023-07-28',//model.attInfo[1].attDate,
+				    						title: "조퇴 ",
+				    						start: model.attInfo[i].attDate.replaceAll(".","-"),//형태를 맞춰줘야 한다 !!!!
 				    						color:'rgba(192, 57, 43, 0.79)',
 				                            textColor:'rgb(255, 255, 255)'
 				    						}) 
@@ -245,30 +244,6 @@
 			}
 			
 		</script>
-	<!-- 	<script>
-		$(function(){
-           
-			
-			
-            $("#main-date").text(mainDate);
-        })
-		</script> -->
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

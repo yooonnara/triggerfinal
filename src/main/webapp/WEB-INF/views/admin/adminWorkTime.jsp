@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -89,49 +90,41 @@
                                     <th>근무 상태</th>
                                 </tr>
                             </thead>
+                            
                             <tbody>
+                            <c:if test="${not empty att }">
+                            	<c:forEach var="a" items="${att }">
                                 <tr>
-                                    <td>100</td>
-                                    <td>2113121</td>
-                                    <td>홍보 1팀</td>
-                                    <td>대리</td>
-                                    <td>김땅땅</td>
-                                    <td>2022-06-13</td>
-                                    <td>08:55:00</td>
-                                    <td>18:40:00</td>
+                                    <td>${a.empNo }</td>
+                                    <td>${a.emp.empNum }</td>
+                                    <td>${a.emp.deptTitle}</td>
+                                    <td>${a.emp.jobTitle }</td>
+                                    <td>${a.emp.name }</td>
+                                    <td>${a.attDate }</td>
+                                    <td>${a.startTime}</td>
+                                    <td>${a.endTime}</td>
                                     <td>9시간 50분 00초</td>
-                                    <td>정상</td>
+                                    <td>
+                                    	<c:if test="${a.status == '0'}">-</c:if>
+                                    	<c:if test="${a.status == '1'}">출근</c:if>
+                                    	<c:if test="${a.status == '2'}">지각</c:if>
+                                    	<c:if test="${a.status == '3'}">조퇴</c:if>
+                                    	<c:if test="${a.status == '4'}">결근</c:if>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>100</td>
-                                    <td>2113121</td>
-                                    <td>홍보 1팀</td>
-                                    <td>대리</td>
-                                    <td>김땅땅</td>
-                                    <td>2022-06-13</td>
-                                    <td>08:55:00</td>
-                                    <td>18:40:00</td>
-                                    <td>9시간 50분 00초</td>
-                                    <td>정상</td>
-                                </tr>
-                                <tr>
-                                    <td>100</td>
-                                    <td>2113121</td>
-                                    <td>홍보 1팀</td>
-                                    <td>대리</td>
-                                    <td>김땅땅</td>
-                                    <td>2022-06-13</td>
-                                    <td>08:55:00</td>
-                                    <td>18:40:00</td>
-                                    <td>9시간 50분 00초</td>
-                                    <td>정상</td>
-                                </tr>
+                                </c:forEach>
+                            </c:if>
+                            
+                                
+                               
                             </tbody>
                         </table>
                     </div>
                         <!-- 페이징 -->
                         <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
+                        	<c:out value="${pageBar }" escapeXml="false"/>
+                       	</div>
+                        <!--     <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center mt-4">
                                     <li class="page-item">
                                         <a class="page-link text-muted" href="#" aria-label="Previous">
@@ -151,8 +144,8 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </nav>
-                        </div>
+                            </nav> -->
+                       
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
