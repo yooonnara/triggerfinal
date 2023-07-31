@@ -307,7 +307,7 @@ $("#submit_btn").on('click', function() {
 	
 	//멤버생성 모달
 
-	function insertEmployee(){
+	/* function insertEmployee(){
 		$.ajax({
 				url: "${path}/ajax/insertEmployee",
 			    type: "POST",
@@ -318,7 +318,7 @@ $("#submit_btn").on('click', function() {
 			        console.log("성공!!!")
 				}
 		});
-	}
+	} */
 	
 });
 

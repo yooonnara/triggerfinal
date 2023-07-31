@@ -62,8 +62,10 @@
 									</tr>
 									<tr>
 										<td>비밀번호</td>
-										<td><input type="password" class="form-control ml-5"
-											name="userId" id=""></td>
+										<td>
+											<input type="password" class="form-control ml-5" name="userId" id=""
+													value="">
+										</td>
 									</tr>
 									<tr>
 										<td>비밀번호 확인</td>

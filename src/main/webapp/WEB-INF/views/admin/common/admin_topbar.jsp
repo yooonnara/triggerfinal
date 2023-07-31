@@ -8,6 +8,13 @@
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
+    
+    <!-- 관리자페이지 이동 -->
+	<div class="input-group" style="justify-content: right">
+		<a href="${path }/main">
+			<span class="mr-2 d-none d-lg-inline small text-dark">멤버 페이지 </span>
+		</a>
+	</div>
 
     <!-- 로그인 프로필 시작 Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
