@@ -91,6 +91,16 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectMonthTime(session, no);
 	}
 	
+	//근태 리스트
+	@Override
+	public List<Attendance> selectWorkTimeAll(Map<String,Object> param) {
+		return dao.selectWorkTimeAll(session, param);
+	}
+	
+	@Override
+	public int selectWorkTimeCount() {
+		return dao.selectWorkTimeCount(session);
+	}
 	
 	//관리자
 	@Override

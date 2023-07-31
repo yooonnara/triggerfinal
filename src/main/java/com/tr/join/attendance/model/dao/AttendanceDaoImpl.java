@@ -65,6 +65,19 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectOne("attendance.selectMonthTime",no);
 	 }
 	 
+	 //근태 리스트
+	 @Override
+	 public List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param) {
+		 return session.selectList("attendance.selectWorkTimeAll",param);
+	 }
+	 
+	 @Override
+	 public int selectWorkTimeCount(SqlSession session){
+		 return session.selectOne("attendance.selectWorkTimeCount");
+	 }
+	 
+	 
+	 
 	 //관리자
 	 @Override
 	 public List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param){

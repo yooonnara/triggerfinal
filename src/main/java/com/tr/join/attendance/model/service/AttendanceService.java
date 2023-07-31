@@ -23,6 +23,9 @@ public interface AttendanceService {
 	Attendance selectRemainTime(int no);
 	Attendance selectMonthTime(int no);
 
+	//근태 리스트
+	List<Attendance> selectWorkTimeAll(Map<String,Object> param);
+	int selectWorkTimeCount();
 	//관리자 페이지
 	List<Attendance> selectAttendanceAll(Map<String,Object> param);
 	int selectAttendanceCount();

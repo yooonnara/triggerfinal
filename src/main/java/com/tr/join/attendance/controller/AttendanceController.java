@@ -109,6 +109,26 @@ public class AttendanceController {
 		
 		 }
 		
+	  //근태 리스트 
+	  @GetMapping("/WorkTimeList")
+	  public String selectWorkTimeAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
+										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+										Model m) {
+		  
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  List<Attendance> wt=service.selectWorkTimeAll(Map.of("loginNo",loginNo,"cPage",cPage,"numPerpage",numPerpage));
+		  int totalData=service.selectWorkTimeCount();  //전체 자료수
+		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
+		  m.addAttribute("wt",wt);
+		  m.addAttribute("totalData",totalData);
+		  System.out.println(m);
+		  
+		  return "attendance/workTimeList";
+		  
+	  }
+	  
+	  
 	  
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
