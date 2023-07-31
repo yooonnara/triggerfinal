@@ -13,42 +13,41 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" name="frm" class="user" action="${path }/insertEmployee" method="post">
+					<form id="frm" name="frm" class="user" action="${path}/admin/insertEmployee" method="post">
 						<table class="table text-dark table-borderless">
 							<tbody class="text-left">
 								<tr class="text-center">
 									<td colspan='2'>
 										<div class="box" style="cursor: pointer">
-											<img src="${path }/resources/img/user_profile.png"
+											<img src="${path }/resources/img/user_profile.png" 
 												class="profile rounded enter-block profile_img"
 												style="width: 80px; height: 80px" id="profile_img">
-											<i class="bi bi-gear-fill profile_img"></i> <input
-												id="profile_img_file" type="file" accept=".jpg, .png"
-												style="display: none;">
+											<i class="bi bi-gear-fill profile_img"></i>
+											<input id="profile_img_file" type="file" accept=".jpg, .png" style="display: none;">
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">사번</th>
 									<td><input type="text" class="form-control"
-										name="emp_num" id="emp_num" requireda readonly></td>
+										name="emp_num" id="emp_num" required readonly></td>
 								</tr>
 								<tr>
 									<th class="align-middle">이름(한글)</th>
 									<td>
 										<input onKeyup="checkName(this.value)" type="text" class="form-control" name="emp_name" id="emp_name" required>
-										<span class="emp-name-msg small text-danger" style="display: none" >이름을 입력해 주세요.</span>
+										<span class="check-msg emp-name-msg small text-danger" style="display: none" >이름을 입력해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">성별</th>
 									<td class="text-left">
-										<input onclick="checkGender(this.value)" type="radio" name="gender" id="gender1" value="M">&nbsp;
+										<input onchange="checkGender(this.value)" type="radio" name="gender" id="gender1" value="M">&nbsp;
 										<label for="gender1">남</label>
 										&nbsp;&nbsp;&nbsp;&nbsp; 
-										<input onclick="checkGender(this.value)" type="radio" name="gender" id="gender2" value="F">&nbsp;
+										<input onchange="checkGender(this.value)" type="radio" name="gender" id="gender2" value="F">&nbsp;
 										<label for="gender2">여</label><br>
-										<span class="gender-msg small text-danger" style="display: none">성별을 선택해 주세요.</span>
+										<span class="check-msg gender-msg small text-danger" style="display: none">성별을 선택해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
@@ -57,95 +56,245 @@
 										<input type="text" class="form-control" name="emp_id"
 											id="emp_id" placeholder="영문, 숫자 4글자 이상" required
 											onKeyup="checkId(this.value)">
-										<span class="emp-id-msg small text-danger"></span>
+										<span class="check-msg emp-id-msg small text-danger"></span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">비밀번호</th>
 									<td>
-										<input onKeyup="checkPwd1(this.value)" onclick="checkPwd1(this.value)" type="password" 
+										<input onKeyup="checkPwd1(this.value)" type="password" 
 												class="form-control" name="pwd1" id="pwd1">
-										<span class="pwd1-msg small text-danger"></span>
+										<span class="check-msg pwd1-msg small text-danger"></span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">비밀번호 확인</th>
 									<td>
-										<input onKeyup="checkPwd2(this.value)" onclick="checkPwd2(this.value)" type="password" 
+										<input onKeyup="checkPwd2(this.value)" type="password" 
 												class="form-control" name="pwd2" id="pwd2">
-										<span class="pwd2-msg small text-danger"></span>
+										<span class="check-msg pwd2-msg small text-danger"></span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">계정상태</th>
 									<td>
-										<select onclick="checkAccStatus(this.value)" class="form-control" aria-label="Default select example">
-											<option selected>선택</option>
-											<option value="1" name="acc_status" id="acc_status1">정상</option>
-											<option value="2" name="acc_status" id="acc_status2">중지</option>
+										<select id="acc_status" name="acc_status" onclick="checkAccStatus(this.value)" class="form-control" aria-label="Default select example">
+											<option value="" selected>선택</option>
+											<option value="1">정상</option>
+											<option value="2">중지</option>
 										</select>
-										<span class="acc-status-msg small text-danger" style="display: none">계정상태를 선택해 주세요.</span>
+										<span class="check-msg acc-status-msg small text-danger" style="display: none">계정상태를 선택해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">입사일</th>
 									<td>
 										<input type="date" class="form-control" name="enroll_date" id="enroll_date">
-										<span class="enroll-date-msg small text-danger" style="display: none">입사일을 입력해 주세요.</span>
+										<span class="check-msg enroll-date-msg small text-danger" style="display: none">입사일을 입력해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">부서</th>
-									<td>
-										<select onclick="checkDept(this.value)" id="dept" name="dept" class="form-control" aria-label="Default select example">
+									<td><!-- onchange="checkDept(this.value)"  -->
+										<select id="dept" name="dept" class="form-control" aria-label="Default select example">
 										</select>
-										<span class="dept-msg small text-danger" style="display: none">부서를 선택해 주세요.</span>
+										<span class="check-msg dept-msg small text-danger" style="display: none">부서를 선택해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">직급</th>
 									<td>
+									<!-- onchange="checkJob(this.value)"  -->
 										<select id="job" name="job" class="form-control" aria-label="Default select example">
 										</select>
-										<span class="job-msg small text-danger" style="display: none">직급을 선택해 주세요.</span>
+										<span class="check-msg job-msg small text-danger" style="display: none">직급을 선택해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">관리자여부</th>
 									<td>
-										<select onclick="checkAccType(this.value)" class="form-control" aria-label="Default select example">
-												<option selected>선택</option>
-												<option value="1" name="acc_type" id="acc_type1">N</option>
-												<option value="2" name="acc_type" id="acc_type2">Y</option>
+										<select name="acc_type" id="acc_type" onchange="checkAccType(this.value)" class="form-control" aria-label="Default select example">
+												<option value="" selected>선택</option>
+												<option value="1">N</option>
+												<option value="2">Y</option>
 										</select>
-										<span class="acc-type-msg small text-danger" style="display: none">관리자여부를 선택해 주세요.</span>
+										<span class="check-msg acc-type-msg small text-danger" style="display: none">관리자여부를 선택해 주세요.</span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">이메일</th>
 									<td>
 										<input onKeyup="checkEmail(this.value)" type="email" class="form-control" name="email" id="email" required>
-										<span class="email-msg small text-danger"></span>
+										<span class="check-msg email-msg small text-danger"></span>
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">전화번호</th>
 									<td>
-									<input onKeyup="checkPhone(this.value)" type="text" class="form-control" name="phone" id="phone" placeholder="- 없이 입력" maxlength="11" required>
-									<span class="phone-msg small text-danger"></span>
+										<input onKeyup="checkPhone(this.value)" type="text" class="form-control" name="phone" id="phone" placeholder="- 없이 입력" maxlength="11" required>
+										<span class="check-msg phone-msg small text-danger"></span>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</form>
 					<div class="modal-footer">
-						<button class="btn btn-dark" type="submit" id="submit_btn"
-							data-dismiss="modal">저장</button>
-						<button class="btn btn-secondary" type="reset"
-							data-dismiss="modal">취소</button>
+						<button class="btn btn-dark" type="button" onclick="checkInsertFrm()">
+							저장
+						</button>
+						<button class="btn btn-secondary" type="reset" data-dismiss="modal">
+							취소
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="${path}/resources/js/employee.js"></script>
+<script>
+
+$(".profile_img").on('click', function() {
+	$('#profile_img_file').click();
+})
+
+
+
+$("#enroll_date").change(e=>{
+	console.log(e);
+	console.log(e.target.value)
+})
+
+
+function getDept() {
+	$.ajax({
+		url: "${path}/admin/ajax/getDept",
+		success: data => {
+			$('#dept').empty();
+			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
+			$('#dept').append(basicOption); 
+			for (var i = 0; i < data.length; i++) {
+				const no = data[i]['no'];
+				const title = data[i]['title'];
+				const option = $("<option></option>").attr("value", no).text(title);
+				$('#dept').append(option);
+			}
+		}
+	})
+}
+
+function getJob() {
+	$.ajax({
+		url: "${path}/admin/ajax/getJob",
+		success: data => {
+			$('#job').empty();
+  			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
+			$('#job').append(basicOption); 
+			for (var i = 0; i < data.length; i++) {
+				const no = data[i]['no'];
+				const title = data[i]['title'];
+				const option = $("<option></option>").attr("value", no).text(title);
+				$('#job').append(option);
+			}
+		}
+	})
+}
+//저장 버튼 눌렀을 때 값 전체 검사
+function checkInsertFrm(){
+	// 이름
+	if(checkName($("#emp_name").val()) == false){
+		$("#emp_name").focus();
+		return false;
+	}
+	
+	// 성별
+	if(checkGender($("input[name=gender]").val()) == false){
+		$("#gender1").focus();
+		return false;
+	}
+	
+	// 아이디	
+ 	if(checkId($("#emp_id").val()) == false){
+		$("#emp_id").focus();
+		return false;
+	}
+	
+	// 비밀번호
+	if(checkPwd1($("#pwd1").val()) == false){
+		$("#pwd1").focus();
+		return false;
+	}
+	
+	// 비밀번호 확인
+	if(checkPwd2($("#pwd2").val()) == false){
+		$("#pwd2").focus();
+		return false;
+	}
+	
+	// 계정상태 
+	if(checkAccStatus($("#acc_status")) == false ){
+		$("#acc_status").focus();
+		return false;
+	}
+	
+	// 입사일
+	if($('#enroll_date').val() == '' || $('#enroll_date').val() == null){
+		$("#enroll_date").focus();
+		return false;
+	}
+	
+	// 퇴사일
+	
+	// 부서
+	
+	// 직급
+	
+	// 관리자여부
+	if(checkAccType($("#acc_type").val()) == false){
+		$("#acc_type").focus();
+		return false;
+	}
+	
+	// 이메일
+	if(checkEmail($("#email").val()) == false){
+		$("#email").focus();
+		return false;
+	}
+	
+	// 전화번호
+	if(checkPhone($("#phone").val()) == false){
+		$("#phone").focus();
+		return false;
+	}
+	frmSubmit();
+}
+function frmSubmit(){
+	if(confirm('저장하시겠습니까?')){
+		$('#frm').submit();
+		/* form=new FormData();
+		$("#frm input").each((i,e)=>{
+			if(e.type=='file'){
+				console.log(e);
+			}
+		});
+		$.ajax({
+			url: "${path}/ajax/insertEmployee",
+		    type: "POST",
+		    data: 
+		    	$("#frm").serialize()
+		    ,
+			success: data => {
+		        console.log("성공!!!")
+			}
+		});  */
+	}
+}
+
+
+
+// keyup
+
+
+
+</script>
+   

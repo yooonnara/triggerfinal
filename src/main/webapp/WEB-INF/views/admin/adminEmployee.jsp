@@ -127,7 +127,8 @@
 
                         <!-- 페이징 -->
                         <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
+                    	    <c:out value="${pageBar }" escapeXml="false"/>
+                            <!-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center mt-4">
                                     <li class="page-item">
                                         <a class="page-link text-muted" href="#" aria-label="Previous">
@@ -147,7 +148,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> -->
                         </div>
                     </div>
                 </div>
@@ -158,9 +159,6 @@
             <!-- 멤버생성 모달 -->
 			<jsp:include page="/WEB-INF/views/admin/insertMemberModal.jsp"/>
 			
-			<!-- 멤버수정 모달, 이름 클릭 시 -->
-			<jsp:include page="/WEB-INF/views/admin/updateMemberModal.jsp"/>
-
 
             <!-- Footer -->
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -178,20 +176,29 @@
    </a>
    
 <script>
+// 모달 오픈 시 이벤트
+$('#insertEmployee').on('shown.bs.modal', function() {
+	getDept();
+	getJob();
+	makeEmpNum();
+	$("#emp_name").focus();
+	// 수정으로 오픈되었을 경우 이벤트
+})
+// 모달 클로즈 시 이벤트
+$('#insertEmployee').on('hidden.bs.modal', function (event) {
+	frmReset(); // 폼 리셋
+})
 
 $(".profile_img").on('click', function() {
 	$('#profile_img_file').click();
 })
 
-// 모달 오픈 시 이벤트
-$('#insertEmployee').on('shown.bs.modal', function() {
-	getDept();
-	getJob();
-	// 수정으로 오픈되었을 경우 이벤트
+
+
+$("#enroll_date").change(e=>{
+	console.log(e);
+	console.log(e.target.value)
 })
-
-
-
 
 
 function getDept() {
@@ -227,248 +234,20 @@ function getJob() {
 		}
 	})
 }
-
-// 저장 버튼 눌렀을 때 값 전체 검사
-$("#submit_btn").on('click', function() {
-	
-	// 이름
-	if(checkName($("#emp_name").val()) == false){
-		$("#emp_name").focus();
-		return false;
-	}
-	
-	// 성별
-	if(checkGender($("#gender1"||"#gender2").val()) == false){
-		$("#gender1").focus();
-		return false;
-	}
-	
-	// 아이디	
- 	if(checkId($("#emp_id").val()) == false){
-		$("#emp_id").focus();
-		return false;
-	}
-	
-	// 비밀번호
-	if(checkPwd1($("#pwd1").val()) == false){
-		$("#pwd1").focus();
-		return false;
-	}
-	
-	// 비밀번호 확인
-	if(checkPwd2($("#pwd2").val()) == false){
-		$("#pwd2").focus();
-		return false;
-	}
-	
-	// 계정상태
-	if(checkAccStatus($("#acc_status1"||"#acc_status2").val()) == false){
-		$("#acc_status1").focus();
-		return false;
-	}
-	
-	// 입사일
-	
-	// 퇴사일
-	
-	// 부서
-	
-	// 직급
-	
-	// 관리자여부
-	if(checkAccType($("#acc_type1"||"#acc_type2").val()) == false){
-		$("#acc_type1").focus();
-		return false;
-	}
-	
-	// 이메일
-	if(checkEmail($("#email").val()) == false){
-		$("#email").focus();
-		return false;
-	}
-	
-	// 전화번호
-	if(checkPhone($("#phone").val()) == false){
-		$("#phone").focus();
-		return false;
-	}
-
-	function getAge() {
-		var age = $('#age').val();	
-		var address = $('#address').val();	
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/memberAge",
-			data: {"age": age, "address":address},
-			success: data=>{
-				console.log(data);
-			}
-		});
-	}
-	
-	//멤버생성 모달
-
-	/* function insertEmployee(){
-		$.ajax({
-				url: "${path}/ajax/insertEmployee",
-			    type: "POST",
-			    data: {
-			    	$('#frm's).serialize()
-			    },
-				success: data => {
-			        console.log("성공!!!")
-				}
-		});
-	} */
-	
-});
-
-
-
-// keyup
-
-// 이름 사용 가능 여부
-function checkName(str){
-	let regex = /^[ㄱ-ㅎ|가-힣]{2,}$/;
-	if(!regex.test(str)) {
-		$('.emp-name-msg').text('2글자 이상 입력하세요. (한글만 가능)').show();
-		return false;
-	} else {
-		$('.emp-name-msg').hide();
-	}
-}
-
-function checkName(str){
-	let regex = /^[ㄱ-ㅎ|가-힣]{2,}$/;
-	if(!regex.test(str)) {
-		$('.emp-name-msg').text('2글자 이상 입력하세요. (한글만 가능)').show();
-		return false;
-	} else {
-		$('.emp-name-msg').hide();
-	}
-}
-
-// 아이디 사용 가능 여부 확인
-function checkId(str){
-	var regex = /^[a-z0-9+]{4,12}$/; 
-	if(!regex.test(str)) {
-		$('.emp-id-msg').text('4~12글자로 입력하세요. (영소문자, 숫자만 가능)').show();
-		return false;
-	} else {
-		$('.emp-id-msg').hide();
-	}
-	
-	// 아이디 중복 검사
+function makeEmpNum(){
 	$.ajax({
-		url: "${path}/admin/ajax/checkDuplicationId",
-		data : {
-			'id' : str
-		},
+		url: "${path}/admin/ajax/makeEmpNum",
 		success: data => {
-			if(data < 1){ // 중복없음
-				$('.emp-id-msg').hide();
-			} else { // 중복있음
-				$('.emp-id-msg').text('이미 존재하는 아이디입니다.').show();
-			}
+			$('#emp_num').val(data);
 		}
-	});
-	
+	})
 }
 
-// 비밀번호 사용 가능 여부
-function checkPwd1(str){
-	let regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,16}$/
-	if(!regex.test(str)) {
-		$('.pwd1-msg').text('8~16글자로 입력하세요. (영문, 숫자, 특수문자 포함)').show();
-		return false;
-	} else {
-		$('.pwd1-msg').hide();
-	}
+function frmReset(){
+	$('#frm')[0].reset();
+	$('.check-msg').hide();
 }
 
-// 비밀번호 일치 여부 확인
-function checkPwd2(str){
-	if($('#pwd1').val() != str){
-		$('.pwd2-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호가 일치하지 않습니다.');
-		return false;
-	} else {
-		$('.pwd2-msg').removeClass('text-danger').addClass('text-primary').text('비밀번호가 일치합니다.');
-	}
-}
-
-// 성별
-function checkGender(str){
-	if (!$('input[name=gender]').is(":checked")){
-		$(".gender-msg").show();
-		$("#gender1").focus();
-		return false;
-	} else {
-		$(".gender-msg").hide();
-	}
-}
-
-// 계정상태
-function checkAccStatus(str){
-	if (!$('option[name=acc_status]').is(":selected")){
-		$(".acc-status-msg").show();
-		$("#acc_status1").focus();
-		return false;
-	} else {
-		$(".acc-status-msg").hide();
-	}
-}
-
-//입사일
-
-// 퇴사일
-
-// 부서
-/* function checkDept(str){
-	if (!$('option').is(":checked")){
-		$(".dept-msg").show();
-		$('select').focus();
-		return false;
-	} else {
-		$(".dept-msg").hide();
-	}
-} */
-
-// 직급
-
-// 관리자여부
-function checkAccType(str){
-	if (!$('option[name=acc_type]').is(":selected")){
-		$(".acc-type-msg").show();
-		$("#acc_type").focus();
-		return false;
-	} else {
-		$(".acc-type-msg").hide();
-	}
-}
-
-// 이메일
-function checkEmail(str){
-	let regex = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/; 
-	if(!regex.test(str)) {
-		$('.email-msg').text('이메일을 입력하세요. (abc@join.com)').show();
-		return false;
-	} else {
-		$('.email-msg').hide();
-	}
-}
-
-// 전화번호
-function checkPhone(str){
-	let regex = /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/; 
-	if(!regex.test(str)) {
-		$('.phone-msg').text('전화번호를 입력하세요. (-없이)').show();
-		return false;
-	} else {
-		$('.phone-msg').hide();
-	}
-}
-
-
-	
 </script>
    
 

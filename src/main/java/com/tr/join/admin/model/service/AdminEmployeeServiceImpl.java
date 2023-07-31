@@ -28,8 +28,8 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 
 	// 멤버 생성하기
 	@Override
-	public int insertEmployee() {
-		return dao.insertEmployee(session);
+	public int insertEmployee(Map param) {
+		return dao.insertEmployee(session, param);
 	}
 
 	@Override
@@ -44,9 +44,22 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 
 
 	@Override
-	public List<Employee> selectEmployeeAll() {
-		return dao.selectEmployeeAll(session);
+	public List<Employee> selectEmployeeAll(Map<String,Object> param) {
+		return dao.selectEmployeeAll(session, param);
 	}
+	
+	@Override
+	public int selectEmployeeCount() {
+		return dao.selectEmployeeCount(session);
+		
+	}
+
+	@Override
+	public String makeEmpNum() {
+		return dao.makeEmpNum(session);
+	}
+	
+	
 	
 	
 

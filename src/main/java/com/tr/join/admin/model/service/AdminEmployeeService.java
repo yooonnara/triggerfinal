@@ -17,9 +17,15 @@ public interface AdminEmployeeService {
 	
 	int checkDuplicationId(String id);
 	
-	List<Employee> selectEmployeeAll();
+	List<Employee> selectEmployeeAll(Map<String,Object> param);
 	
-	int insertEmployee();
+	int insertEmployee(Map param);
+	
+	int selectEmployeeCount();
+	
+	String makeEmpNum();
+	
+	
 
 
 }
