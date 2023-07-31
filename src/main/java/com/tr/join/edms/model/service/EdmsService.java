@@ -15,5 +15,5 @@ public interface EdmsService {
  
 	/* List<Edsm> selectEdsmAll(Map<String,Object>param); */
  
- List<Edms> selectBsnAll();
+ 	List<Edms> selectBsnAll();
 }

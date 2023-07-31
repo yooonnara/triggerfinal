@@ -8,6 +8,13 @@
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
+    
+    <!-- 관리자페이지 이동 -->
+	<div class="input-group" style="justify-content: right">
+		<a href="${path }/main">
+			<span class="mr-2 d-none d-lg-inline small text-dark">멤버 페이지 </span>
+		</a>
+	</div>
 
     <!-- 로그인 프로필 시작 Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
@@ -47,9 +54,9 @@
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header bg-dark text-white">
 				<h5 class="modal-title" id="exampleModalLabel">로그아웃</h5>
-				<button class="close" type="button" data-dismiss="modal"
+				<button class="close text-white" type="button" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>

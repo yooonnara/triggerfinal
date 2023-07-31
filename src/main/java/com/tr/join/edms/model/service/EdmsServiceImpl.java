@@ -9,12 +9,17 @@ import org.springframework.stereotype.Service;
 import com.tr.join.edms.model.dao.EdmsDao;
 import com.tr.join.edms.model.vo.Edms;
 @Service
-public class EdsmServiceImpl implements EdmsService {
+public class EdmsServiceImpl implements EdmsService {
 
-		@Autowired
+		
 	private EdmsDao dao;
-		@Autowired
+		
 	private SqlSession session;
+	
+	public EdmsServiceImpl(EdmsDao dao, SqlSession session) {
+		this.dao=dao;
+		this.session=session;
+	}
 	
 	
 	/*

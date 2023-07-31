@@ -51,11 +51,15 @@ public class EdmsController {
 		
 	}
 	
-	@RequestMapping("/selectBsnAll")
-	public String selectBsnAll(Model m) {
+	
+	
+	
+	@GetMapping("/bsnList")
+	public String selectBsnAll(Model m){
 		List<Edms> list=service.selectBsnAll();
-		m.addAttribute("bsn",list);
-		return "edms/edmsView" ;
+		m.addAttribute("edms",list);
+		list.forEach(System.out::println);
+		return "edms/bsnList" ;
 		
 	}
 	
@@ -96,6 +100,7 @@ public class EdmsController {
 		public String edmsVcPage() {
 			return "edms/vcRequest";
 		}
+		
 		@GetMapping("/bsnRequest")
 		public String bsnRequestPage(Model m) {
 			Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

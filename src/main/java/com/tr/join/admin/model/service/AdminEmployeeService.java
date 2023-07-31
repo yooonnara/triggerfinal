@@ -18,6 +18,8 @@ public interface AdminEmployeeService {
 	int checkDuplicationId(String id);
 	
 	List<Employee> selectEmployeeAll();
+	
+	int insertEmployee();
 
 
 }

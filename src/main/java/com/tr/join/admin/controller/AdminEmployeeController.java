@@ -1,12 +1,18 @@
 package com.tr.join.admin.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +26,11 @@ public class AdminEmployeeController {
 	
 	@Autowired
 	private AdminEmployeeService service;
+	
+	
+	public AdminEmployeeController(AdminEmployeeService service) {
+		this.service=service;
+	}
 	
 	// 메인
 	@GetMapping("/admin")
@@ -35,6 +46,15 @@ public class AdminEmployeeController {
 		System.out.println(employees);
 		return "admin/adminEmployee";
 	}
+	
+	// 멤버 생성하기
+	@PostMapping("/ajax/insertEmployee")
+	@ResponseBody // @Validated 추가하기
+	public int insertEmployee() { 
+		int result = service.insertEmployee();
+		return 0;
+	}
+	
 	
 	@GetMapping("/admin/ajax/getDept")
 	@ResponseBody

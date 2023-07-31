@@ -100,7 +100,7 @@
 		                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
 		                                   		<td>${e.no}</td>
 		                                        <td>
-		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal">${e.name}</a>
+		                                        	<a href="#" data-toggle="modal" data-target="#updateEmployeeModal">${e.name}</a>
 		                                        </td>
 		                                        <td>${e.deptTitle}</td>
 		                                        <td>${e.jobTitle}</td>
@@ -155,8 +155,11 @@
 
             </div>
 
-            <!-- 멤버생성 모달-->
+            <!-- 멤버생성 모달 -->
 			<jsp:include page="/WEB-INF/views/admin/insertMemberModal.jsp"/>
+			
+			<!-- 멤버수정 모달, 이름 클릭 시 -->
+			<jsp:include page="/WEB-INF/views/admin/updateMemberModal.jsp"/>
 
 
             <!-- Footer -->
@@ -186,6 +189,10 @@ $('#insertEmployee').on('shown.bs.modal', function() {
 	getJob();
 	// 수정으로 오픈되었을 경우 이벤트
 })
+
+
+
+
 
 function getDept() {
 	$.ajax({
@@ -286,8 +293,32 @@ $("#submit_btn").on('click', function() {
 		return false;
 	}
 
-
+	function getAge() {
+		var age = $('#age').val();	
+		var address = $('#address').val();	
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/memberAge",
+			data: {"age": age, "address":address},
+			success: data=>{
+				console.log(data);
+			}
+		});
+	}
 	
+	//멤버생성 모달
+
+	/* function insertEmployee(){
+		$.ajax({
+				url: "${path}/ajax/insertEmployee",
+			    type: "POST",
+			    data: {
+			    	$('#frm's).serialize()
+			    },
+				success: data => {
+			        console.log("성공!!!")
+				}
+		});
+	} */
 	
 });
 
@@ -436,6 +467,8 @@ function checkPhone(str){
 	}
 }
 
+
+	
 </script>
    
 

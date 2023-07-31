@@ -112,16 +112,20 @@
                                     <th>결재상태</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                          <%--   <tbody>
+                            <c:if test="${not empty edms}">
+                            <c:forEach var="e" items="${edms}">
                                 <tr>
-                                    <td>2023-07-22</td>
-                                    <td>nr423</td>
+                                    <td>${e.createDate }</td>
+                                    <td>${e.title }</td>
                                     <td>휴가</td>
                                    <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">제목</a></td>
                                   <td><img src="resources/img/#"></td>
                                   <td><a href="#" data-toggle="modal" data-target="#viewEdmsModal">결재대기</a></td>                                 
                                 </tr>
-                            </tbody>
+                                </c:forEach>
+                                </c:if>
+                            </tbody> --%>
                         </table>
                     </div>
 
@@ -155,7 +159,7 @@
 
         </div>
 
-<!-- 폼조회 모달-->
+<%-- <!-- 폼조회 모달-->
         <div id="viewEdms">
             <div class="modal fade text-center" id="viewEdmsModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -232,7 +236,7 @@
                 </div>
             </div>
         </div>
-</div>
+</div> --%>
          
          
              <!-- Footer -->

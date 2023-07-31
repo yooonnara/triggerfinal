@@ -6,6 +6,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+import com.tr.join.employee.model.vo.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,4 +32,5 @@ public class Edms {
 	private int jobNo;
 	private int deptNo;
 	private String detailType;
+	private Employee emp;
 }
