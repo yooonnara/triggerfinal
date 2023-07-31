@@ -101,7 +101,7 @@
                                     <col width="10%" />
                                     <col width="25%" />
                             </colgroup>
-
+						
                             <thead>
                                 <tr class="bg-primary text-white">
                                     <th>기안일</th>
@@ -155,7 +155,7 @@
 
         </div>
 
-<!-- 멤버생성 모달-->
+<!-- 폼조회 모달-->
         <div id="viewEdms">
             <div class="modal fade text-center" id="viewEdmsModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -218,11 +218,9 @@
                                     </tr>
                                       <tr>
 	                                        <td class="align-middle">첨부파일</td>
-	                                        <td> <input type="file" class="class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly>
-	                                        </td>
+	                                        <td> <input type="file" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly></td>
                                        </tr>
-                                    </td>
-                                  </tr> 
+                                  </table> 
                                  </tbody> 
                                 </table>
                             </form>

@@ -2,8 +2,9 @@ package com.tr.join.edms.model.service;
 
 
 
-import com.tr.join.edms.model.dto.Edms;
-import com.tr.join.employee.model.vo.Employee;
+import java.util.List;
+
+import com.tr.join.edms.model.vo.Edms;
 
 public interface EdmsService {
 
@@ -14,5 +15,5 @@ public interface EdmsService {
  
 	/* List<Edsm> selectEdsmAll(Map<String,Object>param); */
  
- 
+ List<Edms> selectBsnAll();
 }

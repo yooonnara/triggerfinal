@@ -86,27 +86,27 @@
             <div class="mypage-container col-12 d-flex justify-content-center">
 
                 <form class="vc shadow px-5 py-5" name="bsninsertForm" action="${path }/edms/insertbsn" method="post" >
-                    <table class="table-sm ml-1 mr-5"">
+                    <table class="table-sm ml-1 mr-5">
                       <input type="hidden" name="type" value="1"/>
                          <tr>
                             <td>번호</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                               value="${loginEmp.no }" placeholder="" readonly="true" ></td>
+                               value="${loginEmp.no }" placeholder="" readonly ></td>
                         </tr>
                         <tr>
                             <td>이름(한글)</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                             value="${loginEmp.name }"   placeholder="" readonly="true" ></td>
+                             value="${loginEmp.name }"   placeholder="" readonly ></td>
                         </tr>
                            <tr>
                             <td>부서</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                              value="${loginEmp. }"   placeholder="개발팀" readonly></td>
+                              value="${loginEmp.dept }"   placeholder="개발팀" readonly></td>
                         </tr>
                         <tr>
                             <td>직급</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="대리" readonly="true"></td>
+                               value="${loginEmp.job }" placeholder="" readonly></td>
                         </tr>
                         <tr>
                       <!--   <td>작성날짜</td>
@@ -147,7 +147,7 @@
                     </table>
                     <div class="req-btn d-flex justify-content-around pt-5  ">
                         <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->
-                        <button type="submit" class="align-text-bottom btn btn-primary ">등록</button>
+                        <input type="submit" class="align-text-bottom btn btn-primary"  value="등록">
                     </div>
                 </form>
             </div>

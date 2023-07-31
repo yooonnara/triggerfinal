@@ -1,4 +1,4 @@
-package com.tr.join.edms.model.dto;
+package com.tr.join.edms.model.vo;
 
 import java.sql.Date;
 

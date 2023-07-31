@@ -1,5 +1,7 @@
 package com.tr.join.edms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -8,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tr.join.edms.model.dto.Edms;
 import com.tr.join.edms.model.service.EdmsService;
+import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
 
@@ -51,6 +53,14 @@ public class EdmsController {
 	
 		//System.out.println(result);
 		//출장 insertform
+		
+	}
+	
+	@RequestMapping("/selectBsnAll()")
+	public String selectBsnAll(Model m) {
+		List<Edms> list=service.selectBsnAll();
+		m.addAttribute("bsn",list);
+		return "edms/edmsView" ;
 		
 	}
 	
