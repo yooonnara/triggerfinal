@@ -48,7 +48,7 @@
                                     </tr>
 									<tr>
 										<td>사번</td>
-										<td><input class="form-control ml-5" type="text" readonly>${empInfo.empNum}</td>
+										<td><input class="form-control ml-5" type="text" value="${empInfo.empNum}"readonly></td>
 									</tr>
 									<tr>
 										<td>이름(한글)</td>
@@ -58,7 +58,7 @@
 									<tr>
 										<td>아이디</td>
 										<td><input class="form-control ml-5" type="text"
-											placeholder="yooonnara" readonly></td>
+											value="${empInfo.id}" readonly></td>
 									</tr>
 									<tr>
 										<td>비밀번호</td>
@@ -73,27 +73,28 @@
 									<tr>
 										<td>입사일</td>
 										<td><input class="form-control ml-5" type="date"
-											placeholder="" readonly></td>
+											value="${empInfo.enrollDate}" readonly></td>
 									</tr>
 									<tr>
 										<td>부서</td>
 										<td><input class="form-control ml-5" type="text"
-											placeholder="개발팀" readonly></td>
+											 value="${empInfo.deptTitle}" readonly></td>
 									</tr>
 									<tr>
 										<td>직급</td>
 										<td><input class="form-control ml-5" type="text"
-											placeholder="대리" readonly></td>
+											value="${empInfo.jobTitle}" readonly></td>
 									</tr>
 									<tr>
 										<td>이메일</td>
 										<td><input type="text" class="form-control ml-5"
-											name="userId" id=""></td>
+											name="userId" value="${empInfo.email}"></td>
 									</tr>
 									<tr>
 										<td>전화번호</td>
 										<td><input type="text" class="form-control ml-5"
-											name="userId" id="" placeholder="- 없이 입력"></td>
+											name="userId" id="" placeholder="- 없이 입력"
+											value="${empInfo.phone}"></td>
 									</tr>
 
 								</table>

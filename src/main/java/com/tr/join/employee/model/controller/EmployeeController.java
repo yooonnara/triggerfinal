@@ -1,12 +1,19 @@
 package com.tr.join.employee.model.controller;
 
+import java.util.List;
+
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
@@ -32,18 +39,20 @@ public class EmployeeController {
 	}
 	 
 	@GetMapping("/mypage")
-	public String mypage(){
+	public String mypage(Model m){
+		// 로그인한 현재 유저 정보 (세션에 저장)
+		Employee loginEmp =(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+	    m.addAttribute("empInfo",loginEmp);
 		return "mypage/mypage";
 	}
 	
+	@GetMapping("/logout")
+	public String logOut() {
+		
+		return "/";
+	}
 	
-	
-	
-//	public String selectEmployeeByNo(Model m) {
-//	      Employee loginEmp=(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//	      m.addAttribute("empInfo",service.selectEmployeeByNo(loginEmp.getNo()));
-//	      return "mypage/mypage";
-//	}
 	
 	
 
