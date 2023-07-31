@@ -144,13 +144,13 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="modal-footer">
-							<button class="btn btn-dark" type="button" id="submit_btn"
-								data-dismiss="modal">저장</button>
-							<button class="btn btn-secondary" type="reset"
-								data-dismiss="modal">취소</button>
-						</div>
 					</form>
+					<div class="modal-footer">
+						<button class="btn btn-dark" type="button" id="submit_btn"
+							data-dismiss="modal">저장</button>
+						<button class="btn btn-secondary" type="reset"
+							data-dismiss="modal">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -190,6 +190,10 @@ $('#insertEmployee').on('shown.bs.modal', function() {
 	// 수정으로 오픈되었을 경우 이벤트
 })
 
+
+
+
+
 function getDept() {
 	$.ajax({
 		url: "${path}/admin/ajax/getDept",
@@ -289,8 +293,32 @@ $("#submit_btn").on('click', function() {
 		return false;
 	}
 
-
+	function getAge() {
+		var age = $('#age').val();	
+		var address = $('#address').val();	
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/memberAge",
+			data: {"age": age, "address":address},
+			success: data=>{
+				console.log(data);
+			}
+		});
+	}
 	
+	//멤버생성 모달
+
+	function insertEmployee(){
+		$.ajax({
+				url: "${path}/ajax/insertEmployee",
+			    type: "POST",
+			    data: {
+			    	$('#frm's).serialize()
+			    },
+				success: data => {
+			        console.log("성공!!!")
+				}
+		});
+	}
 	
 });
 
@@ -439,6 +467,8 @@ function checkPhone(str){
 	}
 }
 
+
+	
 </script>
    
 
