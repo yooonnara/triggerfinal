@@ -191,7 +191,10 @@ $('#insertEmployee').on('shown.bs.modal', function() {
 })
 
 
-
+$("#enroll_date").change(e=>{
+	console.log(e);
+	console.log(e.target.value)
+})
 
 
 function getDept() {
@@ -296,15 +299,23 @@ $("#submit_btn").on('click', function() {
 	
 	
 	//멤버생성 모달
-
-		$.ajax({
+	form=new FormData();
+	console.log($("#frm input"));
+	$("#frm input").each((i,e)=>{
+		if(e.type=='file'){
+			
+			console.log(e);
+		}
+	});
+		/* $.ajax({
 				url: "${path}/ajax/insertEmployee",
 			    type: "POST",
 			    data: {},
+			    
 				success: data => {
 			        console.log("성공!!!")
 				}
-		});
+		}); */
 
 	
 });
