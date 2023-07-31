@@ -57,18 +57,17 @@ public class Employee implements UserDetails{
 	private Date resignDate; // 퇴사일
 	
 	@NotEmpty
-	private int accountStatus; // 계정상태
+	private int accStatus; // 계정상태
 	
 	@NotEmpty
 	private int type; // 관리자 여부
 	
-	private EmpImg empImg;
 	
-	@NotEmpty
-	private Department dept;
+	private int deptNo;
+	private String deptTitle;
+	private int jobNo;
+	private String jobTitle;
 	
-	@NotEmpty
-	private Job job;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

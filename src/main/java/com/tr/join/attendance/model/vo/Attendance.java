@@ -20,6 +20,7 @@ public class Attendance {
 	private String weekTime; //주별시간
 	private String monthTime; //달별시간
 	private String remainTime; //누적시간
+	private String overTime; //추가시간
 	
 	//private String startDate;
 	//private String endDate;
