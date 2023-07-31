@@ -1,5 +1,6 @@
 package com.tr.join.attendance.controller;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,25 +111,50 @@ public class AttendanceController {
 		 }
 		
 	  //근태 리스트 
-	  @GetMapping("/WorkTimeList")
+	  @GetMapping("/workTimeList")
 	  public String selectWorkTimeAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
 										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
 										Model m) {
 		  
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		  List<Attendance> wt=service.selectWorkTimeAll(Map.of("loginNo",loginNo,"cPage",cPage,"numPerpage",numPerpage));
+		  
+		  List<Attendance> wt=service.selectWorkTimeAll(Map.of("loginNo",loginNo.getNo(),"cPage",cPage,"numPerpage",numPerpage));
+		  
 		  int totalData=service.selectWorkTimeCount();  //전체 자료수
 		  
 		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
 		  m.addAttribute("wt",wt);
 		  m.addAttribute("totalData",totalData);
-		  System.out.println(m);
 		  
+		  System.out.println(wt);
+		  System.out.println(totalData);
 		  return "attendance/workTimeList";
 		  
 	  }
 	  
 	  
+	  //ajax 근태 리스트
+	  @GetMapping("/ajaxworkTime")
+	  @ResponseBody 
+	  public List<Attendance> searchWorkTimeByStatus(int searchNum) {
+		  
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  Map<String,Object> ajaxParam=new HashMap(); //Map 생성
+		  ajaxParam.put("searchNum",searchNum); 
+		  ajaxParam.put("loginNo",loginNo.getNo()); 
+		List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
+		  
+		  System.out.println(wtajax);
+		  
+		  return wtajax;
+	  }
+	  
+	  
+	  
+	  
+	  //안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!
+	  //아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
 	  
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
@@ -190,7 +216,7 @@ public class AttendanceController {
 			return "attendance/workTimeWeekly";
 	}
 	
-	@GetMapping("/workTimeList")
+	//@GetMapping("/workTimeList")
 	public String workTimeList() {
 		return "attendance/workTimeList";
 }

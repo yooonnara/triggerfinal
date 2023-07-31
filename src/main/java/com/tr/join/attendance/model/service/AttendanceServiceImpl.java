@@ -102,6 +102,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectWorkTimeCount(session);
 	}
 	
+	//검색 기능 - 근태 상태로 조회
+	@Override
+	public List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam){
+		return dao.searchWorkTimeByStatus(session, ajaxParam);
+	}
+	
 	//관리자
 	@Override
 	public List<Attendance> selectAttendanceAll(Map<String,Object> param){

@@ -76,7 +76,11 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectOne("attendance.selectWorkTimeCount");
 	 }
 	 
-	 
+	 //검색 기능 - 근태 상태
+	 @Override
+	 public List<Attendance> searchWorkTimeByStatus(SqlSession session,Map<String,Object> ajaxParam){
+		 return session.selectList("attendance.searchWorkTimeByStatus",ajaxParam);
+	 }
 	 
 	 //관리자
 	 @Override

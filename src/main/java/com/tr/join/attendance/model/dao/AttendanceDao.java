@@ -27,6 +27,9 @@ public interface AttendanceDao {
 	 List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param);
 	 int selectWorkTimeCount(SqlSession session);
 	 
+	 //검색 기능 - 근태 상태에 따라
+	 List<Attendance> searchWorkTimeByStatus(SqlSession session, Map<String,Object> ajaxParam);
+	 
 	 //관리자
 	 List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param);
 	 int selectAttendanceCount(SqlSession session);

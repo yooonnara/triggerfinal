@@ -26,6 +26,9 @@ public interface AttendanceService {
 	//근태 리스트
 	List<Attendance> selectWorkTimeAll(Map<String,Object> param);
 	int selectWorkTimeCount();
+	
+	//근태 상태로 검색
+	List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam);
 	//관리자 페이지
 	List<Attendance> selectAttendanceAll(Map<String,Object> param);
 	int selectAttendanceCount();
