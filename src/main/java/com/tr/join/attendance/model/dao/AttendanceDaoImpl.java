@@ -48,4 +48,18 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectOne("attendance.selectWeekWorkTime",no);
 	 }
 	 
+	 @Override
+	 public Attendance selectOverWorkTime(SqlSession session, int no) {
+		 return session.selectOne("attendance.selectOverWorkTime",no);
+	 }
+	 
+	 @Override
+	 public Attendance selectRemainTime(SqlSession session, int no) {
+		 return session.selectOne("attendance.selectRemainTime",no);
+	 }
+	 
+	 @Override
+	 public Attendance selectMonthTime(SqlSession session, int no) {
+		 return session.selectOne("attendance.selectMonthTime",no);
+	 }
 }

@@ -88,11 +88,9 @@
 										</tr>
 										<tr>
 											<td class="border-dark border-right" id="df-num">${week.weekTime}</td>
-											<td class="border-dark border-right" id="df-num">1시 30분
-												00초</td>
-											<td class="border-dark border-right" id="df-num">7시 40분
-												00초</td>
-											<td class="border-dark" id="df-num">85시 38분 10초</td>
+											<td class="border-dark border-right" id="df-num">${overWeek.overTime}</td>
+											<td class="border-dark border-right" id="df-num">${remainWeek.remainTime}</td>
+											<td class="border-dark" id="df-num">${month.monthTime}</td>
 										</tr>
 									</table>
 								</div>

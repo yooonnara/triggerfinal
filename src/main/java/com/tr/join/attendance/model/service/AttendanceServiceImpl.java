@@ -72,6 +72,24 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectWeekWorkTime(session, no);
 	}
 	
+	//근태 초과 근무 시간
+	@Override
+	public Attendance selectOverWorkTime(int no) {
+		return dao.selectOverWorkTime(session, no);
+	}
+	
+	//근태 잔여 시간
+	@Override
+	public Attendance selectRemainTime(int no) {
+		return dao.selectRemainTime(session, no);
+	}
+	
+	//근태 이번달 누적 
+	@Override
+	public Attendance selectMonthTime(int no) {
+		return dao.selectMonthTime(session, no);
+	}
+	
 	
 	
 	

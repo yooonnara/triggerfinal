@@ -17,6 +17,9 @@ public interface AttendanceDao {
 	 List<Edsm> workCalendarDayoff(SqlSession session, int no);
 	 List<Edsm> workCalendarTrip(SqlSession session, int no);
 	 Attendance selectWeekWorkTime(SqlSession session, int no);
+	 Attendance selectOverWorkTime(SqlSession session, int no);
+	 Attendance selectRemainTime(SqlSession session, int no);
+	 Attendance selectMonthTime(SqlSession session, int no);
 }
 
 

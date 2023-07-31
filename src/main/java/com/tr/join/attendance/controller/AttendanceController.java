@@ -93,9 +93,15 @@ public class AttendanceController {
 	  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
 		 Attendance week = service.selectWeekWorkTime(loginNo.getNo()); //이번주 누적 근무 시간
-		
+		 Attendance overWeek = service.selectOverWorkTime(loginNo.getNo()); //이번주 초과 근무 시간
+		 Attendance remainWeek = service.selectRemainTime(loginNo.getNo()); //이번주 잔여 근무 시간
+		 Attendance month = service.selectMonthTime(loginNo.getNo()); //이번달 누적 근무 시간
+		 
 		 m.addAttribute("week",week);
-		 System.out.println(m); 
+		 m.addAttribute("overWeek",overWeek);
+		 m.addAttribute("remainWeek",remainWeek);
+		 m.addAttribute("month",month);
+		 System.out.println(month); 
 		  
 		  return "attendance/workTimeMain";
 		
