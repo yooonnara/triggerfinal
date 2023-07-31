@@ -5,16 +5,15 @@
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">멤버 수정</h5>
-					<button class="close" type="button" data-dismiss="modal"
+				<div class="modal-header bg-dark text-white">
+					<h5 class="modal-title" id="exampleModalLabel">멤버 생성</h5>
+					<button class="close text-white" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" name="frm" class="user"
-						action="${path }/insertEmployee" method="post">
+					<form id="frm" name="frm" class="user" action="${path }/insertEmployee" method="post">
 						<table class="table text-dark table-borderless">
 							<tbody class="text-left">
 								<tr class="text-center">
@@ -138,13 +137,13 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="modal-footer">
-							<button class="btn btn-dark" type="button" id="submit_btn"
-								data-dismiss="modal">저장</button>
-							<button class="btn btn-secondary" type="reset"
-								data-dismiss="modal">취소</button>
-						</div>
 					</form>
+					<div class="modal-footer">
+						<button class="btn btn-dark" type="submit" id="submit_btn"
+							data-dismiss="modal">저장</button>
+						<button class="btn btn-secondary" type="reset"
+							data-dismiss="modal">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>

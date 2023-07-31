@@ -26,6 +26,12 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 		return dao.selectDept(session);
 	}
 
+	// 멤버 생성하기
+	@Override
+	public int insertEmployee() {
+		return dao.insertEmployee(session);
+	}
+
 	@Override
 	public List<Job> selectJob() {
 		return dao.selectJob(session);

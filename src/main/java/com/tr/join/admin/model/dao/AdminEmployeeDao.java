@@ -19,5 +19,7 @@ public interface AdminEmployeeDao {
 	
 	List<Employee> selectEmployeeAll(SqlSessionTemplate session);
 
+	int insertEmployee(SqlSessionTemplate session);
+
 
 }

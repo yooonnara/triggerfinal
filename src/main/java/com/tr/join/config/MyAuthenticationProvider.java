@@ -31,12 +31,14 @@ public class MyAuthenticationProvider implements AuthenticationProvider{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String id=authentication.getName();
 		String password=(String)authentication.getCredentials();
+		
 		Employee loginEmp = dao.selectEmployeeById(session,id);
 		if(loginEmp == null || !encoder.matches(password, loginEmp.getPassword())) {
 			throw new BadCredentialsException("로그인실패");
 		}
 		return new UsernamePasswordAuthenticationToken(loginEmp, loginEmp.getPassword(),loginEmp.getAuthorities());
 	}
+	
 
 	@Override
 	public boolean supports(Class<?> authentication) {

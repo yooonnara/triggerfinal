@@ -13,6 +13,13 @@ import com.tr.join.employee.model.vo.Job;
 @Repository
 public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 
+	
+	
+	@Override
+	public int insertEmployee(SqlSessionTemplate session) {
+		return session.insert("adminEmployee.insertEmployee");
+	}
+
 	@Override
 	public List<Department> selectDept(SqlSessionTemplate session) {
 		return session.selectList("adminEmployee.selectDept");

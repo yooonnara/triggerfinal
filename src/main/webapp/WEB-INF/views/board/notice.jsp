@@ -136,7 +136,6 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	
-<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
 </body>
 
