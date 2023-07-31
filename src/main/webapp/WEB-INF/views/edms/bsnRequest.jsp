@@ -87,9 +87,10 @@
 
                 <form class="vc shadow px-5 py-5" name="bsninsertForm" action="${path }/edms/insertbsn" method="post" >
                     <table class="table-sm ml-1 mr-5">
-                      <input type="hidden" name="type" value="1"/>
+                      <input type="hidden" name="type" value="1"/> 
+                      <!--0은연차이고 1은 출장  -->
                       <input type="hidden" name="detailType" value="출장"/>
-                      <input type="hidden" name="no" value="no"/>
+                      <input type="hidden" name="no" value="${loginEmp.no }"/>
                          <tr>
                             <td>번호</td>
                             <td><input class="form-control ml-5 mb-1" type="number"
