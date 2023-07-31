@@ -94,21 +94,21 @@
 
                             <!-- 테이블 칸 크기 -->
                             <colgroup>
-                                <col width="15%" />
+                                	<col width="15%" />
                                     <col width="15%" />
                                     <col width="10%" />
                                     <col width="15%" />
-                                    <col width="10%" />
+                                    <col width="20%" />
                                     <col width="25%" />
                             </colgroup>
 						
                             <thead>
                                 <tr class="bg-primary text-white">
                                     <th>기안일</th>
-                                    <th>문서번호</th>
+                                    <th>부서</th>
+                                    <th>이름</th>
                                     <th>구분</th>
                                     <th>제목</th>
-                                    <th>첨부</th>
                                     <th>결재상태</th>
                                 </tr>
                             </thead>
@@ -180,7 +180,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="align-middle">번호</td>
+                                        <td class="align-middle">사원번호</td>
                                         <td><input class="form-control ml-5 mb-1" type="text"
                                				value="${loginEmp.no }" placeholder="" readonly></td>
                                     </tr>

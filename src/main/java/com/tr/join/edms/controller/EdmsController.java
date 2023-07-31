@@ -16,7 +16,7 @@ import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
 
 import lombok.extern.slf4j.Slf4j;
-@RequestMapping("/edsm")
+@RequestMapping("/edms")
 @Controller
 @Slf4j
 public class EdmsController {
@@ -29,34 +29,29 @@ public class EdmsController {
 		this.empService=empService;
 		this.service=service;
 	}
-	
-	@RequestMapping("/bsnRequest")
-	public String requestform() {
-		//페이지 전환용
-		return "bsnRequest";
-	}
+
 	
 	@PostMapping("/insertbsn")
 	public String insertbsn(Edms e, Model model) {
 		int result = service.insertbsn(e);
-	String msg,loc;
-	if(result>0) {
-	msg="연차/출장 신청이 완료되었습니다.";
-	loc="/";
-	}else {
-		msg="연차/충장신청이 실패되었습니다.";
-		loc="/edms/bsnRequest";
-	}
-	model.addAttribute("msg",msg);
-	model.addAttribute("loc",loc);
-	return "common/msg";
+		String msg,loc;
+		if(result>0) {
+		msg="연차/출장 신청이 완료되었습니다.";
+		loc="/";
+		}else {
+			msg="연차/충장신청이 실패되었습니다.";
+			loc="/edms/bsnRequest";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		return "common/msg";
 	
 		//System.out.println(result);
 		//출장 insertform
 		
 	}
 	
-	@RequestMapping("/selectBsnAll()")
+	@RequestMapping("/selectBsnAll")
 	public String selectBsnAll(Model m) {
 		List<Edms> list=service.selectBsnAll();
 		m.addAttribute("bsn",list);
@@ -102,7 +97,9 @@ public class EdmsController {
 			return "edms/vcRequest";
 		}
 		@GetMapping("/bsnRequest")
-		public String bsnRequestPage() {
+		public String bsnRequestPage(Model m) {
+			Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			m.addAttribute("loginEmp",loginEmp);
 			return "edms/bsnRequest";
 		}
 		

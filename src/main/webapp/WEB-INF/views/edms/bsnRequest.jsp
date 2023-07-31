@@ -89,25 +89,28 @@
                     <table class="table-sm ml-1 mr-5">
                       <input type="hidden" name="type" value="1"/>
                       <input type="hidden" name="detailType" value="출장"/>
+                      <input type="hidden" name="no" value="${loginEmp.no }"/>
                          <tr>
                             <td>번호</td>
-                            <td><input class="form-control ml-5 mb-1" type="text"
-                               value="${loginEmp.no }" placeholder="" readonly ></td>
+                            <td><input class="form-control ml-5 mb-1" type="number"
+                               value="${loginEmp.no }" name="no" placeholder="" readonly ></td>
                         </tr>
                         <tr>
                             <td>이름(한글)</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                             value="${loginEmp.name }"   placeholder="" readonly ></td>
+                             value="${loginEmp.name }" placeholder="" readonly ></td>
                         </tr>
                            <tr>
                             <td>부서</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                              value="${loginEmp.dept }"   placeholder="개발팀" readonly></td>
+                              value="${loginEmp.deptTitle }" placeholder="" readonly>
+                              <input type="hidden" name="deptNo" value="${loginEmp.deptNo }"/></td>
                         </tr>
                         <tr>
                             <td>직급</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                               value="${loginEmp.job }" placeholder="" readonly></td>
+                               value="${loginEmp.jobTitle }" placeholder="" readonly>
+                               <input type="hidden" name="jobNo" value="${loginEmp.jobNo }"/></td>
                         </tr>
                         <tr>
                       <!--   <td>작성날짜</td>
