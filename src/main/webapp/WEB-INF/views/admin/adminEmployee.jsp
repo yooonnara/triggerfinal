@@ -127,7 +127,8 @@
 
                         <!-- 페이징 -->
                         <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
+                    	    <c:out value="${pageBar }" escapeXml="false"/>
+                            <!-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center mt-4">
                                     <li class="page-item">
                                         <a class="page-link text-muted" href="#" aria-label="Previous">
@@ -147,7 +148,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> -->
                         </div>
                     </div>
                 </div>
@@ -465,8 +466,6 @@ function checkPhone(str){
 	}
 }
 
-
-	
 </script>
    
 

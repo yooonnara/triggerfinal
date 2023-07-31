@@ -19,12 +19,11 @@
 								<tr class="text-center">
 									<td colspan='2'>
 										<div class="box" style="cursor: pointer">
-											<img src="${path }/resources/img/user_profile.png"
+											<img src="${path }/resources/img/user_profile.png" 
 												class="profile rounded enter-block profile_img"
 												style="width: 80px; height: 80px" id="profile_img">
-											<i class="bi bi-gear-fill profile_img"></i> <input
-												id="profile_img_file" type="file" accept=".jpg, .png"
-												style="display: none;">
+											<i class="bi bi-gear-fill profile_img"></i>
+											<input id="profile_img_file" type="file" accept=".jpg, .png" style="display: none;">
 										</div>
 									</td>
 								</tr>
@@ -131,18 +130,20 @@
 								<tr>
 									<th class="align-middle">전화번호</th>
 									<td>
-									<input onKeyup="checkPhone(this.value)" type="text" class="form-control" name="phone" id="phone" placeholder="- 없이 입력" maxlength="11" required>
-									<span class="phone-msg small text-danger"></span>
+										<input onKeyup="checkPhone(this.value)" type="text" class="form-control" name="phone" id="phone" placeholder="- 없이 입력" maxlength="11" required>
+										<span class="phone-msg small text-danger"></span>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</form>
 					<div class="modal-footer">
-						<button class="btn btn-dark" type="submit" id="submit_btn"
-							data-dismiss="modal">저장</button>
-						<button class="btn btn-secondary" type="reset"
-							data-dismiss="modal">취소</button>
+						<button class="btn btn-dark" type="submit" id="submit_btn" data-dismiss="modal">
+							저장
+						</button>
+						<button class="btn btn-secondary" type="reset" data-dismiss="modal">
+							취소
+						</button>
 					</div>
 				</div>
 			</div>
