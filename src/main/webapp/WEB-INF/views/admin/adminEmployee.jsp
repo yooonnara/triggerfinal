@@ -95,10 +95,11 @@
                                 </thead>
                                 <tbody>
                                		<c:if test="${not empty employees}">
-            							<c:forEach var="e" items="${employees}">
+            							<c:forEach var="e" items="${employees}" >
 		                                    <tr>
 		                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
-		                                   		<td>${e.no}</td>
+<!-- 		                                   		<td>${e.no}</td> -->
+		                                   		<td>${pageStartRowNum}</td>
 		                                        <td>
 		                                        	<a href="#" data-toggle="modal" data-target="#updateEmployeeModal">${e.name}</a>
 		                                        </td>
@@ -119,6 +120,7 @@
       												<c:if test="${e.type > 1 }">Y</c:if>
 		                                        </td>
 		                                    </tr>
+		                                    <c:set var="pageStartRowNum" value="${pageStartRowNum-1}" ></c:set>
 	                                	</c:forEach>
                                     </c:if>
                                 </tbody>
@@ -128,27 +130,6 @@
                         <!-- 페이징 -->
                         <div class="pasing-area">
                     	    <c:out value="${pageBar }" escapeXml="false"/>
-                            <!-- <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav> -->
                         </div>
                     </div>
                 </div>

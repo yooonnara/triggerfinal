@@ -50,7 +50,9 @@ public class AdminEmployeeController {
 		md.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "adminEmployee"));
 		md.addAttribute("employees",employees);
 		
-		md.addAttribute("totalData",totalData);
+		md.addAttribute("totalData", totalData);
+		int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+		md.addAttribute("pageStartRowNum", pageStartRowNum);
 		
 		return "admin/adminEmployee";
 	}
