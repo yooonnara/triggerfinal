@@ -29,4 +29,5 @@ public class Edms {
 	private Date createDate;
 	private int jobNo;
 	private int deptNo;
+	private String detailType;
 }

@@ -67,6 +67,7 @@
             <div class="mypage-container col-12 d-flex justify-content-center">
 
                 <form class="vc shadow px-5 py-5 ">
+					<input type="hidden" name="type" value="1"/>
                     <table class="table-sm ml-1 mr-5"">
                       
                       
@@ -87,12 +88,12 @@
                         </tr>
                         <tr>
                             <td>연차 구분</td>
-                            <td> <select id="type" onchange="bsnFn()" class="custom-select ml-5 mb-1" col-sm-12">
+                            <td> 
+                           	 <select name="type" onchange="bsnFn()" class="custom-select ml-5 mb-1 col-sm-12">
                                 <option selected>연차 종류를 선택하세요</option>
-                                <option name="type" value="1">연차-결혼</option>
-                                <option name="type" value="2">연차-휴가</option>
-                                <option name="type" value="3">연차-조의</option>
-                                <option name="type" value="4">출장</option>
+                                <option  value="결혼">연차-결혼</option>
+                                <option value="휴가">연차-휴가</option>
+                                <option  value="조의">연차-조의</option>
                               </select>
                         </tr>
                         

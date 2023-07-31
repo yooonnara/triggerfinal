@@ -88,6 +88,7 @@
                 <form class="vc shadow px-5 py-5" name="bsninsertForm" action="${path }/edms/insertbsn" method="post" >
                     <table class="table-sm ml-1 mr-5">
                       <input type="hidden" name="type" value="1"/>
+                      <input type="hidden" name="detailType" value="출장"/>
                          <tr>
                             <td>번호</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
