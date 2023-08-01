@@ -34,6 +34,7 @@ public class EdmsController {
 	
 	@PostMapping("/insertbsn")
 	public String insertbsn(Edms e , MultipartFile upFile  , Model model) {
+		//multipart에서 제공하는 메소드를 이용해서 파일을 저장한다 
 		
 	
 		
