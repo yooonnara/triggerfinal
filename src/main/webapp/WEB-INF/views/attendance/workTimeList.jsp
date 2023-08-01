@@ -180,8 +180,8 @@
 						for(let i=0; i<d.length;i++){
 							const $tr = $("<tr>");
 							const $attDate = $("<td>").text(d[i]["attDate"]);
-							if()
 							const $status = $("<td>").text(d[i]["status"]);
+							if()
 							const $startTime = $("<td>").text(d[i]["startTime"]);
 							const $endTime = $("<td>").text(d[i]["endTime"]);
 							$tr.append($attDate).append($status).append($startTime).append($endTime);

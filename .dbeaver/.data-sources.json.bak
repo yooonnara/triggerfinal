@@ -1,10 +1,10 @@
 {
 	"folders": {},
 	"connections": {
-		"oracle_thin-189911ffe87-4f8ae758041d28bd": {
+		"oracle_thin-189a3727f18-a88f0383a06ceb": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
-			"name": "triggerjoin",
+			"name": "14.36.141.71",
 			"save-password": true,
 			"configuration": {
 				"host": "14.36.141.71",
@@ -12,7 +12,7 @@
 				"database": "XE",
 				"url": "jdbc:oracle:thin:@14.36.141.71:8877:XE",
 				"configurationType": "MANUAL",
-				"home": "C:\\app\\USER\\product\\18.0.0\\dbhomeXE",
+				"home": "C:\\app\\user\\product\\18.0.0\\dbhomeXE",
 				"type": "dev",
 				"provider-properties": {
 					"@dbeaver-connection-type@": "BASIC",
