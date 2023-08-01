@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tr.join.attendance.model.vo.Attendance;
+import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.attendance.model.vo.Edsm;
 
 public interface AttendanceService {
@@ -21,6 +22,19 @@ public interface AttendanceService {
 	Attendance selectOverWorkTime(int no);
 	Attendance selectRemainTime(int no);
 	Attendance selectMonthTime(int no);
+
+	//근태 리스트
+	List<Attendance> selectWorkTimeAll(Map<String,Object> param);
+	int selectWorkTimeCount();
+	
+	//근태 상태로 검색
+	List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam);
+	//관리자 페이지
+	List<Attendance> selectAttendanceAll(Map<String,Object> param);
+	int selectAttendanceCount();
+	
+//---------------연차---------------------
+	List<DayOff> selectDayoffAll(int no);
 	
 	
 	

@@ -13,7 +13,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" name="frm" class="user"
+					<form id="frm2" name="frm2" class="user"
 						action="${path }/updateEmployee" method="post">
 						<table class="table text-dark table-borderless">
 							<tbody class="text-left">

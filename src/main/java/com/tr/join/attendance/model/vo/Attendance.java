@@ -1,5 +1,7 @@
 package com.tr.join.attendance.model.vo;
 
+import com.tr.join.employee.model.vo.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class Attendance {
 	
 	//private String startDate;
 	//private String endDate;
+	private Employee emp;
 	
 	
 }
