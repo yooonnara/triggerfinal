@@ -1,6 +1,8 @@
 package com.tr.join.edms.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -33,4 +35,5 @@ public class Edms {
 	private int deptNo;
 	private String detailType;
 	private Employee emp;
+	private List<Attachment> file=new ArrayList();
 }

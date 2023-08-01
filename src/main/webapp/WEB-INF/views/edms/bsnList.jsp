@@ -121,9 +121,9 @@
                             <c:forEach var="e" items="${edms}">
                                 <tr>
                                 	<td>${e.no }</td>
-                                    <td>${e.createDate }</td>
-                                    <td>${e.emp.jobTitle }</td>
+                                    <td>${e.createDate }</td> 
                                     <td>${e.emp.deptTitle }</td>
+                                    <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.name }</td>
                                     <td>${e.title }</td>
                                     <td>

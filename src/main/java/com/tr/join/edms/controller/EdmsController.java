@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.edms.model.service.EdmsService;
 import com.tr.join.edms.model.vo.Edms;
@@ -24,7 +25,7 @@ public class EdmsController {
 	private EmployeeService empService;
 	private EdmsService service;
 	
-	@Autowired
+	
 	public EdmsController(EmployeeService empService, EdmsService service) {
 		this.empService=empService;
 		this.service=service;
@@ -32,7 +33,11 @@ public class EdmsController {
 
 	
 	@PostMapping("/insertbsn")
-	public String insertbsn(Edms e, Model model) {
+	public String insertbsn(Edms e , MultipartFile upFile  , Model model) {
+		
+	
+		
+		
 		int result = service.insertbsn(e);
 		String msg,loc;
 		if(result>0) {

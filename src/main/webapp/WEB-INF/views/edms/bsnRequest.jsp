@@ -85,16 +85,17 @@
         <div class="vcRequest-area row mt-6 mb-6">
             <div class="mypage-container col-12 d-flex justify-content-center">
 
-                <form class="vc shadow px-5 py-5" name="bsninsertForm" action="${path }/edms/insertbsn" method="post" >
+                <form class="vc shadow px-5 py-5" name="bsninsertForm" action="${path }/edms/insertbsn" method="post" enctype="multipart/form-data" >
                     <table class="table-sm ml-1 mr-5">
                       <input type="hidden" name="type" value="1"/> 
                       <!--0은연차이고 1은 출장  -->
                       <input type="hidden" name="detailType" value="출장"/>
-                      <input type="hidden" name="no" value="${loginEmp.no }"/>
+                      <input type="hidden" name="empNo" value="${loginEmp.no }"/>
+                      
                          <tr>
                             <td>번호</td>
                             <td><input class="form-control ml-5 mb-1" type="number"
-                               value="${loginEmp.no }" name="no" placeholder="" readonly ></td>
+                               value="${loginEmp.no }" name="empNo" placeholder="" readonly ></td>
                         </tr>
                         <tr>
                             <td>이름(한글)</td>
@@ -145,8 +146,10 @@
                             </tr>
                             
                             <tr>
-                            <td>첨부파일 </td>
-                            <td> <input type="file" class="form-control-file  ml-5 mb-1" name="exampleFormControlFile1"></td>
+                            <td>첨부파일</td>
+                            <td> 
+                            <input type="file" class="form-control-file  ml-5 mb-1" name="upFile"><!-- "exampleFormControlFile1" -->
+                            	</td>	
                             </tr>
                            
                     </table>
