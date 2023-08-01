@@ -15,8 +15,11 @@ public interface AttendanceDao {
 	 int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam);
 	 int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam);
 	 List<Attendance> workCalendarAttendance(SqlSession session, int no);
-	 List<Edms> workCalendarDayoff(SqlSession session, int no);
-	 List<Edms> workCalendarTrip(SqlSession session, int no);
+
+		/*
+		 * List<Edms> workCalendarDayoff(SqlSession session, int no); List<Edms>
+		 * workCalendarTrip(SqlSession session, int no);
+		 */
 	 Attendance selectWeekWorkTime(SqlSession session, int no);
 	 Attendance selectOverWorkTime(SqlSession session, int no);
 	 Attendance selectRemainTime(SqlSession session, int no);
@@ -30,7 +33,12 @@ public interface AttendanceDao {
 	 //검색 기능 - 근태 상태에 따라
 	 List<Attendance> searchWorkTimeByStatus(SqlSession session, Map<String,Object> ajaxParam);
 	 
-	 //관리자
+	 //검색 기능 - 시작일~종료일에 따라
+	 List<Attendance> ajaxworkTimeByDate(SqlSession session, Map<String,Object> ajSearchParam);
+	 
+	 
+	 
+	 //근태 관리자
 	 List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param);
 	 int selectAttendanceCount(SqlSession session);
 	 

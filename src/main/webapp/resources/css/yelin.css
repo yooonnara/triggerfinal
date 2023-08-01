@@ -52,10 +52,10 @@
 
 /* workingTimeList.html */
 
-#startDate{
+.startDate{
     width:130px;
 }
-#endDate{
+.endDate{
     width:130px;
 }
 

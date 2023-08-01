@@ -35,15 +35,13 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectList("attendance.workCalendarAttendance", no); 
 	}
 	 
-	 @Override
-	 public  List<Edms> workCalendarDayoff(SqlSession session, int no){
-		 return session.selectList("attendance.workCalendarDayoff",no);
-	 }
-	 
-	 @Override
-	 public  List<Edms> workCalendarTrip(SqlSession session, int no){
-		 return session.selectList("attendance.workCalendarTrip",no);
-	 }
+	/*
+	 * @Override public List<Edms> workCalendarDayoff(SqlSession session, int no){
+	 * return session.selectList("attendance.workCalendarDayoff",no); }
+	 * 
+	 * @Override public List<Edms> workCalendarTrip(SqlSession session, int no){
+	 * return session.selectList("attendance.workCalendarTrip",no); }
+	 */
 	 
 	 @Override
 	 public Attendance selectWeekWorkTime(SqlSession session, int no) {
@@ -68,6 +66,9 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 //근태 리스트
 	 @Override
 	 public List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param) {
+		 int cPage=(int)param.get("cPage");
+		 int numPerpage=(int)param.get("numPerpage");
+		 RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		 return session.selectList("attendance.selectWorkTimeAll",param);
 	 }
 	 
@@ -76,13 +77,23 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectOne("attendance.selectWorkTimeCount");
 	 }
 	 
-	 //검색 기능 - 근태 상태
+	 //근태 리스트 검색 기능(근태 상태)
 	 @Override
 	 public List<Attendance> searchWorkTimeByStatus(SqlSession session,Map<String,Object> ajaxParam){
 		 return session.selectList("attendance.searchWorkTimeByStatus",ajaxParam);
 	 }
 	 
-	 //관리자
+	 //근태 시작일~종료일 검색 기능
+	 @Override
+	 public List<Attendance> ajaxworkTimeByDate(SqlSession session, Map<String,Object> ajSearchParam){
+		 return session.selectList("attendance.ajaxworkTimeByDate",ajSearchParam);
+	 }
+	 
+	 
+	 
+	 
+	 
+	 //근태 관리자
 	 @Override
 	 public List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param){
 		 	//map 이기 때문에 

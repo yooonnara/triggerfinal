@@ -78,13 +78,17 @@ public class AttendanceController {
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 List<Attendance> attendanceInfo = service.workCalendarAttendance(loginNo.getNo());
-		 List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
-		 List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
+			/*
+			 * List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
+			 * List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
+			 */
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
-		 calendarParam.put("dayoffInfo",dayoffInfo);
-		 calendarParam.put("tripInfo",tripInfo);
+			/*
+			 * calendarParam.put("dayoffInfo",dayoffInfo);
+			 * calendarParam.put("tripInfo",tripInfo);
+			 */
 		 
 		// System.out.println(calendarParam);
 		 return calendarParam;
@@ -127,39 +131,53 @@ public class AttendanceController {
 		  m.addAttribute("totalData",totalData);
 		  
 		  System.out.println(wt);
-		  System.out.println(totalData);
+		  //System.out.println(totalData);
 		  return "attendance/workTimeList";
 		  
 	  }
 	  
 	  
-	  //ajax 근태 리스트
+	  //ajax 근태 상태 검색
 	  @GetMapping("/ajaxworkTime")
 	  @ResponseBody 
 	  public List<Attendance> searchWorkTimeByStatus(int searchNum) {
 		  
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
-		  Map<String,Object> ajaxParam=new HashMap(); //Map 생성
+		  Map<String,Object> ajaxParam=new HashMap(); 
 		  ajaxParam.put("searchNum",searchNum); 
 		  ajaxParam.put("loginNo",loginNo.getNo()); 
-		List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
+		  List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
 		  
-		  System.out.println(wtajax);
+		  //System.out.println(wtajax);
 		  
 		  return wtajax;
+	  }
+	  
+	  //ajax 근태 (시작일~종료일)기간 검색
+	  @GetMapping("/ajaxworkTimeSearch")
+	  @ResponseBody
+	  public List<Attendance> ajaxworkTimeByDate(String startDate, String endDate){
+		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 List<Attendance> wkDate = service.ajaxworkTimeByDate(Map.of("startDate",startDate,"endDate",endDate,"loginNo",loginNo.getNo()));
+		 
+		 System.out.println(wkDate);
+		 
+		 return wkDate;
 	  }
 	  
 	  
 	  
 	  
-	  //안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!
-	  //아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
+	  
+	  
+	  
+	  //안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
 	  
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
 	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
-										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+										@RequestParam(value="numPerpage", defaultValue="10") int numPerpage, 
 										Model m) {
 		  
 		  List<Attendance> att=service.selectAttendanceAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
@@ -180,25 +198,28 @@ public class AttendanceController {
 	  
 	  
 //----------출장-----------------
-	  @GetMapping("/att/businessTrip")
-	  public String selectBusinessTrip(@RequestParam(value="cPage",defaultValue="1") int cPage, 
-				@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
-				Model m){
-		  
-		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		  
-		  List<Edms> edsm = service.selectBusinessTrip(Map.of("loginNo",loginNo,"cPage",cPage,"numPerpage",numPerpage));
-		  int totalData = service.selectBusinessTripCount();
-		  
-		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
-		  m.addAttribute("totalData",totalData);
-		  
-		  System.out.println(edsm);
-		  System.out.println(totalData);
-		  return "attendance/businessTripList";
-		  
-	  }
-	  
+		/*
+		 * @GetMapping("/att/businessTrip") public String
+		 * selectBusinessTrip(@RequestParam(value="cPage",defaultValue="1") int cPage,
+		 * 
+		 * @RequestParam(value="numPerpage", defaultValue="5") int numPerpage, Model m){
+		 * 
+		 * Employee
+		 * loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().
+		 * getPrincipal();
+		 * 
+		 * List<Edms> edsm =
+		 * service.selectBusinessTrip(Map.of("loginNo",loginNo,"cPage",cPage,
+		 * "numPerpage",numPerpage)); int totalData = service.selectBusinessTripCount();
+		 * 
+		 * m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData,
+		 * "/WorkTimeList")); m.addAttribute("totalData",totalData);
+		 * 
+		 * System.out.println(edsm); System.out.println(totalData); return
+		 * "attendance/businessTripList";
+		 * 
+		 * }
+		 */
 	  
 	  
 	  

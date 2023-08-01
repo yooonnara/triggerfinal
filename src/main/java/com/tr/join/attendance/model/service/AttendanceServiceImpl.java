@@ -56,15 +56,13 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.workCalendarAttendance(session, no); 
 	}
 	
-	@Override
-	public List<Edms> workCalendarDayoff(int no){
-		return dao.workCalendarDayoff(session, no);
-	}
-	
-	@Override
-	public List<Edms> workCalendarTrip(int no){
-		return dao.workCalendarTrip(session, no);
-	}
+	/*
+	 * @Override public List<Edms> workCalendarDayoff(int no){ return
+	 * dao.workCalendarDayoff(session, no); }
+	 * 
+	 * @Override public List<Edms> workCalendarTrip(int no){ return
+	 * dao.workCalendarTrip(session, no); }
+	 */
 	
 	
 	//근태 누적 시간
@@ -107,6 +105,14 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam){
 		return dao.searchWorkTimeByStatus(session, ajaxParam);
 	}
+	
+	//근태 시작일~종료일 검색
+	public List<Attendance> ajaxworkTimeByDate(Map<String,Object> ajSearchParam){
+		return dao.ajaxworkTimeByDate(session, ajSearchParam);
+	}
+	
+	
+	
 	
 	//관리자
 	@Override

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -53,13 +53,65 @@
                                 <input type="radio" name="options" id="option3">결근
                               </label>
                         </div>
+                      
+                      <!-- datepicker -->
+						<script>	
+			                $(function(){
+			                    
+			                    $("#datepicker1").datepicker({
+			                        changeMonth: true, 
+			                        changeYear: true,
+			                        nextText: '다음 달',
+			                        prevText: '이전 달',
+			                        dateFormat: "yy-mm-dd",
+			                        yearRange: 'c-50:c+20',
+			                        showButtonPanel: true, 
+			                        currentText: '오늘 날짜',
+			                        closeText: '닫기',
+			                        showAnim: "slide",
+			                        showMonthAfterYear: true, 
+			                        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			                        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], 
+			                        onSelect: function(selected){
+			                            $("#datepicker2").datepicker("option", "minDate", selected);
+			                        }
+			                    });	
+			                    
+			                    $("#datepicker2").datepicker({
+			                        changeMonth: true, 
+			                        changeYear: true,
+			                        minDate: '0',
+			                        nextText: '다음 달',
+			                        prevText: '이전 달',
+			                        dateFormat: "yy-mm-dd",
+			                        yearRange: 'c-50:c+20',
+			                        showButtonPanel: true, 
+			                        currentText: '오늘 날짜',
+			                        closeText: '닫기',
+			                        showAnim: "slide",
+			                        showMonthAfterYear: true, 
+			                        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			                        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], 
+			                        onSelect: function(selected){
+			                            $("#datepicker1").datepicker("option", "maxDate", selected);
+			                        }
+			                    });	
+			                    
+			                });
+		                
+		                </script> 
+                      
                         <!-- 근태 시작~종료일 검색 버튼 -->
                         <div class="dateSearch-search float-right mb-3 mr-3">
-                            <input type="text" id="startDate" placeholder="시작일">
-                            <input type="text" id="endDate" placeholder="종료일">
-                            <button class="btn btn-dark btn-sm">검색</button>
+	              			<button class="float-right btn btn-dark btn-sm">검색</button>
+	              			<input type="text"  placeholder="시작일" class="float-right mr-1 startDate" id="datepicker1">
+                            <input type="text"  placeholder="죵료일" class="float-right mr-1 endDate" id="datepicker2">
+                            
                         </div>
                     </div>
+                    
+                    
+                    
                     <!-- 테이블 -->
                     <div id="big-table">
                         <table class="table table-sm shadow table-hover text-center" >
@@ -72,18 +124,16 @@
                                 <col style="width:110px">
                                 <col style="width:110px">
                                 <col style="width:110px">
-                                <col style="width:130px">
                                 <col style="width:80px">
                             </colgroup>
                             <!-- table-active -->
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th>번호</th>
+                                    <th>근무일자</th>
                                     <th>사번</th>
                                     <th>부서</th>
                                     <th>직급</th>
                                     <th>이름</th>
-                                    <th>근무일자</th>
                                     <th>출근시간</th>
                                     <th>퇴근 시간</th>
                                     <th>총 근무시간</th>
@@ -95,17 +145,16 @@
                             <c:if test="${not empty att }">
                             	<c:forEach var="a" items="${att }">
                                 <tr>
-                                    <td>${a.empNo }</td>
+                                	<td>${a.attDate }</td>
                                     <td>${a.emp.empNum }</td>
                                     <td>${a.emp.deptTitle}</td>
                                     <td>${a.emp.jobTitle }</td>
                                     <td>${a.emp.name }</td>
-                                    <td>${a.attDate }</td>
                                     <td>${a.startTime}</td>
                                     <td>${a.endTime}</td>
                                     <td>9시간 50분 00초</td>
                                     <td>
-                                    	<c:if test="${a.status == '0'}">-</c:if>
+                                    	<c:if test="${a.status == '0'}">정상 출근</c:if>
                                     	<c:if test="${a.status == '1'}">출근</c:if>
                                     	<c:if test="${a.status == '2'}">지각</c:if>
                                     	<c:if test="${a.status == '3'}">조퇴</c:if>
@@ -124,27 +173,7 @@
                         <div class="pasing-area">
                         	<c:out value="${pageBar }" escapeXml="false"/>
                        	</div>
-                        <!--     <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav> -->
+                        
                        
                     </div>
                 </div>
@@ -172,7 +201,8 @@
 	<div id="bootstrap">
 		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 	</div>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </body>
 
 </html>
