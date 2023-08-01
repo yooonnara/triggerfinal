@@ -33,13 +33,13 @@ public class EdmsController {
 
 	
 	@PostMapping("/insertbsn")
-	public String insertbsn(Edms e , MultipartFile upFile  , Model model) {
-		//multipart에서 제공하는 메소드를 이용해서 파일을 저장한다 
-		
-	
-		
-		
+	public String insertbsn(Edms e, Model model) {
 		int result = service.insertbsn(e);
+		
+		
+		
+		
+		
 		String msg,loc;
 		if(result>0) {
 		msg="연차/출장 신청이 완료되었습니다.";
@@ -50,12 +50,17 @@ public class EdmsController {
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
+		
 		return "common/msg";
+		
+		
 	
 		//System.out.println(result);
 		//출장 insertform
 		
 	}
+	
+	
 	
 	
 	
