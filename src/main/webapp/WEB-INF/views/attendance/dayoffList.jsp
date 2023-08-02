@@ -91,7 +91,7 @@
                                     <td>${d.emp.deptTitle}</td>
                                     <td>${d.edms.detailType}</td>
                                     <td>${d.edms.startDate } ~ ${d.edms.endDate }</td>
-                                    <td>${d.usedDoCount }</td>
+                                    <td>${d.usingDate }</td>
                                     <td>
                                     	<c:if test="${d.edms.appStatus == '0'}">결재 대기</c:if>
                                     	<c:if test="${d.edms.appStatus == '1'}">승인</c:if>

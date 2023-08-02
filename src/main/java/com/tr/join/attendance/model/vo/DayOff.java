@@ -21,6 +21,7 @@ public class DayOff {
 	private int totalDoCount; //총 연차부여일수
 	private int usedDoCount; //사용 연차일수
 	private int remainDoCount; //남은 연차일수 
+	private int usingDate; //사용 연차일수
 	private Edms edms; 	
 	private Employee emp;
 	private Department dept;
