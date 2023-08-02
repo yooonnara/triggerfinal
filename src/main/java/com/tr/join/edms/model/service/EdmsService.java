@@ -3,6 +3,7 @@ package com.tr.join.edms.model.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.tr.join.edms.model.vo.Edms;
 
@@ -15,7 +16,18 @@ public interface EdmsService {
  
 	/* List<Edsm> selectEdsmAll(Map<String,Object>param); */
  
- 	List<Edms> selectBsnAll();
+ 	List<Edms> selectBsnAll(Map<String,Object>param);
+ 	
+ 	int selectEdmsCount();
+ 	
+ 	//List<Edms> selectPage(int cPage, int numPerpage);
+ 	
  	
  	Edms selectByNo(int no);
+ 	
+ int insertVc(Edms d);
+ 
+ List<Edms> selectVc();
+ 
+ 
 }

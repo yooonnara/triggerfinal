@@ -121,30 +121,27 @@
 	                    <input type="date" class="form-control ml-5 mb-1" name="createDate" id="createDate">   </td>
 	                    </tr> -->
                          <tr>
-                            <td>제목</td>
+                           <td>제목</td>
                             <td><textarea class="form-control ml-5 mb-1" name="title" id="title" rows="1"></textarea></td>
                         </tr>
                         
                          <tr>
-                        <td>내용</td>
+                        <td>신청 내용</td>
                        <td>
                             <textarea class="form-control ml-5 mb-1" name="content" id="content" rows="4"></textarea>
                         </td>
                         </tr>
             
                       <tr>
-                        <td>출장시작일</td>
+                        <td>출장 시작일</td>
                         
 	                     <td>
 	                    <input type="date" class="form-control ml-5 mb-1" name="startDate" id="startDate">   </td>
 	                    </tr>
 	                       <tr>
-	                         <td >출장종료일</td>
-	                               
+	                        <td>출장 종료일</td>   
                              <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate"></td>
-	                            
                             </tr>
-                            
                             <tr>
                             <td>첨부파일</td>
                             <td> 

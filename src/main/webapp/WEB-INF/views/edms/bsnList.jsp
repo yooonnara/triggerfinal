@@ -134,15 +134,12 @@
                                     </c:choose>
                                     </td>
                                   <td>
-                                  <a href="${path }/edms/bsnView?no=${e.no}" >
-                                  <c:choose>
-                                  	<c:when test="${e.appStatus==0 }">결재대기</c:when>
-                                  	<c:when test="${e.appStatus==1 }">승인</c:when>
-                                  	<c:when test="${e.appStatus==2 }">반려</c:when>
-                                  	<c:otherwise>미정</c:otherwise>
-                                  </c:choose>
+                                  <a href="${path }/edms/edmsView?no=${e.no}" >
+                                  	<c:if test="${e.appStatus==0 }">결재대기</c:if>
+                                  	<c:if test="${e.appStatus==1 }">승인</c:if>
+                                  	<c:if test="${e.appStatus==2 }">반려</c:if>
                                   </a>
-                                  </td>                                 
+                               </td>                                 
                                 </tr>
                                 </c:forEach>
                                 </c:if>
@@ -152,6 +149,7 @@
 
                     <!-- 페이징 -->
                     <div class="pasing-area">
+                    <c:out value="${pageBar }" escapeXml="false"/>
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center mt-4">
                                 <li class="page-item">
@@ -201,6 +199,7 @@
     <div id="logoutCheck">
         <script>$('#logoutCheck').load('./include/logout.html')</script>
     </div>
+
 
 
     <!-- Bootstrap core JavaScript-->

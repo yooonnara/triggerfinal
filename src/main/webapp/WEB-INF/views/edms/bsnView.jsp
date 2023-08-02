@@ -35,7 +35,7 @@
 					<h1 class="h3 text-dark mt-5 mb-5">내 정보 수정</h1>
 
 					<div class="mypage-area row mb-3 justify-content-center">
-						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
+						<div class="mypage-container col-6 d-flex justify-content-center bg-white shadow mb-3 pt-3">
 
 							<form class="user" name="bsView" action="${path }/selectByNo" >
 								<table class="table-sm mt-5 mb-5">
@@ -75,7 +75,7 @@
 										</tr>
 
 										<tr>
-                            <td>제목</td>
+                            <td>제목</td>
                             <td><textarea class="form-control ml-5 mb-1" rows="1" readonly><c:out value="${edms.title }"/> </textarea></td>
                         </tr>
                         
@@ -87,31 +87,26 @@
                         </tr>
             
                       <tr>
-                        <td>출장/연차 시작일</td>
+                        <td>출장/연차 시작일</td>
                         
 	                     <td>
 	                    <input type="date" class="form-control ml-5 mb-1" name="startDate" value="${edms.startDate }" readonly>   </td>
 	                    </tr>
 	                       <tr>
-	                         <td>출장/연차 종료일</td>
-	                               
+	                         <td>출장/연차 종료일</td>      
                              <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" value="${edms.endDate }" readonly></td>
-	                            
                             </tr>
-                    
+       
                             </tbody> 
 								</table>
+								 <div class="button-footer d-flex justify-content-around mb-4">
+						<button type="button" class="align-text-bottom btn btn-primary" onclick="location.href='${path }/edms/bsnList'"; >목록</button>
+						 <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->	
+					</div>
 							</form>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" type="submit" id="submit_btn" data-dismiss="modal">
-							저장
-						</button>
-						<button class="btn btn-secondary" type="reset" data-dismiss="modal">
-							취소
-						</button>
-					</div>
+					
 				</div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>

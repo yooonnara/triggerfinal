@@ -1,16 +1,18 @@
 package com.tr.join.edms.controller;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tr.join.common.PageFactory;
 import com.tr.join.edms.model.service.EdmsService;
 import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.service.EmployeeService;
@@ -31,6 +33,7 @@ public class EdmsController {
 		this.service=service;
 	}
 
+	//출장 폼 제출
 	
 	@PostMapping("/insertbsn")
 	public String insertbsn(Edms e, MultipartFile[] upFile ,Model model) {
@@ -64,7 +67,59 @@ public class EdmsController {
 		
 	}
 	
+ //연차 신청하는 폼 작성하기 
+		//@RequestMapping(value="/insertVc ", method=RequestMethod.POST)
+	@PostMapping("/insertVc")
+		public String insertVc(Edms d, Model m ) {
+		int result=service.insertVc(d);
+		
+		
+		String msg,loc;
+		if (result>0){
+				msg="연차신정완료";
+				loc="/main";
+			}else {
+				msg="연차신청실패";
+				loc="/edms/vcRequest";
+			}
+			m.addAttribute("msg",msg);
+			m.addAttribute("loc",loc);
 	
+			return "common/msg";
+	}
+	
+
+	
+	//연차 조회하는 폼 신청하기 
+	@RequestMapping("/selectVc")
+	public String selectVc(Model m) {
+		List<Edms> list=service.selectVc();
+		m.addAttribute("vc",list);
+		list.forEach(System.out::println);
+		
+		return "edms/bsnView";
+		
+	}
+	
+	
+	//전체 출력하기
+	
+		@GetMapping("/bsnList")
+		public String selectBsnAll(@RequestParam(value="cPage", defaultValue="1") int cPage,
+									@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
+			List<Edms> list=service.selectBsnAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
+			int totalData=service.selectEdmsCount();
+			
+			m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "/bsnList"));
+			m.addAttribute("edms",list);
+			list.forEach(System.out::println);
+			System.out.println(m);
+			return "edms/bsnList" ;
+			
+		}
+	
+		
+	//전체 화면창 보여주기 
 	
 	@GetMapping("/edmsView")
 	public String selectByNo(Model m , int no) {
@@ -72,20 +127,13 @@ public class EdmsController {
 				System.out.println(m);
 				
 				return "edms/bsnView";
-	
-	
-	
 }
 	
 	
-	@GetMapping("/bsnList")
-	public String selectBsnAll(Model m){
-		List<Edms> list=service.selectBsnAll();
-		m.addAttribute("edms",list);
-		list.forEach(System.out::println);
-		return "edms/bsnList" ;
-		
-	}
+	
+	
+	
+	
 	
 	/*
 	 * @RequestMapping("/bsnRequest") public String selectEmployeeByNo(Model m) {
@@ -120,10 +168,7 @@ public class EdmsController {
 		public String adminVcPage() {
 			return "admin/adminVc";
 		}
-		@GetMapping("/vcRequest")
-		public String edmsVcPage() {
-			return "edms/vcRequest";
-		}
+		
 		
 		@GetMapping("/bsnRequest")
 		public String bsnRequestPage(Model m) {
@@ -132,7 +177,12 @@ public class EdmsController {
 			return "edms/bsnRequest";
 		}
 		
-	
+		@GetMapping("/vcRequest")
+		public String edmsVcPage(Model m) {
+			Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			m.addAttribute("loginEmp",loginEmp);
+			return "edms/vcRequest";
+		}
 		
 		
 }

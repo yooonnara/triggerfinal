@@ -38,7 +38,7 @@ public class Edms {
 	private String detailType;
 	private Employee emp;
 	
-	private Department department;
+	//private Department department;
 	
 	
 
