@@ -38,5 +38,10 @@ public class EdmsServiceImpl implements EdmsService {
 		return dao.selectBsnAll(session);
 	}
 	
+	
+	@Override
+	public Edms selectByNo(int no) {
+		return dao.selectByNo(session,no);
+	}
 
 }

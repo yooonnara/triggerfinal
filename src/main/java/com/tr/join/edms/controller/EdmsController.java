@@ -33,11 +33,15 @@ public class EdmsController {
 
 	
 	@PostMapping("/insertbsn")
-	public String insertbsn(Edms e, Model model) {
+	public String insertbsn(Edms e, MultipartFile[] upFile ,Model model) {
 		int result = service.insertbsn(e);
-		
-		
-		
+		//파일 업로드 하기 
+		for(MultipartFile f :upFile) {
+			log.debug(f.getOriginalFilename());
+		}
+		/*
+		 * log.debug(upFile.getOriginalFilename()); log.debug("()",upFile.getSize());
+		 */
 		
 		
 		String msg,loc;
@@ -62,7 +66,16 @@ public class EdmsController {
 	
 	
 	
+	@GetMapping("/edmsView")
+	public String selectByNo(Model m , int no) {
+		m.addAttribute("edms", service.selectByNo(no));
+				System.out.println(m);
+				
+				return "edms/bsnView";
 	
+	
+	
+}
 	
 	
 	@GetMapping("/bsnList")

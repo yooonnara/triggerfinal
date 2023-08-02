@@ -8,7 +8,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+import com.tr.join.employee.model.vo.Department;
 import com.tr.join.employee.model.vo.Employee;
+import com.tr.join.employee.model.vo.Job;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +37,9 @@ public class Edms {
 	private int deptNo;
 	private String detailType;
 	private Employee emp;
-	private List<Attachment> file=new ArrayList();
+	
+	private Department department;
+	
+	
+
 }

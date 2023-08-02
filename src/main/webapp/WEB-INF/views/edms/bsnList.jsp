@@ -125,7 +125,7 @@
                                     <td>${e.emp.deptTitle }</td>
                                     <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.name }</td>
-                                    <td>${e.title }</td>
+                                    <td><a href="${path }/edms/edmsView?no=${e.no}">${e.title }</a></td>
                                     <td>
                                     <c:choose>
                                     	<c:when test="${e.type==0 }">연차</c:when>
@@ -134,7 +134,7 @@
                                     </c:choose>
                                     </td>
                                   <td>
-                                  <a href="#" data-toggle="modal" data-target="#viewEdmsModal">
+                                  <a href="${path }/edms/bsnView?no=${e.no}" >
                                   <c:choose>
                                   	<c:when test="${e.appStatus==0 }">결재대기</c:when>
                                   	<c:when test="${e.appStatus==1 }">승인</c:when>

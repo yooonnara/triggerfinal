@@ -24,4 +24,9 @@ public class EdmsDaoImpl implements EdmsDao {
 	public List<Edms> selectBsnAll(SqlSession session){
 		return session.selectList("edms.selectBsnAll");
 	}
+	
+	@Override
+	public Edms selectByNo(SqlSession session, int no) {
+		return session.selectOne("edms.selectByNo",no );
+	}
 }

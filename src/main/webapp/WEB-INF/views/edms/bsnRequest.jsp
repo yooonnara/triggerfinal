@@ -148,7 +148,9 @@
                             <tr>
                             <td>첨부파일</td>
                             <td> 
-                            <input type="file" class="form-control-file  ml-5 mb-1" name="upFile"><!-- "exampleFormControlFile1" -->
+                            <input type="file" class="form-control-file  ml-5 mb-1" name="upFile">
+                             <input type="file" class="form-control-file  ml-5 mb-1" name="upFile2"><!-- "exampleFormControlFile1" -->
+                         		 <!--   <input type="submit" value="파일 저장"> -->
                             	</td>	
                             </tr>
                            

@@ -23,5 +23,8 @@ public interface EdmsDao {
 		 * List<Edsm> selectEdsmAll(SqlSession session,Map<String,Object>param>); int
 		 * selectEdsmByNo(SqlSession, int no);
 		 */
+		
+		
+		Edms selectByNo(SqlSession session, int no);
 }
 
