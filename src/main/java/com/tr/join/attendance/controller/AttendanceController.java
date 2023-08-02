@@ -220,6 +220,7 @@ public class AttendanceController {
 		  return "admin/adminDayoff";
 	  }
 	  
+	  //연차 전체 사원 리셋
 	  @RequestMapping("/amdin/adminResetAll")
 	  public ModelAndView adminResetAll(ModelAndView mv) {
 		  
@@ -257,31 +258,29 @@ public class AttendanceController {
 		 return "attendance/businessTripList";
 	  }
 	  
+	  @RequestMapping("/deleteBT")
+	  public String deleteBusinessTrip(int btNo) {
+		  int result = service.deleteBusinessTrip(btNo);
+		  System.out.println(result);
+		  return "redirect:/businessTripList";
+		  
+		  
+		  
+	  }
 	  
 	  
-		/*
-		 * @GetMapping("/att/businessTrip") public String
-		 * selectBusinessTrip(@RequestParam(value="cPage",defaultValue="1") int cPage,
-		 * 
-		 * @RequestParam(value="numPerpage", defaultValue="5") int numPerpage, Model m){
-		 * 
-		 * Employee
-		 * loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().
-		 * getPrincipal();
-		 * 
-		 * List<Edms> edsm =
-		 * service.selectBusinessTrip(Map.of("loginNo",loginNo,"cPage",cPage,
-		 * "numPerpage",numPerpage)); int totalData = service.selectBusinessTripCount();
-		 * 
-		 * m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData,
-		 * "/WorkTimeList")); m.addAttribute("totalData",totalData);
-		 * 
-		 * System.out.println(edsm); System.out.println(totalData); return
-		 * "attendance/businessTripList";
-		 * 
-		 * }
-		 */
+//	  @RequestMapping("/attendance/cancelBusinessTrip")
+//	  public ModelAndView cancelBusinessTrip(ModelAndView mv) {
+//		  int result = service.cancelBusinessTrip(int no);
+//		  System.out.println(result);
+//		  
+//		  mv.setViewName("redirect:/businessTrip");
+//		  
+//		  return mv;
+//		  
+//	  }
 	  
+		
 	  
 	  
 	  
@@ -323,10 +322,7 @@ public class AttendanceController {
 	public String adminWorkTime() {
 		return "admin/adminWorkTime";
 }
-//	@GetMapping("/adminDayoff")
-//	public String adminDayoff() {
-//		return "admin/adminDayoff";
-//}
+
 	
 	@GetMapping("/adminBusinessTrip")
 	public String adminBusinessTrip() {
