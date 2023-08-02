@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
@@ -171,7 +172,7 @@ public class AttendanceController {
 	  
 	  
 	  
-	  //안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
+//안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
 	  
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
@@ -208,6 +209,35 @@ public class AttendanceController {
 		 return "attendance/dayoffList";
 	  }
 	  
+	  //연차 관리자
+	  @GetMapping("/adminDayoff")
+	  public String selectAdminDayoffAll(Model m) {
+
+		  List<DayOff> dayoff = service.selectAdminDayoffAll();
+		  m.addAttribute("adminDayoff",dayoff);
+		  //System.out.println(m);
+		  
+		  return "admin/adminDayoff";
+	  }
+	  
+	  @RequestMapping("/amdin/adminResetAll")
+	  public ModelAndView adminResetAll(ModelAndView mv) {
+		  
+		  int result = service.adminResetAll();
+		  System.out.println(result);
+		  mv.setViewName("redirect:/adminDayoff");
+		  
+		  return mv;
+	  }
+	  
+	  //연차 이름,직급별 검색
+	  @RequestMapping("/attendance/searchDayoffAdmin")
+	  @ResponseBody
+	  public List<DayOff> searchDayoffAdmin(@RequestParam Map<String,String> dayoffParam){
+		  List<DayOff> df = service.searchDayoffAdmin(dayoffParam);
+		  System.out.println(df);
+		  return df;
+	  }
 	  
 	  
 	  
@@ -276,10 +306,10 @@ public class AttendanceController {
 	public String adminWorkTime() {
 		return "admin/adminWorkTime";
 }
-	@GetMapping("/adminDayoff")
-	public String adminDayoff() {
-		return "admin/adminDayoff";
-}
+//	@GetMapping("/adminDayoff")
+//	public String adminDayoff() {
+//		return "admin/adminDayoff";
+//}
 	
 	@GetMapping("/adminBusinessTrip")
 	public String adminBusinessTrip() {

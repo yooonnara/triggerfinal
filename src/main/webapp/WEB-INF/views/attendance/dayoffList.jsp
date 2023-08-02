@@ -48,7 +48,11 @@
                                     </tr>
                                         <td class="border-dark border-right" id="df-num">${dayoff.get(0).totalDoCount }</td>
                                         <td class="border-dark border-right" id="df-num">${dayoff.get(0).usedDoCount }</td>
-                                        <td class="border-dark border-right" id="df-num">${dayoff.get(0).remainDoCount }</td>
+                                        <td class="border-dark border-right" id="df-num">
+                                        ${dayoff.get(0).remainDoCount }
+                                     <%--    <c:if test=" ${dayoff.get(0).remainDoCount <= 0 }">0</c:if>
+                                    	<c:if test=" ${dayoff.get(0).remainDoCount > 0 }">${dayoff.get(0).remainDoCount }</c:if> --%>
+                                        </td>
                                     </tr>
                             </table>
                         </div>

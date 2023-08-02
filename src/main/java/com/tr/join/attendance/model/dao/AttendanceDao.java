@@ -43,6 +43,9 @@ public interface AttendanceDao {
 	 
 //---------------연차
 	 List<DayOff> selectDayoffAll(SqlSession session, int no);
+	 List<DayOff> selectAdminDayoffAll(SqlSession session);
+	 int adminResetAll(SqlSession session);
+	 List<DayOff> searchDayoffAdmin(SqlSession session, Map<String,String> dayoffParam);
 
 
 //---------------출장

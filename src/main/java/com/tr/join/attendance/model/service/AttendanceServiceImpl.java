@@ -133,6 +133,22 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectDayoffAll(session, no);
 	}
 	
+	@Override
+	public List<DayOff> selectAdminDayoffAll(){
+		return dao.selectAdminDayoffAll(session);
+	}
+	@Override
+	public int adminResetAll() {
+		return dao.adminResetAll(session);
+	}
+
+	@Override
+	public List<DayOff> searchDayoffAdmin(Map<String, String> dayoffParam) {
+		return dao.searchDayoffAdmin(session, dayoffParam);
+	}
+	
+	
+	
 //-------------출장------------------
 	/*
 	 * @Override public List<Edms> selectBusinessTrip(Map<String,Object> param){

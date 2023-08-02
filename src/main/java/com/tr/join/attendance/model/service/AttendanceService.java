@@ -43,7 +43,10 @@ public interface AttendanceService {
 	
 //---------------연차---------------------
 	List<DayOff> selectDayoffAll(int no);
-	
+	//관리자
+	List<DayOff> selectAdminDayoffAll();
+	int adminResetAll();
+	List<DayOff> searchDayoffAdmin(Map<String,String> dayoffParam);
 	
 	
 //-----------출장-------------------------

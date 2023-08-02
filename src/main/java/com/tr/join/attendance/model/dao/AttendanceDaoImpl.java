@@ -114,6 +114,23 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectList("attendance.selectDayoffAll",no);
 	 }
 	 
+	 @Override
+	 public List<DayOff> selectAdminDayoffAll(SqlSession session){
+		 return session.selectList("attendance.selectAdminDayoffAll");
+	 }
+
+	@Override
+	public int adminResetAll(SqlSession session) {
+		return session.update("attendance.adminResetAll");
+	}
+
+	@Override
+	public List<DayOff> searchDayoffAdmin(SqlSession session, Map<String, String> dayoffParam) {
+		return session.selectList("attendance.searchDayoffAdmin",dayoffParam);
+	}
+	
+	 
+	 
 //------------출장--------------
 		/*
 		 * @Override public List<Edms> selectBusinessTrip(SqlSession session,

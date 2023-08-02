@@ -20,7 +20,15 @@
     
 }
 #searchEmp{
-    width:70px;
+    width:90px;
+    margin-right:3px;
+}
+#searchDep{
+	width:90px;
+	margin-right:3px;
+}
+.searchDF{
+	width:60px;
 }
 
 #countForm{
