@@ -1,6 +1,5 @@
 package com.tr.join.attendance.controller;
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.common.PageFactory;
+import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.vo.Employee;
 
 import lombok.extern.slf4j.Slf4j;
@@ -242,6 +242,23 @@ public class AttendanceController {
 	  
 	  
 //----------출장-----------------
+	  
+	  @GetMapping("/businessTripList")
+	  public String selectBusinessTrip(Model m) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<Edms> edms = service.selectBusinessTrip(loginNo.getNo());
+		  int count = service.BusinessTripCount(loginNo.getNo());
+				
+		  m.addAttribute("edms",edms);
+		  m.addAttribute("count",count);
+		  System.out.println(m);
+		  
+		 return "attendance/businessTripList";
+	  }
+	  
+	  
+	  
 		/*
 		 * @GetMapping("/att/businessTrip") public String
 		 * selectBusinessTrip(@RequestParam(value="cPage",defaultValue="1") int cPage,
@@ -289,10 +306,10 @@ public class AttendanceController {
 }
 	
 
-	@GetMapping("/businessTripList")
-	public String businessTripList() {
-		return "attendance/businessTripList";
-}
+//	@GetMapping("/businessTripList")
+//	public String businessTripList() {
+//		return "attendance/businessTripList";
+//}
 	
 //	//@GetMapping("/dayoffList")
 //	public String dayoffList() {

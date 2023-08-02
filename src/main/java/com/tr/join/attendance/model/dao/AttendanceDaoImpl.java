@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.edms.model.vo.Edms;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
 
@@ -128,10 +129,25 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	public List<DayOff> searchDayoffAdmin(SqlSession session, Map<String, String> dayoffParam) {
 		return session.selectList("attendance.searchDayoffAdmin",dayoffParam);
 	}
+
+	
 	
 	 
 	 
 //------------출장--------------
+	
+	@Override
+	public List<Edms> selectBusinessTrip(SqlSession session, int no) {
+		return session.selectList("attendance.selectBusinessTrip",no);
+	}
+
+	@Override
+	public int BusinessTripCount(SqlSession session, int no) {
+		return session.selectOne("attendance.BusinessTripCount",no);
+	}
+	
+	
+	
 		/*
 		 * @Override public List<Edms> selectBusinessTrip(SqlSession session,
 		 * Map<String,Object> param){ int cPage=(int)param.get("cPage"); int

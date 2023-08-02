@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tr.join.attendance.model.dao.AttendanceDao;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.edms.model.vo.Edms;
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
 
@@ -146,10 +147,25 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<DayOff> searchDayoffAdmin(Map<String, String> dayoffParam) {
 		return dao.searchDayoffAdmin(session, dayoffParam);
 	}
+
+
 	
 	
 	
 //-------------출장------------------
+	
+	@Override
+	public List<Edms> selectBusinessTrip(int no) {
+		return dao.selectBusinessTrip(session, no);
+	}
+
+	@Override
+	public int BusinessTripCount(int no) {
+		return dao.BusinessTripCount(session, no);
+	}
+	
+	
+	
 	/*
 	 * @Override public List<Edms> selectBusinessTrip(Map<String,Object> param){
 	 * return dao.selectBusinessTrip(session, param); }
