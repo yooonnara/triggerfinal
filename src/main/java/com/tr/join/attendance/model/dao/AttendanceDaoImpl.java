@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edms;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
 
@@ -108,23 +107,22 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 public int selectAttendanceCount(SqlSession session) {
 		 return session.selectOne("attendance.selectAttendanceCount");
 	 }
-//------------휴가--------------
+//------------연차--------------
 	 
 	 @Override
 	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
-		 return session.selectList("dayoff.selectDayoffAll",no);
+		 return session.selectList("attendance.selectDayoffAll",no);
 	 }
 	 
 //------------출장--------------
-	 @Override
-	 public List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param){
-		int cPage=(int)param.get("cPage");
-		int numPerpage=(int)param.get("numPerpage");
-		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
-		return session.selectList("attendance.selectBusinessTrip",null, rb);
-	 }
-	 @Override
-	 public int selectBusinessTripCount(SqlSession session) {
-		 return session.selectOne("attendance.selectBusinessTripCount");
-	 }
+		/*
+		 * @Override public List<Edms> selectBusinessTrip(SqlSession session,
+		 * Map<String,Object> param){ int cPage=(int)param.get("cPage"); int
+		 * numPerpage=(int)param.get("numPerpage"); RowBounds rb=new
+		 * RowBounds((cPage-1)*numPerpage,numPerpage); return
+		 * session.selectList("attendance.selectBusinessTrip",null, rb); }
+		 * 
+		 * @Override public int selectBusinessTripCount(SqlSession session) { return
+		 * session.selectOne("attendance.selectBusinessTripCount"); }
+		 */
 }

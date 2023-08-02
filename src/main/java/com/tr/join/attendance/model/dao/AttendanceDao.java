@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edms;
 
 public interface AttendanceDao {
 	
@@ -42,12 +41,14 @@ public interface AttendanceDao {
 	 List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param);
 	 int selectAttendanceCount(SqlSession session);
 	 
-//---------------휴가
+//---------------연차
 	 List<DayOff> selectDayoffAll(SqlSession session, int no);
 
 
 //---------------출장
-	List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param);
-	int selectBusinessTripCount(SqlSession session);
+		/*
+		 * List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param);
+		 * int selectBusinessTripCount(SqlSession session);
+		 */
 
 }

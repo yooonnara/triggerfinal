@@ -56,6 +56,51 @@
                                 <input type="radio" name="options" id="option4" value="4">결근
                               </label>
                         </div>
+                        
+                        <!-- 버튼으로 상태 검색 -->
+						<script>
+						$("#big-search input[type=radio]").click(e=>{
+							$.ajax({
+								url: "/ajaxworkTime",
+								data: {"searchNum":e.target.value}, 
+								success:function(d){
+									$("#wk-tbody").html("");
+									console.log(e.target.value);
+									console.log(d);
+									//const $tbody = $("<tbody>")
+									for(let i=0; i<d.length;i++){
+										const $tr = $("<tr>");
+										const $attDate = $("<td>").text(d[i]["attDate"]);
+					                     let status="";
+					                     switch(d[i]["status"]){
+					                        case 0 : status="정상 출근";break; 
+					                        case 2 : status="지각";break;
+					                        case 3 : status="조퇴";break;
+					                        case 4 : status="결근";break;
+					                     }
+					                     const $status = $("<td>").text(status);
+			
+										const $startTime = $("<td>").text(d[i]["startTime"]);
+										const $endTime = $("<td>").text(d[i]["endTime"]);
+										$tr.append($attDate).append($status).append($startTime).append($endTime);
+										
+										$("#wk-tbody").append($tr);
+									}
+								},
+								error:function(){
+									console.log("ajax 통신 실패");
+								}
+							})
+						})
+						</script>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 		  				<!-- datepicker -->
 						<script>	
 			                $(function(){
@@ -166,35 +211,8 @@
                 </div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
-			<!-- 버튼으로 상태 검색 -->
-			<script>
-			$("#big-search input[type=radio]").click(e=>{
-				$.ajax({
-					url: "/ajaxworkTime",
-					data: {"searchNum":e.target.value}, 
-					success:function(d){
-						$("#wk-tbody").html("");
-						console.log(e.target.value);
-						console.log(d);
-						//const $tbody = $("<tbody>")
-						for(let i=0; i<d.length;i++){
-							const $tr = $("<tr>");
-							const $attDate = $("<td>").text(d[i]["attDate"]);
-							const $status = $("<td>").text(d[i]["status"]);
-							if()
-							const $startTime = $("<td>").text(d[i]["startTime"]);
-							const $endTime = $("<td>").text(d[i]["endTime"]);
-							$tr.append($attDate).append($status).append($startTime).append($endTime);
-							
-							$("#wk-tbody").append($tr);
-						}
-					},
-					error:function(){
-						console.log("ajax 통신 실패");
-					}
-				})
-			})
-			</script>
+			
+			
 			
 			
 			<!-- 기간 검색 - 리스트 조회 -->

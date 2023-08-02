@@ -1,5 +1,9 @@
 package com.tr.join.attendance.model.vo;
 
+import com.tr.join.edms.model.vo.Edms;
+import com.tr.join.employee.model.vo.Department;
+import com.tr.join.employee.model.vo.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +21,9 @@ public class DayOff {
 	private int totalDoCount; //총 연차부여일수
 	private int usedDoCount; //사용 연차일수
 	private int remainDoCount; //남은 연차일수 
-	
+	private Edms edms; 	
+	private Employee emp;
+	private Department dept;
 	
 
 	

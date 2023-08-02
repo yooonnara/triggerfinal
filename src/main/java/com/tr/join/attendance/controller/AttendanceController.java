@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edms;
 import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Employee;
 
@@ -193,6 +192,21 @@ public class AttendanceController {
 	  
 	  
 	  
+//-----------------------연차 관리-------------------------------
+	  
+	  
+	  
+	  @GetMapping("/dayoffList")
+	  public String selectDayoffAll(Model m) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<DayOff> dayoff = service.selectDayoffAll(loginNo.getNo());
+		  
+		  m.addAttribute("dayoff",dayoff);
+		  System.out.println(m);
+		  
+		 return "attendance/dayoffList";
+	  }
 	  
 	  
 	  
@@ -226,23 +240,7 @@ public class AttendanceController {
 	  
 	  
 	  
-//-----------------------연차 관리-------------------------------
-	  
-	  
-	  
-	  @RequestMapping("/dayoffList")
-	  @ResponseBody
-	  public String selectDayoffAll(Model m) {
-		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		  
-		  List<DayOff> dayoff = service.selectDayoffAll(loginNo.getNo());
-		  
-		  m.addAttribute("dayoff",dayoff);
-		  
-		  System.out.println(m);
-		  
-		  return "attendance/dayoffList";
-	  }
+
 
 	
 	
@@ -259,15 +257,17 @@ public class AttendanceController {
 	public String workTimeList() {
 		return "attendance/workTimeList";
 }
-	@GetMapping("/dayoffList")
-	public String dayoffList() {
-		return "attendance/dayoffList";
-}
+	
 
 	@GetMapping("/businessTripList")
 	public String businessTripList() {
 		return "attendance/businessTripList";
 }
+	
+//	//@GetMapping("/dayoffList")
+//	public String dayoffList() {
+//		return "attendance/dayoffList";
+//}
 	
 	
 /*----------------------관리자 페이지----------------------*/

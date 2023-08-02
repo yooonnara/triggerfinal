@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edms;
 
 public interface AttendanceService {
 	
@@ -45,9 +44,13 @@ public interface AttendanceService {
 //---------------연차---------------------
 	List<DayOff> selectDayoffAll(int no);
 	
+	
+	
 //-----------출장-------------------------
-	List<Edms> selectBusinessTrip(Map<String,Object> param);
-	int selectBusinessTripCount();
+	/*
+	 * List<Edms> selectBusinessTrip(Map<String,Object> param); int
+	 * selectBusinessTripCount();
+	 */
 	
 	
 }
