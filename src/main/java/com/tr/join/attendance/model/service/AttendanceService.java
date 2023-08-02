@@ -53,7 +53,7 @@ public interface AttendanceService {
 //-----------출장-------------------------
 	List<Edms> selectBusinessTrip(int no);
 	int BusinessTripCount(int no);
-	
-	
+	//출장 삭제
+	int deleteBusinessTrip(int btNo);
 	
 }

@@ -52,9 +52,6 @@ public interface AttendanceDao {
 //---------------출장
 	 List<Edms> selectBusinessTrip(SqlSession session, int no);
 	 int BusinessTripCount(SqlSession session, int no);
-		/*
-		 * List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param);
-		 * int selectBusinessTripCount(SqlSession session);
-		 */
+	 int deleteBusinessTrip(SqlSession session, int btNo);
 
 }

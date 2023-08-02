@@ -34,6 +34,7 @@ public class Edms {
 	private int jobNo;
 	private int deptNo;
 	private String detailType;
+	private String docStatus; //문서상태 
 	private Employee emp;
 	private List<Attachment> file=new ArrayList();
 }

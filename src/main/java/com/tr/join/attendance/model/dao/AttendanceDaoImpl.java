@@ -145,17 +145,12 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	public int BusinessTripCount(SqlSession session, int no) {
 		return session.selectOne("attendance.BusinessTripCount",no);
 	}
+
+	//출장 삭제
+	@Override
+	public int deleteBusinessTrip(SqlSession session, int btNo) {
+		return session.update("attendance.deleteBusinessTrip",btNo);
+	}
 	
 	
-	
-		/*
-		 * @Override public List<Edms> selectBusinessTrip(SqlSession session,
-		 * Map<String,Object> param){ int cPage=(int)param.get("cPage"); int
-		 * numPerpage=(int)param.get("numPerpage"); RowBounds rb=new
-		 * RowBounds((cPage-1)*numPerpage,numPerpage); return
-		 * session.selectList("attendance.selectBusinessTrip",null, rb); }
-		 * 
-		 * @Override public int selectBusinessTripCount(SqlSession session) { return
-		 * session.selectOne("attendance.selectBusinessTripCount"); }
-		 */
 }

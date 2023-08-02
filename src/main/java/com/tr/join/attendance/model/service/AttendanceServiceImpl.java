@@ -153,7 +153,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	
 //-------------출장------------------
-	
+	 //출장 리스트 출력
 	@Override
 	public List<Edms> selectBusinessTrip(int no) {
 		return dao.selectBusinessTrip(session, no);
@@ -163,16 +163,13 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public int BusinessTripCount(int no) {
 		return dao.BusinessTripCount(session, no);
 	}
+
+	//출장삭제
+	@Override
+	public int deleteBusinessTrip(int btNo) {
+		return dao.deleteBusinessTrip(session, btNo);
+	}
 	
-	
-	
-	/*
-	 * @Override public List<Edms> selectBusinessTrip(Map<String,Object> param){
-	 * return dao.selectBusinessTrip(session, param); }
-	 * 
-	 * @Override public int selectBusinessTripCount() { return
-	 * dao.selectBusinessTripCount(session); }
-	 */
 
 
 }

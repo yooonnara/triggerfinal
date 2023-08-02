@@ -77,7 +77,8 @@
                                     </td>
                                     <c:if test="${e.appStatus == '0' }">
                                     <td>
-                                    <a href="#" data-toggle="modal" data-target="#cancelModal" class="btn btn-sm border-warning" id="ccbtn"> 취소 </a>
+                                    <a href="#" data-toggle="modal" class="btn btn-sm border-warning" 
+                                    id="ccbtn" onclick="cancelBtn(${e.no});"> 취소 </a>
                                     </td>
                                     </c:if>
                                     <c:if test="${e.appStatus != '0' }">
@@ -88,11 +89,18 @@
                            	</c:if>     
                             </tbody>
                         </table>
-                        
                 </div>
+                <script>
+                	function cancelBtn(no){
+                		if(confirm("출장신청을 삭제하시겠습니까?")){
+                			console.log(no);
+                			location.href = '/deleteBT?btNo=' + no;
+                		}
+                	}
+                </script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 				<!-- 출장신청 삭제 모달-->
-                <div id="cancel-businessTrip">
+                <!-- <div id="cancel-businessTrip">
                     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -101,13 +109,13 @@
                                     <p><br>출장신청을 삭제하시겠습니까?<br></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="btn btn-primary" href="#">확인</a>
+                                    <a class="btn btn-primary">확인</a>
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 			</div>
 
 
