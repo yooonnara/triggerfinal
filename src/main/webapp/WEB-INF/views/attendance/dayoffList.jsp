@@ -17,9 +17,7 @@
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
 			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
 		</div>
-		<!-- 사이드바 종료 End of Sidebar -->
 
-		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
 			<div id="content">
@@ -27,31 +25,45 @@
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 				</div>
-				<!-- 상단바 종료 End of Topbar -->
 
 				<!-- 수정할 컨테이너 Begin Page Content -->
 				 <div class="container-fluid">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 ml-4">연차 현황</h1>
 
-                    <div class="dayOffCounting-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+                    <div class="dayOffCounting-container"> 
                         <!-- 오늘 날짜 -->
-                        <h3 class="row justify-content-center text-dark font-weight-bold mb-5">2023-07-21</h3>
+                        <h3 class="dfDate row justify-content-center text-dark font-weight-bold mb-5" id="DF_date"></h3>
+                        
+                        <script>
+					        $(function(){
+					            var today = new Date();
+					            var year = today.getFullYear();
+					            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+					            var day = ('0' + today.getDate()).slice(-2);
+					            var week = new Array('일', '월', '화', '수', '목', '금', '토');
+					
+					            var mainDate = year + "-" + month + "-" + day
+					            $("#DF_date").text(mainDate);
+					        })
+					    </script>
+                        
                         <!-- 사용 내역 테이블 -->
                         <div class="row justify-content-center" id="mineCountingTable">
-                            <table class="border border-dark col-5 text-center bg-white">
+                            <table class="border col-5 text-center bg-white">
                                     <tr>
-                                        <td rowspan="2" class="font-weight-bold border-dark border-right">${dayoff.get(0).emp.name} ${dayoff.get(0).emp.jobTitle}</td>
-                                        <td class="border-dark border-right ">발생 연차</td> 
-                                        <td class="border-dark border-right">사용 연차</td>
-                                        <td class="border-dark border-right">잔여 연차</td>
+                                        <td rowspan="2" class="font-weight-bold border-right bg-primary text-white">
+                                        	${dayoff.get(0).emp.name} ${dayoff.get(0).emp.jobTitle}
+                                        </td>
+                                        <td class="border-right ">발생 연차</td> 
+                                        <td class="border-right">사용 연차</td>
+                                        <td class="border-right">잔여 연차</td>
                                     </tr>
-                                        <td class="border-dark border-right" id="df-num">${dayoff.get(0).totalDoCount }</td>
-                                        <td class="border-dark border-right" id="df-num">${dayoff.get(0).usedDoCount }</td>
-                                        <td class="border-dark border-right" id="df-num">
-                                        ${dayoff.get(0).remainDoCount }
-                                     <%--    <c:if test=" ${dayoff.get(0).remainDoCount <= 0 }">0</c:if>
-                                    	<c:if test=" ${dayoff.get(0).remainDoCount > 0 }">${dayoff.get(0).remainDoCount }</c:if> --%>
+                                        <td class="border-right" id="df-num">${dayoff.get(0).totalDoCount }</td>
+                                        <td class="border-right" id="df-num">${dayoff.get(0).usedDoCount }</td>
+                                        <td class="border-right" id="df-num">
+                                        	<c:if test="${dayoff.get(0).remainDoCount < 0}">0</c:if>
+                                        	<c:if test="${dayoff.get(0).remainDoCount > 0}">${dayoff.get(0).remainDoCount}</c:if>
                                         </td>
                                     </tr>
                             </table>

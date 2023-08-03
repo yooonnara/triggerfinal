@@ -71,13 +71,13 @@
 									for(let i=0; i<d.length;i++){
 										const $tr = $("<tr>");
 										const $attDate = $("<td>").text(d[i]["attDate"]);
-					                     let status="";
+					                    let status="";
 					                     switch(d[i]["status"]){
 					                        case 0 : status="정상 출근";break; 
 					                        case 2 : status="지각";break;
 					                        case 3 : status="조퇴";break;
 					                        case 4 : status="결근";break;
-					                     }
+					                    }
 					                    const $status = $("<td>").text(status);
 										const $startTime = $("<td>").text(d[i]["startTime"]);
 										const $endTime = $("<td>").text(d[i]["endTime"]);
@@ -232,7 +232,14 @@
 						for(let i=0;i<dt.length;i++){
 							const $tr = $("<tr>");
 							const $attDate = $("<td>").text(dt[i]["attDate"]);
-							const $status = $("<td>").text(dt[i]["status"]);
+							let status="";
+		                     switch(dt[i]["status"]){
+		                        case 0 : status= "정상 출근" ; break; 
+		                        case 2 : status= "지각" ; break;
+		                        case 3 : status= "조퇴" ; break;
+		                        case 4 : status= "결근" ; break;
+		                    }
+							const $status = $("<td>").text(status);
 							const $startTime = $("<td>").text(dt[i]["startTime"]);
 							
 							const $endTime = $("<td>").text(dt[i]["endTime"]);

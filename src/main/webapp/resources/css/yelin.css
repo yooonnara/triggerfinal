@@ -35,7 +35,9 @@
     width:50px;
 }
 
-
+#DF_date{
+	font-size: 28px;
+}
 
 #inputSize{
 	border-radius:6px;

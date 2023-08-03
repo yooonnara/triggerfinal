@@ -231,7 +231,6 @@
 								}
 			    			})
 			    		})
-			    		
 			    	]
 		    	  });
 		     	 calendar.render();
@@ -306,12 +305,9 @@
 					},
 					error:function(){
 						console.log("퇴근시간입력 ajax통신 실패");
-						
-						
 					}
 				})
 			}
-			
 		</script>
 
 
