@@ -36,6 +36,7 @@ public class Edms {
 	private int jobNo;
 	private int deptNo;
 	private String detailType;
+	private String docStatus; //문서상태 
 	private Employee emp;
 	private String  docStatus; //문서 상태 y,n 취소 하면 n으로 바뀌어서 취소 내역만 뜨게 하는것 
 	//where 절에 y일때 

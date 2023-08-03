@@ -46,6 +46,22 @@ function checkId(str){
 	
 }
 
+// 현재 비밀번호와 일치 여부 확인 (비밀번호 변경 시)
+/*function checkCPwd(str){
+	if(str != ''){
+		if($('#pwd1').val() != str){
+			$('.cPwd-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호를 확인해 주세요.');
+			return false;
+		} else {
+			$('.cPwd-msg').removeClass('text-danger').addClass('text-primary').text('현재 비밀번호와 일치합니다.');
+		}
+	}
+	
+}*/
+
+
+
+
 // 비밀번호 사용 가능 여부
 function checkPwd1(str){
 	let regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,16}$/
@@ -91,22 +107,49 @@ function checkAccStatus(str){
 	}
 }
 
-//입사일
+// 입사일
+function checkEnrollDate(str){
+	if ($('#enroll_date').val() == ''){
+		$(".enroll-date-msg").show();
+		$("#enroll_date").focus();
+		return false;
+	} else {
+		$(".enroll-date-msg").hide();
+	}
+}
 
 // 퇴사일
+/*function checkEnrollDate(str){
+	if ($('#enroll_date').val() == ''){
+		$(".enroll-date-msg").show();
+		$("#enroll_date").focus();
+		return false;
+	} else {
+		$(".enroll-date-msg").hide();
+	}
+}*/
 
 // 부서
-/* function checkDept(str){
-	if (!$('option').is(":checked")){
+function checkDept(str){
+	if ($('#dept').val() == ''){
 		$(".dept-msg").show();
-		$('select').focus();
+		$("#dept").focus();
 		return false;
 	} else {
 		$(".dept-msg").hide();
 	}
-} */
+}
 
 // 직급
+function checkJob(str){
+	if ($('#job').val() == ''){
+		$(".job-msg").show();
+		$("#job").focus();
+		return false;
+	} else {
+		$(".job-msg").hide();
+	}
+}
 
 // 관리자여부
 function checkAccType(str){

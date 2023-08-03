@@ -103,7 +103,7 @@
                                     </div>
                                 </h5>
                               </div>
-                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwoo" data-parent="#accordion">
                                 <div class="card-body">
                                     <table class="table table-sm" id="accordionTable">
                                         <thead>

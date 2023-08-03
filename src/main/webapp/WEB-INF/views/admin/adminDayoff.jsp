@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -37,21 +38,58 @@
                     <div class="adminDayOff-container "> 
                     <!-- 검색 & 부여 버튼 -->
                     <div class="row justify-content-between" id="big-search" >
+                    
                         <!-- 사원명 부서명 검색 버튼 -->
-                        <div class="float-left mb-3 col-5" id="dayOffSearch ">
-                            <label class="text-dark">사원명</label>
-                                <input type="text" class=" mr-2" id="searchEmp">
-                            <label class="text-dark">부서명</label>
-                                <input type="text" id="searchDep">
-                                <button class="btn btn-dark btn-sm">검색</button>
-                        </div>                
+                        <form class="float-left mb-3 col-5" id="dayOffSearch">
+                        	<input type="text" placeholder="사원명" id="searchEmp" name="name">
+                            <input type="text" id="searchDep" placeholder="부서명" name="dept">    
+                            <button class="btn btn-dark btn-sm searchDF" onclick="searchdata();">검색</button>
+                    	</form>                
+                        <script>
+                        	function searchdata(){
+                        		const data=$("#dayOffSearch>input").serialize();
+                        		console.log(data);
+                        			$.ajax({
+                        			url:"${path}/attendance/searchDayoffAdmin",
+                        			data: data,
+                        			success:function(data){
+                        				console.log(data);
+                        			},
+                        			error:function(){
+    									console.log("ajax통신 실패");
+    								}
+                        		}) 
+                        	}
+                        
+                        
+                        
+                        
+                        
+                        
+                        </script>
                          <!-- 연차부여 버튼 -->
                         <div class="btn-member float-right mb-4 mr-3">
-                            <a href="#" class="btn btn-dark btn-sm mr-2">연차 리셋</a>
+                        <button class="btn btn-dark btn-sm mr-2" onclick="updateResetAll();">전체 연차 리셋</button>
+                        <button class="btn btn-dark btn-sm mr-2" onclick="updateReset();">연차 리셋</button>
                             <a href="#" data-toggle="modal" data-target="#insertDayOffModal"
                                 class="btn btn-dark btn-sm">연차 조정</a>
                         </div>
-                    </div>    
+                   </div>    
+                    
+                    <script>
+                    	function updateResetAll(){
+                    		if(confirm("전사원 연차 리셋하시겠습니까?")){
+                    			location.href='/amdin/adminResetAll';
+                    		}
+                    	};
+                    
+                    
+                    </script>
+                    
+                    
+                    
+                    
+                  
                     <!-- 사용 내역 테이블 -->
                     <div id="big-table">
                         <table class="table text-center table-sm">
@@ -78,37 +116,25 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
+	                            <c:if test="${not empty adminDayoff }">
+	                            <c:forEach var="ad" items="${adminDayoff }">
                                 <tr>
                                     <td><input type="checkbox" name="" value="1"></td>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>2022-01-03</td>
-                                    <td>-</td>
-                                    <td>15</td>
-                                    <td>5</td>
-                                    <td>10</td>
+                                    <td>${ad.emp.name }</td>
+                                    <td>${ad.emp.deptTitle}</td>
+                                    <td>${ad.emp.enrollDate }</td>
+                                    <td>
+                                    	<c:if test="${ad.emp.resignDate == null}">-</c:if>
+                                    </td>
+                                    <td>${ad.totalDoCount }</td>
+                                    <td>${ad.usedDoCount }</td>
+                                    <td>
+                                    	<c:if test="${ad.remainDoCount < 0}">*</c:if>
+                                    	<c:if test="${ad.remainDoCount > 0}">${ad.remainDoCount }</c:if>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="" value="1"></td>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>2022-01-03</td>
-                                    <td>-</td>
-                                    <td>15</td>
-                                    <td>5</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="" value="1"></td>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>2022-01-03</td>
-                                    <td>-</td>
-                                    <td>15</td>
-                                    <td>5</td>
-                                    <td>10</td>
-                                </tr>   
-
+	                            </c:forEach>
+	                          	</c:if>
                             </tbody>
                         </table>
                     </div>
@@ -158,8 +184,12 @@
                                             <colgroup>
                                                 <col style="width:120px">
                                                 <col style="width:150px">
-
                                             </colgroup>
+                                            <%-- <c:forEach var="c" items="$("td>input[type=checkbox]:checked").parents("tr").find("td").each((i,e)=>e.innerText))">
+                                            	<td>
+                                            		${c.emp.name }
+                                            	</td>
+                                            </c:forEach> --%>
                                             <tr>
                                                 <th>이름</th>
                                                 <td class="font-weight-bold ml-3 mb-5">김땅땅 홍보 2팀</td>
@@ -199,6 +229,8 @@
                 </div>
             </div>
             <!-- Footer -->
+            
+
             <div id="footer">
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
             </div>

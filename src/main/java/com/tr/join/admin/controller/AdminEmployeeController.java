@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,7 +41,7 @@ public class AdminEmployeeController {
 	// 멤버 통합관리
 	@GetMapping("/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
-									@RequestParam(value = "numPerpage", defaultValue = "5") int numPerpage, 
+									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
 									Model md) {
 		List<Employee> employees = service.selectEmployeeAll(Map.of("cPage", cPage, "numPerpage", numPerpage));
 		int totalData = service.selectEmployeeCount(); // 전체사원수
@@ -50,7 +49,9 @@ public class AdminEmployeeController {
 		md.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "adminEmployee"));
 		md.addAttribute("employees",employees);
 		
-		md.addAttribute("totalData",totalData);
+		md.addAttribute("totalData", totalData);
+		int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+		md.addAttribute("pageStartRowNum", pageStartRowNum);
 		
 		return "admin/adminEmployee";
 	}
@@ -92,10 +93,10 @@ public class AdminEmployeeController {
 	}
 	
 	
-	// 마지막 값을 가져오고.
-	// 앞에 있는 J 를 날려
+	// 마지막 값을 가져오고
+	// 앞에 있는 J 를 지우기
 	// 그리고 남은 숫자를 INT로 변환
-	// 변환된 숫자를 +1 해
+	// 변환된 숫자를 +1
 	// 100 미만이면 0+숫자를 스트링으로
 	// 10 미만이면 00 + 숫자를 스트링으로 0** 형식을 만들고
 	// J를 붙여서 RETURN 해줌
@@ -103,7 +104,7 @@ public class AdminEmployeeController {
 	@ResponseBody
 	public String makeEmpNum() {
 		String lastEmpNum = service.makeEmpNum(); // 마지막 값 가져오기 => 쿼리를 통해서 가져와라
-		lastEmpNum = lastEmpNum.substring(1); // 첫번째값(J) 버려
+		lastEmpNum = lastEmpNum.substring(1); // 첫번째값(J) 지우기
 		String empNum = "";
 		try{
             int tmp = Integer.parseInt(lastEmpNum); // 첫번째 값 버린 숫자를 int로 변환

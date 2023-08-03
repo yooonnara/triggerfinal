@@ -29,12 +29,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="bi bi-person-fill"></i>
-            <span>내 정보</span>
+            <span>내 정보 관리</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${path }/mypage">내 정보 수정</a>
-
+                <a class="collapse-item" href="${path }/mypage">기본정보 수정</a>
+                <a class="collapse-item" href="${path }/updatePassword">비밀번호 변경</a>
             </div>
         </div>
     </li>

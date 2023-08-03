@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.edms.model.vo.Edms;
 
 public interface AttendanceService {
 	
@@ -16,8 +16,10 @@ public interface AttendanceService {
 	Attendance startInsertAttendance(Map<String,Object> startTimeParam);
 	Attendance endInsertAttendance(Map<String,Object> endTimeParam);
 	List<Attendance> workCalendarAttendance(int no);
-	List<Edsm> workCalendarDayoff(int no);
-	List<Edsm> workCalendarTrip(int no);
+
+	/*
+	 * List<Edms> workCalendarDayoff(int no); List<Edms> workCalendarTrip(int no);
+	 */
 	Attendance selectWeekWorkTime(int no);
 	Attendance selectOverWorkTime(int no);
 	Attendance selectRemainTime(int no);
@@ -29,14 +31,29 @@ public interface AttendanceService {
 	
 	//근태 상태로 검색
 	List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam);
+	
+	//근태 시작일~종료일 검색
+	List<Attendance> ajaxworkTimeByDate(Map<String,Object> ajSearchParam);
+	
+	
+	
+	
 	//관리자 페이지
 	List<Attendance> selectAttendanceAll(Map<String,Object> param);
 	int selectAttendanceCount();
 	
 //---------------연차---------------------
 	List<DayOff> selectDayoffAll(int no);
+	//관리자
+	List<DayOff> selectAdminDayoffAll();
+	int adminResetAll();
+	List<DayOff> searchDayoffAdmin(Map<String,String> dayoffParam);
 	
 	
-	
+//-----------출장-------------------------
+	List<Edms> selectBusinessTrip(int no);
+	int BusinessTripCount(int no);
+	//출장 삭제
+	int deleteBusinessTrip(int btNo);
 	
 }

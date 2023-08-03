@@ -24,8 +24,8 @@ public class Attendance {
 	private String remainTime; //누적시간
 	private String overTime; //추가시간
 	
-	//private String startDate;
-	//private String endDate;
+	private String startDate;
+	private String endDate;
 	private Employee emp;
 	
 	
