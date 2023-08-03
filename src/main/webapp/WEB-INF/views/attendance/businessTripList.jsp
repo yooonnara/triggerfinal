@@ -35,9 +35,14 @@
 
                     <div class="businessTripList-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
                         <!-- 출장신청 개수 -->
-                        <p class="ml-2">출장신청  
-                        	<strong style="color:blue"> ${count} </strong>
-                        </p>
+                        <div class="row justify-content-between">
+                        	<p class="ml-2 col-3 float-left">출장신청
+                        		<strong style="color:blue"> ${count} </strong>
+                        	</p>
+	                        <div class="btn-member float-right mr-3">
+	                        	<button class="btn btn-primary btn-sm" id="cbtn" onclick="checkCancel();">취소 내역 확인하기</button>
+	                        </div>
+                        </div>
                     </div>
                         <!-- 사용 내역 테이블 -->
                         <table class="table text-center shadow table-sm">
@@ -61,7 +66,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <tbody class="bg-white" id="bt-tbody">
                             <c:if test="${not empty edms }">
                             	<c:forEach var="e" items="${edms }">
                                 <tr>
@@ -96,6 +101,44 @@
                 			console.log(no);
                 			location.href = '/deleteBT?btNo=' + no;
                 		}
+                	}
+                	
+                	$(document).ready(function(){
+                		$("#cbtn").click(function(){
+                			$(this).text('승인 신청 조회');
+                		})
+                		$.ajax({
+                			url:"/businessTripList",
+                			
+                			
+                		})
+                	})
+                	
+                	function checkCancel(){
+                		$.ajax({
+                			url:"/checkCancelList",
+                			success:function(d){
+                				console.log(d);
+                				$("#bt-tbody").html("");
+                				for(let i=0;i<d.length;i++){
+                					const $tr = $("<tr>");
+                					const $td = $("<td>");
+                					const $name = $("<td>").text(d[i]["emp"]["name"]);
+                					const $deptTitle = $("<td>").text(d[i]["emp"]["deptTitle"]);
+                					const $createDate = $("<td>").text(d[i]["createDate"]);
+                					const $startDate = $("<td>").text(d[i]["startDate"]).text(d[i]["endDate"]);
+                					const $title = $("<td>").text(d[i]["title"]);
+                					const $appStatus = $("<td>").text("취소");
+                					
+                					$tr.append($name).append($deptTitle).append($createDate).append($startDate).append($title).append($appStatus).append($td);
+                					
+                					$("#bt-tbody").append($tr);
+                				}
+                			},
+                			error:function(){
+                				console.log("ajax 통신 실패");
+                			}
+                		})
                 	}
                 </script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->

@@ -78,11 +78,12 @@
 					                        case 3 : status="조퇴";break;
 					                        case 4 : status="결근";break;
 					                     }
-					                     const $status = $("<td>").text(status);
-			
+					                    const $status = $("<td>").text(status);
 										const $startTime = $("<td>").text(d[i]["startTime"]);
 										const $endTime = $("<td>").text(d[i]["endTime"]);
-										$tr.append($attDate).append($status).append($startTime).append($endTime);
+										const $attTime = $("<td>").text(d[i]["attTime"]).text($tr);
+										
+										$tr.append($attDate).append($status).append($startTime).append($endTime).append($attTime);
 										
 										$("#wk-tbody").append($tr);
 									}
@@ -153,7 +154,7 @@
                         <!-- 근태 시작~종료일 검색 버튼 -->
                         <div class="float-right dateSearch-search mb-3 col-8" id="DateSearch">
                             <button class="float-right btn btn-primary btn-sm">검색</button>
-                            <input type="text"  placeholder="죵료일" name="endDate" class="float-right mr-1 endDate" id="datepicker2">
+                            <input type="text"  placeholder="종료일" name="endDate" class="float-right mr-1 endDate" id="datepicker2">
                             <input type="text"  placeholder="시작일" name="startDate" class="float-right mr-1 startDate" id="datepicker1">
                             
                         </div>
@@ -194,7 +195,7 @@
                                     </td>
                                     <td>${w.startTime }</td>
                                     <td>${w.endTime }</td>
-                                    <td>9시간 50분 00초</td>
+                                    <td>${w.attTime }</td>
                                 </tr> 
                                 </c:forEach>
                               </c:if>

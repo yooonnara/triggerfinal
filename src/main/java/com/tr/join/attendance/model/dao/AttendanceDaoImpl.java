@@ -124,6 +124,11 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	public int adminResetAll(SqlSession session) {
 		return session.update("attendance.adminResetAll");
 	}
+	
+	@Override
+	public int adminCheckReset(SqlSession session, DayOff d) {
+		return session.update("attendance.adminCheckReset", d);
+	}
 
 	@Override
 	public List<DayOff> searchDayoffAdmin(SqlSession session, Map<String, String> dayoffParam) {
@@ -150,6 +155,11 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	@Override
 	public int deleteBusinessTrip(SqlSession session, int btNo) {
 		return session.update("attendance.deleteBusinessTrip",btNo);
+	}
+
+	@Override
+	public List<Edms> checkCancelList(SqlSession session, Map<String, Object> cancelParam) {
+		return session.selectList("attendance.checkCancelList",cancelParam);
 	}
 	
 	

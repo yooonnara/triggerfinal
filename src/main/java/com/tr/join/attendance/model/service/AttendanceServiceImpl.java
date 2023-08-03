@@ -138,9 +138,15 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<DayOff> selectAdminDayoffAll(){
 		return dao.selectAdminDayoffAll(session);
 	}
+	
 	@Override
 	public int adminResetAll() {
 		return dao.adminResetAll(session);
+	}
+	
+	@Override
+	public int adminCheckReset(DayOff d) {
+		return dao.adminCheckReset(session, d);
 	}
 
 	@Override
@@ -168,6 +174,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Override
 	public int deleteBusinessTrip(int btNo) {
 		return dao.deleteBusinessTrip(session, btNo);
+	}
+
+	@Override
+	public List<Edms> checkCancelList(Map<String, Object> cancelParam) {
+		return dao.checkCancelList(session, cancelParam);
 	}
 	
 

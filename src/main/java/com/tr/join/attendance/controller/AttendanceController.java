@@ -1,5 +1,6 @@
 package com.tr.join.attendance.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,7 +150,7 @@ public class AttendanceController {
 		  ajaxParam.put("loginNo",loginNo.getNo()); 
 		  List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
 		  
-		  //System.out.println(wtajax);
+		  System.out.println(wtajax);
 		  
 		  return wtajax;
 	  }
@@ -215,7 +216,7 @@ public class AttendanceController {
 
 		  List<DayOff> dayoff = service.selectAdminDayoffAll();
 		  m.addAttribute("adminDayoff",dayoff);
-		  //System.out.println(m);
+		  System.out.println(m);
 		  
 		  return "admin/adminDayoff";
 	  }
@@ -231,6 +232,21 @@ public class AttendanceController {
 		  return mv;
 	  }
 	  
+	  //연차 선택 사원 리셋
+	  @RequestMapping("/admin/checkReset")
+	  @ResponseBody
+	  public String adminCheckReset(DayOff d, @RequestParam(value="dfList[]") ArrayList<Integer> dfList) {
+		  System.out.println(dfList);
+		  int result = 1;
+		  for(int i=0; i<dfList.size(); i++){
+			  d.setNo(dfList.get(i));
+			  result = result * service.adminCheckReset(d);
+		  }
+		  
+		  return result> 0 ? "success" : "fail";
+	  }
+	  
+	  
 	  //연차 이름,직급별 검색
 	  @RequestMapping("/attendance/searchDayoffAdmin")
 	  @ResponseBody
@@ -239,6 +255,7 @@ public class AttendanceController {
 		  System.out.println(df);
 		  return df;
 	  }
+	  
 	  
 	  
 	  
@@ -268,18 +285,22 @@ public class AttendanceController {
 		  
 	  }
 	  
-	  
-//	  @RequestMapping("/attendance/cancelBusinessTrip")
-//	  public ModelAndView cancelBusinessTrip(ModelAndView mv) {
-//		  int result = service.cancelBusinessTrip(int no);
-//		  System.out.println(result);
-//		  
-//		  mv.setViewName("redirect:/businessTrip");
-//		  
-//		  return mv;
-//		  
-//	  }
-	  
+	  //ajax 출장 취소 내역 확인하기 
+	  @GetMapping("/checkCancelList")
+	  @ResponseBody //화면에다가 정보를 보내주려면 필요 json 자동 실행
+	  public List<Edms> checkCancelList() {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  Map<String, Object> cancelParam = new HashMap();
+		  cancelParam.put("loginNo",loginNo.getNo());
+		  
+		  List<Edms> edms = service.checkCancelList(cancelParam);
+		  
+		  System.out.println(edms);
+		  
+		  return edms;
+		  
+	  }
 		
 	  
 	  

@@ -47,6 +47,7 @@ public interface AttendanceService {
 	//관리자
 	List<DayOff> selectAdminDayoffAll();
 	int adminResetAll();
+	int adminCheckReset(DayOff d);
 	List<DayOff> searchDayoffAdmin(Map<String,String> dayoffParam);
 	
 	
@@ -55,5 +56,6 @@ public interface AttendanceService {
 	int BusinessTripCount(int no);
 	//출장 삭제
 	int deleteBusinessTrip(int btNo);
-	
+	//출장 취소 목록 조회
+	List<Edms> checkCancelList(Map<String,Object> cancelParam);
 }

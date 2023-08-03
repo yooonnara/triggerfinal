@@ -51,7 +51,7 @@
                             </label>
                             <label class="btn btn-outline-dark">
                                 <input type="radio" name="options" id="option3">결근
-                              </label>
+                            </label>
                         </div>
                       
                       <!-- datepicker -->
@@ -152,7 +152,7 @@
                                     <td>${a.emp.name }</td>
                                     <td>${a.startTime}</td>
                                     <td>${a.endTime}</td>
-                                    <td>9시간 50분 00초</td>
+                                    <td>${a.attTime }</td>
                                     <td>
                                     	<c:if test="${a.status == '0'}">정상 출근</c:if>
                                     	<c:if test="${a.status == '1'}">출근</c:if>
