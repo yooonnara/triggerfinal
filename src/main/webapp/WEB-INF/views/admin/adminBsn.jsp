@@ -48,7 +48,7 @@
                                             <option selected value="1">전체</option>
                                             <option value="2">결재대기</option>
                                             <option value="3">결재승인</option>
-                                            <option value="4">결재반려</option>
+                                            <option value="-1">결재반려</option>
                                         </select>
                                         <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
                                         <button type="button" class="btn btn-dark btn-sm ">검색</button>
