@@ -35,15 +35,17 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectList("attendance.workCalendarAttendance", no); 
 	}
 	 
-	/*
-	 * @Override public List<Edms> workCalendarDayoff(SqlSession session, int no){
-	 * return session.selectList("attendance.workCalendarDayoff",no); }
-	 * 
-	 * @Override public List<Edms> workCalendarTrip(SqlSession session, int no){
-	 * return session.selectList("attendance.workCalendarTrip",no); }
-	 */
-	 
 	 @Override
+		public List<Edms> workCalendarDayoff(SqlSession session, int no) {
+			return session.selectList("attendance.workCalendarDayoff", no);
+		}
+
+	@Override
+	public List<Edms> workCalendarTrip(SqlSession session, int no) {
+		return session.selectList("attendance.workCalendarTrip", no);
+	}
+
+	@Override
 	 public Attendance selectWeekWorkTime(SqlSession session, int no) {
 		 return session.selectOne("attendance.selectWeekWorkTime",no);
 	 }

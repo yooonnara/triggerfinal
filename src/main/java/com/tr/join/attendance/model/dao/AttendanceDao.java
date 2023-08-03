@@ -15,11 +15,9 @@ public interface AttendanceDao {
 	 int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam);
 	 int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam);
 	 List<Attendance> workCalendarAttendance(SqlSession session, int no);
-
-		/*
-		 * List<Edms> workCalendarDayoff(SqlSession session, int no); List<Edms>
-		 * workCalendarTrip(SqlSession session, int no);
-		 */
+	 List<Edms> workCalendarDayoff(SqlSession session, int no);
+	 List<Edms> workCalendarTrip(SqlSession session, int no);
+	
 	 Attendance selectWeekWorkTime(SqlSession session, int no);
 	 Attendance selectOverWorkTime(SqlSession session, int no);
 	 Attendance selectRemainTime(SqlSession session, int no);

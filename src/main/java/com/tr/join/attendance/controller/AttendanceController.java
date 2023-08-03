@@ -70,7 +70,7 @@ public class AttendanceController {
 	 
 	
 	//근태 캘린더
-	//전체 근태 정보 받아오기. List로 받아와서 뿌리기 ? 
+	//전체 근태 정보 받아오기. 
 	//전체 연차 정보 받아오기. 
 	//전체 출장 정보 받아오기. 
 	 @RequestMapping("/att/workCalendar")
@@ -79,19 +79,17 @@ public class AttendanceController {
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 List<Attendance> attendanceInfo = service.workCalendarAttendance(loginNo.getNo());
-			/*
-			 * List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
-			 * List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
-			 */
+		 List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
+		 List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
+			
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
-			/*
-			 * calendarParam.put("dayoffInfo",dayoffInfo);
-			 * calendarParam.put("tripInfo",tripInfo);
-			 */
+		 calendarParam.put("dayoffInfo",dayoffInfo);
+		 calendarParam.put("tripInfo",tripInfo);
+			
 		 
-		// System.out.println(calendarParam);
+		 System.out.println(tripInfo);
 		 return calendarParam;
 	 }
 	 

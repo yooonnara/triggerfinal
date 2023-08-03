@@ -56,15 +56,16 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.workCalendarAttendance(session, no); 
 	}
 	
-	/*
-	 * @Override public List<Edms> workCalendarDayoff(int no){ return
-	 * dao.workCalendarDayoff(session, no); }
-	 * 
-	 * @Override public List<Edms> workCalendarTrip(int no){ return
-	 * dao.workCalendarTrip(session, no); }
-	 */
-	
-	
+	@Override
+	public List<Edms> workCalendarDayoff(int no) {
+		return dao.workCalendarDayoff(session, no);
+	}
+
+	@Override
+	public List<Edms> workCalendarTrip(int no) {
+		return dao.workCalendarTrip(session, no);
+	}
+
 	//근태 누적 시간
 	@Override
 	public Attendance selectWeekWorkTime(int no) {

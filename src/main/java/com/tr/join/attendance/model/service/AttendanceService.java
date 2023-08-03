@@ -16,10 +16,9 @@ public interface AttendanceService {
 	Attendance startInsertAttendance(Map<String,Object> startTimeParam);
 	Attendance endInsertAttendance(Map<String,Object> endTimeParam);
 	List<Attendance> workCalendarAttendance(int no);
-
-	/*
-	 * List<Edms> workCalendarDayoff(int no); List<Edms> workCalendarTrip(int no);
-	 */
+	List<Edms> workCalendarDayoff(int no);
+	List<Edms> workCalendarTrip(int no);
+	
 	Attendance selectWeekWorkTime(int no);
 	Attendance selectOverWorkTime(int no);
 	Attendance selectRemainTime(int no);
