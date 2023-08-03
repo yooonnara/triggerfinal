@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.edms.model.vo.Edms;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
 
@@ -35,15 +35,13 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectList("attendance.workCalendarAttendance", no); 
 	}
 	 
-	 @Override
-	 public  List<Edsm> workCalendarDayoff(SqlSession session, int no){
-		 return session.selectList("attendance.workCalendarDayoff",no);
-	 }
-	 
-	 @Override
-	 public  List<Edsm> workCalendarTrip(SqlSession session, int no){
-		 return session.selectList("attendance.workCalendarTrip",no);
-	 }
+	/*
+	 * @Override public List<Edms> workCalendarDayoff(SqlSession session, int no){
+	 * return session.selectList("attendance.workCalendarDayoff",no); }
+	 * 
+	 * @Override public List<Edms> workCalendarTrip(SqlSession session, int no){
+	 * return session.selectList("attendance.workCalendarTrip",no); }
+	 */
 	 
 	 @Override
 	 public Attendance selectWeekWorkTime(SqlSession session, int no) {
@@ -68,6 +66,9 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 //근태 리스트
 	 @Override
 	 public List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param) {
+		 int cPage=(int)param.get("cPage");
+		 int numPerpage=(int)param.get("numPerpage");
+		 RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		 return session.selectList("attendance.selectWorkTimeAll",param);
 	 }
 	 
@@ -76,16 +77,26 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectOne("attendance.selectWorkTimeCount");
 	 }
 	 
-	 //검색 기능 - 근태 상태
+	 //근태 리스트 검색 기능(근태 상태)
 	 @Override
 	 public List<Attendance> searchWorkTimeByStatus(SqlSession session,Map<String,Object> ajaxParam){
 		 return session.selectList("attendance.searchWorkTimeByStatus",ajaxParam);
 	 }
 	 
-	 //관리자
+	 //근태 시작일~종료일 검색 기능
+	 @Override
+	 public List<Attendance> ajaxworkTimeByDate(SqlSession session, Map<String,Object> ajSearchParam){
+		 return session.selectList("attendance.ajaxworkTimeByDate",ajSearchParam);
+	 }
+	 
+	 
+	 
+	 
+	 
+	 //근태 관리자
 	 @Override
 	 public List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param){
-		//map 이기 때문에 
+		 	//map 이기 때문에 
 			int cPage=(int)param.get("cPage");
 			int numPerpage=(int)param.get("numPerpage");
 			RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
@@ -97,10 +108,49 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 public int selectAttendanceCount(SqlSession session) {
 		 return session.selectOne("attendance.selectAttendanceCount");
 	 }
-//------------휴가--------------
+//------------연차--------------
 	 
 	 @Override
 	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
-		 return session.selectList("dayoff.selectDayoffAll",no);
+		 return session.selectList("attendance.selectDayoffAll",no);
 	 }
+	 
+	 @Override
+	 public List<DayOff> selectAdminDayoffAll(SqlSession session){
+		 return session.selectList("attendance.selectAdminDayoffAll");
+	 }
+
+	@Override
+	public int adminResetAll(SqlSession session) {
+		return session.update("attendance.adminResetAll");
+	}
+
+	@Override
+	public List<DayOff> searchDayoffAdmin(SqlSession session, Map<String, String> dayoffParam) {
+		return session.selectList("attendance.searchDayoffAdmin",dayoffParam);
+	}
+
+	
+	
+	 
+	 
+//------------출장--------------
+	
+	@Override
+	public List<Edms> selectBusinessTrip(SqlSession session, int no) {
+		return session.selectList("attendance.selectBusinessTrip",no);
+	}
+
+	@Override
+	public int BusinessTripCount(SqlSession session, int no) {
+		return session.selectOne("attendance.BusinessTripCount",no);
+	}
+
+	//출장 삭제
+	@Override
+	public int deleteBusinessTrip(SqlSession session, int btNo) {
+		return session.update("attendance.deleteBusinessTrip",btNo);
+	}
+	
+	
 }

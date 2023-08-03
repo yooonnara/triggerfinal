@@ -65,10 +65,10 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">결재 요청하기</a>
-                <a href=""><h6 class="collapse-header">- 연차 신청</h6></a>
-                <a href=""><h6 class="collapse-header">- 출장 신청</h6></a>
-                <a class="collapse-item" href="#">결재 문서 현황</a>
+                <a class="collapse-item" href="${path }/edmsMain">결재 요청하기</a>
+                <a href="${path }/edms/vcRequest"><h6 class="collapse-header">- 연차 신청</h6></a>
+                <a href="${path }/edms/bsnRequest"><h6 class="collapse-header">- 출장 신청</h6></a>
+                <a class="collapse-item" href="${path }/edms/bsnList">결재 문서 현황</a>
             </div>
         </div>
     </li>

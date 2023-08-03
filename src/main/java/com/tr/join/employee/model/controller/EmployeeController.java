@@ -51,6 +51,7 @@ public class EmployeeController {
 		int result = service.updateEmployee(param);
 		return "redirect:/mypage";
 	}
+	
 		
 	
 	@GetMapping("/logout")

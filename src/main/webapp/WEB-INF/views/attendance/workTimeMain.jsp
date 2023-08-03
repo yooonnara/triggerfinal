@@ -148,15 +148,83 @@
 			    					console.log(model.attInfo[0].status);
 			    					console.log(model.attInfo[1].attDate.replace(".","-")); //2023.07.29
 			    					
-			    					
 			    					for(i=0; i<model.attInfo.length; i++){
+			    						if(model.attInfo[i].status == 4) {
 				    						calendar.addEvent({
-				    						title: "조퇴 ",
+				    						title: "결근 ",
 				    						start: model.attInfo[i].attDate.replaceAll(".","-"),//형태를 맞춰줘야 한다 !!!!
 				    						color:'rgba(192, 57, 43, 0.79)',
 				                            textColor:'rgb(255, 255, 255)'
 				    						}) 
-			    					}		
+			    						}else if(model.attInfo[i].status == 1 || model.attInfo[i].status == 2){ //출근 상태일 때
+			    								calendar.addEvent({
+					    						title: "①출근 " + model.attInfo[i].startTime,
+					    						start: model.attInfo[i].attDate.replaceAll(".","-"),
+					    						color:'rgba(241, 196, 15, 0.72)',
+			                                    textColor:'rgb(51, 51, 51)'
+			    								})
+			    								if(model.attInfo[i].endTime == null){ //퇴근 시간 누락 시
+				    								calendar.addEvent({
+							    					title: "②퇴근 " ,
+							    					start: model.attInfo[i].attDate.replaceAll(".","-"),
+							    					color:'rgba(241, 196, 15, 0.72)',
+					                                textColor:'rgb(51, 51, 51)'
+			    									})
+			    							}else{ //퇴근시간 기입 시
+				    							calendar.addEvent({
+							    				title: "②퇴근 " + model.attInfo[i].endTime, 
+							    				start: model.attInfo[i].attDate.replaceAll(".","-"),
+							    				color:'rgba(241, 196, 15, 0.72)',
+					                            textColor:'rgb(51, 51, 51)'
+				    							})
+			    						}
+			    						}else if(model.attInfo[i].status == 3){ //출근 후 조퇴 할 때
+			    								calendar.addEvent({
+					    						title: "①출근 " + model.attInfo[i].startTime,
+					    						start: model.attInfo[i].attDate.replaceAll(".","-"),
+					    						color:'rgba(241, 196, 15, 0.72)',
+			                                    textColor:'rgb(51, 51, 51)'
+			    								})
+			    								if(model.attInfo[i].endTime == null){ //퇴근 시간 누락 시
+				    								calendar.addEvent({
+							    					title: "조퇴 " ,
+							    					start: model.attInfo[i].attDate.replaceAll(".","-"),
+							    					color:'rgba(29, 150, 65, 0.79)',
+						                            textColor:'rgb(255, 255, 255)'
+			    									})
+			    							}else{ //퇴근시간 기입 시
+				    							calendar.addEvent({
+							    				title: "조퇴 " + model.attInfo[i].endTime, 
+							    				start: model.attInfo[i].attDate.replaceAll(".","-"),
+							    				color:'rgba(29, 150, 65, 0.79)',
+					                            textColor:'rgb(255, 255, 255)'
+				    							})
+			    							}
+			    								
+			    						}else if(model.attInfo[i].status == 0){ //정상 출근일 경우
+			    								calendar.addEvent({
+					    						title: "①출근 " + model.attInfo[i].startTime,
+					    						start: model.attInfo[i].attDate.replaceAll(".","-"),
+					    						color:'rgba(241, 196, 15, 0.72)',
+			                                    textColor:'rgb(51, 51, 51)'
+			    								})
+			    								if(model.attInfo[i].endTime == null){
+			    										calendar.addEvent({
+								    					title: "②퇴근 " ,
+								    					start: model.attInfo[i].attDate.replaceAll(".","-"),
+								    					color:'rgba(241, 196, 15, 0.72)',
+						                                textColor:'rgb(51, 51, 51)'
+				    									})
+			    								}else{
+			    										calendar.addEvent({
+									    				title: "②퇴근 " + model.attInfo[i].endTime, 
+									    				start: model.attInfo[i].attDate.replaceAll(".","-"),
+									    				color:'rgba(241, 196, 15, 0.72)',
+							                            textColor:'rgb(51, 51, 51)'
+						    							})
+			    								}
+			    						}
+			    					}//for문 끝
 		    				}, //success 닫기
 			    				error:function(){
 									console.log("근태캘린더 ajax통신 실패");
@@ -268,5 +336,6 @@
 
 
 </body>
+
 
 </html>

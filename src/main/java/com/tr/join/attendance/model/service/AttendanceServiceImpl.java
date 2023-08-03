@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tr.join.attendance.model.dao.AttendanceDao;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
+import com.tr.join.edms.model.vo.Edms;
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
 
@@ -56,15 +56,13 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.workCalendarAttendance(session, no); 
 	}
 	
-	@Override
-	public List<Edsm> workCalendarDayoff(int no){
-		return dao.workCalendarDayoff(session, no);
-	}
-	
-	@Override
-	public List<Edsm> workCalendarTrip(int no){
-		return dao.workCalendarTrip(session, no);
-	}
+	/*
+	 * @Override public List<Edms> workCalendarDayoff(int no){ return
+	 * dao.workCalendarDayoff(session, no); }
+	 * 
+	 * @Override public List<Edms> workCalendarTrip(int no){ return
+	 * dao.workCalendarTrip(session, no); }
+	 */
 	
 	
 	//근태 누적 시간
@@ -108,6 +106,14 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.searchWorkTimeByStatus(session, ajaxParam);
 	}
 	
+	//근태 시작일~종료일 검색
+	public List<Attendance> ajaxworkTimeByDate(Map<String,Object> ajSearchParam){
+		return dao.ajaxworkTimeByDate(session, ajSearchParam);
+	}
+	
+	
+	
+	
 	//관리자
 	@Override
 	public List<Attendance> selectAttendanceAll(Map<String,Object> param){
@@ -121,13 +127,49 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	
 	
-//--------연차---------------------------
+//-------------연차-----------------
 	
 	@Override
 	public List<DayOff> selectDayoffAll(int no){
 		return dao.selectDayoffAll(session, no);
 	}
 	
+	@Override
+	public List<DayOff> selectAdminDayoffAll(){
+		return dao.selectAdminDayoffAll(session);
+	}
+	@Override
+	public int adminResetAll() {
+		return dao.adminResetAll(session);
+	}
+
+	@Override
+	public List<DayOff> searchDayoffAdmin(Map<String, String> dayoffParam) {
+		return dao.searchDayoffAdmin(session, dayoffParam);
+	}
+
+
 	
+	
+	
+//-------------출장------------------
+	 //출장 리스트 출력
+	@Override
+	public List<Edms> selectBusinessTrip(int no) {
+		return dao.selectBusinessTrip(session, no);
+	}
+
+	@Override
+	public int BusinessTripCount(int no) {
+		return dao.BusinessTripCount(session, no);
+	}
+
+	//출장삭제
+	@Override
+	public int deleteBusinessTrip(int btNo) {
+		return dao.deleteBusinessTrip(session, btNo);
+	}
+	
+
 
 }

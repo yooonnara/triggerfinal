@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -35,7 +36,7 @@
                     <div class="businessTripList-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
                         <!-- 출장신청 개수 -->
                         <p class="ml-2">출장신청  
-                        	<strong style="color:blue">10</strong>
+                        	<strong style="color:blue"> ${count} </strong>
                         </p>
                     </div>
                         <!-- 사용 내역 테이블 -->
@@ -44,91 +45,62 @@
                                 <col style="width:70px">
                                 <col style="width:70px">
                                 <col style="width:80px">
-                                <col style="width:90px">
                                 <col style="width:120px">
-                                <col style="width:80px">
+                                <col style="width:120px">
                                 <col style="width:80px">
                                 <col style="width:100px">
                             </colgroup>
                             <thead class="bg-primary">
                                 <tr>
-                                    <th>NO.</th>
                                     <th>이름</th>
                                     <th>소속</th>
-                                    <th>등록일</th>
-                                    <th>휴가 사용 기간</th>
+                                    <th>신청일</th>
+                                    <th>출장 기간</th>
                                     <th>제목</th>
                                     <th>진행상황</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
+                            <c:if test="${not empty edms }">
+                            	<c:forEach var="e" items="${edms }">
                                 <tr>
-                                    <td>25</td>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>2023-07-02</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>출장 신청</td>
-                                    <td>대기</td>
+                                    <td>${e.emp.name }</td>
+                                    <td>${e.emp.deptTitle }</td>
+                                    <td>${e.createDate }</td>
+                                    <td>${e.startDate} ~ ${e.endDate}</td>
+                                    <td>${e.title }</td>
                                     <td>
-                                    <a href="#" data-toggle="modal" data-target="#cancelModal" class="btn btn-sm border-warning" id="ccbtn"> 취소 </a>
+                                    	<c:if test="${e.appStatus == '0'}">결재 대기</c:if>
+                                    	<c:if test="${e.appStatus == '1'}">승인</c:if>
+                                    	<c:if test="${e.appStatus == '2'}">반려</c:if>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>25</td>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>2023-07-02</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>출장 신청</td>
-                                    <td>대기</td>
+                                    <c:if test="${e.appStatus == '0' }">
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#cancelModal" class="btn btn-sm border-warning" id="ccbtn"> 취소 </a>
+                                    <a href="#" data-toggle="modal" class="btn btn-sm border-warning" 
+                                    id="ccbtn" onclick="cancelBtn(${e.no});"> 취소 </a>
                                     </td>
+                                    </c:if>
+                                    <c:if test="${e.appStatus != '0' }">
+                                    <td></td>
+                                    </c:if>
                                 </tr>
-                                <tr>
-                                    <td>25</td>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>2023-07-02</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>출장 신청</td>
-                                    <td>대기</td>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target="#cancelModal" class="btn btn-sm border-warning" id="ccbtn"> 취소 </a>
-                                    </td>
-                                </tr>
+                                </c:forEach>
+                           	</c:if>     
                             </tbody>
                         </table>
-                        <!-- 페이징 -->
-                        <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
                 </div>
+                <script>
+                	function cancelBtn(no){
+                		if(confirm("출장신청을 삭제하시겠습니까?")){
+                			console.log(no);
+                			location.href = '/deleteBT?btNo=' + no;
+                		}
+                	}
+                </script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 				<!-- 출장신청 삭제 모달-->
-                <div id="cancel-businessTrip">
+                <!-- <div id="cancel-businessTrip">
                     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -137,13 +109,13 @@
                                     <p><br>출장신청을 삭제하시겠습니까?<br></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="btn btn-primary" href="#">확인</a>
+                                    <a class="btn btn-primary">확인</a>
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 			</div>
 
 

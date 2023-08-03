@@ -1,6 +1,5 @@
 package com.tr.join.attendance.controller;
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,12 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
-import com.tr.join.attendance.model.vo.Edsm;
 import com.tr.join.common.PageFactory;
+import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.vo.Employee;
 
 import lombok.extern.slf4j.Slf4j;
@@ -78,13 +78,17 @@ public class AttendanceController {
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 List<Attendance> attendanceInfo = service.workCalendarAttendance(loginNo.getNo());
-		 List<Edsm> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
-		 List<Edsm> tripInfo = service.workCalendarTrip(loginNo.getNo());
+			/*
+			 * List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
+			 * List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
+			 */
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
-		 calendarParam.put("dayoffInfo",dayoffInfo);
-		 calendarParam.put("tripInfo",tripInfo);
+			/*
+			 * calendarParam.put("dayoffInfo",dayoffInfo);
+			 * calendarParam.put("tripInfo",tripInfo);
+			 */
 		 
 		// System.out.println(calendarParam);
 		 return calendarParam;
@@ -127,39 +131,53 @@ public class AttendanceController {
 		  m.addAttribute("totalData",totalData);
 		  
 		  System.out.println(wt);
-		  System.out.println(totalData);
+		  //System.out.println(totalData);
 		  return "attendance/workTimeList";
 		  
 	  }
 	  
 	  
-	  //ajax 근태 리스트
+	  //ajax 근태 상태 검색
 	  @GetMapping("/ajaxworkTime")
 	  @ResponseBody 
 	  public List<Attendance> searchWorkTimeByStatus(int searchNum) {
 		  
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
-		  Map<String,Object> ajaxParam=new HashMap(); //Map 생성
+		  Map<String,Object> ajaxParam=new HashMap(); 
 		  ajaxParam.put("searchNum",searchNum); 
 		  ajaxParam.put("loginNo",loginNo.getNo()); 
-		List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
+		  List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
 		  
-		  System.out.println(wtajax);
+		  //System.out.println(wtajax);
 		  
 		  return wtajax;
+	  }
+	  
+	  //ajax 근태 (시작일~종료일)기간 검색
+	  @GetMapping("/ajaxworkTimeSearch")
+	  @ResponseBody
+	  public List<Attendance> ajaxworkTimeByDate(String startDate, String endDate){
+		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 List<Attendance> wkDate = service.ajaxworkTimeByDate(Map.of("startDate",startDate,"endDate",endDate,"loginNo",loginNo.getNo()));
+		 
+		 System.out.println(wkDate);
+		 
+		 return wkDate;
 	  }
 	  
 	  
 	  
 	  
-	  //안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!
-	  //아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
+	  
+	  
+	  
+//안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
 	  
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
 	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
-										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+										@RequestParam(value="numPerpage", defaultValue="10") int numPerpage, 
 										Model m) {
 		  
 		  List<Attendance> att=service.selectAttendanceAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
@@ -175,35 +193,100 @@ public class AttendanceController {
 	  
 	  
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
 //-----------------------연차 관리-------------------------------
 	  
 	  
 	  
-	  @RequestMapping("/dayoffList")
-	  @ResponseBody
+	  @GetMapping("/dayoffList")
 	  public String selectDayoffAll(Model m) {
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
 		  List<DayOff> dayoff = service.selectDayoffAll(loginNo.getNo());
 		  
 		  m.addAttribute("dayoff",dayoff);
-		  
 		  System.out.println(m);
 		  
-		  return "attendance/dayoffList";
+		 return "attendance/dayoffList";
 	  }
+	  
+	  //연차 관리자
+	  @GetMapping("/adminDayoff")
+	  public String selectAdminDayoffAll(Model m) {
+
+		  List<DayOff> dayoff = service.selectAdminDayoffAll();
+		  m.addAttribute("adminDayoff",dayoff);
+		  //System.out.println(m);
+		  
+		  return "admin/adminDayoff";
+	  }
+	  
+	  //연차 전체 사원 리셋
+	  @RequestMapping("/amdin/adminResetAll")
+	  public ModelAndView adminResetAll(ModelAndView mv) {
+		  
+		  int result = service.adminResetAll();
+		  System.out.println(result);
+		  mv.setViewName("redirect:/adminDayoff");
+		  
+		  return mv;
+	  }
+	  
+	  //연차 이름,직급별 검색
+	  @RequestMapping("/attendance/searchDayoffAdmin")
+	  @ResponseBody
+	  public List<DayOff> searchDayoffAdmin(@RequestParam Map<String,String> dayoffParam){
+		  List<DayOff> df = service.searchDayoffAdmin(dayoffParam);
+		  System.out.println(df);
+		  return df;
+	  }
+	  
+	  
+	  
+//----------출장-----------------
+	  
+	  @GetMapping("/businessTripList")
+	  public String selectBusinessTrip(Model m) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<Edms> edms = service.selectBusinessTrip(loginNo.getNo());
+		  int count = service.BusinessTripCount(loginNo.getNo());
+				
+		  m.addAttribute("edms",edms);
+		  m.addAttribute("count",count);
+		  System.out.println(m);
+		  
+		 return "attendance/businessTripList";
+	  }
+	  
+	  @RequestMapping("/deleteBT")
+	  public String deleteBusinessTrip(int btNo) {
+		  int result = service.deleteBusinessTrip(btNo);
+		  System.out.println(result);
+		  return "redirect:/businessTripList";
+		  
+		  
+		  
+	  }
+	  
+	  
+//	  @RequestMapping("/attendance/cancelBusinessTrip")
+//	  public ModelAndView cancelBusinessTrip(ModelAndView mv) {
+//		  int result = service.cancelBusinessTrip(int no);
+//		  System.out.println(result);
+//		  
+//		  mv.setViewName("redirect:/businessTrip");
+//		  
+//		  return mv;
+//		  
+//	  }
+	  
+		
+	  
+	  
+	  
+	  
+	  
+
 
 	
 	
@@ -220,15 +303,17 @@ public class AttendanceController {
 	public String workTimeList() {
 		return "attendance/workTimeList";
 }
-	@GetMapping("/dayoffList")
-	public String dayoffList() {
-		return "attendance/dayoffList";
-}
+	
 
-	@GetMapping("/businessTripList")
-	public String businessTripList() {
-		return "attendance/businessTripList";
-}
+//	@GetMapping("/businessTripList")
+//	public String businessTripList() {
+//		return "attendance/businessTripList";
+//}
+	
+//	//@GetMapping("/dayoffList")
+//	public String dayoffList() {
+//		return "attendance/dayoffList";
+//}
 	
 	
 /*----------------------관리자 페이지----------------------*/
@@ -237,10 +322,7 @@ public class AttendanceController {
 	public String adminWorkTime() {
 		return "admin/adminWorkTime";
 }
-	@GetMapping("/adminDayoff")
-	public String adminDayoff() {
-		return "admin/adminDayoff";
-}
+
 	
 	@GetMapping("/adminBusinessTrip")
 	public String adminBusinessTrip() {

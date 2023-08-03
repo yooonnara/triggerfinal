@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -30,26 +31,28 @@
 
 				<!-- 수정할 컨테이너 Begin Page Content -->
 				 <div class="container-fluid">
-
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 ml-4">연차 현황</h1>
 
                     <div class="dayOffCounting-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
                         <!-- 오늘 날짜 -->
-                        <h3 class="row justify-content-center text-dark font-weight-bold mb-5" id="toDate"></h3>
+                        <h3 class="row justify-content-center text-dark font-weight-bold mb-5">2023-07-21</h3>
                         <!-- 사용 내역 테이블 -->
                         <div class="row justify-content-center" id="mineCountingTable">
                             <table class="border border-dark col-5 text-center bg-white">
                                     <tr>
-                                        <td rowspan="2" class="font-weight-bold border-dark border-right">김땅땅대리</td>
+                                        <td rowspan="2" class="font-weight-bold border-dark border-right">${dayoff.get(0).emp.name} ${dayoff.get(0).emp.jobTitle}</td>
                                         <td class="border-dark border-right ">발생 연차</td> 
                                         <td class="border-dark border-right">사용 연차</td>
                                         <td class="border-dark border-right">잔여 연차</td>
                                     </tr>
-                                    <tr>
-                                        <td class="border-dark border-right" id="df-num">3</td>
-                                        <td class="border-dark border-right" id="df-num">2</td>
-                                        <td class="border-dark border-right" id="df-num">1</td>
+                                        <td class="border-dark border-right" id="df-num">${dayoff.get(0).totalDoCount }</td>
+                                        <td class="border-dark border-right" id="df-num">${dayoff.get(0).usedDoCount }</td>
+                                        <td class="border-dark border-right" id="df-num">
+                                        ${dayoff.get(0).remainDoCount }
+                                     <%--    <c:if test=" ${dayoff.get(0).remainDoCount <= 0 }">0</c:if>
+                                    	<c:if test=" ${dayoff.get(0).remainDoCount > 0 }">${dayoff.get(0).remainDoCount }</c:if> --%>
+                                        </td>
                                     </tr>
                             </table>
                         </div>
@@ -70,30 +73,37 @@
                                 <col style="width:85px">
                                 <col style="width:85px">
                                 <col style="width:85px">
-                                <col style="width:220px">
-                                <col style="width:85px">
-                                <col style="width:200px">
+                                <col style="width:120px">
+                                 <col style="width:85px">
+                                <col style="width:100px">
                             </colgroup>
                             <thead class="bg-primary  text-white">
                                 <tr>
                                     <th>이름</th>
                                     <th>부서명</th>
-                                    <th>휴가 종류</th>
-                                    <th>연차 사용 기간</th>
+                                    <th>종류</th>
+                                    <th>연차 기간</th>
                                     <th>사용 연차</th>
                                     <th>결재 현황</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
+                            <c:if test="${not empty dayoff }">
+                            <c:forEach var="d" items="${dayoff }">
                                 <tr>
-                                    <td>김땅땅</td>
-                                    <td>홍보 2팀</td>
-                                    <td>결혼</td>
-                                    <td>2023-07-19 ~ 2023-07-20</td>
-                                    <td>${dayoff.year}</td>
-                                    <td>승인</td>
+                                    <td>${d.emp.name }</td>
+                                    <td>${d.emp.deptTitle}</td>
+                                    <td>${d.edms.detailType}</td>
+                                    <td>${d.edms.startDate } ~ ${d.edms.endDate }</td>
+                                    <td>${d.usingDate }</td>
+                                    <td>
+                                    	<c:if test="${d.edms.appStatus == '0'}">결재 대기</c:if>
+                                    	<c:if test="${d.edms.appStatus == '1'}">승인</c:if>
+                                    	<c:if test="${d.edms.appStatus == '2'}">반려</c:if>
+                                    </td>
                                 </tr>
-                         
+                               </c:forEach>
+                             </c:if>
                             </tbody>
                         </table>
                     </div>
@@ -125,20 +135,6 @@
                 </div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
-			
-			<!-- 오늘 날짜와 시간 출력 -->
-		   <script>
-		        $(function(){
-		            var today = new Date();
-		            var year = today.getFullYear();
-		            var month = ('0' + (today.getMonth() + 1)).slice(-2);
-		            var day = ('0' + today.getDate()).slice(-2);
-		            var week = new Array('일', '월', '화', '수', '목', '금', '토');
-
-		            var mainDate = year + "-" + month + "-" + day
-		            $("#toDate").text(mainDate);
-		        })
-		    </script>
 
 
 			<!-- Footer -->
