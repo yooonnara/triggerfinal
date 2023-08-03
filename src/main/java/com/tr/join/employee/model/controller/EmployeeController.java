@@ -52,6 +52,20 @@ public class EmployeeController {
 		return "redirect:/mypage";
 	}
 	
+	// 비밀번호 변경 페이지
+	@GetMapping("/mypagePassword")
+	public String mypagePassword(){
+		// 로그인한 현재 유저 정보 (세션에 저장)
+		Employee loginEmp =(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    
+		return "mypage/updatePassword";
+	}
+	
+	// 비밀번호 수정하기
+	@GetMapping("/updatePassword")
+	public String updatePassword() { 
+		return "redirect:/mypagePassword";
+	}
 		
 	
 	@GetMapping("/logout")

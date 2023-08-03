@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -94,10 +93,10 @@ public class AdminEmployeeController {
 	}
 	
 	
-	// 마지막 값을 가져오고.
-	// 앞에 있는 J 를 날려
+	// 마지막 값을 가져오고
+	// 앞에 있는 J 를 지우기
 	// 그리고 남은 숫자를 INT로 변환
-	// 변환된 숫자를 +1 해
+	// 변환된 숫자를 +1
 	// 100 미만이면 0+숫자를 스트링으로
 	// 10 미만이면 00 + 숫자를 스트링으로 0** 형식을 만들고
 	// J를 붙여서 RETURN 해줌
@@ -105,7 +104,7 @@ public class AdminEmployeeController {
 	@ResponseBody
 	public String makeEmpNum() {
 		String lastEmpNum = service.makeEmpNum(); // 마지막 값 가져오기 => 쿼리를 통해서 가져와라
-		lastEmpNum = lastEmpNum.substring(1); // 첫번째값(J) 버려
+		lastEmpNum = lastEmpNum.substring(1); // 첫번째값(J) 지우기
 		String empNum = "";
 		try{
             int tmp = Integer.parseInt(lastEmpNum); // 첫번째 값 버린 숫자를 int로 변환

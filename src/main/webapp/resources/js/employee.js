@@ -46,6 +46,22 @@ function checkId(str){
 	
 }
 
+// 현재 비밀번호와 일치 여부 확인 (비밀번호 변경 시)
+/*function checkCPwd(str){
+	if(str != ''){
+		if($('#pwd1').val() != str){
+			$('.cPwd-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호를 확인해 주세요.');
+			return false;
+		} else {
+			$('.cPwd-msg').removeClass('text-danger').addClass('text-primary').text('현재 비밀번호와 일치합니다.');
+		}
+	}
+	
+}*/
+
+
+
+
 // 비밀번호 사용 가능 여부
 function checkPwd1(str){
 	let regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,16}$/

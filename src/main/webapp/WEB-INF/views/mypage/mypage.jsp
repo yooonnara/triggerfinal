@@ -32,13 +32,13 @@
 				<div class="container-fluid pl-5 pr-5">
 
 					<!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark mt-5 mb-5">내 정보 수정</h1>
+					<h1 class="h3 text-dark mt-5 mb-5">기본정보 수정</h1>
 
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
 							<form class="user" name="myPagefrm" id="myPagefrm" action="${path }/updateEmployee" method="post">
-								<table class="table-sm mt-5 mb-5">
+								<table class="table mt-5 mb-5 text-dark table-borderless">
 									<tbody class="text-left">
 										<tr class="text-center">
 											<td colspan='2'>
@@ -52,59 +52,43 @@
 											</td>
 										</tr>
 										<tr>
-											<td>사번</td>
+											<td class="align-middle">사번</td>
 											<td>
 												<input id="emp_num" class="form-control ml-5" type="text" value="${empInfo.empNum}" readonly>
 											</td>
 										</tr>
 										<tr>
-											<td>이름(한글)</td>
+											<td class="align-middle">이름(한글)</td>
 											<td>
 												<input id="emp_name" class="form-control ml-5" type="text" value="${empInfo.name}" readonly>
 											</td>
 										</tr>
 										<tr>
-											<td>아이디</td>
+											<td class="align-middle">아이디</td>
 											<td>
 												<input id="emp_id" name="emp_id" class="form-control ml-5" type="text" value="${empInfo.id}" readonly>
 											</td>
 										</tr>
 										<tr>
-											<td>비밀번호</td>
-											<td>
-												<input onKeyup="checkPwd1(this.value)" onclick="checkPwd1(this.value)" type="password" 
-													class="form-control ml-5" name="pwd1" id="pwd1">
-												<span class="pwd1-msg small text-danger ml-5"></span>
-											</td>
-										</tr>
-										<tr>
-											<td>비밀번호 확인</td>
-											<td>
-												<input onKeyup="checkPwd2(this.value)" onclick="checkPwd2(this.value)" type="password" 
-													class="form-control ml-5" name="pwd2" id="pwd2">
-												<span class="pwd2-msg small text-danger ml-5"></span>
-											</td>
-										</tr>
-										<tr>
-											<td>입사일</td>
+											<td class="align-middle">입사일</td>
 											<td>
 												<input id="enroll_date" class="form-control ml-5" type="date" value="${empInfo.enrollDate}" readonly>
 											</td>
 										</tr>
 										<tr>
-											<td>부서</td>
+											<td class="align-middle">부서</td>
 											<td>
 											<input id="dept" class="form-control ml-5" type="text" value="${empInfo.deptTitle}" readonly>
 											</td>
 										</tr>
 										<tr>
-											<td>직급</td>
+											<td class="align-middle">직급</td>
 											<td>
 												<input id="Job" class="form-control ml-5" type="text" value="${empInfo.jobTitle}" readonly>
 											</td>
 										</tr>
 										<tr>
-											<td>이메일</td>
+											<td class="align-middle">이메일</td>
 											<td>
 												<input onKeyup="checkEmail(this.value)" type="email" 
 														class="form-control ml-5" name="email" id="email" value="${empInfo.email}">
@@ -112,7 +96,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>전화번호</td>
+											<td class="align-middle">전화번호</td>
 											<td>
 												<input onKeyup="checkPhone(this.value)" type="text" value="${empInfo.phone}"
 														class="form-control ml-5" name="phone" id="phone" placeholder="- 없이 입력" value="">
@@ -163,18 +147,6 @@ $(".profile_img").on('click', function() {
 
 //저장 버튼 눌렀을 때 값 전체 검사
 function checkMyPageFrm(){
-	
-	// 비밀번호
-	if(checkPwd1($("#pwd1").val()) == false){
-		$("#pwd1").focus();
-		return false;
-	}
-	
-	// 비밀번호 확인
-	if(checkPwd2($("#pwd2").val()) == false){
-		$("#pwd2").focus();
-		return false;
-	}
 	
 	// 이메일
 	if(checkEmail($("#email").val()) == false){
