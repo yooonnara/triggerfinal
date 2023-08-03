@@ -106,11 +106,12 @@ public class EdmsController {
 	
 		@GetMapping("/bsnList")
 		public String selectBsnAll(@RequestParam(value="cPage", defaultValue="1") int cPage,
-									@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
+					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
 			List<Edms> list=service.selectBsnAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 			int totalData=service.selectEdmsCount();
-			
+			//페이징처리 
 			m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "/bsnList"));
+			m.addAttribute("totalData",totalData);
 			m.addAttribute("edms",list);
 			list.forEach(System.out::println);
 			System.out.println(m);
