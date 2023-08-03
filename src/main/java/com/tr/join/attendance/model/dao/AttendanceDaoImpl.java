@@ -135,12 +135,17 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		return session.selectList("attendance.searchDayoffAdmin",dayoffParam);
 	}
 
-	
+	@Override
+	public int insertDayoff(SqlSession session, Map param) {
+		return session.update("attendance.insertDayoff",param);
+	}
 	
 	 
 	 
 //------------출장--------------
 	
+	
+
 	@Override
 	public List<Edms> selectBusinessTrip(SqlSession session, int no) {
 		return session.selectList("attendance.selectBusinessTrip",no);

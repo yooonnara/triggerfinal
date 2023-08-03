@@ -49,7 +49,7 @@ public interface AttendanceService {
 	int adminResetAll();
 	int adminCheckReset(DayOff d);
 	List<DayOff> searchDayoffAdmin(Map<String,String> dayoffParam);
-	
+	int insertDayoff(Map param);
 	
 //-----------출장-------------------------
 	List<Edms> selectBusinessTrip(int no);

@@ -154,11 +154,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.searchDayoffAdmin(session, dayoffParam);
 	}
 
+	@Override
+		public int insertDayoff(Map param) {
+			return dao.insertDayoff(session, param);
+		}
 
-	
-	
-	
-//-------------출장------------------
+	//-------------출장------------------
 	 //출장 리스트 출력
 	@Override
 	public List<Edms> selectBusinessTrip(int no) {

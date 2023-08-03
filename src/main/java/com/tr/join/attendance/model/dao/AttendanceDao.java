@@ -48,7 +48,7 @@ public interface AttendanceDao {
 	 int adminResetAll(SqlSession session);
 	 int adminCheckReset(SqlSession session, DayOff d);
 	 List<DayOff> searchDayoffAdmin(SqlSession session, Map<String,String> dayoffParam);
-
+	 int insertDayoff(SqlSession session, Map param);
 
 //---------------출장
 	 List<Edms> selectBusinessTrip(SqlSession session, int no);

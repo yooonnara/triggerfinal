@@ -36,8 +36,11 @@
 }
 
 
-#dayOffTable{
-    margin-left:50px;
+
+#inputSize{
+	border-radius:6px;
+	 width:80px;
+	
 }
 
 #dayOffTable td{

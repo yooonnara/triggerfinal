@@ -216,7 +216,7 @@ public class AttendanceController {
 
 		  List<DayOff> dayoff = service.selectAdminDayoffAll();
 		  m.addAttribute("adminDayoff",dayoff);
-		  System.out.println(m);
+		  //System.out.println(m);
 		  
 		  return "admin/adminDayoff";
 	  }
@@ -244,6 +244,15 @@ public class AttendanceController {
 		  }
 		  
 		  return result> 0 ? "success" : "fail";
+	  }
+	  
+	  //연차 부여
+	  @RequestMapping("/admin/insertDayoff")
+	  public String insertDayoff(@RequestParam Map param) {
+		  System.out.println(param);
+		  int result = service.insertDayoff(param);
+		  
+		  return "redirect:/adminDayoff";
 	  }
 	  
 	  
