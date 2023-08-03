@@ -42,7 +42,7 @@ public class AdminEmployeeController {
 	// 멤버 통합관리
 	@GetMapping("/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
-									@RequestParam(value = "numPerpage", defaultValue = "5") int numPerpage, 
+									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
 									Model md) {
 		List<Employee> employees = service.selectEmployeeAll(Map.of("cPage", cPage, "numPerpage", numPerpage));
 		int totalData = service.selectEmployeeCount(); // 전체사원수

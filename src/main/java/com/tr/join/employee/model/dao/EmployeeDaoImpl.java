@@ -1,7 +1,8 @@
 package com.tr.join.employee.model.dao;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.tr.join.employee.model.vo.Employee;
@@ -13,6 +14,12 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public Employee selectEmployeeById(SqlSessionTemplate session, String id) {
 		return session.selectOne("employee.selectEmployeeById", id);
 	}
+
+	@Override
+	public int updateEmployee(SqlSessionTemplate session, Map param) {
+		return session.update("employee.updateEmployee", param);
+	}
+	
 	
 	
 }

@@ -113,11 +113,11 @@
 		                                        <td>${e.email}</td>
 		                                        <td>
 													<c:if test="${e.accStatus == 1 }">정상</c:if>
-        											<c:if test="${e.accStatus > 1 }">중지</c:if> 
+        											<c:if test="${e.accStatus == 2 }">중지</c:if> 
 		                                        </td>
 		                                        <td>
 		                                        	<c:if test="${e.type == 1 }">N</c:if>
-      												<c:if test="${e.type > 1 }">Y</c:if>
+      												<c:if test="${e.type == 2 }">Y</c:if>
 		                                        </td>
 		                                    </tr>
 		                                    <c:set var="pageStartRowNum" value="${pageStartRowNum-1}" ></c:set>

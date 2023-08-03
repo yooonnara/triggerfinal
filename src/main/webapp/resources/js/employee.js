@@ -91,22 +91,49 @@ function checkAccStatus(str){
 	}
 }
 
-//입사일
+// 입사일
+function checkEnrollDate(str){
+	if ($('#enroll_date').val() == ''){
+		$(".enroll-date-msg").show();
+		$("#enroll_date").focus();
+		return false;
+	} else {
+		$(".enroll-date-msg").hide();
+	}
+}
 
 // 퇴사일
+/*function checkEnrollDate(str){
+	if ($('#enroll_date').val() == ''){
+		$(".enroll-date-msg").show();
+		$("#enroll_date").focus();
+		return false;
+	} else {
+		$(".enroll-date-msg").hide();
+	}
+}*/
 
 // 부서
-/* function checkDept(str){
-	if (!$('option').is(":checked")){
+function checkDept(str){
+	if ($('#dept').val() == ''){
 		$(".dept-msg").show();
-		$('select').focus();
+		$("#dept").focus();
 		return false;
 	} else {
 		$(".dept-msg").hide();
 	}
-} */
+}
 
 // 직급
+function checkJob(str){
+	if ($('#job').val() == ''){
+		$(".job-msg").show();
+		$("#job").focus();
+		return false;
+	} else {
+		$(".job-msg").hide();
+	}
+}
 
 // 관리자여부
 function checkAccType(str){
