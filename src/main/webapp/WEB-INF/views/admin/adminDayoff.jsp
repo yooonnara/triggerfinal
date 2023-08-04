@@ -40,26 +40,54 @@
                     <div class="row justify-content-between" id="big-search" >
                     
                         <!-- 사원명 부서명 검색 버튼 -->
-                        <form class="float-left mb-3 col-5" id="dayOffSearch">
+                        <div class="float-left mb-3 col-5" id="dayOffSearch">
                         	<input type="text" placeholder="사원명" id="searchEmp" name="name">
                             <input type="text" id="searchDep" placeholder="부서명" name="dept">    
-                            <button class="btn btn-dark btn-sm searchDF" onclick="searchdata();">검색</button>
-                    	</form>                
+                            <button class="btn btn-dark btn-sm searchDF">검색</button>
+                    	</div>                
                         <script>
-                        	function searchdata(){
-                        		const data=$("#dayOffSearch>input").serialize();
-                        		console.log(data);
-                        			$.ajax({
-                        			url:"${path}/attendance/searchDayoffAdmin",
-                        			data: data,
-                        			success:function(data){
-                        				console.log(data);
-                        			},
-                        			error:function(){
-    									console.log("ajax통신 실패");
-    								}
-                        		}) 
-                        	}
+                        	$("#dayOffSearch button").click(e=>{
+                        		$.ajax({
+                       				url:"/ajaxDfSearch",
+                       				data:{
+                       					searchEmp:$("#dayOffSearch input[id=searchEmp]").val(),
+                       					searchDep:$("#dayOffSearch input[id=searchDep]").val()
+                       				},
+                       				success:function(df){
+                       					console.log(df[0]);
+                       					$("#dftable").html("");
+                       					for(let i=0;i<df.length;i++){
+                       						const $tr = $("<tr>");
+                       						const $td = $("<td>");
+                       						const $name = $("<td>").text(df[i]["emp"]["name"]);
+                       						const $deptTitle = $("<td>").text(df[i]["emp"]["deptTitle"]);
+                       						const $enrollDate = $("<td>").text(df[i]["emp"]["enrollDate"]);
+                       						/* let resignDate="";
+                       						const 
+						                     if (df[i]["emp"]["resignDate"] == null){
+						                       	resingDate.text("0") ;
+						                    }else{
+						                    	resignDate.text(df[i]["emp"]["resignDate"]);
+						                    } */
+						                   
+                       						//const $resignDate = $("<td>").text(resignDate);
+                       						const $resignDate = $("<td>").text(df[i]["emp"]["resignDate"]);
+                       						const $total =  $("<td>").text(df[i]["totalDoCount"]);
+                       						const $used =  $("<td>").text(df[i]["usedDoCount"]);
+                       						const $remain =  $("<td>").text(df[i]["remainDoCount"]);
+                       						
+                       						
+                       						$tr.append($tr).append($td).append($name).append($deptTitle).append($enrollDate).append($resignDate).append($total).append($used).append($remain);
+                       						
+                       						$("#dftable").append($tr);
+                       					}
+                       				},
+                       				error:function(){
+                						console.log("ajax 통신 실패");
+                					}
+                        	})
+                        })
+                        	
                         </script>
                         
                          <!-- 연차부여 버튼 -->
@@ -148,7 +176,7 @@
                                     <th>잔여 연차</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <tbody class="bg-white" id="dftable">
 	                            <c:if test="${not empty adminDayoff }">
 	                            <c:forEach var="ad" items="${adminDayoff }">
                                 <tr>

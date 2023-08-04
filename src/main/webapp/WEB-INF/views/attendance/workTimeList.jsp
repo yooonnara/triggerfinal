@@ -97,15 +97,9 @@
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
 		  				<!-- datepicker -->
 						<script>	
 			                $(function(){
-			                    
 			                    
 			                    $("#datepicker1").datepicker({
 			                        changeMonth: true, 

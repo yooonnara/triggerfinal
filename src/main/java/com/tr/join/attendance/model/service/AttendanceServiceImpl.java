@@ -145,9 +145,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.adminCheckReset(session, d);
 	}
 
+
 	@Override
-	public List<DayOff> searchDayoffAdmin(Map<String, String> dayoffParam) {
-		return dao.searchDayoffAdmin(session, dayoffParam);
+	public List<DayOff> ajaxDfSearch(Map<String, String> dfSearch) {
+		return dao.ajaxDfSearch(session, dfSearch);
 	}
 
 	@Override
@@ -182,7 +183,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<Edms> checkCancelList(Map<String, Object> cancelParam) {
 		return dao.checkCancelList(session, cancelParam);
 	}
-	
 
+	@Override
+	public List<Edms> ajaxBtSearch(Map<String, Object> btSearch) {
+		return dao.ajaxBtSearch(session, btSearch);
+	}
+	
+	
 
 }

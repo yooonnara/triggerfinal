@@ -44,7 +44,7 @@ public interface AttendanceDao {
 	 List<DayOff> selectAdminDayoffAll(SqlSession session);
 	 int adminResetAll(SqlSession session);
 	 int adminCheckReset(SqlSession session, DayOff d);
-	 List<DayOff> searchDayoffAdmin(SqlSession session, Map<String,String> dayoffParam);
+	 List<DayOff> ajaxDfSearch(SqlSession session, Map<String, String> dfSearch);
 	 int insertDayoff(SqlSession session, Map param);
 	 List<Edms> workCalendarDayoff(SqlSession session);
 
@@ -53,5 +53,6 @@ public interface AttendanceDao {
 	 int BusinessTripCount(SqlSession session, int no);
 	 int deleteBusinessTrip(SqlSession session, int btNo);
 	 List<Edms> checkCancelList(SqlSession session, Map<String,Object> cancelParam);
+	 List<Edms> ajaxBtSearch(SqlSession session, Map<String,Object> btSearch);
 
 }

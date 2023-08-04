@@ -165,7 +165,7 @@ public class AttendanceController {
 		 return wkDate;
 	  }
 	  
-	  
+
 	  
 	  
 	  
@@ -253,14 +253,18 @@ public class AttendanceController {
 		  return "redirect:/adminDayoff";
 	  }
 	  
-	  
-	  //연차 이름,직급별 검색
-	  @RequestMapping("/attendance/searchDayoffAdmin")
+	  //ajax 연차 사원명&부서명 검색
+	  @GetMapping("/ajaxDfSearch")
 	  @ResponseBody
-	  public List<DayOff> searchDayoffAdmin(@RequestParam Map<String,String> dayoffParam){
-		  List<DayOff> df = service.searchDayoffAdmin(dayoffParam);
-		  System.out.println(df);
-		  return df;
+	  public List<DayOff> ajaxDfSearch(String searchEmp, String searchDep){
+		  System.out.println(searchEmp);
+		  System.out.println(searchDep);
+		  
+		  List<DayOff> dfSearch = service.ajaxDfSearch(Map.of("searchEmp",searchEmp,"searchDep",searchDep));
+		  
+		  System.out.println(dfSearch);
+		  
+		  return dfSearch;
 	  }
 	  
 	  //전사 연차 일정 캘린더
@@ -325,9 +329,6 @@ public class AttendanceController {
 		  int result = service.deleteBusinessTrip(btNo);
 		  System.out.println(result);
 		  return "redirect:/businessTripList";
-		  
-		  
-		  
 	  }
 	  
 	  //ajax 출장 취소 내역 확인하기 
@@ -338,19 +339,29 @@ public class AttendanceController {
 		  
 		  Map<String, Object> cancelParam = new HashMap();
 		  cancelParam.put("loginNo",loginNo.getNo());
-		  
 		  List<Edms> edms = service.checkCancelList(cancelParam);
-		  
 		  System.out.println(edms);
 		  
 		  return edms;
 		  
 	  }
 		
+	  //관리자
+	  //ajax 출장 사원명&부서명 검색
+	  @GetMapping("/ajaxBtSearch")
+	  @ResponseBody
+	  public List<Edms> ajaxBtSearch(String searchEmp, String searchDep){
+		  System.out.println(searchEmp);
+		  System.out.println(searchDep);
+		  
+		  List<Edms> btSearch = service.ajaxBtSearch(Map.of("searchEmp",searchEmp,"searchDep",searchDep));
+		  
+		  System.out.println(btSearch);
+		  
+		  return btSearch;
+	  }
 	  
-	  
-	  
-	  
+
 	  
 
 

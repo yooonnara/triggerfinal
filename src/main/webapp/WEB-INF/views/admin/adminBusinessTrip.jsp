@@ -37,21 +37,56 @@
                     <div class="adminBusinessTrip-container "> 
                     <!-- 검색 & 조회 버튼 -->
                     <div class="row justify-content-between" id="big-search" >
+                    
                     	<!-- 사원명 부서명 검색 버튼 -->
-                        <div class="float-left mb-3 col-5" id="dayOffSearch ">
+                        <div class="float-left mb-3 col-5" id="BtSearch">
                             <label class="text-dark">사원명</label>
-                                <input type="text" class=" mr-1" id="searchEmp">
+                                <input type="text" class=" mr-1" name="searchEmp" id="searchEmp">
                             <label class="text-dark">부서명</label>
-                                <input type="text" id="searchDep">
-                                <button class="btn btn-dark btn-sm">검색</button>
+                                <input type="text" name="searchDep" id="searchDep">
+                            <button class="btn btn-dark btn-sm">검색</button>
                         </div>      
+                        
                         <!--조회 버튼 -->
                         <div class="float-right mb-4 mr-3 btn-member">
                             <a href="#" class="btn btn-dark btn-sm mr-2 ml-5">전체</a>
                             <a href="#" class="btn btn-dark btn-sm mr-2">결제 대기</a>
                             <a href="#" class="btn btn-dark btn-sm">승인</a>
                         </div>
-                                  
+                   	<script>
+                   		$("#BtSearch button").click(e=>{
+                   			$.ajax({
+                   				url:"/ajaxBtSearch",
+                   				data:{
+                   					searchEmp:$("#BtSearch input[name=searchEmp]").val(),
+                   					searchDep:$("#BtSearch input[name=searchDep]").val()
+                   				},
+                   				success:function(bt){
+                   					console.log(bt);
+                   					$("#btTable").html("");
+                   					for(let i=0;i<bt.length;i++){
+                   						const $tr = $("<tr>");
+                   						const $no = $("<td>").text(bt[i]["no"]);
+                   						const $empNo = $("<td>").text(bt[i]["empNo"]);
+                   						const $deptTitle = $("<td>").text(bt[i]["emp"]["deptTitle"]);
+                   						const $jobTitle = $("<td>").text(bt[i]["emp"]["jobTitle"]);
+                   						const $name = $("<td>").text(bt[i]["emp"]["name"]);
+                   						const $startDate = $("<td>").text(bt[i]["startDate"]).text("~").text(bt[i]["endDate"]);
+                   						const $title = $("<td>").text(bt[i]["title"]);
+                   						const $appStatus = $("<td>").text(bt[i]["appStatus"]);
+                   						$tr.append($no).append($empNo).append($deptTitle).append($jobTitle).append($name).append($startDate).append($title).append($appStatus);
+                   						
+                   						$("#btTable").append($tr);
+                   					}
+                   				},
+                   				error:function(){
+            						console.log("ajax 통신 실패");
+            					}
+                   			})
+                   		})
+                   	
+                   	
+                   	</script>               
                     </div>   
                     <!-- 사용 내역 테이블 -->
                     <div id="big-table">
@@ -66,7 +101,7 @@
                                 <col style="width:130px">
                                 <col style="width:80px">
                             </colgroup>
-                            <thead class="bg-dark text-white">
+                            <thead class="bg-dark text-white" >
                                 <tr>
                                     <th>문서번호</th>
                                     <th>사번</th>
@@ -78,7 +113,7 @@
                                     <th>진행상황</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <tbody class="bg-white"  id="btTable">
                                 <tr>
                                     <td>10</td>
                                     <td>121421</td>
