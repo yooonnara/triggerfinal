@@ -57,11 +57,6 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 	
 	@Override
-	public List<Edms> workCalendarDayoff(int no) {
-		return dao.workCalendarDayoff(session, no);
-	}
-
-	@Override
 	public List<Edms> workCalendarTrip(int no) {
 		return dao.workCalendarTrip(session, no);
 	}
@@ -159,6 +154,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 		public int insertDayoff(Map param) {
 			return dao.insertDayoff(session, param);
 		}
+	
+	@Override
+	public List<Edms> workCalendarDayoff() {
+		return dao.workCalendarDayoff(session);
+	}
 
 	//-------------출장------------------
 	 //출장 리스트 출력

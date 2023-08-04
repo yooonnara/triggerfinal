@@ -79,13 +79,13 @@ public class AttendanceController {
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 List<Attendance> attendanceInfo = service.workCalendarAttendance(loginNo.getNo());
-		 List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
+		 //List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
 		 List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
 			
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
-		 calendarParam.put("dayoffInfo",dayoffInfo);
+		 //calendarParam.put("dayoffInfo",dayoffInfo);
 		 calendarParam.put("tripInfo",tripInfo);
 			
 		 
@@ -263,7 +263,45 @@ public class AttendanceController {
 		  return df;
 	  }
 	  
+	  //전사 연차 일정 캘린더
+//	  @RequestMapping("/att/dayoffCalendar")
+//      @ResponseBody
+//      public Map<String, Object> dayoffCalendar() {
+//         List<Edms> dayoffInfo = service.workCalendarDayoff();
+//           
+//         Map<String,Object> cParam=new HashMap(); 
+//         cParam.put("dayoffInfo",dayoffInfo);
+//           
+//         System.out.println(dayoffInfo);
+//         return cParam;
+//      }
 	  
+	  
+	     @RequestMapping("/admin/adminDayoffCalendar")
+	       @ResponseBody
+	       public ModelAndView pageCalendar(ModelAndView m) {
+	          
+	          
+	         //m.addAttribute("dayoffData",cParam); //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
+	          m.setViewName("/admin/adminDayoffCalendar");
+	          
+	          return m;
+	       }
+	     
+	  
+	  @RequestMapping("/att/dayoffCalendar")
+	  @ResponseBody
+      public Map<String, Object> dayoffCalendar() {
+         List<Edms> dayoffInfo = service.workCalendarDayoff();
+           
+         Map<String,Object> cParam=new HashMap(); 
+         cParam.put("dayoffInfo",dayoffInfo);
+         System.out.println(cParam);
+         
+        //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
+         
+         return cParam;
+      }
 	  
 	  
 //----------출장-----------------
@@ -317,7 +355,10 @@ public class AttendanceController {
 
 
 	
-	
+		@GetMapping("/adminDayoffCalendar")
+		public String adminDayoffCalendar() {
+			return "admin/adminDayoffCalendar";
+	}
 	
 	
 	

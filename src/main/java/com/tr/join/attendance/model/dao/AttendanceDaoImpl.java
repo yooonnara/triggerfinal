@@ -34,11 +34,6 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 public List<Attendance> workCalendarAttendance(SqlSession session, int no){ 
 		 return session.selectList("attendance.workCalendarAttendance", no); 
 	}
-	 
-	 @Override
-		public List<Edms> workCalendarDayoff(SqlSession session, int no) {
-			return session.selectList("attendance.workCalendarDayoff", no);
-		}
 
 	@Override
 	public List<Edms> workCalendarTrip(SqlSession session, int no) {
@@ -142,10 +137,12 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		return session.update("attendance.insertDayoff",param);
 	}
 	
-	 
+	@Override
+	public List<Edms> workCalendarDayoff(SqlSession session) {
+		return session.selectList("attendance.workCalendarDayoff");
+	}	 
 	 
 //------------출장--------------
-	
 	
 
 	@Override

@@ -229,11 +229,11 @@
                             }//for문 끝
                             for(i=0; i<model.tripInfo.length;i++){
                                 calendar.addEvent({
-                                  title: "출장 " , 
-                                  start: model.tripInfo[i].startDate,
-                                  end: model.tripInfo[i].endDate,
-                                  color:'rgb(41, 128, 185)',
-                                  textColor:'rgb(255, 255, 255)'
+                                title: "출장 " , 
+                                start: model.tripInfo[i].startDate,
+                                end: model.tripInfo[i].endDate,
+                                color:'rgb(41, 128, 185)',
+                                textColor:'rgb(255, 255, 255)'
                                })
                           }
                       }, //success 닫기

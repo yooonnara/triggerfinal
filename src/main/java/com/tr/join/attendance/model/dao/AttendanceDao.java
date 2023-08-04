@@ -15,7 +15,6 @@ public interface AttendanceDao {
 	 int startInsertAttendance(SqlSession session, Map<String,Object> startTimeParam);
 	 int endInsertAttendance(SqlSession session, Map<String,Object> endTimeParam);
 	 List<Attendance> workCalendarAttendance(SqlSession session, int no);
-	 List<Edms> workCalendarDayoff(SqlSession session, int no);
 	 List<Edms> workCalendarTrip(SqlSession session, int no);
 	
 	 Attendance selectWeekWorkTime(SqlSession session, int no);
@@ -47,6 +46,7 @@ public interface AttendanceDao {
 	 int adminCheckReset(SqlSession session, DayOff d);
 	 List<DayOff> searchDayoffAdmin(SqlSession session, Map<String,String> dayoffParam);
 	 int insertDayoff(SqlSession session, Map param);
+	 List<Edms> workCalendarDayoff(SqlSession session);
 
 //---------------출장
 	 List<Edms> selectBusinessTrip(SqlSession session, int no);

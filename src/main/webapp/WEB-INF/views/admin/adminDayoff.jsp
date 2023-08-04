@@ -70,6 +70,16 @@
                                 class="btn btn-dark btn-sm">연차 조정</a>
                         </div>
                    </div>    
+                   
+                   <script>
+                   		function openCalendar(){
+                   			var url = "${path}/admin/adminDayoffCalendar"
+                   			var name = "adminDayoffCalendar"
+                   			var option = "width=1000, height=730, top=10, location=no"
+                   			window.open(url,name,option);
+                   		};
+                   </script>
+                   
                     
                     <script>
                     	
@@ -161,6 +171,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <button class="btn btn-secondary btn-sm mr-2" type="button" onclick="openCalendar();">캘린더 보기</button>
                         <!-- 페이징 -->
                         <div class="pasing-area">
                             <nav aria-label="Page navigation example">

@@ -16,7 +16,7 @@ public interface AttendanceService {
 	Attendance startInsertAttendance(Map<String,Object> startTimeParam);
 	Attendance endInsertAttendance(Map<String,Object> endTimeParam);
 	List<Attendance> workCalendarAttendance(int no);
-	List<Edms> workCalendarDayoff(int no);
+	//List<Edms> workCalendarDayoff(int no);
 	List<Edms> workCalendarTrip(int no);
 	
 	Attendance selectWeekWorkTime(int no);
@@ -49,7 +49,7 @@ public interface AttendanceService {
 	int adminCheckReset(DayOff d);
 	List<DayOff> searchDayoffAdmin(Map<String,String> dayoffParam);
 	int insertDayoff(Map param);
-	
+	List<Edms> workCalendarDayoff();
 //-----------출장-------------------------
 	List<Edms> selectBusinessTrip(int no);
 	int BusinessTripCount(int no);
