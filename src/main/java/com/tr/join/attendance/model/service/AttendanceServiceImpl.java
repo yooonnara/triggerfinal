@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tr.join.attendance.model.dao.AttendanceDao;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.attendance.model.vo.WorkTime;
 import com.tr.join.edms.model.vo.Edms;
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -107,8 +108,23 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.ajaxworkTimeByDate(session, ajSearchParam);
 	}
 	
+	//근태 상세 보기
+	@Override
+	public List<Attendance> workTimeDetail(Map<String,Object> wkParam) {
+		return dao.workTimeDetail(session, wkParam);
+	}
 	
+	//근태 출퇴근 수정 리스트
+	@Override
+	public List<WorkTime> selectWorkTimeModify(Map<String, Object> wkmParam) {
+		return dao.selectWorkTimeModify(session, wkmParam);
+	}
 	
+	//근태 출퇴근 수정
+	@Override
+	public int insertModifyStartTime(Map param) {
+		return dao.insertModifyStartTime(session, param);
+	}
 	
 	//관리자
 	@Override
@@ -121,9 +137,33 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectAttendanceCount(session);
 	}
 	
+	@Override
+	public List<WorkTime> adminWorkTimeModify() {
+		return dao.adminWorkTimeModify(session);
+	}
+
+	@Override
+	public List<WorkTime> adminWkDetail(Map<String, Object> param) {
+		return dao.adminWkDetail(session, param);
+	}
+
+	@Override
+	public int updateWtModify(WorkTime w) {
+		return dao.updateWtModify(session, w);
+	}
+	
+	@Override
+	public int adminModifyWorktimeSubmit(WorkTime w) {
+		return dao.adminModifyWorktimeSubmit(session, w);
+	}
+
 	
 	
 //-------------연차-----------------
+	
+	
+
+
 	
 	@Override
 	public List<DayOff> selectDayoffAll(int no){
@@ -182,6 +222,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Override
 	public List<Edms> checkCancelList(Map<String, Object> cancelParam) {
 		return dao.checkCancelList(session, cancelParam);
+	}
+	
+	@Override
+	public List<Edms> adminBusinessTrip() {
+		return dao.adminBusinessTrip(session);
 	}
 
 	@Override

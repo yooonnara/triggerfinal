@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.attendance.model.vo.WorkTime;
 import com.tr.join.edms.model.vo.Edms;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
@@ -86,11 +87,23 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectList("attendance.ajaxworkTimeByDate",ajSearchParam);
 	 }
 	 
+	 @Override
+	public List<Attendance> workTimeDetail(SqlSession session, Map<String,Object> wkParam) {
+		return session.selectList("attendance.workTimeDetail", wkParam);
+	}
 	 
-	 
-	 
-	 
-	 //근태 관리자
+
+	@Override
+	public List<WorkTime> selectWorkTimeModify(SqlSession session, Map<String, Object> wkmParam) {
+		return session.selectList("attendance.selectWorkTimeModify", wkmParam);
+	}
+	
+	@Override
+	public int insertModifyStartTime(SqlSession session, Map param) {
+		return session.insert("attendance.insertModifyStartTime",param);
+	}
+
+	//근태 관리자
 	 @Override
 	 public List<Attendance> selectAttendanceAll(SqlSession session, Map<String,Object> param){
 		 	//map 이기 때문에 
@@ -105,9 +118,32 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	 public int selectAttendanceCount(SqlSession session) {
 		 return session.selectOne("attendance.selectAttendanceCount");
 	 }
-//------------연차--------------
+	 @Override
+		public List<WorkTime> adminWorkTimeModify(SqlSession session) {
+			return session.selectList("attendance.adminWorkTimeModify");
+		}
 	 
 	 @Override
+		public List<WorkTime> adminWkDetail(SqlSession session, Map<String, Object> param) {
+			return session.selectList("attendance.adminWkDetail",param);
+		}
+	 
+		@Override
+		public int updateWtModify(SqlSession session, WorkTime w) {
+			return session.update("attendance.updateWtModify", w);
+		}
+		
+		@Override
+		public int adminModifyWorktimeSubmit(SqlSession session, WorkTime w) {
+			return session.update("attendance.adminModifyWorktimeSubmit", w);
+		}
+	 
+//------------연차--------------
+
+
+	
+
+	@Override
 	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
 		 return session.selectList("attendance.selectDayoffAll",no);
 	 }
@@ -166,6 +202,11 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	@Override
 	public List<Edms> checkCancelList(SqlSession session, Map<String, Object> cancelParam) {
 		return session.selectList("attendance.checkCancelList",cancelParam);
+	}
+
+	@Override
+	public List<Edms> adminBusinessTrip(SqlSession session) {
+		return session.selectList("attendance.adminBusinessTrip");
 	}
 
 	@Override

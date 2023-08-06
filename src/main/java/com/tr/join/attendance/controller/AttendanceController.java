@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.attendance.model.vo.WorkTime;
 import com.tr.join.common.PageFactory;
 import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.vo.Employee;
@@ -165,14 +168,45 @@ public class AttendanceController {
 		 return wkDate;
 	  }
 	  
+	  //근태 상세 정보
+	  @RequestMapping("workTimeDetail")
+	  @ResponseBody
+	  public List<Attendance> workTimeDetail(int attNo) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  Map<String,Object> wkParam=new HashMap(); 
+		  wkParam.put("loginNo",loginNo.getNo()); 
+		  wkParam.put("attNo",attNo);
+		  List<Attendance> at = service.workTimeDetail(wkParam);
+		  System.out.println(at);
+		  return at;
+	  }
+	  
+	  //근태 출퇴근 수정
+	  @RequestMapping("/workTimeModify")
+	  public ModelAndView workTimeModify(@RequestParam Map param, ModelAndView mv, HttpSession session) {
+		  System.out.println(param);
+		  int result = service.insertModifyStartTime(param);
+		  
+		  if(result>0) {
+			  session.setAttribute("alertMsg","와우");
+			  mv.setViewName("redirect:/wtModifyList");
+		  }
+		  return mv;
+	  }
+	  
+	  
+	  //근태 출퇴근 수정 리스트
+	  @RequestMapping("/wtModifyList")
+	  public String selectWorkTimeModify(Model m) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		 List<WorkTime> worktime = service.selectWorkTimeModify(Map.of("loginNo",loginNo.getNo()));
+		  m.addAttribute("worktime",worktime);
+		  System.out.println(m);
+		  return "attendance/workTimeModifyList";
+	  }
 
-	  
-	  
-	  
-	  
-	  
-//안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
-	  
+
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
 	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
@@ -185,10 +219,50 @@ public class AttendanceController {
 		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
 		  m.addAttribute("att",att);
 		  m.addAttribute("totalData",totalData);
-		  System.out.println(m);
+		  //System.out.println(m);
 		  
 		  return "admin/adminWorkTime";
 	  }
+	  
+	  
+	  //관리자 : 근태 출퇴근 수정 리스트 
+	  @RequestMapping("/adminWorkTimeModify")
+	  public String adminWorkTimeModify(Model m) {
+		 List<WorkTime> adminWk = service.adminWorkTimeModify();
+		 m.addAttribute("adminWk",adminWk);
+		 //System.out.println(m);
+		  return "admin/adminWorkTimeModify";
+	  }
+	  
+	  //관리자 : 근태 출퇴근 수정 상세 정보
+	  @RequestMapping("/adminWkDetail")
+	  @ResponseBody
+	  public List<WorkTime> adminWkDetail(int wtNo) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  Map<String,Object> param=new HashMap(); 
+		  param.put("wtNo",wtNo);
+		  List<WorkTime> at = service.adminWkDetail(param);
+		  //System.out.println(at);
+		  return at;
+	  }
+	  
+	  
+	  //관리자 : 근태 출퇴근 수정 승인
+	  @RequestMapping("/wtModifySubmit")
+	  public ModelAndView wtModifySubmit(WorkTime w, ModelAndView mv) {
+		  System.out.println(w);
+		  //승인 
+		  int result = service.updateWtModify(w);
+		  int result1 = service.adminModifyWorktimeSubmit(w);
+		  if(result>0) {
+			  mv.setViewName("redirect:/adminWorkTimeModify");
+		  }
+		  
+		  return mv;
+	  }
+	  
+	  
+	  
 	  
 	  
 	  
@@ -347,6 +421,17 @@ public class AttendanceController {
 	  }
 		
 	  //관리자
+	  @GetMapping("/adminBusinessTrip")
+	  public String adminBusinessTrip(Model m){
+		  List<Edms> edms = service.adminBusinessTrip();
+		  System.out.println(edms);
+		  m.addAttribute("edms",edms);
+		  return "admin/adminBusinessTrip";
+	  }
+
+
+	  
+	  
 	  //ajax 출장 사원명&부서명 검색
 	  @GetMapping("/ajaxBtSearch")
 	  @ResponseBody
@@ -404,10 +489,10 @@ public class AttendanceController {
 }
 
 	
-	@GetMapping("/adminBusinessTrip")
-	public String adminBusinessTrip() {
-		return "admin/adminBusinessTrip";
-}
+//	@GetMapping("/adminBusinessTrip")
+//	public String adminBusinessTrip() {
+//		return "admin/adminBusinessTrip";
+//}
 	
 	
 	

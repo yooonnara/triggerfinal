@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -48,8 +49,8 @@
                         </div>      
                         
                         <!--조회 버튼 -->
-                        <div class="float-right mb-4 mr-3 btn-member">
-                            <a href="#" class="btn btn-dark btn-sm mr-2 ml-5">전체</a>
+                        <div class="float-right mb-4 mr-3 btn-member" id="abtSearch">
+                            <a href="#" class="btn btn-dark btn-sm mr-2 ml-5" value="">전체</a>
                             <a href="#" class="btn btn-dark btn-sm mr-2">결제 대기</a>
                             <a href="#" class="btn btn-dark btn-sm">승인</a>
                         </div>
@@ -62,12 +63,12 @@
                    					searchDep:$("#BtSearch input[name=searchDep]").val()
                    				},
                    				success:function(bt){
-                   					console.log(bt);
+                   					console.log(bt[0]["empNo"]);
                    					$("#btTable").html("");
                    					for(let i=0;i<bt.length;i++){
                    						const $tr = $("<tr>");
                    						const $no = $("<td>").text(bt[i]["no"]);
-                   						const $empNo = $("<td>").text(bt[i]["empNo"]);
+                   						const $empNo = $("<td>").text(bt[i]["emp"]["empNum"]);
                    						const $deptTitle = $("<td>").text(bt[i]["emp"]["deptTitle"]);
                    						const $jobTitle = $("<td>").text(bt[i]["emp"]["jobTitle"]);
                    						const $name = $("<td>").text(bt[i]["emp"]["name"]);
@@ -114,36 +115,25 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white"  id="btTable">
+                            <c:if test="${not empty edms }">
+                            <c:forEach var="ed" items="${edms }">
                                 <tr>
-                                    <td>10</td>
-                                    <td>121421</td>
-                                    <td>홍보 2팀</td>
-                                    <td>대리</td>
-                                    <td>김땅땅</td>
-                                    <td>2023-07-19 ~ 2023-7-21</td>
-                                    <td>출장 신청</td>
-                                    <td>승인</td>
+                                    <td>${ed.no }</td>
+                                    <td>${ed.emp.empNum }</td>
+                                    <td>${ed.emp.deptTitle }</td>
+                                    <td>${ed.emp.jobTitle }</td>
+                                    <td>${ed.emp.name }</td>
+                                    <td>${ed.startDate } ~ ${ed.endDate }</td>
+                                    <td>${ed.title }</td>
+                                    <td>
+                                    	<c:if test="${ed.appStatus == '0'}">결대대기</c:if>
+                                    	<c:if test="${ed.appStatus == '1'}">승인</c:if>
+                                    	<c:if test="${ed.appStatus == '2'}">반려</c:if>
+                                    	<c:if test="${ed.appStatus == '3'}">취소</c:if>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>121421</td>
-                                    <td>홍보 2팀</td>
-                                    <td>대리</td>
-                                    <td>김땅땅</td>
-                                    <td>2023-07-19 ~ 2023-7-21</td>
-                                    <td>출장 신청</td>
-                                    <td>승인</td>
-                                </tr>
-                                <tr>                         
-                                    <td>10</td>
-                                    <td>121421</td>
-                                    <td>홍보 2팀</td>
-                                    <td>대리</td>
-                                    <td>김땅땅</td>
-                                    <td>2023-07-19 ~ 2023-7-21</td>
-                                    <td>출장 신청</td>
-                                    <td>승인</td>
-                                </tr>
+                           	</c:forEach>
+                     		</c:if>
                             </tbody>
                         </table>
                     </div>                    

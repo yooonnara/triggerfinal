@@ -81,7 +81,7 @@
 					                    const $status = $("<td>").text(status);
 										const $startTime = $("<td>").text(d[i]["startTime"]);
 										const $endTime = $("<td>").text(d[i]["endTime"]);
-										const $attTime = $("<td>").text(d[i]["attTime"]).text($tr);
+										const $attTime = $("<td>").text(d[i]["attTime"]);
 										
 										$tr.append($attDate).append($status).append($startTime).append($endTime).append($attTime);
 										
@@ -150,10 +150,47 @@
                             <button class="float-right btn btn-primary btn-sm">검색</button>
                             <input type="text"  placeholder="종료일" name="endDate" class="float-right mr-1 endDate" id="datepicker2">
                             <input type="text"  placeholder="시작일" name="startDate" class="float-right mr-1 startDate" id="datepicker1">
-                            
                         </div>
-                        
-
+                        <!-- 기간 검색 - 리스트 조회 -->
+					<script>
+					$("#DateSearch button").click(e=>{
+						$.ajax({
+							url:"/ajaxworkTimeSearch",
+							data: {
+								startDate:$("#DateSearch input[name=startDate]").val(),
+								endDate:$("#DateSearch input[name=endDate]").val()
+								},
+							success:function(dt){
+								//console.log(dt[0].no );
+								$("#wk-tbody").html("");
+								//리스트 새로고침 할 것
+								for(let i=0;i<dt.length;i++){
+									//const $tr = $("<tr>");
+									const $tr = $("<tr>")
+									const $attDate = $("<td >").text(dt[i]["attDate"]);
+									let status="";
+				                     switch(dt[i]["status"]){
+				                        case 0 : status= "정상 출근" ; break; 
+				                        case 2 : status= "지각" ; break;
+				                        case 3 : status= "조퇴" ; break;
+				                        case 4 : status= "결근" ; break;
+				                    }
+									const $status = $("<td>").text(status);
+									const $startTime = $("<td>").text(dt[i]["startTime"]);
+									const $endTime = $("<td>").text(dt[i]["endTime"]);
+									const $attTime = $("<td>").text(dt[i]["attTime"]);
+									$tr.append($attDate).append($status).append($startTime).append($endTime).append($attTime);
+									
+									$("#wk-tbody").append($tr);
+								}
+							},
+							error:function(){
+								console.log("ajax 통신 실패");
+							}
+						})
+					})
+					</script>
+					
                     </div>
                     <!-- 테이블 -->
                     <div id="big-table">
@@ -178,7 +215,7 @@
                             <tbody class="bg-white" id="wk-tbody">
                             <c:if test="${not empty wt }">
                             	<c:forEach var="w" items="${wt }">
-                             	<tr>
+                             	<tr onclick="workDetail(${w.no});">
                                     <td>${w.attDate }</td>
                                     <td>
                                    		<c:if test="${w.status == '0'}">정상 출근</c:if>
@@ -201,6 +238,109 @@
 		            <div class="pasing-area">
 		            	<c:out value="${pageBar }" escapeXml="false"/>
 		            </div>
+		            <script>
+						function workDetail(no){
+							console.log(no);
+							$.ajax({
+								url:"workTimeDetail",
+								data:{
+									attNo:no
+								},
+							success:function(a){
+								console.log(a); 
+								const input = $("#workTimeTable td>input[type=text]");
+								
+								$("#workTimeTable td>input[type=hidden]").val(a[0].no);
+								$(input[0]).val(a[0].attDate);
+								$(input[1]).val(a[0].startTime);
+								$(input[2]).val(a[0].endTime);
+								$("#workTimeModify").modal("show");
+							},
+							error:function(){
+								console.log("근태 ajax 통신실패");
+							}
+						})
+						}
+					</script>
+					
+					
+		
+		            <!-- The Modal -->
+        			<div id="workTime">
+                    <div class="modal fade text-center" id="workTimeModify" tabindex="-1" role="dialog"
+                        aria-activedescendant="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-dark text-white">
+                                    <h5 class="modal-title" id="exampleModalLabel">출퇴근 시간 변경</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <form action="${path }/workTimeModify" class="dayOff"  onsubmit="return confirm('변경?')" method="post">
+                                <!-- Modal body -->        
+                                <div class="modal-body">
+                                    <table id="workTimeTable" class="table table-borderless text-dark">
+                                            <colgroup>
+                                                <col style="width:30%">
+                                                <col style="width:70%">
+                                            </colgroup>
+                                            <tr>
+                                                <th class="align-middle"></th>
+                                                <td class="font-weight-bold">
+                                                	<input type="hidden" class="form-control inputSize" name="att_no">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">수정할 날짜</th>
+                                                <td class="font-weight-bold">
+                                                	<input type="text" class="form-control inputSize" name="workDate" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">지정 출근 시간</th>
+                                                <td class="font-weight-bold">
+                                                	<input type="text" class="form-control inputSize" name="workStart" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">지정 퇴근 시간</th>
+                                                <td>
+                                                    <input type="text" class="form-control inputSize" name="workDate" readonly>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <th class="align-middle">수정할 출근 시간</th>
+                                                <td>
+                                                    <input type="time" class="form-control form-control-sm" name="re_start_time">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">수정할 퇴근 시간</th>
+                                                <td>
+                                                    <input type="time" class="form-control form-control-sm" name="re_end_time">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">신청 사유</th>
+                                                <td>
+                                                    <textarea class="form-control" name="re_content" placeholder="사유를 입력하세요." rows="3" maxlength="99" style="resize: none;"></textarea>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary"">수정</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                </div>
+                              </form>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+		            
+		            
                         
                     </div>
                 </div>
@@ -210,44 +350,7 @@
 			
 			
 			
-			<!-- 기간 검색 - 리스트 조회 -->
-			<script>
-			$("#DateSearch button").click(e=>{
-				$.ajax({
-					url:"/ajaxworkTimeSearch",
-					data: {
-						startDate:$("#DateSearch input[name=startDate]").val(),
-						endDate:$("#DateSearch input[name=endDate]").val()
-						},
-					success:function(dt){
-						console.log(dt);
-						$("#wk-tbody").html("");
-						//리스트 새로고침 할 것
-						for(let i=0;i<dt.length;i++){
-							const $tr = $("<tr>");
-							const $attDate = $("<td>").text(dt[i]["attDate"]);
-							let status="";
-		                     switch(dt[i]["status"]){
-		                        case 0 : status= "정상 출근" ; break; 
-		                        case 2 : status= "지각" ; break;
-		                        case 3 : status= "조퇴" ; break;
-		                        case 4 : status= "결근" ; break;
-		                    }
-							const $status = $("<td>").text(status);
-							const $startTime = $("<td>").text(dt[i]["startTime"]);
-							
-							const $endTime = $("<td>").text(dt[i]["endTime"]);
-							$tr.append($attDate).append($status).append($startTime).append($endTime);
-							
-							$("#wk-tbody").append($tr);
-						}
-					},
-					error:function(){
-						console.log("ajax 통신 실패");
-					}
-				})
-			})
-			</script>
+			
  			
 
 
@@ -268,7 +371,7 @@
 		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 	</div>
 <!-- datepicker -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <!--  <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </body>
 

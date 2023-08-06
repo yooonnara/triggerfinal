@@ -228,6 +228,7 @@
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
                 
+                <!-- 선택 사원 연차 부여 -->
                 <script>
 	                function dayoffUpdate (){
 	            		const inputData = $("td>input[type=checkbox]:checked").parents("tr").find("td")
@@ -239,7 +240,6 @@
 	            		//$(data[0]).text($(inputData[1]).text());
 	            		//$(data[1]).text($(inputData[2]).text());
 	            		//$(data[2]).text($(inputData[3]).text());
-	            		
 	            		//console.log($(inputData[1]).text());
 	            		$(input[0]).val($(inputData[1]).text());
 	            		$(input[1]).val($(inputData[2]).text());
@@ -249,8 +249,6 @@
 	            	function insertDayoff(){
 	            		$('#frm').submit();
 	            	}
-            	
-            	
                 </script>
                 
                 
@@ -349,3 +347,5 @@
 </body>
 
 </html>
+
+
