@@ -26,12 +26,12 @@
 
     <!-- 내 정보 사이드바 -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mypage"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="bi bi-person-fill"></i>
             <span>내 정보 관리</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="mypage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="${path }/mypage">기본정보 수정</a>
                 <a class="collapse-item" href="${path }/mypagePassword">비밀번호 변경</a>
@@ -41,12 +41,12 @@
 
     <!-- 근태관리 사이드바 -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attPages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="bi bi-pencil-square"></i>
             <span>근태현황</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="attPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item">결재 요청하기</a>
                 <a href="${path }/workTimeWeekly"><h6 class="collapse-header">- 주차별 근태 조회</h6></a>
