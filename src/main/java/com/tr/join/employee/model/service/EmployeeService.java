@@ -11,5 +11,8 @@ public interface EmployeeService {
 	
 	int updateEmployee(Map param);
 	
+	int updatePassword(Map param);
+
+	
 
 }

@@ -97,11 +97,12 @@
                                		<c:if test="${not empty employees}">
             							<c:forEach var="e" items="${employees}" >
 		                                    <tr>
-		                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
-<!-- 		                                   		<td>${e.no}</td> -->
+		                                        <td class="align-middle"><input type="checkbox" class="employee-check" name="empNos"></td>
 		                                   		<td>${pageStartRowNum}</td>
 		                                        <td>
-		                                        	<a href="#" data-toggle="modal" data-target="#updateEmployeeModal">${e.name}</a>
+		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal" class="update-modal"
+		                                        	data-empno="${e.no}" data-empnum="${e.empNum}" data-empname="${e.name}" data-gender="${e.gender}"
+		                                        	data-phone="${e.phone}", data-email="${e.email}">${e.name}</a>
 		                                        </td>
 		                                        <td>${e.deptTitle}</td>
 		                                        <td>${e.jobTitle}</td>
@@ -155,20 +156,45 @@
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>
    </a>
-   
 <script>
 // 모달 오픈 시 이벤트
-$('#insertEmployee').on('shown.bs.modal', function() {
+$('#insertEmployee').on('shown.bs.modal', function(e) {
 	getDept();
 	getJob();
-	makeEmpNum();
-	$("#emp_name").focus();
 	// 수정으로 오픈되었을 경우 이벤트
+	var button = $(e.relatedTarget); // 누른 버튼
+	var empno = button.data('empno'); 
+	if(empno != null && empno != undefined){ // 수정
+		$('#resign_date_tr').show();
+		var empnum = button.data('empnum');
+		$('#emp_num').val(empnum);
+		var empname = button.data('empname');
+		$('#emp_name').val(empname);
+		$('.password_tr').hide();
+		var gender = button.data('gender');
+		if(gender == 'M' ) {
+			  $('#gender1').attr('checked',true);
+			} else {
+			  $('#gender2').attr('checked',true);
+			}
+		$('#gender').val(gender);
+		var phone = button.data('phone');
+		$('#phone').val(phone);
+		var email = button.data('email');
+		$('#email').val(email);
+	} else { // 생성
+		$('#resign_date_tr').hide();
+		makeEmpNum();
+		$("#emp_name").focus();
+	}
+/* 	var modal = $(this)
+	modal.find('.modal-title').text('New message to ' + recipient)
+	modal.find('.modal-body input').val(recipient) */
 })
 // 모달 클로즈 시 이벤트
 $('#insertEmployee').on('hidden.bs.modal', function (event) {
 	frmReset(); // 폼 리셋
-})
+});
 
 $(".profile_img").on('click', function() {
 	$('#profile_img_file').click();

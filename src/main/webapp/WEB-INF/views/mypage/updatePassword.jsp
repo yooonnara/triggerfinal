@@ -37,13 +37,13 @@
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
-							<form class="user" name="passwordFrm" id="passwordFrm" action="${path }/mypagePassword" method="post">
-								<table class="table-sm mt-5 mb-5">
+							<form class="user" name="passwordFrm" id="passwordFrm" action="${path }/updatePassword" method="post">
+								<table class="mt-5 mb-5 table table-borderless text-dark">
 									<tbody class="text-left">
 										<tr>
 											<td>현재 비밀번호</td>
 											<td>
-												<input type="password" 
+												<input onkeyup="checkCpwd(this.value)" onclick="checkCpwd(this.value)" type="password" 
 													class="form-control ml-5" name="cPwd" id="cPwd">
 												<span class="cPwd-msg small text-danger ml-5"></span>
 											</td>
@@ -106,11 +106,10 @@
 function updatePasswordFrm(){
 	
 	// 현재 비밀번호
-	if(checkCPwd($("#cPwd").val()) == false){
+	if(checkCpwd($("#cPwd").val()) == false){
 		$("#cPwd").focus();
 		return false;
 	}
-	
 	
 	// 변경할 비밀번호
 	if(checkPwd1($("#pwd1").val()) == false){
@@ -123,7 +122,8 @@ function updatePasswordFrm(){
 		$("#pwd2").focus();
 		return false;
 	}
-
+	frmSubmit();
+}
 function frmSubmit(){
 	if(confirm('저장하시겠습니까?')){
 		$('#passwordFrm').submit();

@@ -59,7 +59,7 @@ public class AdminEmployeeController {
 	// 멤버 생성하기
 	@RequestMapping("/admin/insertEmployee") // @Validated 추가하기
 	public String insertEmployee(@RequestParam Map param) { 
-		//패스워드를 암호화해서 처리하자.
+		//패스워드를 암호화해서 처리
 		String oriPassword = (String)param.get("pwd1");
 		String encodePassword = passwordEncoder.encode(oriPassword);
 		param.put("password", encodePassword);
