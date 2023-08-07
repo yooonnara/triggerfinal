@@ -58,6 +58,13 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 	public String makeEmpNum() {
 		return dao.makeEmpNum(session);
 	}
+
+	@Override
+	public int updateEmployees(Map param) {
+		return dao.updateEmployees(session, param);
+	}
+	
+	
 	
 	
 	

@@ -55,7 +55,7 @@
                             </div>
                             <!-- 작성하기 버튼 -->
                             <div class="btn-employee wirte-area col-4">
-                                <a href="#" class="btn btn-dark btn-sm float-right">멤버삭제</a>
+                                <a href="#" class="btn btn-dark btn-sm float-right" name="delete-btn">멤버삭제</a>
                                 <a href="#" data-toggle="modal" data-target="#insertEmployeeModal"
                                 class="btn btn-dark btn-sm mr-1 float-right">멤버생성</a>
                             </div>
@@ -81,7 +81,7 @@
 
                                 <thead>
                                     <tr class="bg-dark text-white">
-                                        <th class="align-middle"><input type="checkbox" id="employee-check"></th>
+                                        <th class="align-middle"><input type="checkbox" id="chkAll" name="chkAll"></th>
                                         <th>번호</th>
                                         <th>이름</th>
                                         <th>부서</th>
@@ -97,7 +97,7 @@
                                		<c:if test="${not empty employees}">
             							<c:forEach var="e" items="${employees}" >
 		                                    <tr>
-		                                        <td class="align-middle"><input type="checkbox" class="employee-check" name="empNos"></td>
+		                                        <td class="align-middle"><input type="checkbox" name="chk"></td>
 		                                   		<td>${pageStartRowNum}</td>
 		                                        <td>
 		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal" class="update-modal"
@@ -161,6 +161,25 @@
       <i class="fas fa-angle-up"></i>
    </a>
 <script>
+
+// 체크박스
+$(function() {
+	$("#chkAll").click(function() {
+		if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+		else $("input[name=chk]").prop("checked", false);
+	});
+	
+	$("input[name=chk]").click(function() {
+		var total = $("input[name=chk]").length;
+		var checked = $("input[name=chk]:checked").length;
+		
+		if(total != checked) $("#chkAll").prop("checked", false);
+		else $("#chkAll").prop("checked", true); 
+	});
+});
+
+
+
 // 모달 오픈 시 이벤트
 $('#insertEmployee').on('shown.bs.modal', function(e) {
 	
@@ -186,6 +205,8 @@ $('#insertEmployee').on('shown.bs.modal', function(e) {
 			}
 		
 		var empid = button.data('empid');
+		/* $("#emp_id").attr("onclick", null); */
+		/* $('#emp_id').val(empid).prop("readonly",true); */
 		$('#emp_id').val(empid);
 		
 		var accstatus = button.data('accstatus');
@@ -232,8 +253,6 @@ $(".profile_img").on('click', function() {
 	$('#profile_img_file').click();
 })
 
-
-
 $("#enroll_date").change(e=>{
 	console.log(e);
 	console.log(e.target.value)
@@ -260,22 +279,6 @@ function getDept(deptNo) {
     })
 }
 
-/* function getJob() {
-	$.ajax({
-		url: "${path}/admin/ajax/getJob",
-		success: data => {
-			$('#job').empty();
-  			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#job').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#job').append(option);
-			}
-		}
-	})
-} */
 
 function getJob(jobNo) {
     $.ajax({
@@ -310,6 +313,7 @@ function makeEmpNum(){
 function frmReset(){
 	$('#frm')[0].reset();
 	$('.check-msg').hide();
+	/* $('#emp_id').prop("readonly", false); */
 }
 
 </script>

@@ -24,5 +24,7 @@ public interface AdminEmployeeDao {
 	int selectEmployeeCount(SqlSessionTemplate session);
 	
 	String makeEmpNum(SqlSessionTemplate session);
+	
+	int updateEmployees(SqlSessionTemplate session, Map param);
 
 }
