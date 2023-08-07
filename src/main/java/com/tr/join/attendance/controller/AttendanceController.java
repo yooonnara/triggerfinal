@@ -84,7 +84,6 @@ public class AttendanceController {
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
-		 //calendarParam.put("dayoffInfo",dayoffInfo);
 		 calendarParam.put("tripInfo",tripInfo);
 			
 		 
@@ -421,7 +420,6 @@ public class AttendanceController {
          cParam.put("dayoffInfo",dayoffInfo);
          System.out.println(cParam);
          
-        //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
          
          return cParam;
       }
