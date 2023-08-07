@@ -30,4 +30,23 @@ public interface EdmsService {
  List<Edms> selectVc();
  
  
+ //어드민 계정 출장만 출력하기 
+ List<Edms> adminBsnSelect();
+ 
+ //어드민 계정 출장 view 보여주기 
+ Edms selectByBsnNo(int no);
+ 
+ //어드민 계정 ajax 결재 검색하기 
+ 
+ List<Edms> searchEdmsByStatus(Map<String,Object> ajaxParam);
+ 
+ List<Edms> search(Edms edms);
+ 
+ //어드민 연차 검색하기 
+ List<Edms> adminVcSelect();
+ 
+ //어드민 승인하기 
+ 
+ int updateAppStatus(Map<String,Integer> ajaxNumber);
+ 
 }

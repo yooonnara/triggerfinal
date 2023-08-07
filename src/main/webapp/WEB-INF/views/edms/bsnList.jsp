@@ -120,7 +120,7 @@
                             <c:if test="${not empty edms}">
                             <c:forEach var="e" items="${edms}">
                                 <tr>
-                                	<td>${e.no }</td>
+                                	<td>${e.no}</td>
                                     <td>${e.createDate }</td> 
                                     <td>${e.emp.deptTitle }</td>
                                     <td>${e.emp.jobTitle }</td>
@@ -135,7 +135,7 @@
                                     </td>
                                   <td>
                                   <a href="${path }/edms/edmsView?no=${e.no}" >
-                                  	<c:if test="${e.appStatus==0 }">결재대기</c:if>
+                                  	<c:if test="${e.appStatus==0 }">대기</c:if>
                                   	<c:if test="${e.appStatus==1 }">승인</c:if>
                                   	<c:if test="${e.appStatus==2 }">반려</c:if>
                                   </a>
@@ -150,27 +150,7 @@
                     <!-- 페이징 -->
                     <div class="pasing-area">
                     <c:out value="${pageBar }" escapeXml="false"/>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center mt-4">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                <li class="page-item">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                       
                     </div>
                 </div>
             </div>

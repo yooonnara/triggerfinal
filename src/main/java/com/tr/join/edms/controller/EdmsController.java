@@ -1,5 +1,6 @@
 package com.tr.join.edms.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.common.PageFactory;
@@ -102,19 +104,22 @@ public class EdmsController {
 	}
 	
 	
+	
 	//전체 출력하기
 	
 		@GetMapping("/bsnList")
 		public String selectBsnAll(@RequestParam(value="cPage", defaultValue="1") int cPage,
 					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
-			List<Edms> list=service.selectBsnAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
+			Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			List<Edms> list=service.selectBsnAll(Map.of("loginEmp",loginEmp.getName(),"cPage",cPage,"numPerpage",numPerpage));
 			int totalData=service.selectEdmsCount();
 			//페이징처리 
 			m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "/bsnList"));
 			m.addAttribute("totalData",totalData);
 			m.addAttribute("edms",list);
+			
 			list.forEach(System.out::println);
-			System.out.println(m);
+			//System.out.println(m);
 			return "edms/bsnList" ;
 			
 		}
@@ -125,10 +130,97 @@ public class EdmsController {
 	@GetMapping("/edmsView")
 	public String selectByNo(Model m , int no) {
 		m.addAttribute("edms", service.selectByNo(no));
-				System.out.println(m);
+				//System.out.println(m);
 				
 				return "edms/bsnView";
 }
+	
+	//어드민 출장 출력하기 
+	
+		@GetMapping("/adminBsn")
+		public String adminBsnSelect(Model m) {
+			List<Edms> edms=service.adminBsnSelect();
+			m.addAttribute("edms",edms);
+			edms.forEach(System.out::println);
+			//System.out.println(m);
+			return "admin/adminBsn";
+		}
+		
+		//어드민 연차 출력하기 
+		@GetMapping("/adminVc")
+		public String adminVcSelect(Model m) {
+			List<Edms> edms=service.adminVcSelect();
+				m.addAttribute("edms",edms);
+				edms.forEach(System.out::println);
+				return "admin/adminVc";
+			}
+		
+		
+	
+		//ajax 결재 상태 검색 
+		@GetMapping("/adminBsn/select")
+		@ResponseBody
+		public List<Edms> searchEdmsByStatus(int searchNum){
+			Map<String,Object> ajaxParam= new HashMap();
+			ajaxParam.put("searchNum", searchNum);
+			List<Edms> list= service.searchEdmsByStatus(ajaxParam);
+			
+			return list;
+		}
+		
+	
+	@GetMapping("/adminBnsView")
+	public String selectByBsnNo(Model m , int no) {
+		m.addAttribute("edms",service.selectByBsnNo(no));
+		System.out.println(m);
+		System.out.println(no);
+		return ("admin/adminBnsView");
+	}
+	
+	//에이젝스 검색 기능 구현 
+	
+	@GetMapping("/adminBsn/search")
+	@ResponseBody
+	private List<Edms> search(@RequestParam("category") String category, 
+			@RequestParam("keyword") String keyword, Model m)throws Exception{
+		Edms edms= new Edms();
+		edms.setCategory(category);
+		edms.setKeyword(keyword);
+	List<Edms> search =service.search(edms);
+		return search;
+	}
+	
+	
+	//에이젝스 버튼 클릭 기능 
+	@GetMapping("/adminBsnView/statuschange")
+	public String updateAppStatus(int no, int appStatus,Model m){
+	int result=service.updateAppStatus(Map.of("no",no,"appStatus",appStatus));
+	String msg,loc;
+	if(result>0) {
+		msg="승인완료";
+	loc="/";
+	}else {
+	msg="승인이 실패되었습니다";
+	loc="/edms/adminBsn";
+}
+m.addAttribute("msg",msg);
+m.addAttribute("loc",loc);
+
+	return "common/msg";
+	
+	}
+	
+	
+	//어드민 계정 상세 view 구현
+//	@GetMapping("/adminEdmsView")
+	//public String adminByNo(Model m, int no) {
+	//	m.addAttribute("edms",service.adminByNo(no));
+	//	System.out.println(m);
+		
+		
+	//	return "edms/adminEdmsView";
+		
+	//}
 	
 	
 	
@@ -165,10 +257,18 @@ public class EdmsController {
 	 * selectEdsmAll(Map<String,Object>param){ retu }
 	 */
 
-		@GetMapping("/adminVc")
-		public String adminVcPage() {
-			return "admin/adminVc";
+	
+	//어드민 페이지 구현 
+	
+	
+
+		
+		
+		@GetMapping("/adminEdmsView")
+		public String adminEdmsViewPg() {
+			return "edms/adminEdmsView";
 		}
+		
 		
 		
 		@GetMapping("/bsnRequest")

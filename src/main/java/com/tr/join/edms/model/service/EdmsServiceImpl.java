@@ -64,7 +64,61 @@ public class EdmsServiceImpl implements EdmsService {
 	public List<Edms> selectVc() {
 		return dao.selectVc(session);
 	}
+	
+	//어드민 출장만 출력하기 
 
+
+	@Override
+	public List<Edms> adminBsnSelect() {
+		// TODO Auto-generated method stub
+		return dao.adminBsnSelect(session);
+	}
+	
+	//어드민 계정 출장 view로 상세 화면 출력하기 
+	
+	@Override
+	public Edms selectByBsnNo(int no) {
+		// TODO Auto-generated method stub
+		return dao.selectByBsnNo(session,no);
+	}
+
+	//어드민 계정 ajax 이용하기 
+	@Override
+	public List<Edms> searchEdmsByStatus(Map<String,Object> ajaxParam) {
+		// TODO Auto-generated method stub
+		return dao.searchEdmsByStatus(session, ajaxParam);
+	}
+	//어드민 계정 ajax 검색하기 
+
+
+	@Override
+	public List<Edms> search(Edms edms){
+		// TODO Auto-generated method stub
+		return dao.selectResearch(session,edms);
+	}
+
+
+	@Override
+	public List<Edms> adminVcSelect() {
+		// TODO Auto-generated method stub
+		return dao.adminVcSelect(session);
+	}
+
+
+	@Override
+	public int updateAppStatus(Map<String, Integer> ajaxNumber) {
+		// TODO Auto-generated method stub
+		return dao.updateAppStatus(session,ajaxNumber);
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
 	
 	
 }

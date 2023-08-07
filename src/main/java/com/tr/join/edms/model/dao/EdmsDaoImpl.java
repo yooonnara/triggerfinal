@@ -23,12 +23,12 @@ public class EdmsDaoImpl implements EdmsDao {
 	}
 
 	@Override
-	public List<Edms> selectBsnAll(SqlSession session,Map<String,Object>param){
+	public List<Edms> selectBsnAll(SqlSession session,Map<String,Object> param){
 		int cPage=(int)param.get("cPage");
 		int numPerpage=(int)param.get("numPerpage");
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		
-		return session.selectList("edms.selectBsnAll",null, rb);
+		return session.selectList("edms.selectBsnAll",param);
 	}
 	
 	@Override
@@ -52,6 +52,46 @@ public class EdmsDaoImpl implements EdmsDao {
 	public List<Edms> selectVc(SqlSession session) {
 		// TODO Auto-generated method stub
 		return session.selectList("edms.selectVc");
+	}
+
+	//어드민 계정 구현하기 리스트 출력하기 
+	
+	@Override
+	public List<Edms> adminBsnSelect(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectList("edms.adminBsnSelect");
+	}
+
+	@Override
+	public Edms selectByBsnNo(SqlSession session, int no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("edms.selectByBsnNo",no);
+	}
+
+	@Override
+	public List<Edms> searchEdmsByStatus(SqlSession session, Map<String,Object> ajaxParam) {
+		// TODO Auto-generated method stub
+		return session.selectList("edms.searchEdmsByStatus",ajaxParam);
+	}
+
+	@Override
+	public List<Edms> selectResearch(SqlSession session, Edms edms){
+		// TODO Auto-generated method stub
+		return session.selectList("edms.selectResearch",edms);
+	}
+
+	@Override
+	public List<Edms> adminVcSelect(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectList("edms.adminVcSelect");
+	}
+
+	@Override
+	public int updateAppStatus(SqlSession session, Map<String, Integer> ajaxNumber) {
+		// TODO Auto-generated method stub
+		return session.update("edms.updateAppStatus",ajaxNumber);
+	
+	
 	}
 	
 	
