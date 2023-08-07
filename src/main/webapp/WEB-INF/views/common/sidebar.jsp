@@ -48,10 +48,12 @@
         </a>
         <div id="attPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item">결재 요청하기</a>
+                <a class="collapse-item" href="${path }/workTimeMain">근태 현황</a>
                 <a href="${path }/workTimeWeekly"><h6 class="collapse-header">- 주차별 근태 조회</h6></a>
                 <a href="${path }/workTimeList"><h6 class="collapse-header">- 일자별 근태 조회</h6></a>
                 <a href="${path }/wtModifyList"><h6 class="collapse-header">- 출퇴근 시간 변경 조회</h6></a>
+                <a class="collapse-item" href="${path }/dayoffList">연차 현황</a>
+                 <a class="collapse-item" href="${path }/businessTripList">출장 현황</a>
             </div>
         </div>
     </li>

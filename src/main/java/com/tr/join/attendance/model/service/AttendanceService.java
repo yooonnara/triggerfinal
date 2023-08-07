@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.attendance.model.vo.WorkTime;
 import com.tr.join.edms.model.vo.Edms;
 
 public interface AttendanceService {
@@ -16,10 +17,9 @@ public interface AttendanceService {
 	Attendance startInsertAttendance(Map<String,Object> startTimeParam);
 	Attendance endInsertAttendance(Map<String,Object> endTimeParam);
 	List<Attendance> workCalendarAttendance(int no);
-
-	/*
-	 * List<Edms> workCalendarDayoff(int no); List<Edms> workCalendarTrip(int no);
-	 */
+	//List<Edms> workCalendarDayoff(int no);
+	List<Edms> workCalendarTrip(int no);
+	
 	Attendance selectWeekWorkTime(int no);
 	Attendance selectOverWorkTime(int no);
 	Attendance selectRemainTime(int no);
@@ -35,25 +35,41 @@ public interface AttendanceService {
 	//근태 시작일~종료일 검색
 	List<Attendance> ajaxworkTimeByDate(Map<String,Object> ajSearchParam);
 	
+	//근태 상세 보기
+	List<Attendance> workTimeDetail(Map<String,Object> wkParam);
 	
-	
-	
+	//근태 수정 리스트 보기
+	List<WorkTime> selectWorkTimeModify(Map<String,Object> wkmParam);
+	//근태 수정
+	int insertModifyStartTime(Map param);
 	//관리자 페이지
 	List<Attendance> selectAttendanceAll(Map<String,Object> param);
 	int selectAttendanceCount();
+	List<WorkTime> adminWorkTimeModify();
+	List<WorkTime> adminWkDetail(Map<String,Object> param);
+	int updateWtModify(WorkTime w);
+	int adminModifyWorktimeSubmit(WorkTime w);
+	int wtModifyReturn(WorkTime w);
 	
 //---------------연차---------------------
 	List<DayOff> selectDayoffAll(int no);
 	//관리자
 	List<DayOff> selectAdminDayoffAll();
 	int adminResetAll();
-	List<DayOff> searchDayoffAdmin(Map<String,String> dayoffParam);
-	
+	int adminCheckReset(DayOff d);
+	List<DayOff> ajaxDfSearch(Map<String,String> dfSearch);
+	int insertDayoff(Map param);
+	List<Edms> workCalendarDayoff();
 	
 //-----------출장-------------------------
 	List<Edms> selectBusinessTrip(int no);
 	int BusinessTripCount(int no);
 	//출장 삭제
 	int deleteBusinessTrip(int btNo);
-	
+	//출장 취소 목록 조회
+	List<Edms> checkCancelList(Map<String,Object> cancelParam);
+	//관리자
+	List<Edms> adminBusinessTrip();
+	List<Edms> ajaxBtSearch(Map<String,Object> btSearch);
+
 }

@@ -1,8 +1,11 @@
 package com.tr.join.attendance.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tr.join.attendance.model.service.AttendanceService;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.attendance.model.vo.WorkTime;
 import com.tr.join.common.PageFactory;
 import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.vo.Employee;
@@ -69,7 +73,7 @@ public class AttendanceController {
 	 
 	
 	//근태 캘린더
-	//전체 근태 정보 받아오기. List로 받아와서 뿌리기 ? 
+	//전체 근태 정보 받아오기. 
 	//전체 연차 정보 받아오기. 
 	//전체 출장 정보 받아오기. 
 	 @RequestMapping("/att/workCalendar")
@@ -78,19 +82,17 @@ public class AttendanceController {
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 List<Attendance> attendanceInfo = service.workCalendarAttendance(loginNo.getNo());
-			/*
-			 * List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
-			 * List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
-			 */
+		 //List<Edms> dayoffInfo = service.workCalendarDayoff(loginNo.getNo());
+		 List<Edms> tripInfo = service.workCalendarTrip(loginNo.getNo());
+			
 		 
 		 Map<String,Object> calendarParam=new HashMap(); 
 		 calendarParam.put("attInfo",attendanceInfo);
-			/*
-			 * calendarParam.put("dayoffInfo",dayoffInfo);
-			 * calendarParam.put("tripInfo",tripInfo);
-			 */
+		 //calendarParam.put("dayoffInfo",dayoffInfo);
+		 calendarParam.put("tripInfo",tripInfo);
+			
 		 
-		// System.out.println(calendarParam);
+		 System.out.println(tripInfo);
 		 return calendarParam;
 	 }
 	 
@@ -149,7 +151,7 @@ public class AttendanceController {
 		  ajaxParam.put("loginNo",loginNo.getNo()); 
 		  List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
 		  
-		  //System.out.println(wtajax);
+		  System.out.println(wtajax);
 		  
 		  return wtajax;
 	  }
@@ -166,14 +168,45 @@ public class AttendanceController {
 		 return wkDate;
 	  }
 	  
+	  //근태 상세 정보
+	  @RequestMapping("workTimeDetail")
+	  @ResponseBody
+	  public List<Attendance> workTimeDetail(int attNo) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  Map<String,Object> wkParam=new HashMap(); 
+		  wkParam.put("loginNo",loginNo.getNo()); 
+		  wkParam.put("attNo",attNo);
+		  List<Attendance> at = service.workTimeDetail(wkParam);
+		  System.out.println(at);
+		  return at;
+	  }
+	  
+	  //근태 출퇴근 수정
+	  @RequestMapping("/workTimeModify")
+	  public ModelAndView workTimeModify(@RequestParam Map param, ModelAndView mv, HttpSession session) {
+		  System.out.println(param);
+		  int result = service.insertModifyStartTime(param);
+		  
+		  if(result>0) {
+			  session.setAttribute("alertMsg","와우");
+			  mv.setViewName("redirect:/wtModifyList");
+		  }
+		  return mv;
+	  }
 	  
 	  
-	  
-	  
-	  
-	  
-//안될떈!!!!!!!!!!!!!!!!!!!!!!!!!!아래 겟맵핑 지워!!!!!!!!!!!!!!!!!!!!!!!!111
-	  
+	  //근태 출퇴근 수정 리스트
+	  @RequestMapping("/wtModifyList")
+	  public String selectWorkTimeModify(Model m) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		 List<WorkTime> worktime = service.selectWorkTimeModify(Map.of("loginNo",loginNo.getNo()));
+		  m.addAttribute("worktime",worktime);
+		  System.out.println(m);
+		  return "attendance/workTimeModifyList";
+	  }
+
+
 	  //관리자 페이지
 	  @GetMapping("/adminWorkTime")
 	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
@@ -186,10 +219,63 @@ public class AttendanceController {
 		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
 		  m.addAttribute("att",att);
 		  m.addAttribute("totalData",totalData);
-		  System.out.println(m);
+		  //System.out.println(m);
 		  
 		  return "admin/adminWorkTime";
 	  }
+	  
+	  
+	  //관리자 : 근태 출퇴근 수정 리스트 
+	  @RequestMapping("/adminWorkTimeModify")
+	  public String adminWorkTimeModify(Model m) {
+		 List<WorkTime> adminWk = service.adminWorkTimeModify();
+		 m.addAttribute("adminWk",adminWk);
+		 //System.out.println(m);
+		  return "admin/adminWorkTimeModify";
+	  }
+	  
+	  //관리자 : 근태 출퇴근 수정 상세 정보
+	  @RequestMapping("/adminWkDetail")
+	  @ResponseBody
+	  public List<WorkTime> adminWkDetail(int wtNo) {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  Map<String,Object> param=new HashMap(); 
+		  param.put("wtNo",wtNo);
+		  List<WorkTime> at = service.adminWkDetail(param);
+		  //System.out.println(at);
+		  return at;
+	  }
+	  
+	  
+	  //관리자 : 근태 출퇴근 수정 승인
+	  @RequestMapping("/wtModifySubmit")
+	  public ModelAndView wtModifySubmit(WorkTime w, ModelAndView mv) {
+		  System.out.println(w);
+		  //승인 
+		  int result = service.updateWtModify(w);
+		  int result1 = service.adminModifyWorktimeSubmit(w);
+		  if(result>0) {
+			  mv.setViewName("redirect:/adminWorkTimeModify");
+		  }
+		  
+		  return mv;
+	  }
+	  
+	  
+	  //관리자 : 근태 출퇴근 수정 반혀 
+	  @RequestMapping("/wtModifyReturn")
+	  public ModelAndView wtModifyReturn(WorkTime w, ModelAndView mv) {
+		  System.out.println(w);
+		  int result = service.wtModifyReturn(w);
+		  
+		  if(result>0) {
+			  mv.setViewName("redirect:/adminWorkTimeModify");
+		  }
+		  
+		  return mv;
+		  
+	  }
+	  
 	  
 	  
 	  
@@ -231,15 +317,82 @@ public class AttendanceController {
 		  return mv;
 	  }
 	  
-	  //연차 이름,직급별 검색
-	  @RequestMapping("/attendance/searchDayoffAdmin")
+	  //연차 선택 사원 리셋
+	  @RequestMapping("/admin/checkReset")
 	  @ResponseBody
-	  public List<DayOff> searchDayoffAdmin(@RequestParam Map<String,String> dayoffParam){
-		  List<DayOff> df = service.searchDayoffAdmin(dayoffParam);
-		  System.out.println(df);
-		  return df;
+	  public String adminCheckReset(DayOff d, @RequestParam(value="dfList[]") ArrayList<Integer> dfList) {
+		  System.out.println(dfList);
+		  int result = 1;
+		  for(int i=0; i<dfList.size(); i++){
+			  d.setNo(dfList.get(i));
+			  result = result * service.adminCheckReset(d);
+		  }
+		  
+		  return result> 0 ? "success" : "fail";
 	  }
 	  
+	  //연차 부여
+	  @RequestMapping("/admin/insertDayoff")
+	  public String insertDayoff(@RequestParam Map param) {
+		  System.out.println(param);
+		  int result = service.insertDayoff(param);
+		  
+		  return "redirect:/adminDayoff";
+	  }
+	  
+	  //ajax 연차 사원명&부서명 검색
+	  @GetMapping("/ajaxDfSearch")
+	  @ResponseBody
+	  public List<DayOff> ajaxDfSearch(String searchEmp, String searchDep){
+		  System.out.println(searchEmp);
+		  System.out.println(searchDep);
+		  
+		  List<DayOff> dfSearch = service.ajaxDfSearch(Map.of("searchEmp",searchEmp,"searchDep",searchDep));
+		  
+		  System.out.println(dfSearch);
+		  
+		  return dfSearch;
+	  }
+	  
+	  //전사 연차 일정 캘린더
+//	  @RequestMapping("/att/dayoffCalendar")
+//      @ResponseBody
+//      public Map<String, Object> dayoffCalendar() {
+//         List<Edms> dayoffInfo = service.workCalendarDayoff();
+//           
+//         Map<String,Object> cParam=new HashMap(); 
+//         cParam.put("dayoffInfo",dayoffInfo);
+//           
+//         System.out.println(dayoffInfo);
+//         return cParam;
+//      }
+	  
+	  
+	     @RequestMapping("/admin/adminDayoffCalendar")
+	       @ResponseBody
+	       public ModelAndView pageCalendar(ModelAndView m) {
+	          
+	          
+	         //m.addAttribute("dayoffData",cParam); //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
+	          m.setViewName("/admin/adminDayoffCalendar");
+	          
+	          return m;
+	       }
+	     
+	  
+	  @RequestMapping("/att/dayoffCalendar")
+	  @ResponseBody
+      public Map<String, Object> dayoffCalendar() {
+         List<Edms> dayoffInfo = service.workCalendarDayoff();
+           
+         Map<String,Object> cParam=new HashMap(); 
+         cParam.put("dayoffInfo",dayoffInfo);
+         System.out.println(cParam);
+         
+        //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
+         
+         return cParam;
+      }
 	  
 	  
 //----------출장-----------------
@@ -263,33 +416,58 @@ public class AttendanceController {
 		  int result = service.deleteBusinessTrip(btNo);
 		  System.out.println(result);
 		  return "redirect:/businessTripList";
-		  
-		  
-		  
 	  }
 	  
-	  
-//	  @RequestMapping("/attendance/cancelBusinessTrip")
-//	  public ModelAndView cancelBusinessTrip(ModelAndView mv) {
-//		  int result = service.cancelBusinessTrip(int no);
-//		  System.out.println(result);
-//		  
-//		  mv.setViewName("redirect:/businessTrip");
-//		  
-//		  return mv;
-//		  
-//	  }
-	  
+	  //ajax 출장 취소 내역 확인하기 
+	  @GetMapping("/checkCancelList")
+	  @ResponseBody //화면에다가 정보를 보내주려면 필요 json 자동 실행
+	  public List<Edms> checkCancelList() {
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  Map<String, Object> cancelParam = new HashMap();
+		  cancelParam.put("loginNo",loginNo.getNo());
+		  List<Edms> edms = service.checkCancelList(cancelParam);
+		  System.out.println(edms);
+		  
+		  return edms;
+		  
+	  }
 		
+	  //관리자
+	  @GetMapping("/adminBusinessTrip")
+	  public String adminBusinessTrip(Model m){
+		  List<Edms> edms = service.adminBusinessTrip();
+		  System.out.println(edms);
+		  m.addAttribute("edms",edms);
+		  return "admin/adminBusinessTrip";
+	  }
+
+
 	  
 	  
+	  //ajax 출장 사원명&부서명 검색
+	  @GetMapping("/ajaxBtSearch")
+	  @ResponseBody
+	  public List<Edms> ajaxBtSearch(String searchEmp, String searchDep){
+		  System.out.println(searchEmp);
+		  System.out.println(searchDep);
+		  
+		  List<Edms> btSearch = service.ajaxBtSearch(Map.of("searchEmp",searchEmp,"searchDep",searchDep));
+		  
+		  System.out.println(btSearch);
+		  
+		  return btSearch;
+	  }
 	  
-	  
+
 	  
 
 
 	
-	
+		@GetMapping("/adminDayoffCalendar")
+		public String adminDayoffCalendar() {
+			return "admin/adminDayoffCalendar";
+	}
 	
 	
 	
@@ -324,10 +502,10 @@ public class AttendanceController {
 }
 
 	
-	@GetMapping("/adminBusinessTrip")
-	public String adminBusinessTrip() {
-		return "admin/adminBusinessTrip";
-}
+//	@GetMapping("/adminBusinessTrip")
+//	public String adminBusinessTrip() {
+//		return "admin/adminBusinessTrip";
+//}
 	
 	
 	

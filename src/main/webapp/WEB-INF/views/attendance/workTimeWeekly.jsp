@@ -36,9 +36,24 @@
                     	<p class="mt-2 text-secondary" style="font-size:17px">주차별 조회</p>
                     </h1>
 
-                    <div class="workingTimeWeekly-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+                    <div class="workingTimeWeekly-container ">
                         <!-- 오늘 날짜 -->
-                        <h3 class="row justify-content-center text-dark font-weight-bold mb-4">2023-07-21</h3>
+                        <h3 class="dfDate row justify-content-center text-dark font-weight-bold mb-5" id="Weekly_date"></h3>
+                        <script>
+					        $(function(){
+					            var today = new Date();
+					            var year = today.getFullYear();
+					            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+					            var day = ('0' + today.getDate()).slice(-2);
+					            var week = new Array('일', '월', '화', '수', '목', '금', '토');
+					
+					            var mainDate = year + "-" + month + "-" + day
+					            $("#Weekly_date").text(mainDate);
+					        })
+					    </script>
+					    
+					    
+					    
                         <!-- 주차별 아코디언 -->
                         <div id="accordion">
                             <div class="card">

@@ -46,8 +46,10 @@
 		<div id="collapseUtilities" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="${path }/adminWorkTime">멤버 근태현황</a> 
-				<a class="collapse-item" href="${path }/adminWorkTimeModify">출·퇴근 시간 변경</a>
+				<a class="collapse-item" href="${path }/adminWorkTime">멤버 근태 현황</a> 
+				<a href="${path }/adminWorkTimeModify"><h6 class="collapse-header">- 출·퇴근 시간 변경</h6></a>
+				<a class="collapse-item" href="${path }/adminDayoff">멤버 연차 관리</a>
+				<a class="collapse-item" href="${path }/adminBusinessTrip">멤버 출장 관리</a>
 			</div>
 		</div>
 	</li>
