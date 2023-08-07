@@ -55,9 +55,12 @@
                             </div>
                             <!-- 작성하기 버튼 -->
                             <div class="btn-employee wirte-area col-4">
-                                <a href="#" class="btn btn-dark btn-sm float-right">멤버삭제</a>
+                                <a href="#" class="btn btn-dark btn-sm float-right" name="delete-btn" 
+                                	onclick="deleteClick()">멤버삭제
+                                </a>
                                 <a href="#" data-toggle="modal" data-target="#insertEmployeeModal"
-                                class="btn btn-dark btn-sm mr-1 float-right">멤버생성</a>
+                               		 class="btn btn-dark btn-sm mr-1 float-right">멤버생성
+                                </a>
                             </div>
                         </div>
 
@@ -81,7 +84,7 @@
 
                                 <thead>
                                     <tr class="bg-dark text-white">
-                                        <th class="align-middle"><input type="checkbox" id="employee-check"></th>
+                                        <th class="align-middle"><input type="checkbox" id="chkAll" name="chkAll"></th>
                                         <th>번호</th>
                                         <th>이름</th>
                                         <th>부서</th>
@@ -97,12 +100,16 @@
                                		<c:if test="${not empty employees}">
             							<c:forEach var="e" items="${employees}" >
 		                                    <tr>
-		                                        <td class="align-middle"><input type="checkbox" class="employee-check" name="empNos"></td>
+		                                        <td class="align-middle"><input type="checkbox" name="chk"></td>
 		                                   		<td>${pageStartRowNum}</td>
 		                                        <td>
 		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal" class="update-modal"
-		                                        	data-empno="${e.no}" data-empnum="${e.empNum}" data-empname="${e.name}" data-gender="${e.gender}"
-		                                        	data-phone="${e.phone}", data-email="${e.email}">${e.name}</a>
+			                                        	data-empno="${e.no}" data-empnum="${e.empNum}" data-empname="${e.name}" data-gender="${e.gender}"
+			                                        	data-empid="${e.id}" data-accstatus="${e.accStatus}" data-enrolldate="${e.enrollDate}"
+			                                        	data-resigndate="${e.resignDate}" data-dept="${e.deptNo}" data-job="${e.jobNo}"
+			                                        	data-acctype="${e.type}" data-phone="${e.phone}" data-email="${e.email}">
+		                                        		${e.name}
+		                                        	</a>
 		                                        </td>
 		                                        <td>${e.deptTitle}</td>
 		                                        <td>${e.jobTitle}</td>
@@ -157,40 +164,92 @@
       <i class="fas fa-angle-up"></i>
    </a>
 <script>
+
+// 체크박스
+$(function() {
+	$("#chkAll").click(function() {
+		if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+		else $("input[name=chk]").prop("checked", false);
+	});
+	
+	$("input[name=chk]").click(function() {
+		var total = $("input[name=chk]").length;
+		var checked = $("input[name=chk]:checked").length;
+		
+		if(total != checked) $("#chkAll").prop("checked", false);
+		else $("#chkAll").prop("checked", true); 
+	});
+});
+
+// 선택 삭제
+
+
+
+
 // 모달 오픈 시 이벤트
 $('#insertEmployee').on('shown.bs.modal', function(e) {
-	getDept();
-	getJob();
+	
 	// 수정으로 오픈되었을 경우 이벤트
 	var button = $(e.relatedTarget); // 누른 버튼
 	var empno = button.data('empno'); 
 	if(empno != null && empno != undefined){ // 수정
 		$('#resign_date_tr').show();
+		
 		var empnum = button.data('empnum');
 		$('#emp_num').val(empnum);
+		
 		var empname = button.data('empname');
 		$('#emp_name').val(empname);
+		
 		$('.password_tr').hide();
+		
 		var gender = button.data('gender');
 		if(gender == 'M' ) {
-			  $('#gender1').attr('checked',true);
+			$('#gender1').prop('checked', true);
 			} else {
-			  $('#gender2').attr('checked',true);
+				$('#gender2').prop('checked', true);
 			}
-		$('#gender').val(gender);
+		
+		var empid = button.data('empid');
+		/* $("#emp_id").attr("onclick", null); */
+		/* $('#emp_id').val(empid).prop("readonly",true); */
+		$('#emp_id').val(empid);
+		
+		var accstatus = button.data('accstatus');
+		$("#acc_status").val(accstatus).prop("selected", true);
+		
+		var enrolldate = button.data('enrolldate');
+		$("#enroll_date").val(enrolldate);
+		
+		var resigndate = button.data('resigndate');
+		if (resigndate != null){
+			$("#resign_date").val(resigndate);
+		}
+
+		var dept = button.data('dept');
+		getDept(dept);
+		
+		var job = button.data('job');
+		getJob(job);
+		
+		var acctype = button.data('acctype');
+		$("#acc_type").val(acctype);
+		
 		var phone = button.data('phone');
 		$('#phone').val(phone);
+		
 		var email = button.data('email');
 		$('#email').val(email);
+		
 	} else { // 생성
+		getDept(null);
+		getJob(null);
 		$('#resign_date_tr').hide();
 		makeEmpNum();
 		$("#emp_name").focus();
 	}
-/* 	var modal = $(this)
-	modal.find('.modal-title').text('New message to ' + recipient)
-	modal.find('.modal-body input').val(recipient) */
 })
+
 // 모달 클로즈 시 이벤트
 $('#insertEmployee').on('hidden.bs.modal', function (event) {
 	frmReset(); // 폼 리셋
@@ -200,47 +259,54 @@ $(".profile_img").on('click', function() {
 	$('#profile_img_file').click();
 })
 
-
-
 $("#enroll_date").change(e=>{
 	console.log(e);
 	console.log(e.target.value)
 })
 
 
-function getDept() {
-	$.ajax({
-		url: "${path}/admin/ajax/getDept",
-		success: data => {
-			$('#dept').empty();
-			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#dept').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#dept').append(option);
-			}
-		}
-	})
+function getDept(deptNo) {
+    $.ajax({
+        url: "${path}/admin/ajax/getDept",
+        success: data => {
+            $('#dept').empty();
+            const basicOption = $("<option></option>").attr("value", "selected").text("선택");
+            $('#dept').append(basicOption); 
+            for (var i = 0; i < data.length; i++) {
+                const no = data[i]['no'];
+                const title = data[i]['title'];
+                let option = $("<option></option>").attr("value", no).text(title);
+                if (deptNo != null && parseInt(deptNo) == parseInt(no)) {
+                    option = $("<option selected='true'></option>").attr("value", no).text(title);
+                }
+                $('#dept').append(option);
+            }
+        }
+    })
 }
 
-function getJob() {
-	$.ajax({
-		url: "${path}/admin/ajax/getJob",
-		success: data => {
-			$('#job').empty();
-  			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#job').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#job').append(option);
-			}
-		}
-	})
+
+function getJob(jobNo) {
+    $.ajax({
+        url: "${path}/admin/ajax/getJob",
+        success: data => {
+            $('#job').empty();
+            const basicOption = $("<option></option>").attr("value", "selected").text("선택");
+            $('#job').append(basicOption); 
+            for (var i = 0; i < data.length; i++) {
+                const no = data[i]['no'];
+                const title = data[i]['title'];
+                let option = $("<option></option>").attr("value", no).text(title);
+                if (jobNo != null && parseInt(jobNo) == parseInt(no)) {
+                    option = $("<option selected='true'></option>").attr("value", no).text(title);
+                }
+                $('#job').append(option);
+            }
+        }
+    })
 }
+
+// 사번 자동생성
 function makeEmpNum(){
 	$.ajax({
 		url: "${path}/admin/ajax/makeEmpNum",
@@ -253,6 +319,7 @@ function makeEmpNum(){
 function frmReset(){
 	$('#frm')[0].reset();
 	$('.check-msg').hide();
+	/* $('#emp_id').prop("readonly", false); */
 }
 
 </script>

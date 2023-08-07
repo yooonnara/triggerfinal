@@ -171,39 +171,6 @@ $("#enroll_date").change(e=>{
 })
 
 
-function getDept() {
-	$.ajax({
-		url: "${path}/admin/ajax/getDept",
-		success: data => {
-			$('#dept').empty();
-			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#dept').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#dept').append(option);
-			}
-		}
-	})
-}
-
-function getJob() {
-	$.ajax({
-		url: "${path}/admin/ajax/getJob",
-		success: data => {
-			$('#job').empty();
-  			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#job').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#job').append(option);
-			}
-		}
-	})
-}
 //저장 버튼 눌렀을 때 값 전체 검사
 function checkInsertFrm(){
 	// 이름

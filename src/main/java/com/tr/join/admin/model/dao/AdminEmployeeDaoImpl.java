@@ -53,6 +53,13 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 	public String makeEmpNum(SqlSessionTemplate session) {
 		return session.selectOne("adminEmployee.makeEmpNum");
 	}
+
+	@Override
+	public int updateEmployees(SqlSessionTemplate session, Map param) {
+		return session.update("adminEmployee.updateEmployees");
+	}
+	
+	
 	
 	
 	

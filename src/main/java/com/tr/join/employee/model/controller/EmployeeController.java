@@ -52,7 +52,6 @@ public class EmployeeController {
 	// 마이페이지 수정하기
 	@PostMapping("/updateEmployee")
 	public String updateEmployee(@RequestParam Map param) { 
-		System.out.println(param);
 		int result = service.updateEmployee(param);
 		return "redirect:/mypage";
 	}
