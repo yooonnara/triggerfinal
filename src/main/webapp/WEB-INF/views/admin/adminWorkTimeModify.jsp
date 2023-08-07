@@ -115,7 +115,7 @@
 								$("#adWkTable td>textarea").html(ad[0].reContent);
 								
 								const length = ad[0].reContent.length;
-								$(".textCount").text(length + '자');
+								$(".textCount").text(length + '자');	
 								
 								
 								
