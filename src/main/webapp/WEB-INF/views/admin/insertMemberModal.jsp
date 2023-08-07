@@ -59,7 +59,7 @@
 										<span class="check-msg emp-id-msg small text-danger"></span>
 									</td>
 								</tr>
-								<tr>
+								<tr class="password_tr">
 									<th class="align-middle">비밀번호</th>
 									<td>
 										<input onKeyup="checkPwd1(this.value)" type="password" 
@@ -67,7 +67,7 @@
 										<span class="check-msg pwd1-msg small text-danger"></span>
 									</td>
 								</tr>
-								<tr>
+								<tr class="password_tr">
 									<th class="align-middle">비밀번호 확인</th>
 									<td>
 										<input onKeyup="checkPwd2(this.value)" type="password" 
@@ -89,14 +89,20 @@
 								<tr>
 									<th class="align-middle">입사일</th>
 									<td>
-										<input type="date" class="form-control" name="enroll_date" id="enroll_date">
+										<input onchange="checkEnrollDate(this.value)" onsubmit="checkEnrollDate(this.value)" type="date" class="form-control" name="enroll_date" id="enroll_date">
 										<span class="check-msg enroll-date-msg small text-danger" style="display: none">입사일을 입력해 주세요.</span>
+									</td>
+								</tr>
+								<tr id="resign_date_tr" style="display: none">
+									<th class="align-middle">퇴사일</th>
+									<td>
+										<input type="date" class="form-control" name="resign_date" id="resign_date">
 									</td>
 								</tr>
 								<tr>
 									<th class="align-middle">부서</th>
-									<td><!-- onchange="checkDept(this.value)"  -->
-										<select id="dept" name="dept" class="form-control" aria-label="Default select example">
+									<td>
+										<select onchange="checkDept(this.value)" id="dept" name="dept" class="form-control" aria-label="Default select example">
 										</select>
 										<span class="check-msg dept-msg small text-danger" style="display: none">부서를 선택해 주세요.</span>
 									</td>
@@ -104,8 +110,7 @@
 								<tr>
 									<th class="align-middle">직급</th>
 									<td>
-									<!-- onchange="checkJob(this.value)"  -->
-										<select id="job" name="job" class="form-control" aria-label="Default select example">
+										<select onchange="checkJob(this.value)" id="job" name="job" class="form-control" aria-label="Default select example">
 										</select>
 										<span class="check-msg job-msg small text-danger" style="display: none">직급을 선택해 주세요.</span>
 									</td>
@@ -115,8 +120,8 @@
 									<td>
 										<select name="acc_type" id="acc_type" onchange="checkAccType(this.value)" class="form-control" aria-label="Default select example">
 												<option value="" selected>선택</option>
-												<option value="1">N</option>
 												<option value="2">Y</option>
+												<option value="1">N</option>
 										</select>
 										<span class="check-msg acc-type-msg small text-danger" style="display: none">관리자여부를 선택해 주세요.</span>
 									</td>
@@ -243,11 +248,17 @@ function checkInsertFrm(){
 		return false;
 	}
 	
-	// 퇴사일
-	
 	// 부서
+	if(checkDept($("#dept")) == false ){
+		$("#dept").focus();
+		return false;
+	}
 	
 	// 직급
+	if(checkJob($("#job")) == false ){
+		$("#job").focus();
+		return false;
+	}
 	
 	// 관리자여부
 	if(checkAccType($("#acc_type").val()) == false){
@@ -268,33 +279,13 @@ function checkInsertFrm(){
 	}
 	frmSubmit();
 }
+
 function frmSubmit(){
 	if(confirm('저장하시겠습니까?')){
 		$('#frm').submit();
-		/* form=new FormData();
-		$("#frm input").each((i,e)=>{
-			if(e.type=='file'){
-				console.log(e);
-			}
-		});
-		$.ajax({
-			url: "${path}/ajax/insertEmployee",
-		    type: "POST",
-		    data: 
-		    	$("#frm").serialize()
-		    ,
-			success: data => {
-		        console.log("성공!!!")
-			}
-		});  */
+		
 	}
 }
-
-
-
-// keyup
-
-
 
 </script>
    

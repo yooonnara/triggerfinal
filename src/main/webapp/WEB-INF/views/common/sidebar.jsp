@@ -26,32 +26,32 @@
 
     <!-- 내 정보 사이드바 -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mypage"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="bi bi-person-fill"></i>
-            <span>내 정보</span>
+            <span>내 정보 관리</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="mypage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${path }/mypage">내 정보 수정</a>
-
+                <a class="collapse-item" href="${path }/mypage">기본정보 수정</a>
+                <a class="collapse-item" href="${path }/mypagePassword">비밀번호 변경</a>
             </div>
         </div>
     </li>
 
     <!-- 근태관리 사이드바 -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="bi bi-calendar-check-fill"></i>
-            <span>근태관리</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attPages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="bi bi-pencil-square"></i>
+            <span>근태현황</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="attPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${path }/workTimeMain">근태현황</a>
-                <a class="collapse-item" href="${path }/dayoffList">연차현황</a>
-                <a class="collapse-item" href="${path }/businessTripList">출장현황</a>
+                <a class="collapse-item">결재 요청하기</a>
+                <a href="${path }/workTimeWeekly"><h6 class="collapse-header">- 주차별 근태 조회</h6></a>
+                <a href="${path }/workTimeList"><h6 class="collapse-header">- 일자별 근태 조회</h6></a>
+                <a href="${path }/wtModifyList"><h6 class="collapse-header">- 출퇴근 시간 변경 조회</h6></a>
             </div>
         </div>
     </li>
@@ -65,7 +65,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${path }/edmsMain">결재 요청하기</a>
+                <a class="collapse-item">결재 요청하기</a>
                 <a href="${path }/edms/vcRequest"><h6 class="collapse-header">- 연차 신청</h6></a>
                 <a href="${path }/edms/bsnRequest"><h6 class="collapse-header">- 출장 신청</h6></a>
                 <a class="collapse-item" href="${path }/edms/bsnList">결재 문서 현황</a>

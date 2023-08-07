@@ -95,12 +95,14 @@
                                 </thead>
                                 <tbody>
                                		<c:if test="${not empty employees}">
-            							<c:forEach var="e" items="${employees}">
+            							<c:forEach var="e" items="${employees}" >
 		                                    <tr>
-		                                        <td class="align-middle"><input type="checkbox" id="employee-check"></td>
-		                                   		<td>${e.no}</td>
+		                                        <td class="align-middle"><input type="checkbox" class="employee-check" name="empNos"></td>
+		                                   		<td>${pageStartRowNum}</td>
 		                                        <td>
-		                                        	<a href="#" data-toggle="modal" data-target="#updateEmployeeModal">${e.name}</a>
+		                                        	<a href="#" data-toggle="modal" data-target="#insertEmployeeModal" class="update-modal"
+		                                        	data-empno="${e.no}" data-empnum="${e.empNum}" data-empname="${e.name}" data-gender="${e.gender}"
+		                                        	data-phone="${e.phone}", data-email="${e.email}">${e.name}</a>
 		                                        </td>
 		                                        <td>${e.deptTitle}</td>
 		                                        <td>${e.jobTitle}</td>
@@ -112,13 +114,14 @@
 		                                        <td>${e.email}</td>
 		                                        <td>
 													<c:if test="${e.accStatus == 1 }">정상</c:if>
-        											<c:if test="${e.accStatus > 1 }">중지</c:if> 
+        											<c:if test="${e.accStatus == 2 }">중지</c:if> 
 		                                        </td>
 		                                        <td>
 		                                        	<c:if test="${e.type == 1 }">N</c:if>
-      												<c:if test="${e.type > 1 }">Y</c:if>
+      												<c:if test="${e.type == 2 }">Y</c:if>
 		                                        </td>
 		                                    </tr>
+		                                    <c:set var="pageStartRowNum" value="${pageStartRowNum-1}" ></c:set>
 	                                	</c:forEach>
                                     </c:if>
                                 </tbody>
@@ -128,27 +131,6 @@
                         <!-- 페이징 -->
                         <div class="pasing-area">
                     	    <c:out value="${pageBar }" escapeXml="false"/>
-                            <!-- <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav> -->
                         </div>
                     </div>
                 </div>
@@ -174,20 +156,45 @@
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>
    </a>
-   
 <script>
 // 모달 오픈 시 이벤트
-$('#insertEmployee').on('shown.bs.modal', function() {
+$('#insertEmployee').on('shown.bs.modal', function(e) {
 	getDept();
 	getJob();
-	makeEmpNum();
-	$("#emp_name").focus();
 	// 수정으로 오픈되었을 경우 이벤트
+	var button = $(e.relatedTarget); // 누른 버튼
+	var empno = button.data('empno'); 
+	if(empno != null && empno != undefined){ // 수정
+		$('#resign_date_tr').show();
+		var empnum = button.data('empnum');
+		$('#emp_num').val(empnum);
+		var empname = button.data('empname');
+		$('#emp_name').val(empname);
+		$('.password_tr').hide();
+		var gender = button.data('gender');
+		if(gender == 'M' ) {
+			  $('#gender1').attr('checked',true);
+			} else {
+			  $('#gender2').attr('checked',true);
+			}
+		$('#gender').val(gender);
+		var phone = button.data('phone');
+		$('#phone').val(phone);
+		var email = button.data('email');
+		$('#email').val(email);
+	} else { // 생성
+		$('#resign_date_tr').hide();
+		makeEmpNum();
+		$("#emp_name").focus();
+	}
+/* 	var modal = $(this)
+	modal.find('.modal-title').text('New message to ' + recipient)
+	modal.find('.modal-body input').val(recipient) */
 })
 // 모달 클로즈 시 이벤트
 $('#insertEmployee').on('hidden.bs.modal', function (event) {
 	frmReset(); // 폼 리셋
-})
+});
 
 $(".profile_img").on('click', function() {
 	$('#profile_img_file').click();

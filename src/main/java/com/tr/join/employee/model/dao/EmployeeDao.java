@@ -10,4 +10,9 @@ public interface EmployeeDao {
 
 	Employee selectEmployeeById(SqlSessionTemplate session, String id);
 	
+	int updateEmployee(SqlSessionTemplate session, Map param);
+
+	int updatePassword(SqlSessionTemplate session, Map param);
+	
+	
 }

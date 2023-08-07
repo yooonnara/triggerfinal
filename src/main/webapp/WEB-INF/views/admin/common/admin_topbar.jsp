@@ -12,7 +12,7 @@
     <!-- 관리자페이지 이동 -->
 	<div class="input-group" style="justify-content: right">
 		<a href="${path }/main">
-			<span class="mr-2 d-none d-lg-inline small text-dark">멤버 페이지 </span>
+			<span class="mr-2 d-none d-lg-inline small text-dark">멤버 페이지</span>
 		</a>
 	</div>
 
@@ -25,7 +25,7 @@
 		<li class="nav-item dropdown no-arrow">
 			<a class="nav-link dropdown-toggle" href="#" id="userDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">윤나라</span>
+				<span class="mr-2 d-none d-lg-inline text-gray-600 small">이름</span>
 				<img class="img-profile rounded-circle" src="${path }/resources/img/undraw_profile.svg">
 			</a> 
 			
