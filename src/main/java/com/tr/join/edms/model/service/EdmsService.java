@@ -16,7 +16,7 @@ public interface EdmsService {
  
 	/* List<Edsm> selectEdsmAll(Map<String,Object>param); */
  
- 	List<Edms> selectBsnAll(Map<String,Object>param);
+ 	List<Edms> selectBsnAll(Map<String,Object> param);
  	
  	int selectEdmsCount();
  	
