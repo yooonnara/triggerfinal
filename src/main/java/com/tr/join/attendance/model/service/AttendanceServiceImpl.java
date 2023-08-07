@@ -157,14 +157,16 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.adminModifyWorktimeSubmit(session, w);
 	}
 
-	
+	@Override
+	public int wtModifyReturn(WorkTime w) {
+		return dao.wtModifyReturn(session, w);
+	}
 	
 //-------------연차-----------------
 	
-	
 
 
-	
+
 	@Override
 	public List<DayOff> selectDayoffAll(int no){
 		return dao.selectDayoffAll(session, no);

@@ -49,6 +49,7 @@ public interface AttendanceService {
 	List<WorkTime> adminWkDetail(Map<String,Object> param);
 	int updateWtModify(WorkTime w);
 	int adminModifyWorktimeSubmit(WorkTime w);
+	int wtModifyReturn(WorkTime w);
 	
 //---------------연차---------------------
 	List<DayOff> selectDayoffAll(int no);

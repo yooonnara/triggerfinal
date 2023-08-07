@@ -277,23 +277,18 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <form action="${path }/workTimeModify" class="dayOff"  onsubmit="return confirm('변경?')" method="post">
+                                <form action="${path }/workTimeModify" class="dayOff"  onsubmit="return confirm('출퇴근 시간 변경을 신청하시겠습니까?')" method="post">
                                 <!-- Modal body -->        
                                 <div class="modal-body">
-                                    <table id="workTimeTable" class="table table-borderless text-dark">
+                                    <table id="workTimeTable" style="width:400px;" class="table table-borderless text-dark">
                                             <colgroup>
-                                                <col style="width:30%">
-                                                <col style="width:70%">
+                                                <col style="width:40%">
+                                                <col style="width:60%">
                                             </colgroup>
-                                            <tr>
-                                                <th class="align-middle"></th>
-                                                <td class="font-weight-bold">
-                                                	<input type="hidden" class="form-control inputSize" name="att_no">
-                                                </td>
-                                            </tr>
                                             <tr>
                                                 <th class="align-middle">수정할 날짜</th>
                                                 <td class="font-weight-bold">
+                                               	 	<input type="hidden" class="form-control inputSize" name="att_no">
                                                 	<input type="text" class="form-control inputSize" name="workDate" readonly>
                                                 </td>
                                             </tr>
@@ -310,7 +305,7 @@
                                                 </td>
                                             </tr>
                                             
-                                            <tr>
+                                            <tr id="adtr">
                                                 <th class="align-middle">수정할 출근 시간</th>
                                                 <td>
                                                     <input type="time" class="form-control form-control-sm" name="re_start_time">
@@ -322,7 +317,7 @@
                                                     <input type="time" class="form-control form-control-sm" name="re_end_time">
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="adtr">
                                                 <th class="align-middle">신청 사유</th>
                                                 <td>
                                                     <textarea class="form-control" name="re_content" placeholder="사유를 입력하세요." rows="3" maxlength="99" style="resize: none;"></textarea>

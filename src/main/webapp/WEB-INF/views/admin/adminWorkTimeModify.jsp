@@ -112,7 +112,10 @@
 								$(input[2]).val(ad[0].att.endTime);
 								$(input[3]).val(ad[0].reStartTime);
 								$(input[4]).val(ad[0].reEndTime);
-								$(input[5]).val(ad[0].reContent);
+								$("#adWkTable td>textarea").html(ad[0].reContent);
+								
+								const length = ad[0].reContent.length;
+								$(".textCount").text(length + '자');
 								
 								
 								
@@ -125,23 +128,35 @@
 		            	}
 		            </script>
 		            <script>
-		           $(function(){
-		        	   $("#wtSubmit").click(function(){
-		        		   
-		        		   const input = $("#adWkTable td>input[type=text]");
-							const hidden = $("#adWkTable td>input[type=hidden]");
-							
-		        		   if(confirm("출퇴근 시간 변경을 승인하시겠습니까?")){
-		        			   location.href='wtModifySubmit?wtNo=' + $("#adWkTable input[name=wtNo]").val()
-		        					   + '&reStartTime=' + $("#adWkTable input[name=reStartTime]").val()
-		        					   + '&reEndTime=' +$("#adWkTable input[name=reEndTime]").val()
-		        					   + '&no=' +$("#adWkTable input[name=attNo]").val();
-		        		   }
-		        	   })
-		           })
-		            </script>
+			           $(function(){
+			        	   $("#wtSubmit").click(function(){
+			        		   
+			        		   const input = $("#adWkTable td>input[type=text]");
+								const hidden = $("#adWkTable td>input[type=hidden]");
+								
+			        		   if(confirm("출퇴근 시간변경을 승인하시겠습니까?")){
+			        			   location.href='wtModifySubmit?wtNo=' + $("#adWkTable input[name=wtNo]").val()
+			        					   + '&reStartTime=' + $("#adWkTable input[name=reStartTime]").val()
+			        					   + '&reEndTime=' +$("#adWkTable input[name=reEndTime]").val()
+			        					   + '&no=' +$("#adWkTable input[name=attNo]").val();
+			        		   }
+			        	   })
+			           })
+		           </script>
+		           <script>
+			           	$(function(){
+			           		$("#wtReturn").click(function(){
+			           			if(confirm("출퇴근 시간변경을 반려하시겠습니까?")){
+			           				location.href='wtModifyReturn?wtNo=' + $("#adWkTable input[name=wtNo]").val();
+			           			}
+			           		})
+			           	})
+		           </script>
 		            
-		            <!-- The Modal -->
+		            
+		            
+		            
+		            <!-- 출퇴근 시간 변경 Modal -->
         			<div id="adminWorkTime">
                     <div class="modal fade text-center" id="adminWkModify" tabindex="-1" role="dialog"
                         aria-activedescendant="exampleModalLabel" aria-hidden="true">
@@ -155,21 +170,16 @@
                                 </div>
                                 <!-- Modal body -->        
                                 <div class="modal-body">
-                                    <table id="adWkTable" class="table table-borderless text-dark">
+                                    <table id="adWkTable" style="width:430px;" class="table table-borderless text-dark">
                                             <colgroup>
-                                                <col style="width:30%">
-                                                <col style="width:70%">
+                                                <col style="width:40%">
+                                                <col style="width:60%">
                                             </colgroup>
-                                            <tr>
-                                                <th class="align-middle"></th>
-                                                <td class="font-weight-bold">
-                                                	<input type="hidden" class="form-control inputSize" name="wtNo">
-                                                	<input type="hidden" name="attNo">
-                                                </td>
-                                            </tr>
                                             <tr>
                                                 <th class="align-middle">수정할 날짜</th>
                                                 <td class="font-weight-bold">
+                                                	<input type="hidden" class="form-control inputSize" name="wtNo">
+                                                	<input type="hidden" name="attNo">
                                                 	<input type="text" class="form-control inputSize" name="workDate" readonly>
                                                 </td>
                                             </tr>
@@ -185,8 +195,8 @@
                                                     <input type="text" class="form-control inputSize" name="workDate" readonly>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th class="align-middle">수정할 출근 시간</th>
+                                            <tr id="adtr">
+                                                <th class="align-middle" >수정할 출근 시간</th>
                                                 <td>
                                                     <input type="text" class="form-control inputSize" name="reStartTime" readonly>
                                                 </td>
@@ -197,11 +207,11 @@
                                                     <input type="text" class="form-control inputSize" name="reEndTime" readonly>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th class="align-middle">신청 사유</th>
-                                                <td>
-                                                   <!--  <textarea class="form-control" name="re_content" readonly rows="3" maxlength="99" style="resize: none;"></textarea> -->
-                                                    <input type="text" class="form-control inputSize" name="reContent" readonly>
+                                            <tr id="adtr">
+                                                <th class="align-middle" id="thwd" >신청 사유</th>
+                                            	<td id="adtd">
+                                            		<span class="textCount"></span><span>/100자</span>
+                                                    <textarea class="form-control inputSize" name="reContent" rows="3" maxlength="99" style="resize: none;" readonly></textarea>
                                                 </td>
                                             </tr>
                                         </table>

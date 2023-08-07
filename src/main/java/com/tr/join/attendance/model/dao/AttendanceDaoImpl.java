@@ -137,12 +137,16 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		public int adminModifyWorktimeSubmit(SqlSession session, WorkTime w) {
 			return session.update("attendance.adminModifyWorktimeSubmit", w);
 		}
+		
+		@Override
+		public int wtModifyReturn(SqlSession session, WorkTime w) {
+			return session.update("attendance.wtModifyReturn", w);
+		}
+
 	 
 //------------연차--------------
 
-
 	
-
 	@Override
 	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
 		 return session.selectList("attendance.selectDayoffAll",no);

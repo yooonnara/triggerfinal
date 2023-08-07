@@ -87,6 +87,7 @@
                                     <th>사번</th>
                                     <th>부서명</th>
                                     <th>직위</th>
+                                    <th>요청일</th>
                                     <th>조정일</th>
                                     <th>내용</th>
                                     <th>진행상황</th>
@@ -102,6 +103,7 @@
                                     <td>${w.emp.deptTitle }</td>
                                     <td>${w.emp.jobTitle }</td>
                                     <td>${w.wtDate }</td>
+                                    <td>${w.att.attDate }</td>
                                     <td>${w.reContent }</td>
                                     <td>${w.appStatus }</td>
                                 </tr> 

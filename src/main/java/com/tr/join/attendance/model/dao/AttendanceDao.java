@@ -47,6 +47,7 @@ public interface AttendanceDao {
 	 List<WorkTime> adminWkDetail(SqlSession session, Map<String,Object> param);
 	 int updateWtModify(SqlSession session, WorkTime w);
 	 int adminModifyWorktimeSubmit(SqlSession session, WorkTime w);
+	 int wtModifyReturn(SqlSession session, WorkTime w);
 //---------------연차
 	 List<DayOff> selectDayoffAll(SqlSession session, int no);
 	 List<DayOff> selectAdminDayoffAll(SqlSession session);

@@ -69,8 +69,9 @@
                            id="sidebar-div">
                            <a href="${path }/workTimeMain"><p id="fP">근태 현황</p></a>
                            <p id="sP">내 근태 현황</p>
-                           <a href="${path }/workTimeWeekly"><p id="tP">주차별 근태 조회</p></a>
-                           <a href="${path }/workTimeList"><p id="fiP">일자별 근태 조회</p></a>
+                           <a href="${path }/workTimeWeekly"><p id="tP">- 주차별 근태 조회</p></a>
+                           <a href="${path }/workTimeList"><p id="fiP">- 일자별 근태 조회</p></a>
+                           <a href="${path }/wtModifyList"><p id="fiP">- 출퇴근 시간 변경 조회</p></a>
                            <a href="${path }/dayoffList"><p id="siP">내 연차 현황</p></a>
                            
                         </div>

@@ -262,6 +262,19 @@ public class AttendanceController {
 	  }
 	  
 	  
+	  //관리자 : 근태 출퇴근 수정 반혀 
+	  @RequestMapping("/wtModifyReturn")
+	  public ModelAndView wtModifyReturn(WorkTime w, ModelAndView mv) {
+		  System.out.println(w);
+		  int result = service.wtModifyReturn(w);
+		  
+		  if(result>0) {
+			  mv.setViewName("redirect:/adminWorkTimeModify");
+		  }
+		  
+		  return mv;
+		  
+	  }
 	  
 	  
 	  
