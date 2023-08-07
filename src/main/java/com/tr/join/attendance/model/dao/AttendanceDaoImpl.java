@@ -61,7 +61,13 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectOne("attendance.selectMonthTime",no);
 	 }
 	 
-	 //근태 리스트
+	 //근태 주차별 리스트
+	 @Override
+		public List<Attendance> workTimeWeekly(SqlSession session, int no) {
+			return session.selectList("attendance.workTimeWeekly", no);
+		}
+
+	 //근태 일자별 리스트
 	 @Override
 	 public List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param) {
 		 int cPage=(int)param.get("cPage");
@@ -70,7 +76,7 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 return session.selectList("attendance.selectWorkTimeAll",param);
 	 }
 	 
-	 @Override
+	@Override
 	 public int selectWorkTimeCount(SqlSession session){
 		 return session.selectOne("attendance.selectWorkTimeCount");
 	 }

@@ -210,7 +210,7 @@
                                             <tr id="adtr">
                                                 <th class="align-middle" id="thwd" >신청 사유</th>
                                             	<td id="adtd">
-                                            		<span class="textCount"></span><span>/100자</span>
+                                            		<span>/100자</span><span class="textCount font-weight-bold"></span>
                                                     <textarea class="form-control inputSize" name="reContent" rows="3" maxlength="99" style="resize: none;" readonly></textarea>
                                                 </td>
                                             </tr>

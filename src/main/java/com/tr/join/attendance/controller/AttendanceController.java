@@ -36,10 +36,6 @@ public class AttendanceController {
 		this.service=service;
 	}
 	
-//	@GetMapping("/workTimeMain")
-//	public String workTimeMain() {
-//		return "attendance/workTimeMain";
-//	}
 
 	@RequestMapping("/att/startInsert")
 	@ResponseBody
@@ -116,7 +112,39 @@ public class AttendanceController {
 		
 		 }
 		
-	  //근태 리스트 
+	  
+	  //근태 주차별 리스트 
+	  @GetMapping("/workTimeWeekly")
+	  public String workTimeWeekly(Model m) {
+		  
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<Attendance> att = service.workTimeWeekly(loginNo.getNo());
+		  m.addAttribute("att", att);
+		  System.out.println(m);
+		  return "attendance/workTimeWeekly";
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  //근태 일자별 리스트 
 	  @GetMapping("/workTimeList")
 	  public String selectWorkTimeAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
 										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
@@ -249,30 +277,48 @@ public class AttendanceController {
 	  
 	  //관리자 : 근태 출퇴근 수정 승인
 	  @RequestMapping("/wtModifySubmit")
-	  public ModelAndView wtModifySubmit(WorkTime w, ModelAndView mv) {
+	  public String wtModifySubmit(WorkTime w, Model m) {
+		  
 		  System.out.println(w);
-		  //승인 
+		  String msg = null, loc = null;
 		  int result = service.updateWtModify(w);
 		  int result1 = service.adminModifyWorktimeSubmit(w);
+		  
 		  if(result>0) {
-			  mv.setViewName("redirect:/adminWorkTimeModify");
+			  msg="근태 출퇴근 수정이 승인되었습니다.";
+			  loc="/adminWorkTimeModify";
+		  }else {
+			  msg="근태 출퇴근 수정에 실패했습니다.";
+			  msg="/adminWorkTimeModify";
 		  }
 		  
-		  return mv;
+		  m.addAttribute("result",result);
+		  m.addAttribute("result1",result1);
+		  m.addAttribute("msg",msg);
+		  m.addAttribute("loc",loc);
+		  
+		  return "common/msg";
 	  }
 	  
 	  
 	  //관리자 : 근태 출퇴근 수정 반혀 
 	  @RequestMapping("/wtModifyReturn")
-	  public ModelAndView wtModifyReturn(WorkTime w, ModelAndView mv) {
+	  public String wtModifyReturn(WorkTime w, Model m) {
 		  System.out.println(w);
+		  String msg = null, loc = null;
 		  int result = service.wtModifyReturn(w);
 		  
 		  if(result>0) {
-			  mv.setViewName("redirect:/adminWorkTimeModify");
+			  msg="근태 출퇴근 수정이 반려되었습니다.";
+			  loc="/adminWorkTimeModify";
 		  }
 		  
-		  return mv;
+		  m.addAttribute("result", result);
+		  m.addAttribute("msg",msg);
+		  m.addAttribute("loc",loc);
+		  
+		  return "common/msg";
+		 
 		  
 	  }
 	  
@@ -353,20 +399,6 @@ public class AttendanceController {
 		  
 		  return dfSearch;
 	  }
-	  
-	  //전사 연차 일정 캘린더
-//	  @RequestMapping("/att/dayoffCalendar")
-//      @ResponseBody
-//      public Map<String, Object> dayoffCalendar() {
-//         List<Edms> dayoffInfo = service.workCalendarDayoff();
-//           
-//         Map<String,Object> cParam=new HashMap(); 
-//         cParam.put("dayoffInfo",dayoffInfo);
-//           
-//         System.out.println(dayoffInfo);
-//         return cParam;
-//      }
-	  
 	  
 	     @RequestMapping("/admin/adminDayoffCalendar")
 	       @ResponseBody
@@ -462,74 +494,16 @@ public class AttendanceController {
 
 	  
 
-
+//	
+//	@GetMapping("/adminDayoffCalendar")
+//		public String adminDayoffCalendar() {
+//		return "admin/adminDayoffCalendar";
+//	}
+//	
 	
-		@GetMapping("/adminDayoffCalendar")
-		public String adminDayoffCalendar() {
-			return "admin/adminDayoffCalendar";
-	}
-	
-	
-	
-	
-	@GetMapping("/workTimeWeekly")
-		public String workTimeWeekly() {
-			return "attendance/workTimeWeekly";
-	}
-	
-	//@GetMapping("/workTimeList")
-	public String workTimeList() {
-		return "attendance/workTimeList";
-}
 	
 
-//	@GetMapping("/businessTripList")
-//	public String businessTripList() {
-//		return "attendance/businessTripList";
-//}
-	
-//	//@GetMapping("/dayoffList")
-//	public String dayoffList() {
-//		return "attendance/dayoffList";
-//}
-	
-	
-/*----------------------관리자 페이지----------------------*/
-	
-//	@GetMapping("/adminWorkTime")
-	public String adminWorkTime() {
-		return "admin/adminWorkTime";
-}
 
-	
-//	@GetMapping("/adminBusinessTrip")
-//	public String adminBusinessTrip() {
-//		return "admin/adminBusinessTrip";
-//}
-	
-	
-	
-	
-/*----------------------근태 출퇴근 관리 버튼----------------------*/
-//	@Autowired
-//	private EssService eService; 
-//1. 서비스 정의 
-//2. json 라이브러리 추가
-//3. 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

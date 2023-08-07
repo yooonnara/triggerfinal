@@ -23,8 +23,9 @@ public interface AttendanceDao {
 	 Attendance selectRemainTime(SqlSession session, int no);
 	 Attendance selectMonthTime(SqlSession session, int no);
 	 
-	 
-	 //근태 리스트
+	 //근태 주차별 리스트
+	 List<Attendance> workTimeWeekly(SqlSession session, int no);
+	 //근태 일자별 리스트
 	 List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param);
 	 int selectWorkTimeCount(SqlSession session);
 	 
