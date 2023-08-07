@@ -130,6 +130,15 @@ public class AdminEmployeeController {
 		return "redirect:/adminEmployee";
 	}
 	
-
-
+	// 멤버삭제
+//	@PostMapping("/amin/ajax/deleteEmployees")
+//	@ResponseBody
+//	public String deleteEmployees() {
+//		
+//		return "";
+//		
+//	}
+	
+	
+	
 }

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript"
+	src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 
@@ -39,7 +40,7 @@
 
 						<!-- 등록 버튼 -->
 						<div class="board-btn">
-							<button class="btn btn-primary btn-sm float-right">등록</button>
+							<button class="btn btn-primary btn-sm float-right mb-3">저장</button>
 						</div>
 
 
@@ -68,7 +69,22 @@
 												<div class="editor-wrap">
 													<div id="smarteditor" class="editor-area">
 														<!--에디터가 들어가는 영역입니다.-->
+														<textarea name="contents" id="contents"></textarea>
 													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th class="text-center align-middle"><span>첨부파일</span></th>
+										<td>
+											<div class="td-con">
+												<div class="fileBox addfile">
+													<span class="inputOuter bTp"> 
+														<div class="file-area" id="file-area">
+															<input type="file" name="uploadFiles1" id="uploadFiles1" class="uploadBtn" accept="image/*"  >
+														</div>
+													</span>
 												</div>
 											</div>
 										</td>

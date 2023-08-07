@@ -55,9 +55,12 @@
                             </div>
                             <!-- 작성하기 버튼 -->
                             <div class="btn-employee wirte-area col-4">
-                                <a href="#" class="btn btn-dark btn-sm float-right" name="delete-btn">멤버삭제</a>
+                                <a href="#" class="btn btn-dark btn-sm float-right" name="delete-btn" 
+                                	onclick="deleteClick()">멤버삭제
+                                </a>
                                 <a href="#" data-toggle="modal" data-target="#insertEmployeeModal"
-                                class="btn btn-dark btn-sm mr-1 float-right">멤버생성</a>
+                               		 class="btn btn-dark btn-sm mr-1 float-right">멤버생성
+                                </a>
                             </div>
                         </div>
 
@@ -177,6 +180,9 @@ $(function() {
 		else $("#chkAll").prop("checked", true); 
 	});
 });
+
+// 선택 삭제
+
 
 
 

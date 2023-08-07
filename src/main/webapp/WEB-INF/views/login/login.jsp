@@ -36,7 +36,7 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small my-4">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">아이디 저장 &nbsp;
+                                                <label class="custom-control-label" for="customCheck" name="saveId">아이디 저장 &nbsp;
                                                     &#124; &nbsp;</label>
                                                 <label class="">
                                                     <a href="#" data-toggle="modal" data-target="#passwordModal" class="text-primary">
@@ -111,6 +111,10 @@
             </div>
         </div>
     </div>
+
+<script>
+
+</script>
 
 
 	<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
