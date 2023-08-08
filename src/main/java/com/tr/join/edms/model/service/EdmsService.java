@@ -51,4 +51,6 @@ public interface EdmsService {
  
  Edms selectByVcNo(int no);
  
+ List<Edms> searchVc(Edms edms);
+ 
 }

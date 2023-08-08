@@ -101,6 +101,13 @@ public class EdmsDaoImpl implements EdmsDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("edms.selectByVcNo",no);
 	}
+	//어드민 계정 연차 ajax로 출력하기 
+
+	@Override
+	public List<Edms> searchVc(SqlSession session, Edms edms) {
+		// TODO Auto-generated method stub
+		return session.selectList("edms.searchVc",edms);
+	}
 	
 	
 	

@@ -190,13 +190,26 @@ public class EdmsController {
 	
 	@GetMapping("/adminBsn/search")
 	@ResponseBody
-	private List<Edms> search(@RequestParam("category") String category, 
+	public List<Edms> search(@RequestParam("category") String category, 
 			@RequestParam("keyword") String keyword, Model m)throws Exception{
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
 		List<Edms> search =service.search(edms);
 		return search;
+	}
+	
+	//연차 에이젝스 검색 기능 
+	@GetMapping("/adminVc/searchVc")
+	@ResponseBody
+	public List<Edms>searchVc(@RequestParam("category") String category,
+			@RequestParam("keyword") String keyword, Model m) throws Exception{
+		Edms edms= new Edms();
+		edms.setCategory(category);
+		edms.setKeyword(keyword);
+		List<Edms> searchVc=service.searchVc(edms);
+		return searchVc;
+		
 	}
 	
 	

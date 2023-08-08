@@ -93,25 +93,25 @@
                         <table class="table table-sm shadow table-hover text-center">
 
                             <!-- 테이블 칸 크기 -->
-                            <colgroup>
-                                	<col width="10%" />
+                     <colgroup>
+                                  <col width="10%" />
                                     <col width="10%" />
                                     <col width="10%" />
+                                     <col width="10%" />
                                     <col width="10%" />
+                                    <col width="15%" />
                                     <col width="10%" />
-                                    <col width="20%" />
-                                    <col width="10%" />
-                                    <col width="20%" />
+                                    <col width="15%" />
                             </colgroup>
 						
                             <thead>
-                                <tr class="bg-primary text-white">
-                                    <th>문서번호</th>
+                                <tr class="bg-dark text-white">
+                                    <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
                                     <th>직급</th>
                                     <th>이름</th>
-                                     <th>제목</th>
+                                    <th>제목</th>
                                     <th>구분</th>
                                     <th>결재상태</th>
                                 </tr>

@@ -53,55 +53,116 @@
                             </form>
                         </div>
                         
-                     <!--    <script> 
+                     <script> 
                         function searchVc(){
                         	$.ajax({
                         		url : "${pageContext.request.contextPath}/edms/adminVc/searchVc",
                         		data : $("form[name=vc-form]").serialize(),
                         		success:function(n){
-                        			
+                        			$("#edms-vc").html(""); //리셋
                         			console.log(n);
-                        			for
-                        		}	
-                        	
-                        	
+                        			for(let i=0; i<n.length;i++){
+                        				const $tr=$("<tr>");
+                        				const $no=$("<td>").text(n[i]["no"]);
+                        				const $createDate=$("<td>").text(n[i]["createDate"]);
+                        				const $deptTitle=$("<td>").text(n[i]['emp']["deptTitle"]);
+                        				const $jobTitle=$("<td>").text(n[i]['emp']["jobTitle"]);
+                        				const $name=$("<td>").text(n[i]['emp']["name"]);
+                        				const $title=$("<td>").text(n[i]["title"]);
+                        				let type="";
+                        				switch(n[i]["type"]){
+                        				case 0:type="연차" ;break;
+                        				case 1:type="출장" ;break;
+                        				}
+                        				const $type=$("<td>").text(type);
+                        				
+                        				let appStatus="";
+                        				switch (n[i]["appStatus"]){
+                        				case 0 : appStatus ="대기";break;
+                        				case 1 : appStatus="대기";break;
+                        				case 2 : appStatus="반려";break; 
+                        				}
+                        				
+                        				const $appStatus=$("<td>").text(appStatus);
+                        				$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).
+                        				append($name).append($title).append($type).append($appStatus);
+                        				$("#edms-vc").append($tr);
+                        			}
+                        	},
+                        	error:function(){
+                        		consoe.log("에이젝스 통신 실패");
                         	}
                         	})
-                        }
+                        };
                         
-                        </script> -->
-                        
-                      
-                                <div class="btn-member col-4" id="vcAll">
-                                    <button type="button" class="btn btn-dark btn-sm  ml-1 float-right">반려</button>
-                                     <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">승인</button>
-                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">대기</button>
-                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right">전체</button>
+                        </script> 
+                                <div class="btn-member col-4" id="vcBtnAll">
+                                    <button type="button" class="btn btn-dark btn-sm  ml-1 float-right" value="-1">전체</button>
+                                     <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="0">대기</button>
+                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="1">승인</button>
+                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="2">반려</button>
                                       
                                 </div>
                             </div>
                        
                             <!-- 검색하기 버튼 -->
+                            <script>
+                            $("vcBtnAll button").click(e=>{
+                            	$.ajax({
+                            		url:"${pageContext.request.contextPath}/edms/adminVc/btn",
+                            		data: {"searchVcBtn":e.target.value},
+                            		success:function(f){
+                            		$("#edms-vc").html("");
+                            		console.log(e.target.value);
+                            		console.log(f);
+                            		for(let i=0; i<f.length; i++){
+                            			const $tr=$("<tr>");
+                            			const $no=$("<td>").text(f[i]["no"]);
+                            			const $createDate=$("<td>").text(f[i]["createDate"]);
+                            			const $deptTitle=$("<td>").text(f[i][emp]["deptTitle"]);
+                            			const $jobTitle=$("<td>").text(f[i][emp]["jobTitle"]);
+                            			const $name=$("<td>").text(f[i][emp]["name"]);
+                            			const $title=$("<td>").text(f[i][emp]["name"]);
+                            			let type="";
+                            			switch(f[i]["type"]){
+                            			case 0: type="연차" ;break;
+                            			case 1: type="출장" ;break;
+                            			}
+                            			const $type=$("<td>").text(type);
+                            			
+                            			let appStatus="";
+                            			switch(f[i]["appStatus"]){
+                            			case 0: appStatus="대기" ;break;
+                            			case 1:appStatus="승인" ;break;
+                            			case 2:
+                            			}
+                            		}
+                            		}
+                            	})
+                            })
+                            	
                             
+                            </script>
                             
                             
                           <div class="board-container">
                             <table class="table table-sm shadow table-hover text-center">
 
                                 <!-- 테이블 칸 크기 -->
-                                <colgroup>
-                                   <col width="10%" />
+                               <colgroup>
+                                  <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
+                                     <col width="10%" />
+                                    <col width="10%" />
                                     <col width="15%" />
                                     <col width="10%" />
-                                    <col width="10%" />
                                     <col width="15%" />
-                                    <col width="10%" />
-                                    <col width="25%" />
-                                </colgroup>
-
-                                <thead>
-                                    <tr class="bg-dark text-white">
-                       				 <th>문서번호</th>
+                            </colgroup>
+						
+                            <thead>
+                                <tr class="bg-dark text-white">
+                                    <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
                                     <th>직급</th>
@@ -109,7 +170,7 @@
                                     <th>제목</th>
                                     <th>구분</th>
                                     <th>결재상태</th>
-                                    </tr>
+                                </tr>
                                 </thead>
                                 <tbody id="edms-vc">
                                 <c:if test="${not empty edms}">

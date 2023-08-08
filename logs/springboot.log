@@ -1247,3 +1247,490 @@ Caused by: org.xml.sax.SAXParseException: 요소 유형 "mapper"의 콘텐츠는
 2023-08-08 10:48:53.162  INFO 25540 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-08-08 10:48:53.162  INFO 25540 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-08-08 10:48:53.165  INFO 25540 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-08-08 11:08:40.605 ERROR 25540 --- [http-nio-9090-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Optional int parameter 'no' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type.] with root cause
+
+java.lang.IllegalStateException: Optional int parameter 'no' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type.
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.handleNullValue(AbstractNamedValueMethodArgumentResolver.java:263) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:116) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:179) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:146) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.78.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.29.jar:5.3.29]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.78.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.10.jar:5.7.10]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.29.jar:5.3.29]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.78.jar:9.0.78]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-08-08 12:00:13.958  INFO 25540 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:00:14.075  INFO 25540 --- [Thread-10] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:00:14.078  INFO 25540 --- [Thread-10] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-08-08 12:00:14.106  INFO 25540 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-08-08 12:00:14.192  INFO 25540 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-08-08 12:00:14.584  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:00:14.587  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:00:16.174  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:00:16.196  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:00:16.284  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:00:16.430  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:00:16.432  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:00:16.432  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:00:17.159  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:00:17.164  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:00:17.164  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2554 ms
+2023-08-08 12:00:17.996  INFO 25540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4db1fbf7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19a79b26, org.springframework.security.web.context.SecurityContextPersistenceFilter@123e390b, org.springframework.security.web.header.HeaderWriterFilter@36eaef11, org.springframework.security.web.authentication.logout.LogoutFilter@32723f22, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4d5a7d82, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c0c7b7d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d7f9d8a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2959eee6, org.springframework.security.web.session.SessionManagementFilter@3d523cd5, org.springframework.security.web.access.ExceptionTranslationFilter@5a1a94cd, org.springframework.security.web.access.intercept.AuthorizationFilter@6ab07c05]
+2023-08-08 12:00:18.238  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-08-08 12:00:18.346  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-08-08 12:00:18.429  INFO 25540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:00:18.458  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:00:18.479  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 4.06 seconds (JVM running for 4519.446)
+2023-08-08 12:00:18.482  INFO 25540 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:04:59.389  INFO 25540 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2023-08-08 12:04:59.418  INFO 25540 --- [Thread-24] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:04:59.425  INFO 25540 --- [Thread-24] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-08-08 12:04:59.479  INFO 25540 --- [Thread-24] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-08-08 12:04:59.654  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:04:59.654  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:05:00.408  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:05:00.427  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:05:00.482  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:05:00.559  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:05:00.559  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:05:00.560  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:05:00.740  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:05:00.742  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:05:00.742  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1083 ms
+2023-08-08 12:05:01.080  INFO 25540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@33122c1f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77384c97, org.springframework.security.web.context.SecurityContextPersistenceFilter@67c55491, org.springframework.security.web.header.HeaderWriterFilter@56276a, org.springframework.security.web.authentication.logout.LogoutFilter@36f6d20, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@fcb5c20, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@11e3b974, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@203fb155, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35241ca, org.springframework.security.web.session.SessionManagementFilter@5f262689, org.springframework.security.web.access.ExceptionTranslationFilter@1c5d41bc, org.springframework.security.web.access.intercept.AuthorizationFilter@26b12be4]
+2023-08-08 12:05:01.388  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-08-08 12:05:01.528  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-08-08 12:05:01.567  INFO 25540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:05:01.608  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:05:01.653  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 2.067 seconds (JVM running for 4802.62)
+2023-08-08 12:05:01.656  INFO 25540 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:07:14.200  INFO 25540 --- [http-nio-9090-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-08 12:07:14.200  INFO 25540 --- [http-nio-9090-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-08 12:07:14.203  INFO 25540 --- [http-nio-9090-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-08 12:15:07.697  INFO 25540 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:15:07.835  INFO 25540 --- [Thread-29] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:15:07.836  INFO 25540 --- [Thread-29] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-08-08 12:15:07.861  INFO 25540 --- [Thread-29] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-08-08 12:15:07.912  INFO 25540 --- [Thread-29] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2023-08-08 12:15:08.014  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:15:08.014  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:15:08.292  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:15:08.309  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:15:08.359  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:15:08.431  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:15:08.431  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:15:08.432  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:15:08.814  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:15:08.824  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:15:08.825  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 808 ms
+2023-08-08 12:15:09.143  INFO 25540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@277d0eb6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@37746a14, org.springframework.security.web.context.SecurityContextPersistenceFilter@72a9739e, org.springframework.security.web.header.HeaderWriterFilter@7168d5fa, org.springframework.security.web.authentication.logout.LogoutFilter@5160144e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4b7b66dd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@404b5956, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@773b83a0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7959733, org.springframework.security.web.session.SessionManagementFilter@60dfe2e3, org.springframework.security.web.access.ExceptionTranslationFilter@bb73ce9, org.springframework.security.web.access.intercept.AuthorizationFilter@47fb4c5c]
+2023-08-08 12:15:09.660  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2023-08-08 12:15:09.763  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2023-08-08 12:15:09.787  INFO 25540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:15:09.806  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:15:09.811  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 1.834 seconds (JVM running for 5410.779)
+2023-08-08 12:15:09.815  INFO 25540 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:15:53.222  INFO 25540 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2023-08-08 12:15:53.287  INFO 25540 --- [Thread-37] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:15:53.377  INFO 25540 --- [Thread-37] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2023-08-08 12:15:53.462  INFO 25540 --- [Thread-37] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2023-08-08 12:15:53.717  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:15:53.717  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:15:53.991  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:15:54.005  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:15:54.055  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:15:54.105  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:15:54.106  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:15:54.106  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:15:54.488  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:15:54.517  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:15:54.519  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 798 ms
+2023-08-08 12:15:54.732  INFO 25540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@623f66d4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5399a0b2, org.springframework.security.web.context.SecurityContextPersistenceFilter@6ed7c564, org.springframework.security.web.header.HeaderWriterFilter@b6a96e6, org.springframework.security.web.authentication.logout.LogoutFilter@1e0965ed, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@547cbd7c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c9ec434, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@631cb8e7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e013309, org.springframework.security.web.session.SessionManagementFilter@557f1d69, org.springframework.security.web.access.ExceptionTranslationFilter@4de3ef0d, org.springframework.security.web.access.intercept.AuthorizationFilter@374c4bdd]
+2023-08-08 12:15:55.090  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2023-08-08 12:15:55.202  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2023-08-08 12:15:55.225  INFO 25540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:15:55.280  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:15:55.298  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 1.644 seconds (JVM running for 5456.265)
+2023-08-08 12:15:55.306  INFO 25540 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:16:51.947  INFO 25540 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:16:52.114  INFO 25540 --- [Thread-42] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:16:52.122  INFO 25540 --- [Thread-42] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2023-08-08 12:16:52.179  INFO 25540 --- [Thread-42] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2023-08-08 12:16:52.377  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:16:52.377  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:16:52.619  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:16:52.634  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:16:52.678  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:16:52.734  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:16:52.735  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:16:52.735  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:16:52.911  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:16:52.914  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:16:52.914  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 533 ms
+2023-08-08 12:16:53.252  INFO 25540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@620a953e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@710355d7, org.springframework.security.web.context.SecurityContextPersistenceFilter@3197d9ac, org.springframework.security.web.header.HeaderWriterFilter@42184d1d, org.springframework.security.web.authentication.logout.LogoutFilter@44523168, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7eada6fe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2513eac6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@25e33bdc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51f6a1e4, org.springframework.security.web.session.SessionManagementFilter@19bef683, org.springframework.security.web.access.ExceptionTranslationFilter@6eff4dfd, org.springframework.security.web.access.intercept.AuthorizationFilter@37062bc7]
+2023-08-08 12:16:53.483  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2023-08-08 12:16:53.584  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2023-08-08 12:16:53.609  INFO 25540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:16:53.648  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:16:53.658  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 1.339 seconds (JVM running for 5514.625)
+2023-08-08 12:16:53.661  INFO 25540 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:24:21.111  INFO 25540 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:24:21.134  INFO 25540 --- [Thread-47] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:24:21.139  INFO 25540 --- [Thread-47] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2023-08-08 12:24:21.216  INFO 25540 --- [Thread-47] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2023-08-08 12:24:21.302  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:24:21.302  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:24:21.436  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:24:21.444  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:24:21.475  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:24:21.524  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:24:21.524  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:24:21.524  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:24:21.643  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:24:21.645  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:24:21.645  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 340 ms
+2023-08-08 12:24:21.712  WARN 25540 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adminEmployeeController' defined in file [C:\Users\user\git\triggerfinal\target\classes\com\tr\join\admin\controller\AdminEmployeeController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adminEmployeeServiceImpl': Unsatisfied dependency expressed through field 'session'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sqlSessionTemplate' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Unsatisfied dependency expressed through method 'sqlSessionTemplate' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+2023-08-08 12:24:21.713  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:24:21.720  INFO 25540 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-08-08 12:24:21.739 ERROR 25540 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adminEmployeeController' defined in file [C:\Users\user\git\triggerfinal\target\classes\com\tr\join\admin\controller\AdminEmployeeController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adminEmployeeServiceImpl': Unsatisfied dependency expressed through field 'session'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sqlSessionTemplate' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Unsatisfied dependency expressed through method 'sqlSessionTemplate' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:921) ~[spring-context-5.3.29.jar:5.3.29]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.29.jar:5.3.29]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+	at com.tr.join.Gdj64JoinFinalApplication.main(Gdj64JoinFinalApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adminEmployeeServiceImpl': Unsatisfied dependency expressed through field 'session'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sqlSessionTemplate' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Unsatisfied dependency expressed through method 'sqlSessionTemplate' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:662) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:642) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.29.jar:5.3.29]
+	... 24 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sqlSessionTemplate' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Unsatisfied dependency expressed through method 'sqlSessionTemplate' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659) ~[spring-beans-5.3.29.jar:5.3.29]
+	... 39 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.29.jar:5.3.29]
+	... 52 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.3.29.jar:5.3.29]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-5.3.29.jar:5.3.29]
+	... 66 common frames omitted
+Caused by: java.io.IOException: Failed to parse mapping resource: 'file [C:\Users\user\git\triggerfinal\target\classes\mybatis\mappers\edms\edms-mapper.xml]'
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:700) ~[mybatis-spring-2.1.1.jar:2.1.1]
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:577) ~[mybatis-spring-2.1.1.jar:2.1.1]
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:720) ~[mybatis-spring-2.1.1.jar:2.1.1]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:187) ~[mybatis-spring-boot-autoconfigure-2.3.1.jar:2.3.1]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$3428e373.CGLIB$sqlSessionFactory$1(<generated>) ~[mybatis-spring-boot-autoconfigure-2.3.1.jar:2.3.1]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$3428e373$$FastClassBySpringCGLIB$$982152df.invoke(<generated>) ~[mybatis-spring-boot-autoconfigure-2.3.1.jar:2.3.1]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.3.29.jar:5.3.29]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.3.29.jar:5.3.29]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$3428e373.sqlSessionFactory(<generated>) ~[mybatis-spring-boot-autoconfigure-2.3.1.jar:2.3.1]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.3.29.jar:5.3.29]
+	... 67 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 217; columnNumber: 11; 요소 유형 "choose"의 콘텐츠는 "(when*,otherwise?)"과(와) 일치해야 합니다.
+	at org.apache.ibatis.parsing.XPathParser.createDocument(XPathParser.java:262) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.parsing.XPathParser.<init>(XPathParser.java:127) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.<init>(XMLMapperBuilder.java:85) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:697) ~[mybatis-spring-2.1.1.jar:2.1.1]
+	... 80 common frames omitted
+Caused by: org.xml.sax.SAXParseException: 요소 유형 "choose"의 콘텐츠는 "(when*,otherwise?)"과(와) 일치해야 합니다.
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:204) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.error(ErrorHandlerWrapper.java:135) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:396) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:284) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDValidator.handleEndElement(XMLDTDValidator.java:1923) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDValidator.endElement(XMLDTDValidator.java:865) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEndElement(XMLDocumentFragmentScannerImpl.java:1728) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2899) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:542) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:889) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:825) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:247) ~[na:na]
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:342) ~[na:na]
+	at org.apache.ibatis.parsing.XPathParser.createDocument(XPathParser.java:260) ~[mybatis-3.5.13.jar:3.5.13]
+	... 83 common frames omitted
+
+2023-08-08 12:24:37.527  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 25540 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:24:37.528  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:24:37.664  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:24:37.673  INFO 25540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:24:37.698  WARN 25540 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:24:37.738  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:24:37.738  INFO 25540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:24:37.739  INFO 25540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:24:37.850  INFO 25540 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:24:37.852  INFO 25540 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:24:37.852  INFO 25540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 323 ms
+2023-08-08 12:24:37.954  INFO 25540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7f057e06, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6fbdad68, org.springframework.security.web.context.SecurityContextPersistenceFilter@5aa52e44, org.springframework.security.web.header.HeaderWriterFilter@1270b4cf, org.springframework.security.web.authentication.logout.LogoutFilter@7c1d8c67, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4594687, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7970299a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e312cb7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a570bfe, org.springframework.security.web.session.SessionManagementFilter@20483437, org.springframework.security.web.access.ExceptionTranslationFilter@ca5ea60, org.springframework.security.web.access.intercept.AuthorizationFilter@3b5333d1]
+2023-08-08 12:24:38.045  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2023-08-08 12:24:38.231  INFO 25540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2023-08-08 12:24:38.249  INFO 25540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:24:38.259  INFO 25540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:24:38.264  INFO 25540 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 0.759 seconds (JVM running for 5979.231)
+2023-08-08 12:24:38.265  INFO 25540 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:24:45.446  INFO 25540 --- [RMI TCP Connection(148)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-08-08 12:24:45.463  INFO 25540 --- [RMI TCP Connection(148)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:24:45.467  INFO 25540 --- [RMI TCP Connection(148)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2023-08-08 12:24:45.620  INFO 25540 --- [RMI TCP Connection(148)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+2023-08-08 12:24:49.896  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 3724 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:24:49.897  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:24:49.952  INFO 3724 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\user\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.5.0.0\ojdbc8-21.5.0.0.jar referenced one or more files that do not exist: file:/C:/Users/user/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.5.0.0/oraclepki.jar
+2023-08-08 12:24:49.952  INFO 3724 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-08-08 12:24:49.952  INFO 3724 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-08-08 12:24:50.536  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:24:50.559  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:24:50.669  WARN 3724 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:24:51.210  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:24:51.219  INFO 3724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:24:51.219  INFO 3724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:24:51.472  INFO 3724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:24:51.484  INFO 3724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:24:51.484  INFO 3724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1532 ms
+2023-08-08 12:24:51.977  INFO 3724 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@635e6099, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@44eb0834, org.springframework.security.web.context.SecurityContextPersistenceFilter@23107080, org.springframework.security.web.header.HeaderWriterFilter@2ded809b, org.springframework.security.web.authentication.logout.LogoutFilter@22c629a7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@325e008e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29aadad6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3245d7c1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@751f7487, org.springframework.security.web.session.SessionManagementFilter@41f2b371, org.springframework.security.web.access.ExceptionTranslationFilter@29477fc4, org.springframework.security.web.access.intercept.AuthorizationFilter@18a7f6b0]
+2023-08-08 12:24:52.308  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-08-08 12:24:52.763  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-08-08 12:24:52.883  INFO 3724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:24:52.930  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:24:52.942  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 3.452 seconds (JVM running for 6.063)
+2023-08-08 12:24:56.458  INFO 3724 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-08 12:24:56.459  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-08 12:24:56.461  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-08-08 12:34:30.696  INFO 3724 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:34:30.720  INFO 3724 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:34:30.722  INFO 3724 --- [Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-08-08 12:34:30.736  INFO 3724 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-08-08 12:34:30.806  INFO 3724 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-08-08 12:34:30.886  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 3724 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:34:30.886  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:34:31.049  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:34:31.057  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:34:31.095  WARN 3724 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:34:31.148  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:34:31.149  INFO 3724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:34:31.149  INFO 3724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:34:31.290  INFO 3724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:34:31.293  INFO 3724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:34:31.293  INFO 3724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 405 ms
+2023-08-08 12:34:31.421  INFO 3724 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7bcf9d6a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@653db16e, org.springframework.security.web.context.SecurityContextPersistenceFilter@754510f3, org.springframework.security.web.header.HeaderWriterFilter@35c470e2, org.springframework.security.web.authentication.logout.LogoutFilter@7067bc7b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@134d85e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6df47e5d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b214061, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4b1d3ff6, org.springframework.security.web.session.SessionManagementFilter@20571bd6, org.springframework.security.web.access.ExceptionTranslationFilter@1a3314f, org.springframework.security.web.access.intercept.AuthorizationFilter@3d719dfe]
+2023-08-08 12:34:31.524  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-08-08 12:34:31.653  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-08-08 12:34:31.674  INFO 3724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:34:31.688  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:34:31.694  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 0.835 seconds (JVM running for 584.814)
+2023-08-08 12:34:31.697  INFO 3724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:34:38.012  INFO 3724 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-08 12:34:38.012  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-08 12:34:38.015  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-08-08 12:37:29.422  INFO 3724 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:37:29.438  INFO 3724 --- [Thread-29] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:37:29.438  INFO 3724 --- [Thread-29] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-08-08 12:37:29.444  INFO 3724 --- [Thread-29] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-08-08 12:37:29.490  INFO 3724 --- [Thread-29] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-08-08 12:37:29.564  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 3724 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:37:29.564  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:37:29.723  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:37:29.732  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:37:29.762  WARN 3724 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:37:29.809  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:37:29.810  INFO 3724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:37:29.810  INFO 3724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:37:29.926  INFO 3724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:37:29.928  INFO 3724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:37:29.928  INFO 3724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 360 ms
+2023-08-08 12:37:30.044  INFO 3724 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@77f8bc91, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a18eea0, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b5adb32, org.springframework.security.web.header.HeaderWriterFilter@2c575e7c, org.springframework.security.web.authentication.logout.LogoutFilter@76d64dc4, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3a273096, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@217d70bb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@37cf6e56, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11d7add3, org.springframework.security.web.session.SessionManagementFilter@55be63af, org.springframework.security.web.access.ExceptionTranslationFilter@5a7011ab, org.springframework.security.web.access.intercept.AuthorizationFilter@6b7bf389]
+2023-08-08 12:37:30.144  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-08-08 12:37:30.246  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-08-08 12:37:30.264  INFO 3724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:37:30.281  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:37:30.286  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 0.746 seconds (JVM running for 763.406)
+2023-08-08 12:37:30.287  INFO 3724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:38:10.603  INFO 3724 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-08 12:38:10.603  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-08 12:38:10.604  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-08 12:38:16.783  INFO 3724 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-08-08 12:38:16.799  INFO 3724 --- [Thread-38] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-08-08 12:38:16.800  INFO 3724 --- [Thread-38] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-08-08 12:38:16.806  INFO 3724 --- [Thread-38] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-08-08 12:38:16.880  INFO 3724 --- [Thread-38] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-08-08 12:38:16.951  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 3724 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-08 12:38:16.951  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-08 12:38:17.084  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-08 12:38:17.092  INFO 3724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-08-08 12:38:17.122  WARN 3724 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-08 12:38:17.172  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:38:17.172  INFO 3724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-08 12:38:17.173  INFO 3724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-08-08 12:38:17.304  INFO 3724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-08 12:38:17.306  INFO 3724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-08 12:38:17.306  INFO 3724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 352 ms
+2023-08-08 12:38:17.421  INFO 3724 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@392b6b14, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@290b2271, org.springframework.security.web.context.SecurityContextPersistenceFilter@49e0fb67, org.springframework.security.web.header.HeaderWriterFilter@28e493b9, org.springframework.security.web.authentication.logout.LogoutFilter@7d24cae7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@18c11e2e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ad9eb36, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@262cdc8f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3ad96fd4, org.springframework.security.web.session.SessionManagementFilter@688fbce7, org.springframework.security.web.access.ExceptionTranslationFilter@5e47b3ae, org.springframework.security.web.access.intercept.AuthorizationFilter@6203f641]
+2023-08-08 12:38:17.506  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-08-08 12:38:17.654  INFO 3724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-08-08 12:38:17.671  INFO 3724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-08 12:38:17.696  INFO 3724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:38:17.707  INFO 3724 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 0.783 seconds (JVM running for 810.828)
+2023-08-08 12:38:17.711  INFO 3724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-08-08 12:38:27.560  INFO 3724 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-08 12:38:27.560  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-08 12:38:27.561  INFO 3724 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-08 13:59:20.796  WARN 3724 --- [HikariPool-4 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Thread starvation or clock leap detected (housekeeper delta=21m59s165ms433µs).
+2023-08-08 14:02:15.692  WARN 3724 --- [HikariPool-4 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Thread starvation or clock leap detected (housekeeper delta=2m24s890ms848µs300ns).
+2023-08-08 14:11:30.581  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@51b32ff6 (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:11:30.583  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@291abeca (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:11:30.584  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@21829fa7 (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:11:30.585  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@321e724d (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:11:30.586  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@58829968 (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:11:30.587  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@24317281 (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:11:30.587  WARN 3724 --- [http-nio-9090-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-4 - Failed to validate connection oracle.jdbc.driver.T4CConnection@47b58dd5 (접속 종료). Possibly consider using a shorter maxLifetime value.
+2023-08-08 14:12:03.293 DEBUG 3724 --- [http-nio-9090-exec-1] c.t.join.edms.controller.EdmsController  : 
+2023-08-08 14:13:44.838  WARN 3724 --- [http-nio-9090-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 2 errors<EOL>Field error in object 'edms' on field 'endDate': rejected value []; codes [typeMismatch.edms.endDate,typeMismatch.endDate,typeMismatch.java.sql.Date,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [edms.endDate,endDate]; arguments []; default message [endDate]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.sql.Date' for property 'endDate'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [java.sql.Date] for value []; nested exception is java.lang.IllegalArgumentException]<EOL>Field error in object 'edms' on field 'startDate': rejected value []; codes [typeMismatch.edms.startDate,typeMismatch.startDate,typeMismatch.java.sql.Date,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [edms.startDate,startDate]; arguments []; default message [startDate]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.sql.Date' for property 'startDate'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [java.sql.Date] for value []; nested exception is java.lang.IllegalArgumentException]]

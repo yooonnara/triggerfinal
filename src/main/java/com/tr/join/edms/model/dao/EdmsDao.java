@@ -53,7 +53,8 @@ public interface EdmsDao {
 		
 		Edms selectByVcNo(SqlSession session, int no);
 		
-		
+		//어드민 계정 연차 ajax로 검색하기 
+		List<Edms> searchVc(SqlSession session, Edms edms);
 		
 		//어드민 계정 출장 승인하기 
 		

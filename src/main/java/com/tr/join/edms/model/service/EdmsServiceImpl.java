@@ -121,6 +121,15 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.selectByVcNo(session,no);
 	}
+
+
+	//연차 페이지 ajax로 검색하기 
+	@Override
+	public List<Edms> searchVc(Edms edms) {
+		// TODO Auto-generated method stub
+		return dao.searchVc(session,edms);
+	}
+	
 	
 	
 	
