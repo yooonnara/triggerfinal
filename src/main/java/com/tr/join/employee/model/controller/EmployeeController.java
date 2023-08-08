@@ -2,8 +2,10 @@ package com.tr.join.employee.model.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -31,9 +33,27 @@ public class EmployeeController {
 	public String loginPage() {
 		return "login/login";
 	}
+	
+	// 아이디 저장
+	@PostMapping("/successLogin")
+	public String cookieResolve(String userId, @RequestParam(name = "saveId", required = false) String saveId,
+			HttpServletResponse response) {
 
+		if ("on".equals(saveId)) { // 아이디 저장 버튼을 체크했을 때
+			Cookie cookie = new Cookie("userId", userId);
+			cookie.setMaxAge(7 * 24 * 60 * 60); // 일주일
+			response.addCookie(cookie);
+		} else { // 체크하지 않았을 때
+			Cookie cookie = new Cookie("userId", "");
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+		}
+		return "redirect:/main";
+	}
+	
+	
 	@GetMapping("/main") 
-	 public String mainPage() { 
+	 public String mainPage( ) { 		
 		return "mainpage"; 
 	}
 	

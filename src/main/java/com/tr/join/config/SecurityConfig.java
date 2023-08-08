@@ -37,7 +37,7 @@ public class SecurityConfig{
 					.usernameParameter("userId")
 					.passwordParameter("password")
 					.loginProcessingUrl("/login")
-					.defaultSuccessUrl("/main")
+					.successForwardUrl("/successLogin")
 				.and()
 				.authorizeHttpRequests()
 					.antMatchers("/resources/**").permitAll()
@@ -46,7 +46,7 @@ public class SecurityConfig{
 				.and()
 				.rememberMe()  // 자동 로그인 설정
 					//.key("hayden") //쿠키에 사용되는 값을 암호화하기 위한 키(key)값
-					.rememberMeParameter("remember-me")
+					.rememberMeParameter("saveId")
 					.userDetailsService(provider) //DataSource 추가
 					.tokenValiditySeconds(604800) //토큰 유지 시간(초단위) - 일주일
 					.alwaysRemember(false)
@@ -54,8 +54,8 @@ public class SecurityConfig{
 				.logout()
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/")
-					.invalidateHttpSession(true) //세션 삭제
-					.deleteCookies("remember-me", "JSESSIONID")
+					//.invalidateHttpSession(true) //세션 삭제
+					//.deleteCookies("JSESSIONID")
 				.and()
 				.authenticationProvider(provider)
 				.headers().frameOptions().disable()

@@ -131,16 +131,6 @@ function checkEnrollDate(str){
 	}
 }
 
-// 퇴사일
-/*function checkEnrollDate(str){
-	if ($('#enroll_date').val() == ''){
-		$(".enroll-date-msg").show();
-		$("#enroll_date").focus();
-		return false;
-	} else {
-		$(".enroll-date-msg").hide();
-	}
-}*/
 
 // 부서
 function checkDept(str){

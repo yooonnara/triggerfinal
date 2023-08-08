@@ -300,7 +300,7 @@ function getDept(deptNo) {
         url: "${path}/admin/ajax/getDept",
         success: data => {
             $('#dept').empty();
-            const basicOption = $("<option></option>").attr("value", "selected").text("선택");
+            const basicOption = $("<option></option>").attr("value", "").text("선택");
             $('#dept').append(basicOption); 
             for (var i = 0; i < data.length; i++) {
                 const no = data[i]['no'];
@@ -321,7 +321,7 @@ function getJob(jobNo) {
         url: "${path}/admin/ajax/getJob",
         success: data => {
             $('#job').empty();
-            const basicOption = $("<option></option>").attr("value", "selected").text("선택");
+            const basicOption = $("<option></option>").attr("value", "").text("선택");
             $('#job').append(basicOption); 
             for (var i = 0; i < data.length; i++) {
                 const no = data[i]['no'];

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
 
 <body>
@@ -35,8 +36,8 @@
                                         </button>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small my-4">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember-me">
-                                                <label class="custom-control-label" for="customCheck">로그인 상태 유지 &nbsp;
+                                                <input type="checkbox" class="custom-control-input" id="saveId" name="saveId">
+                                                <label class="custom-control-label" for="saveId">아이디 저장 &nbsp;
                                                     &#124; &nbsp;</label>
                                                 <label class="">
                                                     <a href="#" data-toggle="modal" data-target="#passwordModal" class="text-primary">
@@ -84,6 +85,30 @@
             </div>
         </div>
     </div>
+    
+    <script>
+    $(document).ready(function() {
+        $("#userId").val(Cookies.get('key'));      
+        if ($("#userId").val() !== "") {
+            $("#saveId").prop("checked", true);  // Change this line
+        }
+
+        $("#saveId").change(function() {
+            if ($("#saveId").is(":checked")) {
+                Cookies.set('key', $("#userId").val(), { expires: 7 });
+            } else {
+                Cookies.remove('key');
+            }
+        });
+
+        $("#userId").keyup(function() {
+            if ($("#saveId").is(":checked")) {
+                Cookies.set('key', $("#userId").val(), { expires: 7 });
+            }
+        });
+    });
+
+    </script>
 
     <!-- 임시 비밀번호 발송 확인 모달-->
     <div id="temporary-password">

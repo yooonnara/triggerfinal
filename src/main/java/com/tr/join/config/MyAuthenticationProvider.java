@@ -52,6 +52,8 @@ public class MyAuthenticationProvider implements AuthenticationProvider,UserDeta
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		Employee loginEmp=dao.selectEmployeeById(session,username);
+		System.out.println(loginEmp);
 		return dao.selectEmployeeById(session,username);
 	}
 	
