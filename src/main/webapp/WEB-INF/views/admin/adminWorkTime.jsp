@@ -32,7 +32,7 @@
 
 
               <!-- 수정할 컨테이너 Begin Page Content -->
-              <div class="container-fluid">
+              <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전사원 근태 현황</h1>
                     <div class="adminWorkingTimeList-container ">  
@@ -104,9 +104,8 @@
                         <!-- 근태 시작~종료일 검색 버튼 -->
                         <div class="dateSearch-search float-right mb-3 mr-3">
 	              			<button class="float-right btn btn-dark btn-sm">검색</button>
+	              			<input type="text"  placeholder="종료일" class="float-right mr-1 endDate" id="datepicker2">
 	              			<input type="text"  placeholder="시작일" class="float-right mr-1 startDate" id="datepicker1">
-                            <input type="text"  placeholder="죵료일" class="float-right mr-1 endDate" id="datepicker2">
-                            
                         </div>
                     </div>
                     

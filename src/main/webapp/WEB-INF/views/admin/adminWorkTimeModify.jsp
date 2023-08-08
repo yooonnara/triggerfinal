@@ -32,7 +32,7 @@
 
 
               <!-- 수정할 컨테이너 Begin Page Content -->
-				<div class="container-fluid">
+				<div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark my-5">전사원 근태 현황
                   <p class="mt-2 text-secondary" style="font-size:17px">출퇴근 변경</p> 
@@ -59,11 +59,11 @@
                             <!-- table-active -->
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th>No.</th>
+                                    <th>번호</th>
                                     <th>이름</th>
                                     <th>사번</th>
-                                    <th>부서명</th>
-                                    <th>직위</th>
+                                    <th>부서</th>
+                                    <th>직급</th>
                                     <th>조정일</th>
                                     <th>내용</th>
                                     <th>진행상황</th>

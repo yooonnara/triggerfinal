@@ -55,7 +55,7 @@
                             </div>
                             <!-- 작성하기 버튼 -->
                             <div class="wirte-area col-4">
-                                <a href="" class="btn btn-primary btn-sm float-right">글쓰기</a>
+                                <a href="${path }/communityWrite" class="btn btn-primary btn-sm float-right">글쓰기</a>
                             </div>
                         </div>
 
@@ -99,30 +99,6 @@
                         
                        
 
-                        <!-- 페이징 -->
-                        <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->

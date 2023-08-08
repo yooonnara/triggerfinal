@@ -57,7 +57,9 @@ public class SecurityConfig{
 					.invalidateHttpSession(true) //세션 삭제
 					.deleteCookies("remember-me", "JSESSIONID")
 				.and()
-					.authenticationProvider(provider)
+				.authenticationProvider(provider)
+				.headers().frameOptions().disable()
+				.and()
 				.build();
 	}
 	

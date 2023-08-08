@@ -19,7 +19,6 @@
 			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
 		</div>
 		<!-- 사이드바 종료 End of Sidebar -->
-
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
@@ -28,17 +27,13 @@
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 				</div>
-				<!-- 상단바 종료 End of Topbar -->
-
 				<!-- 수정할 컨테이너 Begin Page Content -->
 				<div class="container-fluid pl-5 pr-5">
-
                 <!-- 타이틀 Page Heading -->
                 <h1 class="h3 text-dark mt-5 mb-5">근태 현황
                 	<p class="mt-2 text-secondary" style="font-size:17px">출퇴근 변경 목록 조회</p>
                 </h1>
-
-                    <div class="adminWorkingTimeList-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+                    <div class="adminWorkingTimeList-container "> 
                     <!-- 근무상태 검색 & 시작및종료일 검색 버튼 영역 -->
                     <div class="row" id="big-search">
                         <!-- 근무상태 검색 버튼 -->
@@ -56,17 +51,6 @@
                                 <input type="radio" name="options" id="option4" value="4">반려
                               </label>
                         </div>
-                        
-
-                        
-                        
-                        
-
-
-				
-
-                      
-			
 					
                     </div>
                     <!-- 테이블 -->
@@ -85,8 +69,8 @@
                                     <th>No.</th>
                                     <th>이름</th>
                                     <th>사번</th>
-                                    <th>부서명</th>
-                                    <th>직위</th>
+                                    <th>부서</th>
+                                    <th>직급</th>
                                     <th>요청일</th>
                                     <th>조정일</th>
                                     <th>내용</th>
@@ -117,10 +101,6 @@
 		            <div class="pasing-area">
 		            	<c:out value="${pageBar }" escapeXml="false"/>
 		            </div>
-	
-		           
-		            
-		            
                         
                     </div>
                 </div>
