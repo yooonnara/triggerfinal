@@ -49,4 +49,6 @@ public interface EdmsService {
  
  int updateAppStatus(Map<String,Integer> ajaxNumber);
  
+ Edms selectByVcNo(int no);
+ 
 }

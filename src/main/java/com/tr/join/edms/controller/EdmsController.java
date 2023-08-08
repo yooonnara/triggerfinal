@@ -52,7 +52,7 @@ public class EdmsController {
 		String msg,loc;
 		if(result>0) {
 		msg="연차/출장 신청이 완료되었습니다.";
-		loc="/";
+		loc="/main";
 		}else {
 			msg="연차/충장신청이 실패되었습니다.";
 			loc="/edms/bsnRequest";
@@ -177,6 +177,15 @@ public class EdmsController {
 		return ("admin/adminBnsView");
 	}
 	
+	
+	@GetMapping("/adminVcView")
+	public String selectByVcNo(Model m, int no) {
+		m.addAttribute("edms",service.selectByVcNo(no));
+		System.out.println(m);
+		System.out.println(no);
+		return("admin/adminVcView");
+	}
+	
 	//에이젝스 검색 기능 구현 
 	
 	@GetMapping("/adminBsn/search")
@@ -186,7 +195,7 @@ public class EdmsController {
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
-	List<Edms> search =service.search(edms);
+		List<Edms> search =service.search(edms);
 		return search;
 	}
 	
@@ -197,11 +206,12 @@ public class EdmsController {
 	int result=service.updateAppStatus(Map.of("no",no,"appStatus",appStatus));
 	String msg,loc;
 	if(result>0) {
-		msg="승인완료";
-	loc="/";
-	}else {
-	msg="승인이 실패되었습니다";
+		msg="승인 완료되었습니다.";
 	loc="/edms/adminBsn";
+	}else {
+	msg="승인이 반려되었습니다.";
+	loc=
+	"/admin";
 }
 m.addAttribute("msg",msg);
 m.addAttribute("loc",loc);

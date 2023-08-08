@@ -88,9 +88,9 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.searchEdmsByStatus(session, ajaxParam);
 	}
+	
+	
 	//어드민 계정 ajax 검색하기 
-
-
 	@Override
 	public List<Edms> search(Edms edms){
 		// TODO Auto-generated method stub
@@ -109,6 +109,17 @@ public class EdmsServiceImpl implements EdmsService {
 	public int updateAppStatus(Map<String, Integer> ajaxNumber) {
 		// TODO Auto-generated method stub
 		return dao.updateAppStatus(session,ajaxNumber);
+	}
+
+
+	
+
+	//연차 페이지 view 출력하기 
+	
+	@Override
+	public Edms selectByVcNo(int no) {
+		// TODO Auto-generated method stub
+		return dao.selectByVcNo(session,no);
 	}
 	
 	
