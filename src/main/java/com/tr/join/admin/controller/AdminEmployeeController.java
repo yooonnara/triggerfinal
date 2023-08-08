@@ -1,5 +1,6 @@
 package com.tr.join.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tr.join.admin.model.service.AdminEmployeeService;
+import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Department;
 import com.tr.join.employee.model.vo.Employee;
@@ -27,7 +29,6 @@ public class AdminEmployeeController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
 	
 	public AdminEmployeeController(AdminEmployeeService service) {
 		this.service=service;
@@ -131,13 +132,18 @@ public class AdminEmployeeController {
 	}
 	
 	// 멤버삭제
-//	@PostMapping("/amin/ajax/deleteEmployees")
-//	@ResponseBody
-//	public String deleteEmployees() {
-//		
-//		return "";
-//		
-//	}
+	@RequestMapping("/admin/ajax/deleteEmployee")
+	@ResponseBody
+	public String deleteEmployee(Employee e, @RequestParam(value = "empList[]") ArrayList<Integer> empList) {
+		System.out.println(empList);
+		int result = 1;
+		for (int i = 0; i < empList.size(); i++) {
+			e.setNo(empList.get(i));
+			result = result * service.deleteEmployee(e);
+		}
+
+		return result > 0 ? "success" : "fail";
+	}
 	
 	
 	

@@ -44,5 +44,11 @@ public class BoardController {
 		return "board/community";
 	}
 	
+	//자유게시판 작성
+	@GetMapping("/communityWrite")
+	public String communityWrite() {
+		return "board/communityWrite";
+	}
+	
 	
 }

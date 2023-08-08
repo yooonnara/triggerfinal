@@ -58,7 +58,7 @@
                             <thead class="bg-primary">
                                 <tr>
                                     <th>이름</th>
-                                    <th>소속</th>
+                                    <th>부서</th>
                                     <th>신청일</th>
                                     <th>출장 기간</th>
                                     <th>제목</th>
