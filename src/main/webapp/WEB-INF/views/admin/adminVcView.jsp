@@ -104,7 +104,7 @@
                             </tbody> 
 						</table>
 						
-						<div class="btn-click">
+						<div class="btn-click col text-center pb-5">
                                   <button class="btn btn-dark" id="button1" onclick="button1_click();">결재승인</button>
                       		 <button class="btn btn-danger" id="button2" onclick="button2_click();">승인 반려</button>
                         <button class="btn btn-secondary" id="button3" onclick="button1_click();">취소</button>

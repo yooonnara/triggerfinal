@@ -116,18 +116,19 @@
 
                             <!-- 테이블 칸 크기 -->
                             <colgroup>
-                                	<col width="10%" />
+                                  <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
+                                     <col width="10%" />
+                                    <col width="10%" />
                                     <col width="15%" />
                                     <col width="10%" />
-                                    <col width="10%" />
                                     <col width="15%" />
-                                    <col width="10%" />
-                                    <col width="25%" />
                             </colgroup>
 						
                             <thead>
                                 <tr class="bg-dark text-white">
-                                    <th>문서번호</th>
+                                    <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
                                     <th>직급</th>
@@ -215,7 +216,7 @@
 		            		
 		            		let appStatus="";
 		            		switch(f[i]["appStatus"]){
-		            		case -1 :appStatus="전체";break;
+		            		//case -1 :appStatus="전체";break;
 		            		case 0 :appStatus="대기";break;
 		            		case 1 :appStatus="승인";break;
 		            		case 2:appStatus="반려";break;
