@@ -26,6 +26,7 @@ public class Attendance {
 	
 	private String startDate;
 	private String endDate;
+	private String attTime;
 	private Employee emp;
 	
 	

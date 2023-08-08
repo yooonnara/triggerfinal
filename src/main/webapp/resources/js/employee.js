@@ -47,17 +47,30 @@ function checkId(str){
 }
 
 // 현재 비밀번호와 일치 여부 확인 (비밀번호 변경 시)
-/*function checkCPwd(str){
-	if(str != ''){
-		if($('#pwd1').val() != str){
-			$('.cPwd-msg').removeClass('text-primary').addClass('text-danger').text('비밀번호를 확인해 주세요.');
-			return false;
-		} else {
-			$('.cPwd-msg').removeClass('text-danger').addClass('text-primary').text('현재 비밀번호와 일치합니다.');
-		}
+function checkCpwd(password){
+	if(password != ''){
+		$.ajax({
+			url: "/ajax/checkPassword",
+			type : "post",
+			data : {
+				'password' : password
+			},
+			success: data => {
+				if(data < 1){ // 현재 비밀번호 같지않음
+					$('.cPwd-msg').text('비밀번호를 확인해 주세요.').show();
+					return false;
+				} else { // 같음
+					$('.cPwd-msg').hide();
+				}
+			}
+		});
+		
 	}
 	
-}*/
+	
+	return ;
+	
+}
 
 
 

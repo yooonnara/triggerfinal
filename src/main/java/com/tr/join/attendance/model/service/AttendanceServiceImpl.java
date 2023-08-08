@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tr.join.attendance.model.dao.AttendanceDao;
 import com.tr.join.attendance.model.vo.Attendance;
 import com.tr.join.attendance.model.vo.DayOff;
+import com.tr.join.attendance.model.vo.WorkTime;
 import com.tr.join.edms.model.vo.Edms;
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -56,15 +57,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.workCalendarAttendance(session, no); 
 	}
 	
-	/*
-	 * @Override public List<Edms> workCalendarDayoff(int no){ return
-	 * dao.workCalendarDayoff(session, no); }
-	 * 
-	 * @Override public List<Edms> workCalendarTrip(int no){ return
-	 * dao.workCalendarTrip(session, no); }
-	 */
-	
-	
+	@Override
+	public List<Edms> workCalendarTrip(int no) {
+		return dao.workCalendarTrip(session, no);
+	}
+
 	//근태 누적 시간
 	@Override
 	public Attendance selectWeekWorkTime(int no) {
@@ -89,7 +86,18 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectMonthTime(session, no);
 	}
 	
-	//근태 리스트
+	
+	
+	
+	//근태 주차별 리스트
+	@Override
+	public List<Attendance> workTimeWeekly(int no) {
+		return dao.workTimeWeekly(session, no);
+	}
+	
+	
+	
+	//근태 일자별 리스트
 	@Override
 	public List<Attendance> selectWorkTimeAll(Map<String,Object> param) {
 		return dao.selectWorkTimeAll(session, param);
@@ -111,8 +119,23 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.ajaxworkTimeByDate(session, ajSearchParam);
 	}
 	
+	//근태 상세 보기
+	@Override
+	public List<Attendance> workTimeDetail(Map<String,Object> wkParam) {
+		return dao.workTimeDetail(session, wkParam);
+	}
 	
+	//근태 출퇴근 수정 리스트
+	@Override
+	public List<WorkTime> selectWorkTimeModify(Map<String, Object> wkmParam) {
+		return dao.selectWorkTimeModify(session, wkmParam);
+	}
 	
+	//근태 출퇴근 수정
+	@Override
+	public int insertModifyStartTime(Map param) {
+		return dao.insertModifyStartTime(session, param);
+	}
 	
 	//관리자
 	@Override
@@ -125,10 +148,36 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return dao.selectAttendanceCount(session);
 	}
 	
+	@Override
+	public List<WorkTime> adminWorkTimeModify() {
+		return dao.adminWorkTimeModify(session);
+	}
+
+	@Override
+	public List<WorkTime> adminWkDetail(Map<String, Object> param) {
+		return dao.adminWkDetail(session, param);
+	}
+
+	@Override
+	public int updateWtModify(WorkTime w) {
+		return dao.updateWtModify(session, w);
+	}
 	
+	@Override
+	public int adminModifyWorktimeSubmit(WorkTime w) {
+		return dao.adminModifyWorktimeSubmit(session, w);
+	}
+
+	@Override
+	public int wtModifyReturn(WorkTime w) {
+		return dao.wtModifyReturn(session, w);
+	}
 	
 //-------------연차-----------------
 	
+
+
+
 	@Override
 	public List<DayOff> selectDayoffAll(int no){
 		return dao.selectDayoffAll(session, no);
@@ -138,21 +187,34 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<DayOff> selectAdminDayoffAll(){
 		return dao.selectAdminDayoffAll(session);
 	}
+	
 	@Override
 	public int adminResetAll() {
 		return dao.adminResetAll(session);
 	}
-
+	
 	@Override
-	public List<DayOff> searchDayoffAdmin(Map<String, String> dayoffParam) {
-		return dao.searchDayoffAdmin(session, dayoffParam);
+	public int adminCheckReset(DayOff d) {
+		return dao.adminCheckReset(session, d);
 	}
 
 
+	@Override
+	public List<DayOff> ajaxDfSearch(Map<String, String> dfSearch) {
+		return dao.ajaxDfSearch(session, dfSearch);
+	}
+
+	@Override
+		public int insertDayoff(Map param) {
+			return dao.insertDayoff(session, param);
+		}
 	
-	
-	
-//-------------출장------------------
+	@Override
+	public List<Edms> workCalendarDayoff() {
+		return dao.workCalendarDayoff(session);
+	}
+
+	//-------------출장------------------
 	 //출장 리스트 출력
 	@Override
 	public List<Edms> selectBusinessTrip(int no) {
@@ -169,7 +231,22 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public int deleteBusinessTrip(int btNo) {
 		return dao.deleteBusinessTrip(session, btNo);
 	}
-	
 
+	@Override
+	public List<Edms> checkCancelList(Map<String, Object> cancelParam) {
+		return dao.checkCancelList(session, cancelParam);
+	}
+	
+	@Override
+	public List<Edms> adminBusinessTrip() {
+		return dao.adminBusinessTrip(session);
+	}
+
+	@Override
+	public List<Edms> ajaxBtSearch(Map<String, Object> btSearch) {
+		return dao.ajaxBtSearch(session, btSearch);
+	}
+	
+	
 
 }

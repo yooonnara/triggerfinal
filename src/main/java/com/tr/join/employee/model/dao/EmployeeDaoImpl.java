@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.tr.join.employee.model.vo.Employee;
 
 @Repository
-public class EmployeeDaoImpl implements EmployeeDao{
+public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee selectEmployeeById(SqlSessionTemplate session, String id) {
@@ -19,7 +19,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public int updateEmployee(SqlSessionTemplate session, Map param) {
 		return session.update("employee.updateEmployee", param);
 	}
-	
-	
-	
+
+	@Override
+	public int updatePassword(SqlSessionTemplate session, Map param) {
+		return session.update("employee.updatePassword", param);
+	}
+
 }

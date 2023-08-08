@@ -7,14 +7,5 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TriggerJoinController {
 
-
-	
-	@GetMapping("/notice")
-	public String noticePage() {
-		return "board/notice";
-	}
-	
-	
-	
 	
 }

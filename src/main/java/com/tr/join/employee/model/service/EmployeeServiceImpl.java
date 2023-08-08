@@ -26,6 +26,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int updateEmployee(Map param) {
 		return dao.updateEmployee(session, param);
 	}
+	
+	@Override
+	public int updatePassword(Map param) {
+		return dao.updatePassword(session, param);
+	}
+	
+	
 
 	
 	

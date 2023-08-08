@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +39,7 @@ public class AdminEmployeeController {
 		return "admin/adminMain";
 	}
 	
-	// 멤버 통합관리
+	// 멤버 통합관리 (페이징)
 	@GetMapping("/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
@@ -59,7 +60,7 @@ public class AdminEmployeeController {
 	// 멤버 생성하기
 	@RequestMapping("/admin/insertEmployee") // @Validated 추가하기
 	public String insertEmployee(@RequestParam Map param) { 
-		//패스워드를 암호화해서 처리하자.
+		//패스워드를 암호화해서 처리
 		String oriPassword = (String)param.get("pwd1");
 		String encodePassword = passwordEncoder.encode(oriPassword);
 		param.put("password", encodePassword);
@@ -122,10 +123,22 @@ public class AdminEmployeeController {
 		return empNum;
 	}
 	
+	// 멤버수정
+	@PostMapping("/admin/updateEmployees")
+	public String updateEmployee(@RequestParam Map param) { 
+		int result = service.updateEmployees(param);
+		return "redirect:/adminEmployee";
+	}
+	
+	// 멤버삭제
+//	@PostMapping("/amin/ajax/deleteEmployees")
+//	@ResponseBody
+//	public String deleteEmployees() {
+//		
+//		return "";
+//		
+//	}
 	
 	
 	
-	
-	
-
 }

@@ -59,7 +59,7 @@
 										<span class="check-msg emp-id-msg small text-danger"></span>
 									</td>
 								</tr>
-								<tr>
+								<tr class="password_tr">
 									<th class="align-middle">비밀번호</th>
 									<td>
 										<input onKeyup="checkPwd1(this.value)" type="password" 
@@ -67,7 +67,7 @@
 										<span class="check-msg pwd1-msg small text-danger"></span>
 									</td>
 								</tr>
-								<tr>
+								<tr class="password_tr">
 									<th class="align-middle">비밀번호 확인</th>
 									<td>
 										<input onKeyup="checkPwd2(this.value)" type="password" 
@@ -91,6 +91,12 @@
 									<td>
 										<input onchange="checkEnrollDate(this.value)" onsubmit="checkEnrollDate(this.value)" type="date" class="form-control" name="enroll_date" id="enroll_date">
 										<span class="check-msg enroll-date-msg small text-danger" style="display: none">입사일을 입력해 주세요.</span>
+									</td>
+								</tr>
+								<tr id="resign_date_tr" style="display: none">
+									<th class="align-middle">퇴사일</th>
+									<td>
+										<input type="date" class="form-control" name="resign_date" id="resign_date">
 									</td>
 								</tr>
 								<tr>
@@ -165,39 +171,6 @@ $("#enroll_date").change(e=>{
 })
 
 
-function getDept() {
-	$.ajax({
-		url: "${path}/admin/ajax/getDept",
-		success: data => {
-			$('#dept').empty();
-			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#dept').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#dept').append(option);
-			}
-		}
-	})
-}
-
-function getJob() {
-	$.ajax({
-		url: "${path}/admin/ajax/getJob",
-		success: data => {
-			$('#job').empty();
-  			const basicOption = $("<option></option>").attr("value", "selected").text("선택");
-			$('#job').append(basicOption); 
-			for (var i = 0; i < data.length; i++) {
-				const no = data[i]['no'];
-				const title = data[i]['title'];
-				const option = $("<option></option>").attr("value", no).text(title);
-				$('#job').append(option);
-			}
-		}
-	})
-}
 //저장 버튼 눌렀을 때 값 전체 검사
 function checkInsertFrm(){
 	// 이름
@@ -278,24 +251,6 @@ function frmSubmit(){
 	if(confirm('저장하시겠습니까?')){
 		$('#frm').submit();
 		
-		
-		
-		/* form=new FormData();
-		$("#frm input").each((i,e)=>{
-			if(e.type=='file'){
-				console.log(e);
-			}
-		});
-		$.ajax({
-			url: "${path}/ajax/insertEmployee",
-		    type: "POST",
-		    data: 
-		    	$("#frm").serialize()
-		    ,
-			success: data => {
-		        console.log("성공!!!")
-			}
-		});  */
 	}
 }
 

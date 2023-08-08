@@ -25,6 +25,8 @@ public interface AdminEmployeeService {
 	
 	String makeEmpNum();
 	
+	int updateEmployees(Map param);
+	
 	
 
 

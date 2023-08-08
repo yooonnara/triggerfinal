@@ -40,50 +40,111 @@
                     <div class="row justify-content-between" id="big-search" >
                     
                         <!-- 사원명 부서명 검색 버튼 -->
-                        <form class="float-left mb-3 col-5" id="dayOffSearch">
+                        <div class="float-left mb-3 col-5" id="dayOffSearch">
                         	<input type="text" placeholder="사원명" id="searchEmp" name="name">
                             <input type="text" id="searchDep" placeholder="부서명" name="dept">    
-                            <button class="btn btn-dark btn-sm searchDF" onclick="searchdata();">검색</button>
-                    	</form>                
+                            <button class="btn btn-dark btn-sm searchDF">검색</button>
+                    	</div>                
                         <script>
-                        	function searchdata(){
-                        		const data=$("#dayOffSearch>input").serialize();
-                        		console.log(data);
-                        			$.ajax({
-                        			url:"${path}/attendance/searchDayoffAdmin",
-                        			data: data,
-                        			success:function(data){
-                        				console.log(data);
-                        			},
-                        			error:function(){
-    									console.log("ajax통신 실패");
-    								}
-                        		}) 
-                        	}
-                        
-                        
-                        
-                        
-                        
-                        
+                        	$("#dayOffSearch button").click(e=>{
+                        		$.ajax({
+                       				url:"/ajaxDfSearch",
+                       				data:{
+                       					searchEmp:$("#dayOffSearch input[id=searchEmp]").val(),
+                       					searchDep:$("#dayOffSearch input[id=searchDep]").val()
+                       				},
+                       				success:function(df){
+                       					console.log(df[0]);
+                       					$("#dftable").html("");
+                       					for(let i=0;i<df.length;i++){
+                       						const $tr = $("<tr>");
+                       						const $td = $("<td>");
+                       						const $name = $("<td>").text(df[i]["emp"]["name"]);
+                       						const $deptTitle = $("<td>").text(df[i]["emp"]["deptTitle"]);
+                       						const $enrollDate = $("<td>").text(df[i]["emp"]["enrollDate"]);
+                       						/* let resignDate="";
+                       						const 
+						                     if (df[i]["emp"]["resignDate"] == null){
+						                       	resingDate.text("0") ;
+						                    }else{
+						                    	resignDate.text(df[i]["emp"]["resignDate"]);
+						                    } */
+						                   
+                       						//const $resignDate = $("<td>").text(resignDate);
+                       						const $resignDate = $("<td>").text(df[i]["emp"]["resignDate"]);
+                       						const $total =  $("<td>").text(df[i]["totalDoCount"]);
+                       						const $used =  $("<td>").text(df[i]["usedDoCount"]);
+                       						const $remain =  $("<td>").text(df[i]["remainDoCount"]);
+                       						
+                       						
+                       						$tr.append($tr).append($td).append($name).append($deptTitle).append($enrollDate).append($resignDate).append($total).append($used).append($remain);
+                       						
+                       						$("#dftable").append($tr);
+                       					}
+                       				},
+                       				error:function(){
+                						console.log("ajax 통신 실패");
+                					}
+                        	})
+                        })
+                        	
                         </script>
+                        
                          <!-- 연차부여 버튼 -->
                         <div class="btn-member float-right mb-4 mr-3">
                         <button class="btn btn-dark btn-sm mr-2" onclick="updateResetAll();">전체 연차 리셋</button>
                         <button class="btn btn-dark btn-sm mr-2" onclick="updateReset();">연차 리셋</button>
-                            <a href="#" data-toggle="modal" data-target="#insertDayOffModal"
+                            <a href="#" data-toggle="modal" onclick="dayoffUpdate();"
                                 class="btn btn-dark btn-sm">연차 조정</a>
                         </div>
                    </div>    
+                   
+                   <script>
+                   		function openCalendar(){
+                   			var url = "${path}/admin/adminDayoffCalendar"
+                   			var name = "adminDayoffCalendar"
+                   			var option = "width=1000, height=730, top=10, location=no"
+                   			window.open(url,name,option);
+                   		};
+                   </script>
+                   
                     
                     <script>
+                    	
                     	function updateResetAll(){
                     		if(confirm("전사원 연차 리셋하시겠습니까?")){
                     			location.href='/amdin/adminResetAll';
                     		}
                     	};
                     
-                    
+                    	function updateReset(){
+                    		if(confirm("선택 사원의 연차를 리셋하시겠습니까?")){
+                    			var dfList = [];
+                    			$("td>input[type=checkbox]:checked").each(function(){
+                    				var ck = $(this).val(); //사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
+                    				dfList.push(ck); //배열에 추가해주고 값을 넘긴다.
+                    			})
+                    			
+                    			$.ajax({
+                    				url:"/admin/checkReset",
+                    				data:{
+                    					dfList:dfList
+                    				},
+                    				success:function(result){
+                    					console.log(result);
+                    					if(result == "success"){
+                    						alert("연차 리셋되었습니다.");
+                    						location.replace("/adminDayoff");
+                    					}
+                    				},
+                    				
+                    				error:function(){
+                    					 console.log("ajax 연차 리셋 통신실패");
+                    				}
+                    			})
+                    			
+                    		}
+                    	}
                     </script>
                     
                     
@@ -115,11 +176,11 @@
                                     <th>잔여 연차</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <tbody class="bg-white" id="dftable">
 	                            <c:if test="${not empty adminDayoff }">
 	                            <c:forEach var="ad" items="${adminDayoff }">
                                 <tr>
-                                    <td><input type="checkbox" name="" value="1"></td>
+                                    <td><input type="checkbox" name="ck" value="${ad.no }"></td>
                                     <td>${ad.emp.name }</td>
                                     <td>${ad.emp.deptTitle}</td>
                                     <td>${ad.emp.enrollDate }</td>
@@ -138,6 +199,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <button class="btn btn-secondary btn-sm mr-2" type="button" onclick="openCalendar();">캘린더 보기</button>
                         <!-- 페이징 -->
                         <div class="pasing-area">
                             <nav aria-label="Page navigation example">
@@ -165,53 +227,83 @@
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
+                
+                <!-- 선택 사원 연차 부여 -->
+                <script>
+	                function dayoffUpdate (){
+	            		const inputData = $("td>input[type=checkbox]:checked").parents("tr").find("td")
+	            		const data = $("#dayOffTable td");
+	            		const input = $("#dayOffTable td>input[type=text]");
+	            	
+	            		console.log(data);
+	            		
+	            		//$(data[0]).text($(inputData[1]).text());
+	            		//$(data[1]).text($(inputData[2]).text());
+	            		//$(data[2]).text($(inputData[3]).text());
+	            		//console.log($(inputData[1]).text());
+	            		$(input[0]).val($(inputData[1]).text());
+	            		$(input[1]).val($(inputData[2]).text());
+	            		$(input[2]).val($(inputData[3]).text());
+	            		$("#insertDayOffModal").modal("show");
+	            	}
+	            	function insertDayoff(){
+	            		$('#frm').submit();
+	            	}
+                </script>
+                
+                
                 <!-- 연차 조정 modal창 -->
 				<div id="insertDayOff">
                     <div class="modal fade text-center" id="insertDayOffModal" tabindex="-1" role="dialog"
                         aria-activedescendant="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-dark text-white">
                                     <h5 class="modal-title" id="exampleModalLabel">연차 조정</h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="dayOff">
+                                    <form id="frm" name="frm" class="dayOff"  action="${path }/admin/insertDayoff" method="post">
                                         <!--  class="table-bordered" -->
-                                        <table id="dayOffTable">
+                                        <table id="dayOffTable" class="table table-borderless text-dark">
                                             <colgroup>
-                                                <col style="width:120px">
-                                                <col style="width:150px">
+                                                <col style="width:20%">
+                                                <col style="width:80%">
                                             </colgroup>
-                                            <%-- <c:forEach var="c" items="$("td>input[type=checkbox]:checked").parents("tr").find("td").each((i,e)=>e.innerText))">
-                                            	<td>
-                                            		${c.emp.name }
-                                            	</td>
-                                            </c:forEach> --%>
                                             <tr>
-                                                <th>이름</th>
-                                                <td class="font-weight-bold ml-3 mb-5">김땅땅 홍보 2팀</td>
-                                            </tr>
-                                            <tr>
-                                                <th>입사일</th>
-                                                <td class="font-weight-bold ml-3 mb-5">2022-07-21</td>
-                                            </tr>
-                                            <tr>
-                                                <th>선택</th>
-                                                <td>
-                                                    <label><input type="radio" name="select"checked>발생 연차</label>
+                                                <th class="align-middle">이름</th>
+                                                <td class="font-weight-bold">
+                                                	<input type="text" class="form-control inputSize" name="emp_name" readonly>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>연차수</th>
-                                                <td>
-                                                    <input type="text" class="form-control form-control-sm" name="DayOffCount" id="countForm">
+                                                <th class="align-middle">부서</th>
+                                                <td class="font-weight-bold">
+                                                	<input type="text" class="form-control inputSize" name="dept_type" readonly>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>내용</th>
+                                                <th class="align-middle">입사일</th>
+                                                <td class="font-weight-bold">
+                                                	<input type="text" class="form-control inputSize" name="enroll_date" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">선택</th>
+                                                <td>
+                                                    <label><input type="radio" name="select" checked>발생 연차</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">연차수</th>
+                                                <td>
+                                                    <input type="text" class="form-control form-control-sm" name="count_form">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">내용</th>
                                                 <td>
                                                     <textarea class="form-control" id="dayOffTextarea" rows="3" style="resize: none;"></textarea>
                                                 </td>
@@ -220,7 +312,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="btn btn-primary" href="#">확인</a>
+                                    <a class="btn btn-primary" onclick="insertDayoff()">확인</a>
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                                 </div>
                             </div>
@@ -255,3 +347,5 @@
 </body>
 
 </html>
+
+

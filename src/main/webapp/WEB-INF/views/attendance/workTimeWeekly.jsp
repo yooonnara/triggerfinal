@@ -36,9 +36,50 @@
                     	<p class="mt-2 text-secondary" style="font-size:17px">주차별 조회</p>
                     </h1>
 
-                    <div class="workingTimeWeekly-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+                    <div class="workingTimeWeekly-container ">
                         <!-- 오늘 날짜 -->
-                        <h3 class="row justify-content-center text-dark font-weight-bold mb-4">2023-07-21</h3>
+                        <h3 class="dfDate row justify-content-center text-dark font-weight-bold mb-5" id="Weekly_date"></h3>
+                        <script>
+					        $(function(){
+					            var today = new Date();
+					            var year = today.getFullYear();
+					            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+					            var day = ('0' + today.getDate()).slice(-2);
+					            var week = new Array('일', '월', '화', '수', '목', '금', '토');
+					
+					            var mainDate = year + "-" + month + "-" + day
+					            $("#Weekly_date").text(mainDate);
+					        })
+					    </script>
+					    
+					    
+					    
+					    
+					    <script>
+					    function getWeekNo(v_date_str){
+					    	const weekTable=$(".card-body>table");
+					    	const today=new Date();
+					    	const cMonth=today.getMonth();
+					    	const cYear=today.getUTCFullYear();
+					    	console.log(cYear,cMonth);
+					    	const cWeekDay=new Date(cYear,cMonth,1);
+					    	//0 월, 1 화, 2 수, 3 목, 4 금, 5 토, 6 일
+					    	if(cWeekDay%7)
+					    	
+					    }
+					    	$(function(){
+					    		$("#onbutton").click(function(){
+					    			console.log("클릭");
+					    			var weekNo = getWeekNo("2023-08-13");
+					    			console.log(weekNo);
+					    			
+					    			
+					    		})
+					    	})
+					    </script>
+					    
+					    <button type="button" id="onbutton">시험</button>
+					    
                         <!-- 주차별 아코디언 -->
                         <div id="accordion">
                             <div class="card">
@@ -67,24 +108,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>03 월</td>
-                                                <td>08:30:00</td>
-                                                <td>19:00:00</td>
-                                                <td>11:30:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>04 화</td>
-                                                <td>08:30:00</td>
-                                                <td>19:00:00</td>
-                                                <td>11:30:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>05 수</td>
-                                                <td>08:30:00</td>
-                                                <td>19:00:00</td>
-                                                <td>11:30:00</td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -115,24 +139,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>03 월</td>
-                                                <td>08:30:00</td>
-                                                <td>19:00:00</td>
-                                                <td>11:30:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>03 월</td>
-                                                <td>08:30:00</td>
-                                                <td>19:00:00</td>
-                                                <td>11:30:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>03 월</td>
-                                                <td>08:30:00</td>
-                                                <td>19:00:00</td>
-                                                <td>11:30:00</td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -153,7 +160,19 @@
                               </div>
                               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                 <div class="card-body">
-                                  
+                                  <table class="table table-sm" id="accordionTable">
+                                        <thead>
+                                            <tr>
+                                                <th>일자</th>
+                                                <th>업무시작</th>
+                                                <th>업무종료</th>
+                                                <th>총 근무시간</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                               </div>
                             </div>
@@ -172,6 +191,19 @@
                                 </div>
                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                                   <div class="card-body">
+                                  <table class="table table-sm" id="accordionTable">
+                                        <thead>
+                                            <tr>
+                                                <th>일자</th>
+                                                <th>업무시작</th>
+                                                <th>업무종료</th>
+                                                <th>총 근무시간</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                   </div>
                                 </div>
                               </div>
