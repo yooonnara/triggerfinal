@@ -3,6 +3,7 @@ package com.tr.join.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,16 @@ import com.tr.join.employee.model.vo.Job;
 public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 
 	@Autowired
-	AdminEmployeeDao dao;
+	private AdminEmployeeDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate session;
+	
+	public AdminEmployeeServiceImpl(AdminEmployeeDao dao, SqlSessionTemplate session) {
+		super();
+		this.dao = dao;
+		this.session = session;
+	}
 	
 	@Override
 	public List<Department> selectDept() {
@@ -63,6 +70,13 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 	public int updateEmployees(Map param) {
 		return dao.updateEmployees(session, param);
 	}
+
+	@Override
+	public int deleteEmployee(Employee e) {
+		return dao.deleteEmployee(session, e);
+	}
+	
+	
 	
 	
 	

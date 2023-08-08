@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -58,6 +59,12 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 	public int updateEmployees(SqlSessionTemplate session, Map param) {
 		return session.update("adminEmployee.updateEmployees");
 	}
+
+	@Override
+	public int deleteEmployee(SqlSession session, Employee e) {
+		return session.delete("adminEmployee.deleteEmployee", e);
+	}
+	
 	
 	
 	
