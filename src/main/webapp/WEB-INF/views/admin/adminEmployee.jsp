@@ -32,7 +32,7 @@
               <div class="container-fluid pl-5 pr-5">
 
                 <!-- 타이틀 Page Heading -->
-                <h1 class="h3 text-dark mt-5 mb-5">멤버 통합관리</h1>
+                <h1 class="h3 text-dark mt-5 mb-5">사원 통합관리</h1>
 
                     <div class="notice-container">
 
@@ -56,10 +56,10 @@
                             <!-- 작성하기 버튼 -->
                             <div class="btn-employee wirte-area col-4">
                                 <a href="#" class="btn btn-dark btn-sm float-right" name="delete-btn" 
-                                	onclick="deleteEmployee()">멤버삭제
+                                	onclick="deleteEmployee()">사원삭제
                                 </a>
                                 <a href="#" data-toggle="modal" data-target="#insertEmployeeModal"
-                               		 class="btn btn-dark btn-sm mr-1 float-right">멤버생성
+                               		 class="btn btn-dark btn-sm mr-1 float-right">사원생성
                                 </a>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
 
             </div>
 
-            <!-- 멤버생성 모달 -->
+            <!-- 사원생성 모달 -->
 			<jsp:include page="/WEB-INF/views/admin/insertMemberModal.jsp"/>
 			
 
@@ -184,7 +184,7 @@ $(function() {
 
 // 선택삭제
 function deleteEmployee(){
-	if(confirm("선택한 멤버를 삭제하시겠습니까?")){
+	if(confirm("선택한 사원을 삭제하시겠습니까?")){
 		var empList = [];
 		$("td>input[type=checkbox]:checked").each(function(){
 			var chk = $(this).val(); //사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
@@ -198,7 +198,7 @@ function deleteEmployee(){
 			},
 			success:function(result){
 				if (result === "success") {
-	                alert("선택된 멤버가 삭제되었습니다.");
+	                alert("선택된 사원이 삭제되었습니다.");
 					location.replace("/adminEmployee");
 				}else {
 	                alert("삭제에 실패했습니다. 다시 시도해 주세요.");
