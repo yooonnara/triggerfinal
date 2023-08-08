@@ -36,6 +36,8 @@ public class SecurityConfig{
 					.logoutUrl("/logout")
 				.and()
 				.authenticationProvider(provider)
+				.headers().frameOptions().disable()
+				.and()
 				.build();
 	}
 	

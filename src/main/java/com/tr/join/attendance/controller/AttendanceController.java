@@ -123,6 +123,15 @@ public class AttendanceController {
 		  System.out.println(m);
 		  return "attendance/workTimeWeekly";
 	  }
+	  @GetMapping("/workTimeWeeklyData")
+	  @ResponseBody
+	  public List<Attendance> workTimeWeeklyData() {
+		  
+		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  
+		  List<Attendance> att = service.workTimeWeekly(loginNo.getNo());
+		  return att;
+	  }
 	  
 	  
 	  

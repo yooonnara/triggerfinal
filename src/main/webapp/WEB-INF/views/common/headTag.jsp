@@ -23,7 +23,6 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
    rel="stylesheet">
 
-<!-- Custom styles for this template-->
 <link href="${path }/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${path }/resources/css/sb-admin-2.css" rel="stylesheet">
 <script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
@@ -36,5 +35,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-							
+
+				
 </head>

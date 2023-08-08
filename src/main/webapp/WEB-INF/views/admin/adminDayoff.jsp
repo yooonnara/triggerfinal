@@ -32,9 +32,9 @@
 
 
               <!-- 수정할 컨테이너 Begin Page Content -->
-				<div class="container-fluid">
+				<div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
-                    <h1 class="h3 text-dark my-5 ml-5">전사원 연차 현황</h1>
+                    <h1 class="h3 text-dark mt-5 mb-5">전사원 연차 현황</h1>
                     <div class="adminDayOff-container "> 
                     <!-- 검색 & 부여 버튼 -->
                     <div class="row justify-content-between" id="big-search" >
@@ -168,7 +168,7 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>이름</th>
-                                    <th>부서명</th>
+                                    <th>부서</th>
                                     <th>입사일</th>
                                     <th>퇴사일</th>
                                     <th>발생 연차</th>

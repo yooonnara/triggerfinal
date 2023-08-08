@@ -32,7 +32,7 @@
 
 
               <!-- 수정할 컨테이너 Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark my-5 ml-2">전사 출장 현황</h1>
                     <div class="adminBusinessTrip-container "> 
@@ -106,7 +106,7 @@
                                 <tr>
                                     <th>문서번호</th>
                                     <th>사번</th>
-                                    <th>소속</th>
+                                    <th>부서</th>
                                     <th>직위</th>
                                     <th>이름</th>
                                     <th>휴가 사용 기간</th>

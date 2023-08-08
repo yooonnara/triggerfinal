@@ -92,7 +92,7 @@
                             <thead class="bg-primary  text-white">
                                 <tr>
                                     <th>이름</th>
-                                    <th>부서명</th>
+                                    <th>부서</th>
                                     <th>종류</th>
                                     <th>연차 기간</th>
                                     <th>사용 연차</th>
