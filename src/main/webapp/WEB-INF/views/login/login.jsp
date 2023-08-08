@@ -35,8 +35,8 @@
                                         </button>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small my-4">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck" name="saveId">아이디 저장 &nbsp;
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember-me">
+                                                <label class="custom-control-label" for="customCheck">로그인 상태 유지 &nbsp;
                                                     &#124; &nbsp;</label>
                                                 <label class="">
                                                     <a href="#" data-toggle="modal" data-target="#passwordModal" class="text-primary">

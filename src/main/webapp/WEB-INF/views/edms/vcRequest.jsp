@@ -66,41 +66,53 @@
         <div class="vcRequest-area row mt-6 mb-6">
             <div class="mypage-container col-12 d-flex justify-content-center">
 
-                <form class="vc shadow px-5 py-5 ">
-					<input type="hidden" name="type" value="1"/>
-                    <table class="table-sm ml-1 mr-5"">
+                <form class="vc shadow px-5 py-5" name="vcInsertForm" action="${path }/edms/insertVc" method="post">
+					
+                    <table class="table-sm ml-1 mr-5">
+                    <input type="hidden" name="type" value="0"/>
+					<!--  <input type="hidden" name="detailType" value=""/>-->
                       
-                      
+                      	<tr>
+                            <td>번호</td>
+                            <td><input class="form-control ml-5 mb-1" type="number"
+                               value="${loginEmp.no }" name="empNo" placeholder="" readonly ></td>
+                        </tr>
                         <tr>
                             <td>이름(한글)</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="나빈" readonly></td>
+                              value="${loginEmp.name }"  placeholder="" readonly></td>
+                        </tr>              
+                        <tr>
+                            <td>직급</td>
+                            <td><input class="form-control ml-5 mb-1" type="text"
+                               value="${loginEmp.jobTitle }" placeholder="" readonly>
+                                <input type="hidden" name="jobNo" value="${loginEmp.jobNo }"/></td></td>
                         </tr>
                         <tr>
                             <td>부서</td>
                             <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="개발팀" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>직급</td>
-                            <td><input class="form-control ml-5 mb-1" type="text"
-                                placeholder="대리" readonly></td>
+                               value="${loginEmp.deptTitle }" placeholder="" readonly>
+                                 <input type="hidden" name="deptNo" value="${loginEmp.deptNo }"/></td>
+                                 
                         </tr>
                         <tr>
                             <td>연차 구분</td>
                             <td> 
-                           	 <select name="type" onchange="bsnFn()" class="custom-select ml-5 mb-1 col-sm-12">
+                           	 <select name="detailType" id="detailType" onchange="bsnFn()" class="custom-select ml-5 mb-1 col-sm-12">
                                 <option selected>연차 종류를 선택하세요</option>
                                 <option  value="결혼">연차-결혼</option>
                                 <option value="휴가">연차-휴가</option>
                                 <option  value="조의">연차-조의</option>
                               </select>
                         </tr>
-                        
+                         <tr>
+                            <td>제목</td>
+                            <td><textarea class="form-control ml-5 mb-1" name="title" id="title" rows="1"></textarea></td>
+                        </tr>
                          <tr>
                         <td>신청 내용</td>
                        <td>
-                            <textarea class="form-control ml-5 mb-1" name="exampleFormControlTextarea1" rows="4"></textarea>
+                            <textarea class="form-control ml-5 mb-1" name="content" id="content" rows="4"></textarea>
                         </td>
                         </tr>
             
@@ -108,18 +120,19 @@
                         <td>연차시작날짜</td>
                         
 	                     <td>
-	                    <input type="date" class="form-control ml-5 mb-1" name="enroll_date" id="">   </td>
+	                    <input type="date" class="form-control ml-5 mb-1" name="startDate" id="startDate">   </td>
 	                    </tr>
 	                         <tr>
 	                         <td class="align-middle">연차끝날짜</td>
 	                               
-                             <td> <input type="date" class="form-control ml-5 mb-1" name="resign_date" id=""></td>
+                             <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate"></td>
 	                            
                             </tr>
                            
                     </table>
-                    <div class="req-btn d-flex justify-content-around pt-5  ">
-                        <a class="align-text-bottom btn btn-primary " href="#">등록</a></button>
+   							<div class="req-btn d-flex justify-content-around pt-5  ">
+                        <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->
+                        <input type="submit" class="align-text-bottom btn btn-primary"  value="등록">
                     </div>
                 </form>
             </div>

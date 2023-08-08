@@ -63,9 +63,9 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">결재 문서 관리</a>
-                <a href=""><h6 class="collapse-header">- 연차 문서 관리</h6></a>
-                <a href=""><h6 class="collapse-header">- 출장 문서 관리</h6></a>
+                <a class="collapse-item">결재 문서 관리</a>
+                <a href="${path }/edms/adminVc"><h6 class="collapse-header">- 연차 문서 관리</h6></a>
+                <a href="${path }/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
                 <a class="collapse-item" href="#">결재 문서 현황</a>
             </div>
         </div>

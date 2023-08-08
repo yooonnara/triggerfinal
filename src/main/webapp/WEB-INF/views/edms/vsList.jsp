@@ -63,22 +63,26 @@
 
                                 <!-- 테이블 칸 크기 -->
                                 <colgroup>
+                                  <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
                                     <col width="10%" />
                                     <col width="20%" />
+                                    <col width="10%" />
                                     <col width="20%" />
-                                    <col width="20%" />
-                                    <col width="15%" />
-                                    <col width="40%" />
                                 </colgroup>
 
                                 <thead>
                                     <tr class="bg-primary text-white">
-                                        <th>기안일</th>
-                                        <th>문서번호</th>
-                                        <th>구분</th>
-                                        <th>제목</th>
-                                        <th>첨부</th>
-                                        <th>결재상테></th>
+                                          <th>문서번호</th>
+		                                    <th>기안일</th>
+		                                    <th>부서</th>
+		                                    <th>직급</th>
+		                                    <th>이름</th>
+		                                     <th>제목</th>
+		                                    <th>구분</th>
+		                                    <th>결재상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
