@@ -13,17 +13,16 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" name="frm" class="user" action="${path}/admin/insertEmployee" method="post">
+					<form id="frm" name="frm" class="user" action="${path}/admin/insertEmployee" enctype="multipart/form-data" method="post">
 						<table class="table text-dark table-borderless">
 							<tbody class="text-left">
 								<tr class="text-center">
 									<td colspan='2'>
 										<div class="box" style="cursor: pointer">
-											<img src="${path }/resources/img/user_profile.png" 
-												class="profile rounded enter-block profile_img"
-												style="width: 80px; height: 80px" id="profile_img">
-											<i class="bi bi-gear-fill profile_img"></i>
-											<input id="profile_img_file" type="file" accept=".jpg, .png" style="display: none;">
+											<img src="${path }/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
+												 id="profileImg">
+											<i class="bi bi-gear-fill profile_img "></i>
+											<input onchange="PreviewImage()" id="empImg" name="upFile" type="file" accept="image/*" style="display: none;">
 										</div>
 									</td>
 								</tr>
@@ -160,9 +159,19 @@
 <script>
 
 $(".profile_img").on('click', function() {
-	$('#profile_img_file').click();
+	$('#empImg').click();
 })
 
+function PreviewImage() {
+        // 파일리더 생성 
+        var preview = new FileReader();
+        preview.onload = function (e) {
+        // img id 값 
+        document.getElementById("profileImg").src = e.target.result;
+    };
+    // input id 값 
+    preview.readAsDataURL(document.getElementById("empImg").files[0]);
+ };
 
 
 $("#enroll_date").change(e=>{

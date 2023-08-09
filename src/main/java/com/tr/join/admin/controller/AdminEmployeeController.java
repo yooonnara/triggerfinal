@@ -1,8 +1,14 @@
 package com.tr.join.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,9 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.admin.model.service.AdminEmployeeService;
-import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Department;
 import com.tr.join.employee.model.vo.Employee;
@@ -59,13 +65,30 @@ public class AdminEmployeeController {
 	}
 	
 	// 멤버 생성하기
-	@RequestMapping("/admin/insertEmployee") // @Validated 추가하기
-	public String insertEmployee(@RequestParam Map param) { 
+	@RequestMapping("/admin/insertEmployee")
+	public String insertEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
 		//패스워드를 암호화해서 처리
 		String oriPassword = (String)param.get("pwd1");
 		String encodePassword = passwordEncoder.encode(oriPassword);
 		param.put("password", encodePassword);
-
+		
+		// 파일업로드
+		// 절대경로 가져오기
+		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
+		if (upFile != null && !upFile.isEmpty()) {
+			String oriName = upFile.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			Date today = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rdn = (int) (Math.random() * 10000) + 1;
+			String rename = sdf.format(today) + "_" + rdn + ext;
+			try {
+				upFile.transferTo(new File(path, rename));
+				param.put("empImg", rename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		int result = service.insertEmployee(param);
 		return "redirect:/adminEmployee";
 	}

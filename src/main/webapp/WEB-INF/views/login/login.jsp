@@ -69,7 +69,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>임시 비밀번호를 발송을 위해 등록된 아이디를 입력해 주세요.</p>
+                        <p>비밀번호를 찾고자하는 아이디를 입력해주세요.</p>
                         <form class="user">
                             <div class="form-group">
                                 <input type="email" class="form-control form-control-user" id="exampleInputEmail"
@@ -110,24 +110,29 @@
 
     </script>
 
-    <!-- 임시 비밀번호 발송 확인 모달-->
+    <!-- 인증번호 발송 확인 모달-->
     <div id="temporary-password">
         <div class="modal fade" id="temporaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">임시 비밀번호 발송</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">인증번호 메일 발송</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>임시 비밀번호가 발송되었습니다.<br>
-                        등록하신 메일에서 임시 비밀번호를 확인하세요.<br><br>
-
-                        임시 비밀번호로 로그인 후<br>
-                        <span style="color: #428EFF;">‘내 정보 수정’</span>에서 비밀번호를 꼭 변경해 주시기 바랍니다.</p>
+                        <p>인증번호가 발송되었습니다.<br>
+                        아래 인증번호를 입력하신 후 새로운 비밀번호를 생성해 주세요.<br>
+						<form class="user">
+                            <div class="form-group">
+                                인증번호<input type="text" class="form-control form-control-user" id="exampleInputEmail"><br>
+                                비밀번호 변경하기
+                                <input type="password" class="form-control form-control-user" id="exampleInputEmail" placeholder="새로운 비밀번호">
+                                <input type="password" class="form-control form-control-user" id="exampleInputEmail" placeholder="비밀번호 확인">
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-primary" href="login.html">확인</a>
