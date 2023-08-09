@@ -43,7 +43,7 @@
 										<tr class="text-center">
 											<td colspan='2'>
 												<div class="box" style="cursor: pointer">
-													<img src="${path }/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
+													<img src="${path}/resources/upload/employee/${empInfo.empImg}" class="profile rounded enter-block profile_img rounded-circle"
 														 id="profileImg">
 													<i class="bi bi-gear-fill profile_img "></i>
 													<input onchange="PreviewImage()" method="multipart/form-data" id="empProfileImg" name="empProfileImg" type="file" accept="image/*" style="display: none;">

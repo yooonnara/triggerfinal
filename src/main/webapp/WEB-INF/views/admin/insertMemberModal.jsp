@@ -19,8 +19,8 @@
 								<tr class="text-center">
 									<td colspan='2'>
 										<div class="box" style="cursor: pointer">
-											<img src="${path }/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
-												 id="profileImg">
+											<img src="${path }/resources/img/user_profile.png" id="profileImg" 
+													class="profile rounded enter-block profile_img rounded-circle">
 											<i class="bi bi-gear-fill profile_img "></i>
 											<input onchange="PreviewImage()" id="empImg" name="upFile" type="file" accept="image/*" style="display: none;">
 										</div>
