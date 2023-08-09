@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.vo.Employee;
 @Repository
@@ -21,6 +22,18 @@ public class EdmsDaoImpl implements EdmsDao {
 	public int insertbsn(SqlSession session, Edms e) {
 		return session.insert("edms.insertbsn", e);
 	}
+	
+	
+	
+
+	@Override
+	public int insertAttachment(SqlSession session, Attachment a) {
+		// TODO Auto-generated method stub
+		return session.insert("edms.insertAttachment",a);
+	}
+
+
+
 
 	@Override
 	public List<Edms> selectBsnAll(SqlSession session,Map<String,Object> param){

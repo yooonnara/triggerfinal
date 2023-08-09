@@ -1,13 +1,21 @@
 package com.tr.join.edms.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.common.PageFactory;
 import com.tr.join.edms.model.service.EdmsService;
+import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
@@ -34,40 +43,67 @@ public class EdmsController {
 		this.empService=empService;
 		this.service=service;
 	}
+	
+	
 
-	//출장 폼 제출
 	
 	@PostMapping("/insertbsn")
-	public String insertbsn(Edms e, MultipartFile[] upFile ,Model model) {
-		int result = service.insertbsn(e);
-		//파일 업로드 하기 
-		for(MultipartFile f :upFile) {
-			log.debug(f.getOriginalFilename());
+	public String insertbsn(Edms e, MultipartFile[] upFile ,HttpSession session, Model model) {
+		
+		log.info("{}",e);
+		log.info("{}",upFile);
+		
+		//절대 경로 가져오기 
+		String path =session.getServletContext().getRealPath("/resources/upload/edms/");
+		if(upFile!=null) {				
+			for(MultipartFile mf:upFile) {
+				if(!mf.isEmpty()) {
+					String oriName=mf.getOriginalFilename();
+					String ext=oriName.substring(oriName.lastIndexOf("."));
+					Date today=new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn=(int)(Math.random()*10000)+1;
+					String rename=sdf.format(today)+"_"+rdn+ext;
+					
+					try {
+						mf.transferTo(new File(path+rename));
+					}catch(IOException e1) {
+						e1.printStackTrace();
+					}
+					
+					Attachment file=Attachment.builder()
+							.originalFilename(oriName)
+							.renamedFilename(rename)
+							.build();
+					
+					e.getFile().add(file);
+		
+				}
+			}
 		}
-		/*
-		 * log.debug(upFile.getOriginalFilename()); log.debug("()",upFile.getSize());
-		 */
+		try {
+			service.insertbsn(e);
+		}catch(RuntimeException e1) {
+			e1.printStackTrace();
+			for(Attachment a : e.getFile()) {
+				File delFile=new File(path+a.getRenamedFilename());
+				delFile.delete();
+			}
+			
+			model.addAttribute("msg","출장신청이 실패되었습니다.");
+			model.addAttribute("loc","/edms/bsnRequest");
+			
+			return "common/msg";
 		
-		
-		String msg,loc;
-		if(result>0) {
-		msg="연차/출장 신청이 완료되었습니다.";
-		loc="/main";
-		}else {
-			msg="연차/충장신청이 실패되었습니다.";
-			loc="/edms/bsnRequest";
 		}
-		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
-		
-		return "common/msg";
-		
-		
+		return "redirect:/edms/bsnList";
 	
 		//System.out.println(result);
 		//출장 insertform
 		
 	}
+
+
 	
  //연차 신청하는 폼 작성하기 
 		//@RequestMapping(value="/insertVc ", method=RequestMethod.POST)
@@ -106,7 +142,8 @@ public class EdmsController {
 	
 	
 	//전체 출력하기
-	
+	//map<string,object>로 바꿈
+	//return map.of("",,"",);
 		@GetMapping("/bsnList")
 		public String selectBsnAll(@RequestParam(value="cPage", defaultValue="1") int cPage,
 					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
@@ -117,7 +154,7 @@ public class EdmsController {
 			m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "/bsnList"));
 			m.addAttribute("totalData",totalData);
 			m.addAttribute("edms",list);
-			
+			//페이지 바도 처리해줘야함 
 			list.forEach(System.out::println);
 			//System.out.println(m);
 			return "edms/bsnList" ;

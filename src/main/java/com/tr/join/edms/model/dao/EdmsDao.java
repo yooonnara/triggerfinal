@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
 
 public interface EdmsDao {
@@ -17,6 +18,7 @@ public interface EdmsDao {
 	 * ;
 	 */
 		int insertbsn(SqlSession session, Edms e);
+		int insertAttachment(SqlSession session, Attachment a);
 		
 		List<Edms> selectBsnAll(SqlSession session, Map<String,Object> param);
 		

@@ -158,46 +158,25 @@
 
         </div>
         
-                 <!-- Footer -->
-             <div id="footer">
-                <script>$('#footer').load('./include/footer.html')</script>
-            </div>
-            <!-- End of Footer -->
+      
+			<!-- Footer -->
+				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+			<!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+		</div>
+		<!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top"style="display:list-item">
-        <i class="fas fa-angle-up"></i>
-    </a>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
+		<i class="fas fa-angle-up"></i>
+	</a>
+	
+<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
-    <!-- 로그아웃 확인창 Logout Modal-->
-    <div id="logoutCheck">
-        <script>$('#logoutCheck').load('./include/logout.html')</script>
-    </div>
-
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 </body>
 
 </html>
+
