@@ -1,13 +1,19 @@
 package com.tr.join.edms.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -17,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -102,6 +109,46 @@ public class EdmsController {
 		//출장 insertform
 		
 	}
+	
+	
+	
+	
+	
+	//파일 다운로드 하는 메소드 
+	@RequestMapping("/filedownload")
+	public void fileDown(String oriname, String rename, OutputStream out,
+			@RequestHeader(value="user-agent") String header,
+			HttpSession session,
+			HttpServletResponse res) {
+		
+		String path=session.getServletContext().getRealPath("/resources/upload/edms/");
+		File downloadFile=new File(path+rename);
+		try(FileInputStream fis=new FileInputStream(downloadFile);
+				BufferedInputStream bis=new BufferedInputStream(fis);
+				BufferedOutputStream bos=new BufferedOutputStream(out)) {
+			
+			boolean isMS=header.contains("Trident")||header.contains("MSIE");
+			String ecodeRename="";
+			if(isMS) {
+				ecodeRename=URLEncoder.encode(oriname,"UTF-8");
+				ecodeRename=ecodeRename.replaceAll("\\+","%20");
+			}else {
+				ecodeRename=new String(oriname.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			res.setContentType("application/octet-stream;charset=utf-8");
+			res.setHeader("Content-Disposition","attachment;filename=\""+ecodeRename+"\"");
+			
+			int read=-1;
+			while((read=bis.read())!=-1) {
+				bos.write(read);
+			}
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 
 	

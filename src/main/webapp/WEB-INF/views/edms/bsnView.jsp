@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
 <body id="page-top">
 
@@ -95,7 +96,18 @@
 	                         <td>출장/연차 종료일</td>      
                              <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" value="${edms.endDate }" readonly></td>
                             </tr>
-       
+                            <tr>
+                            	<td>첨부파일</td>
+                            	<td>
+                            	 <c:if test="${not empty edms.file }">
+							      <c:forEach var="f" items="${edms.file }">
+							         <button type="button"  class="btn btn-primary" 
+							         onclick="fn_fileDownload('${f.originalFilename}','${f.renamedFilename }');">
+							           ${f.originalFilename }</button>
+							        </c:forEach>
+							     </c:if>
+							     </td>
+							    </tr>
                             </tbody> 
 								</table>
 								 <div class="button-footer d-flex justify-content-around mb-4">
@@ -107,6 +119,13 @@
 					</div>
 					
 				</div>
+				
+				
+				<script>
+				function fn_fileDownload(oriName,reName){
+					location.assign("${path}/edms/filedownload?oriname="+oriName+"&rename="+reName);
+				};
+				</script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
 
