@@ -66,7 +66,9 @@ public class PageFactory {
 		
 	}
 	
-	public static String getAjaxPage(int cPage, int numPerpage, int totalData, String url) {
+	
+	//ajax 페이징처리 
+	public static String getAjaxPage(int cPage, int numPerpage, int totalData, String url,int searchNum) {
 		
 		//매개변수값을 이용해서 pageBar를 만들어주는 함수
 		StringBuffer pageBar=new StringBuffer();
@@ -88,46 +90,59 @@ public class PageFactory {
 			pageBar.append("</li>");
 		}else {
 			pageBar.append("<li class='page-item'>");
-			pageBar.append("<a class='page-link' href='javascript:fn_paging("+(pageNo-1)+")'>&laquo;");
+			pageBar.append("<a class='page-link' href='javascript:ajaxWorkTimePage("+(pageNo-1)+","+numPerpage+","+searchNum+")'>&laquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar.append("<li class='page-item disabled'>");
-				pageBar.append("<a class='page-link' href='#'>"+pageNo);
+				pageBar.append("<a class='page-link' href='#'>"+pageNo); 
 				pageBar.append("</a>");
 				pageBar.append("</li>");				
 			}else {
 				pageBar.append("<li class='page-item'>");
-				pageBar.append("<a class='page-link' href='javascript:fn_paging("+(pageNo)+")'>"+pageNo);
+				pageBar.append("<a class='page-link' href='javascript:ajaxWorkTimePage("+(pageNo)+","+numPerpage+","+searchNum+")'>"+pageNo);
 				pageBar.append("</a>");
 				pageBar.append("</li>");
 			}
 			pageNo++;
 		}
 		
-		if(pageNo>totalPage) {
+		if(pageNo>totalPage) { //현재 보고있는 페이지
 			pageBar.append("<li class='page-item disabled '>");
 			pageBar.append("<a class='page-link' href='#'>&raquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}else {
 			pageBar.append("<li class='page-item'>");
-			pageBar.append("<a class='page-link' href='javascript:fn_paging("+(pageNo)+")'>&raquo;");
+			pageBar.append("<a class='page-link' href='javascript:ajaxWorkTimePage("+(pageNo)+","+numPerpage+","+searchNum+")'>&raquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}
 		pageBar.append("</ul>");
 		
 		//스크립트문 추가
-		pageBar.append("<script>");
-		pageBar.append("function fn_paging(no){");
-		pageBar.append("$.ajax({('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');}");
-		pageBar.append("}");
-		pageBar.append("</script>");
+//		pageBar.append("<script>");
+//		pageBar.append("function fn_ajaxpaging(no){");
+//		pageBar.append("$.ajax({('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');}");
+//		pageBar.append("}");
+//		pageBar.append("</script>");
 		
 		return new String(pageBar);
 		
 	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

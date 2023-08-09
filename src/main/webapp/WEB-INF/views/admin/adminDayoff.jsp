@@ -190,7 +190,7 @@
                                     <td>${ad.totalDoCount }</td>
                                     <td>${ad.usedDoCount }</td>
                                     <td>
-                                    	<c:if test="${ad.remainDoCount < 0}">*</c:if>
+                                    	<c:if test="${ad.remainDoCount <= 0}">*</c:if>
                                     	<c:if test="${ad.remainDoCount > 0}">${ad.remainDoCount }</c:if>
                                     </td>
                                 </tr>
@@ -201,29 +201,9 @@
                     </div>
                     <button class="btn btn-secondary btn-sm mr-2" type="button" onclick="openCalendar();">캘린더 보기</button>
                         <!-- 페이징 -->
-                        <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link text-muted" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link text-muted" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+	                       <div class="pasing-area">
+					        	<c:out value="${pageBar }" escapeXml="false"/>
+					        </div>   
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->

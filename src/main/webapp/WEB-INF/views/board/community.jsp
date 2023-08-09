@@ -68,6 +68,7 @@
                                     <col width="40%" />
                                     <col width="15%" />
                                     <col width="15%" />
+                                    <col width="10%" />
                                     <col width="20%" />
                                 </colgroup>
 
@@ -76,8 +77,9 @@
                                         <th>번호</th>
                                         <th>제목</th>
                                         <th>작성자</th>
-                                        <th>조회수</th>
+                                        <th>첨부파일</th>
                                         <th>작성일</th>
+                                        <th>조회수</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,17 +87,25 @@
                                 	<c:forEach var="b" items="${board }">
                                     <tr>
                                         <td>${b.no }</td>
-                                        <td><a href="">${b.title }</a></td>
+                                        <td><a href="${path }/board/communityView.do?no=${b.no}">${b.title }</a></td>
                                         <td>${b.writer }</td>
+                                        <td>
+                                        	<c:if test="${not empty b.file }">
+                                        		<img src="${path }/resources/img/file_icon.png" width="30" height="30" alt="첨부파일사진">
+                                        	</c:if>
+                                        </td>
+                                        <td>${b.emp.dateCreated }</td>
                                         <td>${b.views }</td>
-                                        <td>${b.dateCreated }</td>
                                     </tr>
                                  	</c:forEach>
                                     </c:if>
                                 </tbody>
                             </table>
                         </div>
-                        
+                        <!-- 페이징 -->
+				        <div class="pasing-area">
+				        	<c:out value="${pageBar }" escapeXml="false"/>
+				        </div>        
                         
                        
 

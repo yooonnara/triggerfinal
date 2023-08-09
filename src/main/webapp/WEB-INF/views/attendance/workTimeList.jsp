@@ -59,11 +59,51 @@
                         
                         <!-- 버튼으로 상태 검색 -->
 						<script>
-						$("#big-search input[type=radio]").click(e=>{
+						$("#big-search input[type=radio]").click(ajaxWorkTime);
+						
+						function ajaxWorkTimePage(cPage,numPerpage,searchNum){
+							$.ajax({
+								url:"/ajaxworkTime",
+								data:{"cPage":cPage,"numPerpage":numPerpage,"searchNum":searchNum},
+								success:function(data){
+									const d = data['wtajax']
+									$("#wk-tbody").html("");
+									$(".pasing-area").html(data["pageBar"]);
+									
+								for(let i=0; i<d.length;i++){
+									const $tr = $("<tr>");
+									const $attDate = $("<td>").text(d[i]["attDate"]);
+				                    let status="";
+				                     switch(d[i]["status"]){
+				                        case 0 : status="정상 출근";break; 
+				                        case 2 : status="지각";break;
+				                        case 3 : status="조퇴";break;
+				                        case 4 : status="결근";break;
+				                    }
+				                    const $status = $("<td>").text(status);
+									const $startTime = $("<td>").text(d[i]["startTime"]);
+									const $endTime = $("<td>").text(d[i]["endTime"]);
+									const $attTime = $("<td>").text(d[i]["attTime"]);
+									
+									$tr.append($attDate).append($status).append($startTime).append($endTime).append($attTime);
+									
+									$("#wk-tbody").append($tr);
+								}
+								
+							},
+							error:function(e){
+								console.log(e);
+							}
+							})	
+						}
+						
+						function ajaxWorkTime(e){
 							$.ajax({
 								url: "/ajaxworkTime",
 								data: {"searchNum":e.target.value}, 
-								success:function(d){
+								success:function(data){
+									const d = data['wtajax'];
+									$(".pasing-area").html(data["pageBar"]);
 									$("#wk-tbody").html("");
 									console.log(e.target.value);
 									console.log(d);
@@ -92,7 +132,7 @@
 									console.log("ajax 통신 실패");
 								}
 							})
-						})
+						}
 						</script>
                         
                         
@@ -139,7 +179,6 @@
 			                            $("#datepicker1").datepicker("option", "maxDate", selected);
 			                        }
 			                    });	
-			                    
 			                });
                			</script> 
 
@@ -238,6 +277,8 @@
 		            <div class="pasing-area">
 		            	<c:out value="${pageBar }" escapeXml="false"/>
 		            </div>
+		            
+		            <!-- 모달 -->
 		            <script>
 						function workDetail(no){
 							console.log(no);

@@ -104,10 +104,16 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 	
 	@Override
-	public int selectWorkTimeCount() {
-		return dao.selectWorkTimeCount(session);
+	public int selectWorkTimeCount(int no) {
+		return dao.selectWorkTimeCount(session, no);
 	}
 	
+	
+	@Override
+	public int searchWorkTimeCount(Map<String, Object> ajaxParam) {
+		return dao.searchWorkTimeCount(session, ajaxParam);
+	}
+
 	//검색 기능 - 근태 상태로 조회
 	@Override
 	public List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam){
@@ -174,18 +180,21 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 	
 //-------------연차-----------------
-	
-
-
 
 	@Override
-	public List<DayOff> selectDayoffAll(int no){
-		return dao.selectDayoffAll(session, no);
+	public List<DayOff> selectDayoffAll(Map<String,Object> param){
+		return dao.selectDayoffAll(session, param);
 	}
 	
+	
 	@Override
-	public List<DayOff> selectAdminDayoffAll(){
-		return dao.selectAdminDayoffAll(session);
+	public int dayoffAllCount(int no) {
+		return dao.dayoffAllCount(session, no);
+	}
+
+	@Override
+	public List<DayOff> selectAdminDayoffAll(Map<String,Object> param){
+		return dao.selectAdminDayoffAll(session,param);
 	}
 	
 	@Override
@@ -217,8 +226,13 @@ public class AttendanceServiceImpl implements AttendanceService {
 	//-------------출장------------------
 	 //출장 리스트 출력
 	@Override
-	public List<Edms> selectBusinessTrip(int no) {
-		return dao.selectBusinessTrip(session, no);
+	public List<Edms> selectBusinessTrip(Map<String,Object> param) {
+		return dao.selectBusinessTrip(session, param);
+	}
+
+	@Override
+	public int AdminDayoffCount() {
+		return dao.AdminDayoffCount(session);
 	}
 
 	@Override

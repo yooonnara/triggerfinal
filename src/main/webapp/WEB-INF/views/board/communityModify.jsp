@@ -37,15 +37,12 @@
                 <div class="container-fluid pl-5 pr-5">
 
                     <!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark mt-5 mb-5">자유게시판 작성</h1>
+					<h1 class="h3 text-dark mt-5 mb-5">자유게시판 수정</h1>
 
 					<div class="notice-container">
 
 
-						<!-- 등록 버튼 -->
-						<div class="board-btn">
-							
-						</div>
+						
 
 
 						<div class="board-container">
@@ -56,15 +53,16 @@
 									<col width="15%" />
 									<col width="85%" />
 								</colgroup>
-								<form id="cmForm" name="cmForm" action="${path }/board/insertCommunityWrite" method="post">
+								<form id="cmmForm" name="cmmForm" action="${path }/board/communityModifySubmit" method="post">
 								<tbody>
 									<tr>
+										<input name="no" value="${board.no }" hidden>
 										<td class="text-center align-middle">작성자</td>
-										<td><input name="writer" value="${emp.get(0).name }"></td>
+										<td><input name="writer" value="${board.writer }" readonly></td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle">제목</td>
-										<td><input id="title" name="title" type="text"></td>
+										<td><input id="title" name="title" type="text" value="${board.title }"></td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle"><span>첨부파일</span></td>
@@ -84,14 +82,14 @@
 										<td class="text-center align-middle" id="cwTd" colspan="2">
 											<div id="smarteditor" class="editor-area">
 												<!--에디터가 들어가는 영역입니다.-->
-												<textarea name="contents" id="contents" rows="20" cols="10" style="width:1300px"></textarea>
+												<textarea name="contents" id="contents" rows="20" cols="10" style="width:1300px">${board.content }</textarea>
 											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-						<button type="submit" id="submit_cm" class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">저장</button>
+						<button type="submit" id="submit_cmm" class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</button>
 						<a href="javascript:history.back()" class="btn btn-secondary mt-3 float-right btn-sm mb-3">취소</a>
 						
 						</form>
@@ -111,7 +109,7 @@
 					})
 				
 				//textarea에 쓴 내용 전송하기
-				$("#cmForm").on('submit',function(e){
+				$("#cmmForm").on('submit',function(e){
 					oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 				      
 				    if ($("#title").val().length < 1) {
