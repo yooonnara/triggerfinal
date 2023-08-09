@@ -70,19 +70,41 @@
                     <div class="search-write-area row mb-3">
                         <!-- 검색창 -->
                         <div class="search-area float-start col-8">
-                            <form>
+                            <form name="asearch-form">
                                 <div class="search-area d-flex">
                                     <select name="notice-search" aria-label="Default select example" class="mr-1">
-                                        <option selected value="1">전체</option>
-                                        <option value="2">결재대기</option>
-                                        <option value="3">결재승인</option>
-                                        <option value="4">결재반려</option>
+                                        <option selected value="all">전체</option>
+                                        <option value="waite">결재대기</option>
+                                        <option value="allow">결재승인</option>
+                                        <option value="return">결재반려</option>
                                     </select>
                                     <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
-                                    <button type="button" class="btn btn-primary btn-sm ">검색</button>
+                                    <button type="button" onclick="eSearch()"class="btn btn-primary btn-sm ">검색</button>
                                 </div>
                             </form>
                         </div>
+                        
+                        <script>
+                        function eSearch(){
+                        	$.ajax({
+                        		url: "${path}/edms/bsnList/eSearch",
+                        		data: $("form[name=asearch-form]").serialize(),
+                        		success:function(f){
+                        			$("#em-sts").html("");//리셋 
+                        			console.log(f);
+                        			for(let i=0; i<f.length;i++){
+                        				const $tr=$("<tr>");
+                        				const $no=$
+                        			}
+                        		}
+                        	})
+                        }
+                        
+                        
+                        </script>
+                        
+                        
+                        
                     <!--     작성하기 버튼
                         <div class="wirte-area col-4">
                             <a href="" class="btn btn-primary btn-sm float-right">글쓰기</a>
@@ -105,7 +127,7 @@
                             </colgroup>
 						
                             <thead>
-                                <tr class="bg-dark text-white">
+                                <tr class="bg-primary text-white">
                                     <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
@@ -116,7 +138,7 @@
                                     <th>결재상태</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="em-sts">
                             <c:if test="${not empty edms}">
                             <c:forEach var="e" items="${edms}">
                                 <tr>
