@@ -106,26 +106,15 @@
                 </div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
-			
-			
-			
-			
-			
- 			
-
-
 			<!-- Footer -->
 			<div id="footer">
 				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 			</div>
 		</div>
 	</div>
-
-	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
-
 	<!-- 부트스트랩 스크립트 -->
 	<div id="bootstrap">
 		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
@@ -134,5 +123,4 @@
  <!--  <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </body>
-
 </html>

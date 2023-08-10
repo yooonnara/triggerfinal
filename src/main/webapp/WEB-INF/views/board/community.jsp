@@ -90,7 +90,7 @@
                                         <td><a href="${path }/board/communityView.do?no=${b.no}">${b.title }</a></td>
                                         <td>${b.writer }</td>
                                         <td>
-                                        	<c:if test="${not empty b.file }">
+                                        	<c:if test="${not empty b.file and b.file[0].boardNo!=0}">
                                         		<img src="${path }/resources/img/file_icon.png" width="30" height="30" alt="첨부파일사진">
                                         	</c:if>
                                         </td>

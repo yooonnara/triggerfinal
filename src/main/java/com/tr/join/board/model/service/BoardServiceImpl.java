@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tr.join.board.model.dao.BoardDao;
 import com.tr.join.board.model.vo.Board;
+import com.tr.join.board.model.vo.BoardComment;
 import com.tr.join.employee.model.vo.Employee;
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -58,6 +59,12 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectCommunityById(session,no);
 	}
 
+	
+	@Override
+	public List<BoardComment> selectCommentAll(int no) {
+		return dao.selectCommentAll(session,no);
+	}
+
 	@Override
 	public Board communityModifyList(Map<String, Object> param) {
 		return dao.communityModifyList(session, param);
@@ -66,6 +73,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int communityModifySubmit(Map param) {
 		return dao.communityModifySubmit(session,param);
+	}
+
+	@Override
+	public int commentWrite(Map<String, Object> param) {
+		return dao.commentWrite(session,param);
+	}
+
+	@Override
+	public List<BoardComment> selectComment(Map<String,Object> param) {
+		return dao.selectComment(session,param);
 	}
 	
 	

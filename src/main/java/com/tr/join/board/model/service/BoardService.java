@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tr.join.board.model.vo.Board;
+import com.tr.join.board.model.vo.BoardComment;
 import com.tr.join.employee.model.vo.Employee;
 
 public interface BoardService {
@@ -13,7 +14,9 @@ public interface BoardService {
 	List<Employee> communityWrite(int no);
 	int insertCommunityWrite(Board b);
 	Board selectCommunityById(int no);
+	List<BoardComment> selectCommentAll(int no);
 	Board communityModifyList(Map<String,Object> param);
 	int communityModifySubmit(Map param);
-	
+	int commentWrite(Map<String,Object> param);
+	List<BoardComment> selectComment(Map<String,Object> param);
 }

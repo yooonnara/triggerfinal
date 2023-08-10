@@ -123,6 +123,7 @@ public class AttendanceController {
 		  System.out.println(m);
 		  return "attendance/workTimeWeekly";
 	  }
+	  
 	  @GetMapping("/workTimeWeeklyData")
 	  @ResponseBody
 	  public List<Attendance> workTimeWeeklyData() {
@@ -428,14 +429,13 @@ public class AttendanceController {
 	  }
 	  
 	     @RequestMapping("/admin/adminDayoffCalendar")
-	       @ResponseBody
-	       public ModelAndView pageCalendar(ModelAndView m) {
+	     @ResponseBody
+	     public ModelAndView pageCalendar(ModelAndView m) {
 	          
+	     //m.addAttribute("dayoffData",cParam); //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
+	     m.setViewName("/admin/adminDayoffCalendar");
 	          
-	         //m.addAttribute("dayoffData",cParam); //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
-	          m.setViewName("/admin/adminDayoffCalendar");
-	          
-	          return m;
+	     return m;
 	       }
 	     
 	  
@@ -524,13 +524,7 @@ public class AttendanceController {
 
 	  
 
-//	
-//	@GetMapping("/adminDayoffCalendar")
-//		public String adminDayoffCalendar() {
-//		return "admin/adminDayoffCalendar";
-//	}
-//	
-	
+
 	
 
 

@@ -83,33 +83,114 @@
 								</tbody>
 							</table>
 						</div>
-						
-					</div>
+						<!-- 댓글 부분 -->
+						<div class="board-container">
+							<table id="commTable" class="table table-sm shadow table-hover text-center">
+								<colgroup>
+									<col width="30%" />
+									<col width="20%" />
+									<col width="10%" />
+									<col width="10%" />
+								</colgroup>
+								<th class="text-left">댓글 작성</th>
+								<form name="comment-form" action="${path }/board/commentWrite" method="post">	
+									<tbody>
+									<c:if test="${not empty comment }">
+									<c:forEach var="c" items="${comment }">
+										<tr>
+											<td class="float-left" style="width:980px">${c.content }</td>
+											<td>${c.writer }</td>
+											<td><button class="btn btn-primary ml-2 mr-1 btn-sm">수정</button></td>
+											<td><button class="btn btn-secondary btn-sm">삭제</button></td>
+										</tr>
+									</c:forEach>
+									</c:if>	
+										<tr>
+											<td>
+												<input name="name" value="${emp.name}" type="hidden">
+												<input name="boardNo" value="${board.no}" type="hidden">
+												<input name="empNo" value="${board.empNo}" type="hidden">
+												<input name="comment" id="comment" class="bg-light mt-2 ml-5" style="width:900px;height:60px;">
+											</td>
+											<td colspan="3">
+											<button type="submit" class="btn btn-secondary  float-left mt-3 ml-5 btn-sm mb-3 " >댓글 작성</button>
+											</td>
+										</tr>
+									</tbody>	
+								 </form> 
+							</table>
+						</div>
+					</div><!--끝  -->
 				</div>
+				
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
 
+			<script>
+				//댓글 전송하기
+				$("#comment-form").on('submit',function(e){
+				  
+				    var name = $("#name").val();
+				    var boardNo = $("#boardNo").val();
+				    var empNo = $("#empNo").val();
+				    var comment = $("#comment").val();
+			   });
+				
+
+				
+				
+			/* 	function submitComm(){
+					$.ajax({
+						url:"/board/commentWrite",
+						data:{
+							name : $('input[name=name]').val(),
+							boardNo : $('input[name=boardNo]').val(),
+							empNo : $('input[name=empNo]').val(),
+							comment : $('input[name=comment]').val()
+						},
+						success:function(c){
+							console.log(c[0]["content"]);
+							
+							for(let i=0;i<c.length;i++){
+								const $tr = $("<tr>");
+								const $td = $("<td class='float-left ml-5'>");
+								const $comment = $("<td>").text(c[i]["content"]);
+								
+								$td.append($comment);
+								
+								$("#commTable").append($td);
+							}
+						},
+						error:function(){
+    						console.log("ajax 통신 실패");
+    					}
+         
+					})
+				} */
+				
 			
+					
+			</script>
 
 
-			<!-- Footer -->
+
+
+
+
+
+
+
+
+
+
 				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-			<!-- End of Footer -->
-
 		</div>
-		<!-- End of Content Wrapper -->
-
 	</div>
 	<!-- End of Page Wrapper -->
-
 	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
-	
 <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-
 </body>
-
 </html>
-

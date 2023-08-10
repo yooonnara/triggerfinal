@@ -68,18 +68,6 @@
 										<td><input id="title" name="title" type="text" class="bg-light" style="border:none;width:500px" ></td>
 									</tr>
 									<tr>
-										<!-- <td class="text-center align-middle"><span>첨부파일</span></td>
-										<td>
-											<div class="td-con">
-												<div class="fileBox addfile">
-													<span class="inputOuter bTp"> 
-														<div class="file-area" id="file-area">
-															<input type="file" name="uploadFiles1" id="uploadFiles1" class="uploadBtn" accept="image/*" style="width:500px">
-														</div>
-													</span>
-												</div>
-											</div>
-										</td> -->
 										<td class="text-center align-middle"><span>첨부파일</span></td>
 										<td>
 							                <div class="custom-file" style="width:500px">
@@ -115,9 +103,6 @@
 				});
 			})
 			</script>
-
-
-
 
 
 			<!-- smartEditor -->

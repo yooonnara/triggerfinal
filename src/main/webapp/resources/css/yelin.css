@@ -334,3 +334,7 @@
     #accordionTable th{
         border-top:none;
     }
+    
+    #commTable>tr{
+		border:1px;
+	}

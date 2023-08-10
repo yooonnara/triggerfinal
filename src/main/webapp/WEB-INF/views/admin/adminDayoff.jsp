@@ -62,15 +62,6 @@
                        						const $name = $("<td>").text(df[i]["emp"]["name"]);
                        						const $deptTitle = $("<td>").text(df[i]["emp"]["deptTitle"]);
                        						const $enrollDate = $("<td>").text(df[i]["emp"]["enrollDate"]);
-                       						/* let resignDate="";
-                       						const 
-						                     if (df[i]["emp"]["resignDate"] == null){
-						                       	resingDate.text("0") ;
-						                    }else{
-						                    	resignDate.text(df[i]["emp"]["resignDate"]);
-						                    } */
-						                   
-                       						//const $resignDate = $("<td>").text(resignDate);
                        						const $resignDate = $("<td>").text(df[i]["emp"]["resignDate"]);
                        						const $total =  $("<td>").text(df[i]["totalDoCount"]);
                        						const $used =  $("<td>").text(df[i]["usedDoCount"]);

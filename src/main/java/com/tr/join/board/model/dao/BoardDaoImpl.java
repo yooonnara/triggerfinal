@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.tr.join.board.model.vo.Board;
-import com.tr.join.board.model.vo.BoardImg;
+import com.tr.join.board.model.vo.BoardComment;
 import com.tr.join.employee.model.vo.Employee;
 
 @Repository
@@ -43,6 +43,12 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne("board.selectCommunityById",no);
 	}
 
+	
+	@Override
+	public List<BoardComment> selectCommentAll(SqlSession session, int no) {
+		return session.selectList("board.selectCommentAll",no);
+	}
+
 	@Override
 	public Board communityModifyList(SqlSession session, Map<String, Object> param) {
 		return session.selectOne("board.communityModifyList",param);
@@ -51,6 +57,16 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int communityModifySubmit(SqlSession session, Map param) {
 		return session.insert("board.communityModifySubmit",param);
+	}
+
+	@Override
+	public int commentWrite(SqlSession session, Map<String, Object> param) {
+		return session.insert("board.commentWrite", param);
+	}
+
+	@Override
+	public List<BoardComment> selectComment(SqlSession session,Map<String,Object> param) {
+		return session.selectList("board.selectComment",param);
 	}
 	
 	

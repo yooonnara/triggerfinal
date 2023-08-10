@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,10 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.board.model.service.BoardService;
 import com.tr.join.board.model.vo.Board;
+import com.tr.join.board.model.vo.BoardComment;
 import com.tr.join.board.model.vo.BoardImg;
 import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Employee;
@@ -117,17 +120,13 @@ public class BoardController {
 		return "redirect:/community";
 	}
 	
-	
-	
-	
-	
-	
 	//상세보기
 	@GetMapping("/board/communityView.do")
 	public String selectCommunityById(int no, Model m) {
 		Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginNo", loginNo.getNo());
 		m.addAttribute("board", service.selectCommunityById(no));
+		m.addAttribute("comment", service.selectCommentAll(no));
 		System.out.println(m);
 		return "board/communityView";
 	}
@@ -157,7 +156,30 @@ public class BoardController {
 	}
 	
 	
+	//댓글 작성
+	@RequestMapping("/board/commentWrite")
+	private String commentWrite(@RequestParam Map param, Model m) {
+		
+		Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		param.put("loginNo", loginNo.getName());
+		int result = service.commentWrite(param);
+		System.out.println(param);
+		List<BoardComment> comment = service.selectComment(param);
+		m.addAttribute("result",result);
+		m.addAttribute("comment",comment);
+		
+		return "board/communityView";
+	}
 	
+	
+//	@RequestMapping("/board/comment")
+//	 
+//	@ResponseBody private Map<String, Object> commentInsert(){
+//	
+//	Map<String,Object> cParam=new HashMap(); List<BoardComment> comment =
+//	service.selectComment(); cParam.put("comment",comment);
+//	
+//	return cParam; }
 	
 	
 	
