@@ -11,7 +11,7 @@ public interface BoardService {
 	List<Board> selectCommunityAll(Map<String,Object> param);
 	int CommunityCount();
 	List<Employee> communityWrite(int no);
-	int insertCommunityWrite(Map param);
+	int insertCommunityWrite(Board b);
 	Board selectCommunityById(int no);
 	Board communityModifyList(Map<String,Object> param);
 	int communityModifySubmit(Map param);

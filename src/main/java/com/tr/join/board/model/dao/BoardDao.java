@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.tr.join.board.model.vo.Board;
+import com.tr.join.board.model.vo.BoardImg;
 import com.tr.join.employee.model.vo.Employee;
 
 public interface BoardDao {
@@ -13,7 +14,8 @@ public interface BoardDao {
 	List<Board> selectCommunityAll(SqlSession session,Map<String,Object> param);
 	int CommunityCount(SqlSession session);
 	List<Employee> communityWrite(SqlSession session,int no);
-	int insertCommunityWrite(SqlSession session, Map param);
+	int insertCommunityWrite(SqlSession session, Board b);
+	int insertBoardImg(SqlSession session, int no);
 	Board selectCommunityById(SqlSession session, int no);
 	Board communityModifyList(SqlSession session, Map<String,Object> param);
 	int communityModifySubmit(SqlSession session, Map param);

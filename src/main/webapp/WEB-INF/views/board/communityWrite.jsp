@@ -48,7 +48,7 @@
 						</div>
 
 
-						<div class="board-container">
+						<div class="board-container"  style="width:1200px;margin:auto">
 							<table class="table table-sm shadow table-hover text-center">
 
 								<!-- 테이블 칸 크기 -->
@@ -56,49 +56,69 @@
 									<col width="15%" />
 									<col width="85%" />
 								</colgroup>
-								<form id="cmForm" name="cmForm" action="${path }/board/insertCommunityWrite" method="post">
+								<form id="cmForm" name="cmForm" action="${path }/board/insertCommunityWrite" method="post" enctype="multipart/form-data" >
 								<tbody>
 									<tr>
 										<td class="text-center align-middle">작성자</td>
-										<td><input name="writer" value="${emp.get(0).name }"></td>
+										<input name="empNo" value="${emp.get(0).no}" hidden>
+										<td><input name="writer" value="${emp.get(0).name }" class="bg-light" style="border:none;width:500px"></td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle">제목</td>
-										<td><input id="title" name="title" type="text"></td>
+										<td><input id="title" name="title" type="text" class="bg-light" style="border:none;width:500px" ></td>
 									</tr>
 									<tr>
-										<td class="text-center align-middle"><span>첨부파일</span></td>
+										<!-- <td class="text-center align-middle"><span>첨부파일</span></td>
 										<td>
 											<div class="td-con">
 												<div class="fileBox addfile">
 													<span class="inputOuter bTp"> 
 														<div class="file-area" id="file-area">
-															<input type="file" name="uploadFiles1" id="uploadFiles1" class="uploadBtn" accept="image/*"  >
+															<input type="file" name="uploadFiles1" id="uploadFiles1" class="uploadBtn" accept="image/*" style="width:500px">
 														</div>
 													</span>
 												</div>
 											</div>
+										</td> -->
+										<td class="text-center align-middle"><span>첨부파일</span></td>
+										<td>
+							                <div class="custom-file" style="width:500px">
+							                    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
+							                    <label class="custom-file-label" for="upFile1" >파일을 선택하세요</label>
+							                </div>
 										</td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle" id="cwTd" colspan="2">
 											<div id="smarteditor" class="editor-area">
 												<!--에디터가 들어가는 영역입니다.-->
-												<textarea name="contents" id="contents" rows="20" cols="10" style="width:1300px"></textarea>
+												<textarea name="content" id="content" rows="20" cols="10" style="width:1300px"></textarea>
 											</div>
 										</td>
 									</tr>
 								</tbody>
-							</table>
+								</table>
+								<button type="submit" id="submit_cm" class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">저장</button>
+								<a href="javascript:history.back()" class="btn btn-secondary mt-3 float-right btn-sm mb-3">취소</a>
 						</div>
-						<button type="submit" id="submit_cm" class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">저장</button>
-						<a href="javascript:history.back()" class="btn btn-secondary mt-3 float-right btn-sm mb-3">취소</a>
-						
 						</form>
 					</div>
 				</div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
+
+			<script>
+			$(()=>{
+				$("[name=upFile]").change(e=>{
+					const fileName = e.target.files[0].name;
+					$(e.target).next(".custom-file-label").text(fileName);
+				});
+			})
+			</script>
+
+
+
+
 
 			<!-- smartEditor -->
 			<script>
@@ -152,3 +172,4 @@
 
 </html>
 
+								

@@ -34,21 +34,25 @@
 
 
 				<!-- 수정할 컨테이너 Begin Page Content -->
-                <div class="container-fluid pl-5 pr-5">
+                <div class="container-fluid pl-5 pr-5" >
 
                     <!-- 타이틀 Page Heading -->
 					<h1 class="h3 text-dark mt-5">자유게시판 상세페이지</h1>
 
-					<div class="notice-container">
+					<div class="notice-container" style="width:1200px;margin:auto">
+					
+					<!-- 삭제/수정 버튼 -->
+					<c:if test="${loginNo == board.empNo}">
 						<div class="float-left">
 						<a href="${path }/board/communityModify.do?no=${board.no}"  class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</a>
 						<a href="javascript:history.back()" class="btn btn-secondary mt-3 btn-sm mb-3">삭제하기</a>
 						</div>
+					</c:if>	
 						<a href="${path }/community" class="btn btn-secondary float-right mt-3 btn-sm mb-3">목록</a>
 
 
 						<div class="board-container">
-							<table class="table table-sm shadow table-hover text-center">
+							<table class="table table-sm shadow table-hover text-center" >
 								<!-- 테이블 칸 크기 -->
 								<colgroup>
 									<col width="15%" />

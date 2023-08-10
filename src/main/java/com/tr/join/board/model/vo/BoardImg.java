@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BoardImg {
 	private int no;
-	private int boardNo;
+	private int boardNo; //board의 커뮤니티 번호여야 한다. 
 	private String fileName;
 	private String saveFileName;
 }

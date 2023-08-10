@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.tr.join.board.model.vo.Board;
+import com.tr.join.board.model.vo.BoardImg;
 import com.tr.join.employee.model.vo.Employee;
 
 @Repository
@@ -28,8 +29,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertCommunityWrite(SqlSession session, Map param) {
-		return session.insert("board.insertCommunityWrite",param);
+	public int insertCommunityWrite(SqlSession session, Board b) {
+		return session.insert("board.insertCommunityWrite",b);
+	}
+
+	@Override
+	public int insertBoardImg(SqlSession session, int no) {
+		return session.insert("board.insertBoardImg",no);
 	}
 
 	@Override

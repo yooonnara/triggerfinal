@@ -34,7 +34,7 @@
 
 
 				<!-- 수정할 컨테이너 Begin Page Content -->
-                <div class="container-fluid pl-5 pr-5">
+                <div class="container-fluid pl-5 pr-5" >
 
                     <!-- 타이틀 Page Heading -->
 					<h1 class="h3 text-dark mt-5 mb-5">자유게시판 수정</h1>
@@ -45,7 +45,7 @@
 						
 
 
-						<div class="board-container">
+						<div class="board-container"  style="width:1200px;margin:auto">
 							<table class="table table-sm shadow table-hover text-center">
 
 								<!-- 테이블 칸 크기 -->
@@ -58,11 +58,11 @@
 									<tr>
 										<input name="no" value="${board.no }" hidden>
 										<td class="text-center align-middle">작성자</td>
-										<td><input name="writer" value="${board.writer }" readonly></td>
+										<td><input name="writer" value="${board.writer }" readonly class="bg-light" style="border:none;width:500px"></td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle">제목</td>
-										<td><input id="title" name="title" type="text" value="${board.title }"></td>
+										<td><input id="title" name="title" type="text" value="${board.title }" class="bg-light" style="width:500px"></td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle"><span>첨부파일</span></td>
@@ -71,7 +71,7 @@
 												<div class="fileBox addfile">
 													<span class="inputOuter bTp"> 
 														<div class="file-area" id="file-area">
-															<input type="file" name="uploadFiles1" id="uploadFiles1" class="uploadBtn" accept="image/*"  >
+															<input type="file" name="uploadFiles1" id="uploadFiles1" class="uploadBtn" style="width:500px" accept="image/*"  >
 														</div>
 													</span>
 												</div>
@@ -88,10 +88,9 @@
 									</tr>
 								</tbody>
 							</table>
+							<button type="submit" id="submit_cmm" class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</button>
+							<a href="javascript:history.back()" class="btn btn-secondary mt-3 float-right btn-sm mb-3">취소</a>
 						</div>
-						<button type="submit" id="submit_cmm" class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</button>
-						<a href="javascript:history.back()" class="btn btn-secondary mt-3 float-right btn-sm mb-3">취소</a>
-						
 						</form>
 					</div>
 				</div>

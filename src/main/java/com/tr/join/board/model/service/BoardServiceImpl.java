@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tr.join.board.model.dao.BoardDao;
 import com.tr.join.board.model.vo.Board;
@@ -34,12 +35,22 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Employee> communityWrite(int no) {
-		return dao.communityWrite(session,no);
+		return dao.communityWrite(session, no);
 	}
 
 	@Override
-	public int insertCommunityWrite(Map param) {
-		return dao.insertCommunityWrite(session,param);
+	@Transactional
+	public int insertCommunityWrite(Board b) {
+		int result= dao.insertCommunityWrite(session,b);
+		
+		if(result>0) {
+			if(b.getFile().size()>0) {
+					result=dao.insertBoardImg(session,b.getNo());
+					if(result!=1) throw new RuntimeException("첨부파일 형식이 올바르지 않습니다.");
+			}
+		}
+		return result;
+		
 	}
 
 	@Override
