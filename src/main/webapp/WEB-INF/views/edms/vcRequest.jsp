@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+<script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -69,7 +71,7 @@
                         <tr>
                             <td>연차 구분</td>
                             <td> 
-                           	 <select name="detailType" id="detailType" onchange="bsnFn()" class="custom-select ml-5 mb-1 col-sm-12">
+                           	 <select name="detailType" id="detailType" class="custom-select ml-5 mb-1 col-sm-12">
                                 <option selected>연차 종류를 선택하세요</option>
                                 <option  value="결혼">연차-결혼</option>
                                 <option value="휴가">연차-휴가</option>
@@ -89,21 +91,18 @@
             
                       <tr>
                         <td>연차시작날짜</td>
-                        
 	                     <td>
-	                    <input type="date" class="form-control ml-5 mb-1" name="startDate" id="startDate">   </td>
-	                    </tr>
-	                         <tr>
-	                         <td class="align-middle">연차끝날짜</td>
-	                               
-                             <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate"></td>
-	                            
-                            </tr>
-                           
+	                    	<input type="date" class="form-control ml-5 mb-1" name="startDate" id="startDate" >   
+	                    </td>
+	                  </tr>
+	                    <tr>
+	                        <td class="align-middle">연차끝날짜</td> 
+                             <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate" ></td>
+                        </tr>    
                     </table>
    							<div class="req-btn d-flex justify-content-around pt-5  ">
                         <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->
-                        <input type="submit" class="align-text-bottom btn btn-primary"  value="등록">
+                        <input type="submit" class="align-text-bottom btn btn-primary"  onsubmit="vcInsert();" value="등록">
                     </div>
                 </form>
             </div>
@@ -112,7 +111,41 @@
 
       <!-- 수정할 컨테이너 종료 End of Main Content -->
          </div>
+<script>
+document.querySelect('form[name="vcInsertForm"]').addEventListener('submit',function(event){
+	//필수 입력값 가져오기 
+	var detailType=document.getElementById('detailType').value;
+	var title= document.getElementById('title').value;
+	var content =document.getElementById('content').value;
+	var starDate=document.getElementById
+})
 
+
+
+
+
+const startDateInput = document.querySelector('[name="startDate"]');
+const endDateInput = document.querySelector('[name="endDate"]');
+
+
+startDateInput.addEventListener('change', () => {
+    // Ensure that the endDate cannot be earlier than startDate
+   // console.log(new Date,new Date(startDateInput.value),)
+   //const startDate=new Date();
+    if (new Date()>new Date(startDateInput.value)||new Date(endDateInput.value) < new Date(startDateInput.value)){
+   		alert ("시작일은 오늘 이전이거나 종료일 이후일 수 없습니다.");
+        startDateInput.value="";
+    }
+});
+
+endDateInput.addEventListener('change', () => {
+    // Ensure that the endDate cannot be earlier than startDate
+    if (new Date()>new Date(endDateInput.value)||new Date(startDateInput.value) > new Date(endDateInput.value)) {
+       alert("종료일은 오늘 이전이거나 시작일 이전일 수없습니다.");
+    	endDateInput.value = "";
+    }  
+});
+</script>
 
          <!-- Footer -->
             <jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -123,7 +156,7 @@
 
    </div>
    <!-- End of Page Wrapper -->
-
+</div>
    <!-- Scroll to Top Button-->
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
       <i class="fas fa-angle-up"></i>

@@ -72,9 +72,9 @@
                         <div class="search-area float-start col-8">
                             <form name="asearch-form">
                                 <div class="search-area d-flex">
-                                    <select name="notice-search" aria-label="Default select example" class="mr-1">
+                                    <select name="category" aria-label="Default select example" class="mr-1">
                                         <option selected value="all">전체</option>
-                                        <option value="waite">결재대기</option>
+                                        <option value="wait">결재대기</option>
                                         <option value="allow">결재승인</option>
                                         <option value="return">결재반려</option>
                                     </select>
@@ -87,18 +87,44 @@
                         <script>
                         function eSearch(){
                         	$.ajax({
-                        		url: "${path}/edms/bsnList/eSearch",
+                        		url: "${pageContext.request.contextPath}/edms/bsnList/eSearch",
                         		data: $("form[name=asearch-form]").serialize(),
                         		success:function(f){
                         			$("#em-sts").html("");//리셋 
                         			console.log(f);
                         			for(let i=0; i<f.length;i++){
                         				const $tr=$("<tr>");
-                        				const $no=$
+                        				const $no=$("<td>").text(f[i]["no"]);
+                        				const $createDate=$("<td>").text(f[i]["createDate"]);
+                        				const $deptTitle=$("<td>").text(f[i]['emp']["deptTitle"]);
+                        				const $jobTitle=$("<td>").text(f[i]['emp']["jobTitle"]);
+                        				const $name=$("<td>").text(f[i]['emp']["name"]);
+                        				const $title=$("<td>").text(f[i]["title"]);
+                        				let type="";
+                        				switch(f[i]["type"]){
+                        				case 0: type="연차" ;break;
+                        				case 1: type="출장" ;break;
+                        				}
+                        				const $type=$("<td>").text(type);
+                        				
+                        				let appStatus="";
+                        				switch(f[i]["appStatus"]){
+                        				case -1: appStatus="전체" ;break;
+                        				case 0: appStatus="대기" ;break;
+                        				case 1:appStatus="승인" ;break;
+                        				case 2:appStatus="반려" ;break;
+                        				}
+                        				const $appStatus=$("<td>").text(appStatus);
+                        				$tr.append($no).append($createDate).append($deptTitle).append($jobTitle)
+                        				.append($name).append($title).append($type).append($appStatus);
+                        				$("#em-sts").append($tr);
                         			}
+                        		},
+                        		error:function(){
+                        			console.log("ajax 통신 실패하였습니다.")
                         		}
                         	})
-                        }
+                        };
                         
                         
                         </script>

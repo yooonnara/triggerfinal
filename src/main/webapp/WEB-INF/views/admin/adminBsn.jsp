@@ -99,7 +99,7 @@
              		            },
              		            	
              		            error:function(){
-             		           		console.log("ajax 통신시실패");
+             		           		console.log("ajax 통신 실패하였습니다.");
              		           	}
              		            
              		           })

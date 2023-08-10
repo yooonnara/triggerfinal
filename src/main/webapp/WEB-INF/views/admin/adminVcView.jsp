@@ -9,6 +9,8 @@
 
 <body id="page-top">
 
+
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -31,10 +33,7 @@
                 </div>
                 <!-- 상단바 종료 End of Topbar -->
 
-            <!-- 수정할 컨테이너 Begin Page Content -->
-            <div class="container-fluid pl-5 pr-5">
-            
-            
+  	
             
             <!-- 수정할 컨테이너 Begin Page Content -->
 				<div class="container-fluid pl-5 pr-5">
@@ -106,6 +105,8 @@
                             </tr>
                             </tbody> 
 						</table>
+						
+						
 						
 						<div class="btn-click col text-center pb-5">
                                   <button class="btn btn-dark" id="button1" onclick="button1_click();">결재승인</button>

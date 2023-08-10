@@ -121,6 +121,18 @@ public class EdmsDaoImpl implements EdmsDao {
 		// TODO Auto-generated method stub
 		return session.selectList("edms.searchVc",edms);
 	}
+
+
+	//이용자 계정 ajax로 검색하기 
+
+	@Override
+	public List<Edms> selecteSearch(SqlSession session, Edms edms) {
+		// TODO Auto-generated method stub
+		return session.selectList("edms.selecteSearch",edms);
+	}
+	
+	
+	
 	
 	
 	

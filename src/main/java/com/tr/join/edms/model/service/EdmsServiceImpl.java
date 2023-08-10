@@ -123,6 +123,14 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.selectResearch(session,edms);
 	}
+	
+	//이용자 계정 ajax 검색하기 
+	
+	@Override
+	public List<Edms> eSearch(Edms edms) {
+		// TODO Auto-generated method stub
+		return dao.selecteSearch(session,edms);
+	}
 
 
 	@Override
@@ -130,6 +138,9 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.adminVcSelect(session);
 	}
+
+
+
 
 
 	@Override

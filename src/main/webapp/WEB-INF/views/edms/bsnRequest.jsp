@@ -37,7 +37,7 @@
         <div class="vcRequest-area row mt-6 mb-6">
             <div class="mypage-container col-12 d-flex justify-content-center">
 
-                <form class="vc shadow px-5 py-5" name="bsninsertForm" action="${path }/edms/insertbsn" method="post" enctype="multipart/form-data" >
+                <form class="vc shadow px-5 py-5" name="bsninsertForm" id="alarm" action="${path }/edms/insertbsn" method="post" enctype="multipart/form-data" >
                     <table class="table-sm ml-1 mr-5">
                       <input type="hidden" name="type" value="1"/> 
                       <!--0은연차이고 1은 출장  -->
@@ -88,16 +88,15 @@
             
                       <tr>
                         <td>출장 시작일</td>
-                        
 	                     <td>
-	                    <input type="date" class="form-control ml-5 mb-1" name="startDate" id="startDate" onkeyUp="checkDate(this.value)">
-	                    <span class="startDateMsg small text-danger text-alaign-center" style="display:none">출장일을 입력하세요</span></td>
+	                    <input type="date" class="form-control ml-5 mb-1" name="startDate" id="startDate">
+	                    </td>
 	                    </tr>
 	                       <tr>
 	                        <td>출장 종료일</td>   
-                             <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate" onkeyUp="chkDate(this.value)"> 
-                             <span class="endDateMsg small text-danger text-alaign-center" style="display:none">출장 종료일을 입력하세요</span>   </td>
+                             <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate" > 
                             </tr>
+                            <!-- onsubmit --> <!-- onchange -->
                             <tr>
                             <td>첨부파일</td>
                             <td> 
@@ -109,15 +108,24 @@
                             </tr>
                            
                     </table>
-                    <div class="req-btn d-flex justify-content-around pt-5  ">
+                    <div class="req-btn d-flex justify-content-around pt-5"  id="notice" >
                         <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->
-                        <input type="submit" class="align-text-bottom btn btn-primary"  value="등록">
+                        <input type="submit" class="align-text-bottom btn btn-primary"  onsubmit="notice();" value="등록">
                     </div>
                 </form>
             </div>
         </div>
         
  <script>
+ 
+ var formElements=$("alarm");
+ function notice(){
+	 if(formElements>=''){
+		 alert("공백인 문항이 있습니다")
+		 
+	 };
+	 
+ }
     function checkDate(t) {
         if ($('#startDate').val() == '') {
             $('.startDateMsg').show();
@@ -125,7 +133,7 @@
         } else {
             $('.startDateMsg').hide();
         }
-    }
+    };
 
     function chkDate(t) {
         if ($('#chkDate').val() == '') {
@@ -134,7 +142,8 @@
         } else {
             $('.startDateMsg').hide();
         }
-    }
+    };
+    
     $(()=>{
     	$("[name=upFile]").change(e=>{
    
@@ -143,7 +152,27 @@
     	});
     })
     
-  
+const startDateInput = document.querySelector('[name="startDate"]');
+const endDateInput = document.querySelector('[name="endDate"]');
+
+
+startDateInput.addEventListener('change', () => {
+    // Ensure that the endDate cannot be earlier than startDate
+   // console.log(new Date,new Date(startDateInput.value),)
+   //const startDate=new Date();
+    if (new Date()>new Date(startDateInput.value)||new Date(endDateInput.value) < new Date(startDateInput.value)){
+   		alert ("시작일은 오늘 이전이거나 종료일 이후일 수 없습니다.");
+        startDateInput.value="";
+    }
+});
+
+endDateInput.addEventListener('change', () => {
+    // Ensure that the endDate cannot be earlier than startDate
+    if (new Date()>new Date(endDateInput.value)||new Date(startDateInput.value) > new Date(endDateInput.value)) {
+       alert("종료일은 오늘 이전이거나 시작일 이전일 수없습니다.");
+    	endDateInput.value = "";
+    }  
+});
 </script>
      
 	   <!-- 수정할 컨테이너 종료 End of Main Content -->

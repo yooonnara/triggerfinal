@@ -283,11 +283,29 @@ public class EdmsController {
 		return search;
 	}
 	
+	//에이젝스 이용자 검색 기능 
+	
+	@GetMapping("/bsnList/eSearch")
+	@ResponseBody
+	public List<Edms> eSearch(@RequestParam("category") String category,
+			@RequestParam("keyword") String keyword, Model m) throws Exception{
+		Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		m.addAttribute("loginEmp",loginEmp);
+		
+		Edms edms = new Edms();
+		edms.setCategory(category);
+		edms.setKeyword(keyword);
+		edms.setEmpNo(loginEmp.getNo());
+		List<Edms> eSearch =service.eSearch(edms);
+		return eSearch;
+	}
+	
 	//연차 에이젝스 검색 기능 
 	@GetMapping("/adminVc/searchVc")
 	@ResponseBody
 	public List<Edms>searchVc(@RequestParam("category") String category,
 			@RequestParam("keyword") String keyword, Model m) throws Exception{
+		
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
