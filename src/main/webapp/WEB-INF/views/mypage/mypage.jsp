@@ -37,17 +37,25 @@
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
-							<form class="user" name="myPagefrm" id="myPagefrm" action="${path }/updateEmployee" method="post">
+							<form class="user" name="myPagefrm" id="myPagefrm" action="${path }/updateEmployee" method="post" enctype="multipart/form-data">
 								<table class="table mt-5 mb-5 text-dark table-borderless">
 									<tbody class="text-left">
 										<tr class="text-center">
 											<td colspan='2'>
 												<div class="box" style="cursor: pointer">
+												<c:if test="${empInfo.empImg == null}">
+													<img src="${path }/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
+														 id="profileImg">
+												</c:if>
+												<c:if test="${empInfo.empImg != null}">
 													<img src="${path}/resources/upload/employee/${empInfo.empImg}" class="profile rounded enter-block profile_img rounded-circle"
 														 id="profileImg">
+												</c:if>
 													<i class="bi bi-gear-fill profile_img "></i>
-													<input onchange="PreviewImage()" method="multipart/form-data" id="empProfileImg" name="empProfileImg" type="file" accept="image/*" style="display: none;">
+													<input onchange="PreviewImage()" method="multipart/form-data" id="upFile" name="upFile" type="file" accept="image/*" style="display: none;">
+													<input type="hidden" name="oldImg" value="${empInfo.empImg}">
 												</div>
+												
 											</td>
 										</tr>
 										<tr>
@@ -140,8 +148,8 @@
 	
 <script>
 
-$(".profile_img").on('click', function() {
-	$('#empProfileImg').click();
+$("#profileImg").on('click', function() {
+	$('#upFile').click();
 })
 
 function PreviewImage() {
@@ -152,7 +160,7 @@ function PreviewImage() {
         document.getElementById("profileImg").src = e.target.result;
     };
     // input id 값 
-    preview.readAsDataURL(document.getElementById("empProfileImg").files[0]);
+    preview.readAsDataURL(document.getElementById("upFile").files[0]);
  };
  
 

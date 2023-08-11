@@ -1,9 +1,14 @@
 package com.tr.join.employee.model.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
@@ -28,6 +34,10 @@ public class EmployeeController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	@GetMapping("/main") 
+	public String mainPage( ) { 		
+		return "mainpage"; 
+	}
 	
 	@GetMapping("/")
 	public String loginPage() {
@@ -51,12 +61,6 @@ public class EmployeeController {
 		return "redirect:/main";
 	}
 	
-	
-	@GetMapping("/main") 
-	 public String mainPage( ) { 		
-		return "mainpage"; 
-	}
-	
 	// 마이페이지 정보 불러오기
 	@GetMapping("/mypage")
 	public String mypage(Model m){
@@ -69,9 +73,29 @@ public class EmployeeController {
 		return "mypage/mypage";
 	}
 	
-	// 마이페이지 수정하기
+	// 마이페이지 수정하기 (이전 프로필 사진 삭제하기)
 	@PostMapping("/updateEmployee")
-	public String updateEmployee(@RequestParam Map param) { 
+	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
+		// 파일업로드
+		// 절대경로 가져오기
+		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
+		if (upFile != null && !upFile.isEmpty()) {
+			String oriName = upFile.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			Date today = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rdn = (int) (Math.random() * 10000) + 1;
+			String rename = sdf.format(today) + "_" + rdn + ext;
+			try {
+				upFile.transferTo(new File(path, rename));
+				param.put("empImg", rename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			param.put("empImg", param.get("oldImg"));
+		}
+		System.out.println(param);
 		int result = service.updateEmployee(param);
 		return "redirect:/mypage";
 	}

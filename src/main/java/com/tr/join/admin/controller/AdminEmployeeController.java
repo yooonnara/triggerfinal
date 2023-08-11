@@ -64,6 +64,17 @@ public class AdminEmployeeController {
 		return "admin/adminEmployee";
 	}
 	
+	/*
+	 * @RequestMapping("/admin/ajax/searchEmployee") public String
+	 * searchEmployee(@RequestParam("searchType") String searchType,
+	 * 
+	 * @RequestParam("keyword") String keyword, Model md) { List<Employee> employees
+	 * = service.searchEmployee(searchType, keyword); md.addAttribute("employees",
+	 * employees); return ""; }
+	 */
+	
+	
+	
 	// 멤버 생성하기
 	@RequestMapping("/admin/insertEmployee")
 	public String insertEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
@@ -149,7 +160,29 @@ public class AdminEmployeeController {
 	
 	// 멤버수정
 	@PostMapping("/admin/updateEmployees")
-	public String updateEmployee(@RequestParam Map param) { 
+	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
+		// 파일업로드
+		// 절대경로 가져오기
+		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
+		if (upFile != null && !upFile.isEmpty()) {
+			String oriName = upFile.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			Date today = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rdn = (int) (Math.random() * 10000) + 1;
+			String rename = sdf.format(today) + "_" + rdn + ext;
+			try {
+				upFile.transferTo(new File(path, rename));
+				param.put("empImg", rename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			param.put("empImg", param.get("oldImg"));
+		}
+		
+		System.out.println(param);
+				
 		int result = service.updateEmployees(param);
 		return "redirect:/adminEmployee";
 	}
@@ -157,15 +190,15 @@ public class AdminEmployeeController {
 	// 멤버삭제
 	@RequestMapping("/admin/ajax/deleteEmployee")
 	@ResponseBody
-	public String deleteEmployee(Employee e, @RequestParam(value = "empList[]") ArrayList<Integer> empList) {
+	public int deleteEmployee(Employee e, @RequestParam(value = "empList[]") ArrayList<Integer> empList) {
 		System.out.println(empList);
-		int result = 1;
+		int result = 0;
 		for (int i = 0; i < empList.size(); i++) {
 			e.setNo(empList.get(i));
-			result = result * service.deleteEmployee(e);
+			result += service.deleteEmployee(e);
 		}
 
-		return result > 0 ? "success" : "fail";
+		return result ;
 	}
 	
 	

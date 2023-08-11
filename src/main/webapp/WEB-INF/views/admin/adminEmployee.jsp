@@ -107,7 +107,7 @@
 			                                        	data-empno="${e.no}" data-empnum="${e.empNum}" data-empname="${e.name}" data-gender="${e.gender}"
 			                                        	data-empid="${e.id}" data-accstatus="${e.accStatus}" data-enrolldate="${e.enrollDate}"
 			                                        	data-resigndate="${e.resignDate}" data-dept="${e.deptNo}" data-job="${e.jobNo}"
-			                                        	data-acctype="${e.type}" data-phone="${e.phone}" data-email="${e.email}">
+			                                        	data-acctype="${e.type}" data-phone="${e.phone}" data-email="${e.email}" data-empimg="${e.empImg}">
 		                                        		${e.name}
 		                                        	</a>
 		                                        </td>
@@ -164,7 +164,7 @@
       <i class="fas fa-angle-up"></i>
    </a>
 <script>
-
+var is_update = false;
 // 체크박스
 $(function() {
 	$("#chkAll").click(function() {
@@ -189,15 +189,17 @@ function deleteEmployee(){
 		$("td>input[type=checkbox]:checked").each(function(){
 			var chk = $(this).val(); //사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
 			empList.push(chk); //배열에 추가해주고 값을 넘긴다.
-		})
+		});
+		console.log(empList);
 		
 		$.ajax({
 			url:"/admin/ajax/deleteEmployee",
+			type : 'post',
 			data:{
 				empList : empList
 			},
 			success:function(result){
-				if (result === "success") {
+				if (result > 0) {
 	                alert("선택된 사원이 삭제되었습니다.");
 					location.replace("/adminEmployee");
 				}else {
@@ -223,6 +225,8 @@ $('#insertEmployee').on('shown.bs.modal', function(e) {
 	var button = $(e.relatedTarget); // 누른 버튼
 	var empno = button.data('empno'); 
 	if(empno != null && empno != undefined){ // 수정
+		is_update = true;
+		$('#empModalTitle').text('사원 수정');
 		$('#resign_date_tr').show();
 		
 		var empnum = button.data('empnum');
@@ -241,8 +245,7 @@ $('#insertEmployee').on('shown.bs.modal', function(e) {
 			}
 		
 		var empid = button.data('empid');
-		/* $("#emp_id").attr("onclick", null); */
-		/* $('#emp_id').val(empid).prop("readonly",true); */
+		$('#emp_id').val(empid).prop("readonly",true)
 		$('#emp_id').val(empid);
 		
 		var accstatus = button.data('accstatus');
@@ -271,7 +274,16 @@ $('#insertEmployee').on('shown.bs.modal', function(e) {
 		var email = button.data('email');
 		$('#email').val(email);
 		
+  		var empimg = button.data('empimg');
+  		if(empimg != null && empimg != ''){
+			$('#profileImg').attr('src','${path}/resources/upload/employee/'+empimg);
+			$('#oldImg').val(empimg);
+  		}
+  		
+		
 	} else { // 생성
+		is_update = false;
+		$('#empModalTitle').text('사원 생성');
 		getDept(null);
 		getJob(null);
 		$('#resign_date_tr').hide();
@@ -349,7 +361,8 @@ function makeEmpNum(){
 function frmReset(){
 	$('#frm')[0].reset();
 	$('.check-msg').hide();
-	/* $('#emp_id').prop("readonly", false); */
+	$('#profileImg').attr('src','${path}/resources/img/user_profile.png');
+	$('#emp_id').prop("readonly", false); 
 }
 
 </script>
