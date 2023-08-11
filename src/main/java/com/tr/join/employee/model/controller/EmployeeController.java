@@ -75,7 +75,7 @@ public class EmployeeController {
 	
 	// 마이페이지 수정하기 (이전 프로필 사진 삭제하기)
 	@PostMapping("/updateEmployee")
-	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
+	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session, Model m) { 
 		// 파일업로드
 		// 절대경로 가져오기
 		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
@@ -97,7 +97,19 @@ public class EmployeeController {
 		}
 		System.out.println(param);
 		int result = service.updateEmployee(param);
-		return "redirect:/mypage";
+		
+		String msg,loc;
+		if(result>0) {
+		msg="기본정보가 수정되었습니다.";
+		loc="/mypage";
+		}else {
+			msg="수정에 실패했습니다. 다시 시도해 주세요.";
+			loc="/mypage";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
 	// 비밀번호 변경 페이지
@@ -109,7 +121,7 @@ public class EmployeeController {
 	
 	// 비밀번호 수정하기
 	@PostMapping("/updatePassword")
-	public String updatePassword(@RequestParam Map param) { 
+	public String updatePassword(@RequestParam Map param, Model m) { 
 		// 로그인한 현재 유저 정보 (세션에 저장된 정보)
 		Employee sessionEmp = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		param.put("emp_id", sessionEmp.getId());
@@ -121,7 +133,19 @@ public class EmployeeController {
 		
 		int result = service.updatePassword(param);
 		
-		return "redirect:/mypagePassword";
+		String msg,loc;
+		if(result>0) {
+		msg="비밀번호가 수정되었습니다.";
+		loc="/mypagePassword";
+		}else {
+			msg="수정에 실패했습니다. 다시 시도해 주세요.";
+			loc="/mypagePassword";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
+		
 	}
 	
 	// 현재 비밀번호와 입력한 비밀번호의 일치여부 확인

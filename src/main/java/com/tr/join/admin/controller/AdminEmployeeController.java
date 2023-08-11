@@ -46,7 +46,7 @@ public class AdminEmployeeController {
 		return "admin/adminMain";
 	}
 	
-	// 멤버 통합관리 (페이징)
+	// 사원통합관리(페이징)
 	@GetMapping("/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
@@ -64,20 +64,9 @@ public class AdminEmployeeController {
 		return "admin/adminEmployee";
 	}
 	
-	/*
-	 * @RequestMapping("/admin/ajax/searchEmployee") public String
-	 * searchEmployee(@RequestParam("searchType") String searchType,
-	 * 
-	 * @RequestParam("keyword") String keyword, Model md) { List<Employee> employees
-	 * = service.searchEmployee(searchType, keyword); md.addAttribute("employees",
-	 * employees); return ""; }
-	 */
-	
-	
-	
-	// 멤버 생성하기
+	// 사원생성
 	@RequestMapping("/admin/insertEmployee")
-	public String insertEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
+	public String insertEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session, Model m) { 
 		//패스워드를 암호화해서 처리
 		String oriPassword = (String)param.get("pwd1");
 		String encodePassword = passwordEncoder.encode(oriPassword);
@@ -101,7 +90,19 @@ public class AdminEmployeeController {
 			}
 		}
 		int result = service.insertEmployee(param);
-		return "redirect:/adminEmployee";
+
+		String msg,loc;
+		if(result>0) {
+		msg="사원이 생성되었습니다.";
+		loc="/adminEmployee";
+		}else {
+			msg="생성에 실패했습니다. 다시 시도해 주세요.";
+			loc="/adminEmployee";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
 	
@@ -158,9 +159,9 @@ public class AdminEmployeeController {
 		return empNum;
 	}
 	
-	// 멤버수정
+	// 사원수정
 	@PostMapping("/admin/updateEmployees")
-	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session) { 
+	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session, Model m) { 
 		// 파일업로드
 		// 절대경로 가져오기
 		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
@@ -184,10 +185,22 @@ public class AdminEmployeeController {
 		System.out.println(param);
 				
 		int result = service.updateEmployees(param);
-		return "redirect:/adminEmployee";
+		
+		String msg,loc;
+		if(result>0) {
+		msg="사원정보가 수정되었습니다.";
+		loc="/adminEmployee";
+		}else {
+			msg="수정에 실패했습니다. 다시 시도해 주세요.";
+			loc="/adminEmployee";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
-	// 멤버삭제
+	// 사원삭제
 	@RequestMapping("/admin/ajax/deleteEmployee")
 	@ResponseBody
 	public int deleteEmployee(Employee e, @RequestParam(value = "empList[]") ArrayList<Integer> empList) {

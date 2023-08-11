@@ -200,7 +200,7 @@ function deleteEmployee(){
 			},
 			success:function(result){
 				if (result > 0) {
-	                alert("선택된 사원이 삭제되었습니다.");
+	                alert("사원이 삭제되었습니다.");
 					location.replace("/adminEmployee");
 				}else {
 	                alert("삭제에 실패했습니다. 다시 시도해 주세요.");
