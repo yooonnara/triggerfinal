@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
 <link href="${path }/resources/css/nara.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 <body id="page-top">
 
 	<!-- Page Wrapper -->

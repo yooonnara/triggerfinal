@@ -9,10 +9,10 @@
         <i class="fa fa-bars"></i>
     </button>
     
-    <!-- 관리자페이지 이동 -->
+    <!-- 사원페이지 이동 -->
 	<div class="input-group" style="justify-content: right">
 		<a href="${path }/main">
-			<span class="mr-2 d-none d-lg-inline small text-dark">사원 페이지</span>
+			<span class="mr-2 d-none d-lg-inline small text-primary">사원 페이지</span>
 		</a>
 	</div>
 

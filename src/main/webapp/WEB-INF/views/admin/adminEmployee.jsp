@@ -2,6 +2,7 @@
 <link href="${path }/resources/css/nara.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 
 <body id="page-top">
 

@@ -136,7 +136,7 @@ public class AdminEmployeeController {
 	// 변환된 숫자를 +1
 	// 100 미만이면 0+숫자를 스트링으로
 	// 10 미만이면 00 + 숫자를 스트링으로 0** 형식을 만들고
-	// J를 붙여서 RETURN 해줌
+	// J를 붙여서 return 해줌
 	@GetMapping("/admin/ajax/makeEmpNum")
 	@ResponseBody
 	public String makeEmpNum() {
@@ -145,7 +145,7 @@ public class AdminEmployeeController {
 		String empNum = "";
 		try{
             int tmp = Integer.parseInt(lastEmpNum); // 첫번째 값 버린 숫자를 int로 변환
-    		tmp += 1; // 마지막 숫자에 +1 을 한다.
+    		tmp += 1; // 마지막 숫자에 +1 하기
     		if(10 > tmp) {
     			empNum = "J00" + tmp; 
     		} else if (100 > tmp) {

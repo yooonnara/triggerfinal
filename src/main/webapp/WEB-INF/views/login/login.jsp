@@ -57,13 +57,13 @@
     </div>
 
     <!-- 비밀번호 찾기 모달-->
-    <div id="findpassword">
-        <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div id="find-password-area">
+        <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" 
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+                        <h5 class="modal-title">비밀번호 찾기</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -72,13 +72,13 @@
                         <p>비밀번호를 찾고자하는 아이디를 입력해주세요.</p>
                         <form class="user">
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                    aria-describedby="emailHelp" placeholder="아이디">
+                                <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                     placeholder="아이디">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#temporaryModal">다음</a>
+                        <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#authenticationNumberModal">다음</a>
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                     </div>
                 </div>
@@ -86,6 +86,37 @@
         </div>
     </div>
     
+
+    <!-- 인증번호 발송 확인 모달-->
+    <div id="authentication-number-area">
+        <div class="modal fade" id="authenticationNumberModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">인증번호 메일 발송</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>인증번호가 발송되었습니다.<br>
+                        아래 인증번호를 입력하신 후 새로운 비밀번호를 생성해 주세요.<br>
+						<form class="user">
+                            <div class="form-group">
+                                인증번호<input type="text" class="form-control form-control-user" id="authenticationNumber"><br>
+                                비밀번호 변경하기
+                                <input type="password" class="form-control form-control-user" id="newPassword" placeholder="새로운 비밀번호">
+                                <input type="password" class="form-control form-control-user" id="checkNewPassword" placeholder="비밀번호 확인">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
     $(document).ready(function() {
         $("#userId").val(Cookies.get('key'));      
@@ -110,41 +141,6 @@
 
     </script>
 
-    <!-- 인증번호 발송 확인 모달-->
-    <div id="temporary-password">
-        <div class="modal fade" id="temporaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">인증번호 메일 발송</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>인증번호가 발송되었습니다.<br>
-                        아래 인증번호를 입력하신 후 새로운 비밀번호를 생성해 주세요.<br>
-						<form class="user">
-                            <div class="form-group">
-                                인증번호<input type="text" class="form-control form-control-user" id="exampleInputEmail"><br>
-                                비밀번호 변경하기
-                                <input type="password" class="form-control form-control-user" id="exampleInputEmail" placeholder="새로운 비밀번호">
-                                <input type="password" class="form-control form-control-user" id="exampleInputEmail" placeholder="비밀번호 확인">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-primary" href="login.html">확인</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<script>
-
-</script>
 
 
 	<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
