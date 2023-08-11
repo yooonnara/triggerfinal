@@ -35,7 +35,7 @@ public class EmployeeController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("/main") 
-	public String mainPage( ) { 		
+	public String mainPage() {
 		return "mainpage"; 
 	}
 	
@@ -44,7 +44,7 @@ public class EmployeeController {
 		return "login/login";
 	}
 	
-	// 아이디 저장
+	// 로그인 - 아이디 저장
 	@PostMapping("/successLogin")
 	public String cookieResolve(String userId, @RequestParam(name = "saveId", required = false) String saveId,
 			HttpServletResponse response) {
@@ -102,6 +102,8 @@ public class EmployeeController {
 		if(result>0) {
 		msg="기본정보가 수정되었습니다.";
 		loc="/mypage";
+//			Employee loginEmp =(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			loginEmp.set
 		}else {
 			msg="수정에 실패했습니다. 다시 시도해 주세요.";
 			loc="/mypage";
@@ -165,10 +167,8 @@ public class EmployeeController {
 //		System.out.println("디비에 저장된 비밀번호는 " + dbEmp.getPassword());
 		
 		if(password != null && passwordEncoder.matches(password, dbEmp.getPassword()) == true) {
-			System.out.println("일치");
 			return 1;
 		} else {
-			System.out.println("불일치");
 			return 0;
 		}
 	}
