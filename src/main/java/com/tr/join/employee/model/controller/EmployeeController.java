@@ -137,8 +137,8 @@ public class EmployeeController {
 		
 		String msg,loc;
 		if(result>0) {
-		msg="비밀번호가 수정되었습니다.";
-		loc="/mypagePassword";
+		msg="비밀번호가 수정되었습니다. 다시 로그인해 주세요.";
+		loc="/";
 		}else {
 			msg="수정에 실패했습니다. 다시 시도해 주세요.";
 			loc="/mypagePassword";
