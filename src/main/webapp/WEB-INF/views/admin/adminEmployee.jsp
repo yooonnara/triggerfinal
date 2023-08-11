@@ -147,7 +147,7 @@
             </div>
 
             <!-- 사원생성 모달 -->
-			<jsp:include page="/WEB-INF/views/admin/insertMemberModal.jsp"/>
+			<jsp:include page="/WEB-INF/views/admin/insertEmployeeModal.jsp"/>
 			
 
             <!-- Footer -->
