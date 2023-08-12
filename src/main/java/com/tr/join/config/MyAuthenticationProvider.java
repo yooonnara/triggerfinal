@@ -40,6 +40,9 @@ public class MyAuthenticationProvider implements AuthenticationProvider,UserDeta
 		if(loginEmp == null || !encoder.matches(password, loginEmp.getPassword())) {
 			throw new BadCredentialsException("로그인실패");
 		}
+//		if(loginEmp.getType() == 2 && lo) {
+//			
+//		}
 		return new UsernamePasswordAuthenticationToken(loginEmp, loginEmp.getPassword(),loginEmp.getAuthorities());
 	}
 	

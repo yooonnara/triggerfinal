@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-
+<c:set var="keyfield" value="${param.keyfield}" />
+<c:set var="keyword" value="${param.keyword}" />
+<c:set var="baseUrl" value="${path}/adminEmployee?keyfield=${keyfield}&keyword=${keyword}&cPage=${cPage}" />
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -41,16 +43,16 @@
                          <div class="search-write-area row mb-3">
                             <!-- 검색창 -->
                             <div class="search-area float-start col-8">
-                                <form>
+                                <form action="" method="get">
                                     <div class="search-area d-flex">
-                                        <select name="notice-search" aria-label="Default select example" class="mr-1">
-                                            <option selected value="emp_name">이름</option>
-                                            <option value="dept">부서</option>
-                                            <option value="job">직급</option>
-                                            <option value="gender">성별</option>
+                                        <select name="keyfield" aria-label="Default select example" class="mr-1">
+                                            <option <c:if test="${keyfield == 'emp_name'}">selected</c:if> value="emp_name">이름</option>
+                                            <option <c:if test="${keyfield == 'dept'}">selected</c:if> value="dept">부서</option>
+                                            <option <c:if test="${keyfield == 'job'}">selected</c:if> value="job">직급</option>
+                                            <option <c:if test="${keyfield == 'gender'}">selected</c:if> value="gender">성별</option>
                                         </select>
-                                        <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
-                                        <button type="button" class="btn btn-dark btn-sm ">검색</button>
+                                        <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1" value="${keyword}">
+                                        <button type="submit" class="btn btn-dark btn-sm ">검색</button>
                                     </div>
                                 </form>
                             </div>
@@ -86,15 +88,35 @@
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th class="align-middle"><input type="checkbox" id="chkAll" name="chkAll"></th>
-                                        <th>번호</th>
-                                        <th>이름</th>
-                                        <th>부서</th>
-                                        <th>직급</th>
-                                        <th>성별</th>
-                                        <th>전화번호</th>
-                                        <th>이메일</th>
-                                        <th>계정상태</th>
-                                        <th>관리자여부</th>
+                                        <th class="align-middle">번호</th>
+                                        <th class="align-middle">이름</th>
+                                        <th class="align-middle">부서</th>
+                                        <th class="align-middle">직급</th>
+                                        <th class="align-middle">성별</th>
+                                        <th class="align-middle">전화번호</th>
+                                        <th class="align-middle">이메일</th>
+                                        <th class="align-middle">
+                                        	<div class="btn-group">
+											  <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+											  	<b>계정상태</b>
+											  </button>
+											  <ul class="dropdown-menu">
+											    <li><a href="${baseUrl}&accStatus=1">정상</a></li>
+											    <li><a href="${baseUrl}&accStatus=2">중지</a></li>
+											  </ul>
+											</div>
+                                        </th>
+                                        <th class="align-middle">
+                                        	<div class="btn-group">
+											  <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+											  	<b>관리자여부</b>
+											  </button>
+											  <ul class="dropdown-menu">
+											    <li><a href="${baseUrl}&accType=2">Y</a></li>
+											    <li><a href="${baseUrl}&accType=1">N</a></li>
+											  </ul>
+											</div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

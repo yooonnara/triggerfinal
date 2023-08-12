@@ -57,6 +57,7 @@ public class AdminEmployeeController {
 		
 		md.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "adminEmployee"));
 		md.addAttribute("employees",employees);
+		md.addAttribute("cPage",cPage);
 		
 		md.addAttribute("totalData", totalData);
 		int pageStartRowNum = totalData - (cPage-1)*numPerpage;
@@ -176,6 +177,10 @@ public class AdminEmployeeController {
 			try {
 				upFile.transferTo(new File(path, rename));
 				param.put("empImg", rename);
+				File oldFile = new File(path + (String) param.get("oldImg"));
+				if (oldFile != null) {
+					boolean result = oldFile.delete();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -183,8 +188,6 @@ public class AdminEmployeeController {
 			param.put("empImg", param.get("oldImg"));
 		}
 		
-		System.out.println(param);
-				
 		int result = service.updateEmployees(param);
 		
 		String msg,loc;

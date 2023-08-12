@@ -155,13 +155,14 @@ $("#profileImg").on('click', function() {
 
 function PreviewImage() {
         // 파일리더 생성 
-        var preview = new FileReader();
-        preview.onload = function (e) {
+    var preview = new FileReader();
+    preview.onload = function (e) {
+        console.log(e);
         // img id 값 
-        document.getElementById("profileImg").src = e.target.result;
+    	$("#profileImg").attr('src',e.target.result);
     };
     // input id 값 
-    preview.readAsDataURL(document.getElementById("upFile").files[0]);
+    preview.readAsDataURL($("#upFile")[0].files[0]);
  };
  
 

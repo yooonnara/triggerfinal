@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<ul
-	class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion h-100"
-	id="accordionSidebar">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion h-100" id="accordionSidebar">
 
 	<!-- 사이드바 화이트 로고 Sidebar - Brand -->
 	<a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="">

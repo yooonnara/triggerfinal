@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script type="text/javascript"
-	src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+<script type="text/javascript" src="/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <body id="page-top">
 
@@ -63,19 +63,6 @@
 										<td>공지사항 제목입니다.</td>
 									</tr>
 									<tr>
-										<th class="text-center align-middle">내용</th>
-										<td>
-											<div class="td-con">
-												<div class="editor-wrap">
-													<div id="smarteditor" class="editor-area">
-														<!--에디터가 들어가는 영역입니다.-->
-														<textarea name="contents" id="contents"></textarea>
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
 										<th class="text-center align-middle"><span>첨부파일</span></th>
 										<td>
 											<div class="td-con">
@@ -89,14 +76,42 @@
 											</div>
 										</td>
 									</tr>
+									<tr>
+										<th class="text-center align-middle">내용</th>
+										<td>
+											<form action="" method="">
+												<div id="smarteditor" class="editor-area">
+													<!--에디터가 들어가는 영역입니다.-->
+													<textarea name="contents" id="contents"></textarea>
+												</div>
+											</form>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
-
 					</div>
 				</div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
+			
+			<script>
+			<!-- 스마트 에디터 -->
+			let oEditors = [];
+			smartEditor = function(){
+				nhn.husky.EZCreator.createInIFrame({
+			    oAppRef : oEditors,
+			    elPlaceHolder : "contents",
+				sSkinURI: "/smartEditor/SmartEditor2Skin.html",
+				fCreator : "createSEditor2",
+				htParams: { fOnBeforeUnload : function(){}}
+				})
+			}
+			
+			$(document).ready(function(){
+				smartEditor();
+			})
+			</script>
 
 
 			<!-- Footer -->
