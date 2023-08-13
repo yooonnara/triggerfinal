@@ -192,7 +192,7 @@ function checkPhone(str){
 
 
 // adminEmployee 검색기능
-
+/*
 $(document).ready(function () {
         $('#searchForm').submit(function (event) {
             event.preventDefault();  
@@ -210,7 +210,7 @@ $(document).ready(function () {
             });
         });
     });
-
+*/
 
 
 

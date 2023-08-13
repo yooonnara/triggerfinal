@@ -58,7 +58,11 @@ public class PageFactory {
 		//스크립트문 추가
 		pageBar.append("<script>");
 		pageBar.append("function fn_paging(no){");
-		pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');");
+		if(url.contains("?")) {
+			pageBar.append("location.assign('"+url+"&cPage='+no+'&numPerpage="+numPerpage+"');");
+		} else {
+			pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');");
+		}
 		pageBar.append("}");
 		pageBar.append("</script>");
 		

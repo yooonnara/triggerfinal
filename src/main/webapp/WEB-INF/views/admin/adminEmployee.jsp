@@ -5,6 +5,8 @@
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 <c:set var="keyfield" value="${param.keyfield}" />
 <c:set var="keyword" value="${param.keyword}" />
+<c:set var="searchAccStatus" value="${param.searchAccStatus}" />
+<c:set var="searchAccType" value="${param.searchAccType}" />
 <c:set var="baseUrl" value="${path}/adminEmployee?keyfield=${keyfield}&keyword=${keyword}&cPage=${cPage}" />
 <body id="page-top">
 
@@ -43,9 +45,12 @@
                          <div class="search-write-area row mb-3">
                             <!-- 검색창 -->
                             <div class="search-area float-start col-8">
-                                <form action="" method="get">
+                                <form action="" method="get" id=searchForm>
+                                <input type="hidden" id="searchAccStatus" name="searchAccStatus" value="${searchAccStatus}">
+                                <input type="hidden" id="searchAccType" name="searchAccType" value="${searchAccType}">
                                     <div class="search-area d-flex">
                                         <select name="keyfield" aria-label="Default select example" class="mr-1">
+                                            <option value="">선택</option>
                                             <option <c:if test="${keyfield == 'emp_name'}">selected</c:if> value="emp_name">이름</option>
                                             <option <c:if test="${keyfield == 'dept'}">selected</c:if> value="dept">부서</option>
                                             <option <c:if test="${keyfield == 'job'}">selected</c:if> value="job">직급</option>
@@ -101,8 +106,9 @@
 											  	<b>계정상태</b>
 											  </button>
 											  <ul class="dropdown-menu">
-											    <li><a href="${baseUrl}&accStatus=1">정상</a></li>
-											    <li><a href="${baseUrl}&accStatus=2">중지</a></li>
+											    <li><a href="javascript:dropdownSearch('searchAccStatus', '')">전체</a></li>
+											    <li><a href="javascript:dropdownSearch('searchAccStatus', 1)">정상</a></li>
+											    <li><a href="javascript:dropdownSearch('searchAccStatus', 2)">중지</a></li>
 											  </ul>
 											</div>
                                         </th>
@@ -112,8 +118,9 @@
 											  	<b>관리자여부</b>
 											  </button>
 											  <ul class="dropdown-menu">
-											    <li><a href="${baseUrl}&accType=2">Y</a></li>
-											    <li><a href="${baseUrl}&accType=1">N</a></li>
+											    <li><a href="javascript:dropdownSearch('searchAccType', '')">전체</a></li>
+											    <li><a href="javascript:dropdownSearch('searchAccType', 2)">Y</a></li>
+											    <li><a href="javascript:dropdownSearch('searchAccType', 1)">N</a></li>
 											  </ul>
 											</div>
                                         </th>
@@ -237,8 +244,10 @@ function deleteEmployee(){
 	}
 }
 
-
-
+function dropdownSearch(searchId, value){
+	$('#'+searchId).val(value);
+	$('#searchForm').submit();
+}
 
 
 // 모달 오픈 시 이벤트

@@ -51,17 +51,38 @@ public class AdminEmployeeController {
 	@GetMapping("/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
-									Model md) {
-		List<Employee> employees = service.selectEmployeeAll(Map.of("cPage", cPage, "numPerpage", numPerpage));
-		int totalData = service.selectEmployeeCount(); // 전체사원수
+									Model m, @RequestParam Map param) {
+		String url = "adminEmployee";
+
+		if(param.get("searchAccStatus") != null) {
+			url += "?searchAccStatus="+(String)param.get("searchAccStatus");
+		}
+		if(param.get("searchAccType") != null) {
+			url += "&searchAccType="+(String)param.get("searchAccType");
+		}
+		if(param.get("keyfield") != null ) {
+			url += "&keyfield="+(String)param.get("keyfield");
+		}
+		if(param.get("keyword") != null) {
+			url += "&keyword="+(String)param.get("keyword");
+		}
+//		System.out.println(url);
 		
-		md.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "adminEmployee"));
-		md.addAttribute("employees",employees);
-		md.addAttribute("cPage",cPage);
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+//		param.put("accStatus", (String) param.get("searchAccStatus"));
+		List<Employee> employees = service.selectEmployeeAll(param);
+		int totalData = service.selectEmployeeCount(param); // 전체사원수
+		// {searchAccStatus=2, searchAccType=, keyfield=, keyword=}
 		
-		md.addAttribute("totalData", totalData);
+		
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, url));
+		m.addAttribute("employees",employees);
+		m.addAttribute("cPage",cPage);
+		
+		m.addAttribute("totalData", totalData);
 		int pageStartRowNum = totalData - (cPage-1)*numPerpage;
-		md.addAttribute("pageStartRowNum", pageStartRowNum);
+		m.addAttribute("pageStartRowNum", pageStartRowNum);
 		
 		return "admin/adminEmployee";
 	}
