@@ -48,7 +48,7 @@ public class Employee implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> auth=new ArrayList<>();
 		auth.add(new SimpleGrantedAuthority("USER"));
-		if(type==1) auth.add(new SimpleGrantedAuthority("ADMIN"));
+		if(type==2) auth.add(new SimpleGrantedAuthority("ADMIN"));
 		
 		return auth;
 	}

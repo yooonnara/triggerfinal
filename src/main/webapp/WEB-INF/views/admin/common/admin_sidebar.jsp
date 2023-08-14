@@ -14,7 +14,7 @@
 
 	<!-- Nav Item - Dashboard -->
 	<li class="nav-item active"><a class="nav-link"
-		href="${path }/admin"> <i class="bi bi-house-door-fill"></i> <span>홈</span></a>
+		href="${path }/admin/adminMain"> <i class="bi bi-house-door-fill"></i> <span>홈</span></a>
 	</li>
 
 	<!-- Divider -->
@@ -28,7 +28,7 @@
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="${path }/adminEmployee">사원 통합관리</a>
+				<a class="collapse-item" href="${path }/admin/adminEmployee">사원 통합관리</a>
 
 			</div>
 		</div></li>

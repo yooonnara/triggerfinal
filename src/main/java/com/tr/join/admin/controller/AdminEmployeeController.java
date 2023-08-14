@@ -42,13 +42,19 @@ public class AdminEmployeeController {
 	}
 	
 	// 메인
-	@GetMapping("/admin")
+	@RequestMapping("/admin/adminMain")
 	public String adminPage() {
 		return "admin/adminMain";
 	}
 	
+	// 권한 거부 에러페이지
+	@RequestMapping("/deniedpage")
+	public String deniedPage() {
+		return "error/deniedpage";
+	}
+	
 	// 사원통합관리(페이징)
-	@GetMapping("/adminEmployee")
+	@GetMapping("/admin/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
 									Model m, @RequestParam Map param) {
