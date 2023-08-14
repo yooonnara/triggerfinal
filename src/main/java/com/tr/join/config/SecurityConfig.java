@@ -42,7 +42,10 @@ public class SecurityConfig{
 				.authorizeHttpRequests()
 					.antMatchers("/resources/**").permitAll()
 					.antMatchers("/").permitAll()
-					.antMatchers("/**").hasAnyAuthority("ADMIN","USER")
+					.antMatchers("/admin/*").hasAuthority("ADMIN")
+					.antMatchers("/**").hasAnyAuthority("ADMIN","USER") // 넓은 범위가 가장 아래 있어야 함
+				.and()
+				.exceptionHandling().accessDeniedPage("/deniedpage")
 				.and()
 				.rememberMe()  // 자동 로그인 설정
 					//.key("hayden") //쿠키에 사용되는 값을 암호화하기 위한 키(key)값
@@ -60,6 +63,7 @@ public class SecurityConfig{
 				.authenticationProvider(provider)
 				.headers().frameOptions().disable()
 				.and()
+				
 				.build();
 	}
 	

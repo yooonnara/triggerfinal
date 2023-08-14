@@ -16,7 +16,7 @@
 		<div class="input-group" style="justify-content: right">
 		    <c:choose>
 		        <c:when test="${loginEmployee.type == 2 && loginEmployee.accStatus == 1}">
-		            <a href="${path}/admin">
+		            <a href="${path}/admin/adminMain">
 		                <span class="mr-2 d-none d-lg-inline small text-primary">관리자 페이지</span>
 		            </a>
 		        </c:when>

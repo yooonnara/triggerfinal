@@ -23,7 +23,7 @@ public interface AdminEmployeeService {
 	
 	int insertEmployee(Map param);
 	
-	int selectEmployeeCount();
+	int selectEmployeeCount(Map<String,Object> param);
 	
 	String makeEmpNum();
 	

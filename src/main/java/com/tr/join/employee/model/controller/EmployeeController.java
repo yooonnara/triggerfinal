@@ -89,6 +89,11 @@ public class EmployeeController {
 			try {
 				upFile.transferTo(new File(path, rename));
 				param.put("empImg", rename);
+				
+				File oldFile = new File(path + (String)param.get("oldImg"));
+				if(oldFile != null) {
+					boolean result = oldFile.delete();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -102,8 +107,8 @@ public class EmployeeController {
 		if(result>0) {
 		msg="기본정보가 수정되었습니다.";
 		loc="/mypage";
-//			Employee loginEmp =(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//			loginEmp.set
+			Employee loginEmp =(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			loginEmp.setEmpImg((String)param.get("empImg"));
 		}else {
 			msg="수정에 실패했습니다. 다시 시도해 주세요.";
 			loc="/mypage";

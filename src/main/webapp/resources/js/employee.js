@@ -190,28 +190,3 @@ function checkPhone(str){
 
 
 
-
-// adminEmployee 검색기능
-
-$(document).ready(function () {
-        $('#searchForm').submit(function (event) {
-            event.preventDefault();  
-            const formData = $(this).serialize(); 
-
-            $.ajax({
-                url: "${path}/admin/ajax/searchEmployee",
-                data: formData,
-                success: function (data) {
-                    $('#employeeList').html(data);
-                },
-                error: function () {
-                    alert("오류가 발생했습니다. 다시 시도해 주세요.");
-                }
-            });
-        });
-    });
-
-
-
-
-

@@ -27,38 +27,13 @@
 
 				<!-- 수정할 컨테이너 Begin Page Content -->
 				<div class="container-fluid pl-5 pr-5">
-
-					<!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark mt-5 mb-5">HOME</h1>
-
-					<div class="main-container row">
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<p class="h6 mb-0 font-weight-bold text-gray-800">결재현황</p><br>
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												대기
-											</div>
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												승인
-											</div>
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												반려
-											</div>
-											
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
+					 <!-- 404 Error Text -->
+                    <div class="text-center">
+                        <div class="error mx-auto" data-text="403">403</div><br>
+                        <p class="lead text-gray-800 mb-5">접근이 거부되었습니다 :(</p>
+                        <p class="text-gray-500 mb-0">자세한 사항은 관리자에게 문의해 주시기 바랍니다.</p>
+                        <a href="${path }/main"><span class="text-primary">&larr; 메인페이지로 돌아가기</span></a>
+                    </div>
 				</div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 

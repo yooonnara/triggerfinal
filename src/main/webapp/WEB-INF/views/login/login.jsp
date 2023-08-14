@@ -118,6 +118,11 @@
     </div>
 
     <script>
+    // 모달 닫기
+    $('#authenticationNumberModal').on('hidden.bs.modal', function (event) { // 2차로 열린 모달 닫을 때 이벤트
+    	$('#passwordModal').modal('hide'); // 첫번째 모달 닫기
+	});
+    
     $(document).ready(function() {
         $("#userId").val(Cookies.get('key'));      
         if ($("#userId").val() !== "") {
