@@ -8,6 +8,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.tr.join.employee.model.vo.Department;
 import com.tr.join.employee.model.vo.Employee;
 import com.tr.join.employee.model.vo.Job;
@@ -36,7 +38,8 @@ public class Edms {
 	private int jobNo;
 	private int deptNo;
 	private String detailType;
-
+	private List<Attachment> file= new ArrayList();
+	
 	private Employee emp;
 	private String  docStatus; //문서 상태 y,n 취소 하면 n으로 바뀌어서 취소 내역만 뜨게 하는것 
 	//where 절에 y일때 

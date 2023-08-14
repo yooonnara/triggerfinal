@@ -2,6 +2,8 @@ package com.tr.join.edms.model.vo;
 
 import java.sql.Date;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +16,12 @@ import lombok.NoArgsConstructor;
 public class Attachment {
 
 	private int fileNo;
-	private String originalFilename;
-	private String renamedFilename;
+	private int edmsNo; //전자결재 fk값 
+	private String originalFilename;// 원본파일 이름 
+	private String renamedFilename; //서버저장용 파일이음
 	private Date uploadDate;
-	private int downloadCount;
-	private int no; //전자결재 fk값 
+	//private int fileAttached; //파일 첨부 여부 (첨부 1, 미첨부0)
+	
+	private int downloadCount ;// 다운로드 한 정도 값
+
 }

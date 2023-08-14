@@ -1,5 +1,7 @@
 package com.tr.join.edms.model.service;
 
+//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.tr.join.edms.model.dao.EdmsDao;
+import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
+
+import lombok.extern.slf4j.Slf4j;
 @Service
+@Slf4j
 public class EdmsServiceImpl implements EdmsService {
 
 		
@@ -29,8 +35,29 @@ public class EdmsServiceImpl implements EdmsService {
 	
 	@Override
 	public int insertbsn(Edms e) {
-		return dao.insertbsn(session, e);
-}
+		
+		log.info("실행전 : {}",e.getNo());
+		int result=dao.insertbsn(session, e);
+		log.info("실행후 : {}",e.getNo());
+		if(result>0) {
+			if(e.getFile().size()>0) {
+				for(Attachment a : e.getFile()) {
+					a.setEdmsNo(e.getNo());
+					result+=dao.insertAttachment(session,a);
+					//result=dao.insertAttachment(session,a);
+					//if(result!=1) throw new RuntimeException("첨부파일의 내용이 이상합니다.");
+				}
+			}
+		}
+		//rollback처리를 원하다면..... RuntimeException을 발생시키면됨.
+		if(result!=e.getFile().size()+1) throw new RuntimeException("첨부파일의 내용이 이상합니다.");
+		//if(result!=0) throw new RuntimeException("첨부파일의 내용이 이상합니다.");
+		
+		
+		return result;
+	}
+		//return dao.insertbsn(session, e);
+//}
 	
 	//출장 조회하기
 	
@@ -96,6 +123,14 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.selectResearch(session,edms);
 	}
+	
+	//이용자 계정 ajax 검색하기 
+	
+	@Override
+	public List<Edms> eSearch(Edms edms) {
+		// TODO Auto-generated method stub
+		return dao.selecteSearch(session,edms);
+	}
 
 
 	@Override
@@ -103,6 +138,9 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.adminVcSelect(session);
 	}
+
+
+
 
 
 	@Override

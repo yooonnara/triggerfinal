@@ -42,6 +42,9 @@ public interface EdmsService {
  
  List<Edms> search(Edms edms);
  
+ //이용자 계정 ajax 출력하기 
+ 
+ List<Edms> eSearch(Edms edms);
  //어드민 연차 검색하기 
  List<Edms> adminVcSelect();
  

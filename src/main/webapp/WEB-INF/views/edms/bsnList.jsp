@@ -5,31 +5,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>JOIN</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="${page }/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="${page }/resources/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="${page }/resources/css/sb-admin-2.css" rel="stylesheet">
-    <script src="js/jquery-3.7.0.min.js"></script>
-
-    <!--부트스트랩 아이콘-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
-</head>
+<!-- 헤드 태그 -->
+<div id="headTag">
+	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+</div>
 
 <body id="page-top">
 
@@ -70,19 +49,67 @@
                     <div class="search-write-area row mb-3">
                         <!-- 검색창 -->
                         <div class="search-area float-start col-8">
-                            <form>
+                            <form name="asearch-form">
                                 <div class="search-area d-flex">
-                                    <select name="notice-search" aria-label="Default select example" class="mr-1">
-                                        <option selected value="1">전체</option>
-                                        <option value="2">결재대기</option>
-                                        <option value="3">결재승인</option>
-                                        <option value="4">결재반려</option>
+                                    <select name="category" aria-label="Default select example" class="mr-1">
+                                        <option selected value="all">전체</option>
+                                        <option value="wait">결재대기</option>
+                                        <option value="allow">결재승인</option>
+                                        <option value="return">결재반려</option>
                                     </select>
                                     <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
-                                    <button type="button" class="btn btn-primary btn-sm ">검색</button>
+                                    <button type="button" onclick="eSearch()"class="btn btn-primary btn-sm ">검색</button>
                                 </div>
                             </form>
                         </div>
+                        
+                        <script>
+                        function eSearch(){
+                        	$.ajax({
+                        		url: "${pageContext.request.contextPath}/edms/bsnList/eSearch",
+                        		data: $("form[name=asearch-form]").serialize(),
+                        		success:function(f){
+                        			$("#em-sts").html("");//리셋 
+                        			console.log(f);
+                        			for(let i=0; i<f.length;i++){
+                        				const $tr=$("<tr>");
+                        				const $no=$("<td>").text(f[i]["no"]);
+                        				const $createDate=$("<td>").text(f[i]["createDate"]);
+                        				const $deptTitle=$("<td>").text(f[i]['emp']["deptTitle"]);
+                        				const $jobTitle=$("<td>").text(f[i]['emp']["jobTitle"]);
+                        				const $name=$("<td>").text(f[i]['emp']["name"]);
+                        				const $title=$("<td>").text(f[i]["title"]);
+                        				let type="";
+                        				switch(f[i]["type"]){
+                        				case 0: type="연차" ;break;
+                        				case 1: type="출장" ;break;
+                        				}
+                        				const $type=$("<td>").text(type);
+                        				
+                        				let appStatus="";
+                        				switch(f[i]["appStatus"]){
+                        				case -1: appStatus="전체" ;break;
+                        				case 0: appStatus="대기" ;break;
+                        				case 1:appStatus="승인" ;break;
+                        				case 2:appStatus="반려" ;break;
+                        				}
+                        				const $appStatus=$("<td>").text(appStatus);
+                        				$tr.append($no).append($createDate).append($deptTitle).append($jobTitle)
+                        				.append($name).append($title).append($type).append($appStatus);
+                        				$("#em-sts").append($tr);
+                        			}
+                        		},
+                        		error:function(){
+                        			console.log("ajax 통신 실패하였습니다.")
+                        		}
+                        	})
+                        };
+                        
+                        
+                        </script>
+                        
+                        
+                        
                     <!--     작성하기 버튼
                         <div class="wirte-area col-4">
                             <a href="" class="btn btn-primary btn-sm float-right">글쓰기</a>
@@ -105,7 +132,7 @@
                             </colgroup>
 						
                             <thead>
-                                <tr class="bg-dark text-white">
+                                <tr class="bg-primary text-white">
                                     <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
@@ -116,7 +143,7 @@
                                     <th>결재상태</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="em-sts">
                             <c:if test="${not empty edms}">
                             <c:forEach var="e" items="${edms}">
                                 <tr>
@@ -158,46 +185,25 @@
 
         </div>
         
-                 <!-- Footer -->
-             <div id="footer">
-                <script>$('#footer').load('./include/footer.html')</script>
-            </div>
-            <!-- End of Footer -->
+      
+			<!-- Footer -->
+				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+			<!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+		</div>
+		<!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top"style="display:list-item">
-        <i class="fas fa-angle-up"></i>
-    </a>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
+		<i class="fas fa-angle-up"></i>
+	</a>
+	
+<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
-    <!-- 로그아웃 확인창 Logout Modal-->
-    <div id="logoutCheck">
-        <script>$('#logoutCheck').load('./include/logout.html')</script>
-    </div>
-
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 </body>
 
 </html>
+
