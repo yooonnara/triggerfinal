@@ -45,7 +45,7 @@
 					<c:if test="${loginNo == board.empNo}">
 						<div class="float-left">
 						<a href="${path }/board/communityModify.do?no=${board.no}"  class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</a>
-						<a href="javascript:history.back()" class="btn btn-secondary mt-3 btn-sm mb-3">삭제하기</a>
+						<a href="${path }/board/communityDelete.do?no=${board.no}" class="btn btn-secondary mt-3 btn-sm mb-3">삭제하기</a>
 						</div>
 					</c:if>	
 						<a href="${path }/community" class="btn btn-secondary float-right mt-3 btn-sm mb-3">목록</a>
@@ -70,8 +70,9 @@
 									<tr>
 										<td class="text-center align-middle"><span>첨부파일</span></td>
 										<td>
-											<c:forEach var="f" items="${board.file }">
-											</c:forEach>
+										<c:if test="${board.file[0].saveFileName != null}">
+											<img src="${path }/upload/board/${board.file[0].saveFileName}">
+										</c:if>	
 										</td>
 									</tr>
 									<tr>
@@ -110,17 +111,17 @@
 												<input name="name" value="${emp.name}" type="hidden">
 												<input name="boardNo" value="${board.no}" type="hidden">
 												<input name="empNo" value="${board.empNo}" type="hidden">
-												<input name="comment" id="comment" class="bg-light mt-2 ml-5" style="width:900px;height:60px;">
+												<input name="comment" id="comment" class="bg-light mt-2 ml-5 bg-white" style="width:900px;height:60px; border:none; ">
 											</td>
 											<td colspan="3">
-											<button type="submit" class="btn btn-secondary  float-left mt-3 ml-5 btn-sm mb-3 " >댓글 작성</button>
+											<button type="submit" class="btn btn-secondary float-left mt-3 ml-5 btn-sm mb-3">댓글 작성</button>
 											</td>
 										</tr>
 									</tbody>	
 								 </form> 
 							</table>
 						</div>
-					</div><!--끝  -->
+					</div>
 				</div>
 				
                 <!-- 수정할 컨테이너 종료 End of Main Content -->

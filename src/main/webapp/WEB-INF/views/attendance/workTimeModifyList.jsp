@@ -31,9 +31,9 @@
 				<div class="container-fluid pl-5 pr-5">
                 <!-- 타이틀 Page Heading -->
                 <h1 class="h3 text-dark mt-5 mb-5">근태 현황
-                	<p class="mt-2 text-secondary" style="font-size:17px">출퇴근 변경 목록 조회</p>
+                	<p class="mt-2 text-secondary" >출퇴근 변경 목록 조회</p>
                 </h1>
-                    <div class="adminWorkingTimeList-container "> 
+                    <div class="adminWorkingTimeList-container" > 
                     <!-- 근무상태 검색 & 시작및종료일 검색 버튼 영역 -->
                     <div class="row" id="big-search">
                         <!-- 근무상태 검색 버튼 -->
@@ -72,7 +72,7 @@
                                     <th>부서</th>
                                     <th>직급</th>
                                     <th>요청일</th>
-                                    <th>조정일</th>
+                                    <!-- <th>조정일</th> -->
                                     <th>내용</th>
                                     <th>진행상황</th>
                                 </tr>
@@ -81,13 +81,13 @@
                             <c:if test="${not empty worktime }">
                             	<c:forEach var="w" items="${worktime }">
                              	<tr>
-                                    <td>${w.wtNo }</td>
+                                    <td>${w.no }</td>
                                     <td>${w.emp.name }</td>
                                     <td>${w.emp.empNum }</td>
                                     <td>${w.emp.deptTitle }</td>
                                     <td>${w.emp.jobTitle }</td>
                                     <td>${w.wtDate }</td>
-                                    <td>${w.att.attDate }</td>
+                                    <%-- <td>${w.att.attDate }</td> --%>
                                     <td>${w.reContent }</td>
                                     <td>${w.appStatus }</td>
                                 </tr> 

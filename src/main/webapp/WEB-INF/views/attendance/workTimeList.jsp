@@ -38,7 +38,7 @@
                 	<p class="mt-2 text-secondary" style="font-size:17px">일자별 조회</p>
                 </h1>
 
-                    <div class="adminWorkingTimeList-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+                    <div class="adminWorkingTimeList-container"> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
                     <!-- 근무상태 검색 & 시작및종료일 검색 버튼 영역 -->
                     <div class="row" id="big-search">
                         <!-- 근무상태 검색 버튼 -->
@@ -57,7 +57,7 @@
                               </label>
                         </div>
                         
-                        <!-- 버튼으로 상태 검색 -->
+                        <!-- 근무 상태별 검색 -->
 						<script>
 						$("#big-search input[type=radio]").click(ajaxWorkTime);
 						
@@ -89,7 +89,6 @@
 									
 									$("#wk-tbody").append($tr);
 								}
-								
 							},
 							error:function(e){
 								console.log(e);
@@ -278,7 +277,7 @@
 		            	<c:out value="${pageBar }" escapeXml="false"/>
 		            </div>
 		            
-		            <!-- 모달 -->
+		            <!-- 근무시간 수정 모달 -->
 		            <script>
 						function workDetail(no){
 							console.log(no);
@@ -298,7 +297,7 @@
 								$("#workTimeModify").modal("show");
 							},
 							error:function(){
-								console.log("근태 ajax 통신실패");
+								console.log("근태상세 통신 실패");
 							}
 						})
 						}
@@ -306,7 +305,7 @@
 					
 					
 		
-		            <!-- The Modal -->
+		            <!-- 출퇴근 시간 변경 모달 -->
         			<div id="workTime">
                     <div class="modal fade text-center" id="workTimeModify" tabindex="-1" role="dialog"
                         aria-activedescendant="exampleModalLabel" aria-hidden="true">
@@ -335,34 +334,24 @@
                                             </tr>
                                             <tr>
                                                 <th class="align-middle">지정 출근 시간</th>
-                                                <td class="font-weight-bold">
-                                                	<input type="text" class="form-control inputSize" name="workStart" readonly>
-                                                </td>
+                                                <td class="font-weight-bold"><input type="text" class="form-control inputSize" name="workStart" readonly></td>
                                             </tr>
                                             <tr>
                                                 <th class="align-middle">지정 퇴근 시간</th>
-                                                <td>
-                                                    <input type="text" class="form-control inputSize" name="workDate" readonly>
-                                                </td>
+                                                <td><input type="text" class="form-control inputSize" name="workDate" readonly></td>
                                             </tr>
-                                            
                                             <tr id="adtr">
                                                 <th class="align-middle">수정할 출근 시간</th>
-                                                <td>
-                                                    <input type="time" class="form-control form-control-sm" name="re_start_time">
-                                                </td>
+                                                <td><input type="time" class="form-control form-control-sm" name="re_start_time"></td>
                                             </tr>
                                             <tr>
                                                 <th class="align-middle">수정할 퇴근 시간</th>
-                                                <td>
-                                                    <input type="time" class="form-control form-control-sm" name="re_end_time">
-                                                </td>
+                                                <td><input type="time" class="form-control form-control-sm" name="re_end_time"></td>
                                             </tr>
                                             <tr id="adtr">
                                                 <th class="align-middle">신청 사유</th>
-                                                <td>
-                                                    <textarea class="form-control" name="re_content" placeholder="사유를 입력하세요." rows="3" maxlength="99" style="resize: none;"></textarea>
-                                                </td>
+                                                <td><textarea class="form-control" name="re_content" placeholder="사유를 입력하세요." rows="3" maxlength="99" 
+                                                	style="resize: none;"></textarea></td>
                                             </tr>
                                         </table>
                                 </div>
@@ -374,7 +363,7 @@
                             </div>
                         </div>        
                     </div>
-                </div>
+                	</div>
 		            
 		            
                         

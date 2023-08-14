@@ -59,6 +59,7 @@
                                         <td class="border-right">사용 연차</td>
                                         <td class="border-right">잔여 연차</td>
                                     </tr>
+                                    <tr>
                                         <td class="border-right" id="df-num">${dayoff.get(0).totalDoCount }</td>
                                         <td class="border-right" id="df-num">${dayoff.get(0).usedDoCount }</td>
                                         <td class="border-right" id="df-num">
@@ -119,6 +120,7 @@
                             </tbody>
                         </table>
                     </div>
+                    
                     <!-- 페이징 -->
 				        <div class="pasing-area">
 				        	<c:out value="${pageBar }" escapeXml="false"/>

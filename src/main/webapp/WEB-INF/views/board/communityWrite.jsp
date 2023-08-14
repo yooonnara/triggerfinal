@@ -10,48 +10,25 @@
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-
-		<!-- 사이드바 시작 Sidebar -->
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
 		</div>
-		<!-- 사이드바 종료 End of Sidebar -->
-
-
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
-
 			<!-- Main Content -->
 			<div id="content">
-
-				<!-- 상단바 시작 Topbar -->
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 					<!-- smartEditor -->
 					<script type="text/javascript" src="/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>		
 				</div>
-				<!-- 상단바 종료 End of Topbar -->
-
-
 				<!-- 수정할 컨테이너 Begin Page Content -->
                 <div class="container-fluid pl-5 pr-5">
-
-                    <!-- 타이틀 Page Heading -->
 					<h1 class="h3 text-dark mt-5 mb-5">자유게시판 작성</h1>
-
 					<div class="notice-container">
-
-
-						<!-- 등록 버튼 -->
-						<div class="board-btn">
-							
-						</div>
-
 
 						<div class="board-container"  style="width:1200px;margin:auto">
 							<table class="table table-sm shadow table-hover text-center">
-
-								<!-- 테이블 칸 크기 -->
 								<colgroup>
 									<col width="15%" />
 									<col width="85%" />

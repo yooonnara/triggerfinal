@@ -99,6 +99,7 @@ public class AttendanceController {
 		 Attendance week = service.selectWeekWorkTime(loginNo.getNo()); //이번주 누적 근무 시간
 		 Attendance overWeek = service.selectOverWorkTime(loginNo.getNo()); //이번주 초과 근무 시간
 		 Attendance remainWeek = service.selectRemainTime(loginNo.getNo()); //이번주 잔여 근무 시간
+		 System.out.println(remainWeek);
 		 Attendance month = service.selectMonthTime(loginNo.getNo()); //이번달 누적 근무 시간
 		 
 		 m.addAttribute("week",week);
@@ -349,7 +350,7 @@ public class AttendanceController {
 	  @GetMapping("/dayoffList")
 	  public String selectDayoffAll(
 			  @RequestParam(value="cPage",defaultValue="1") int cPage,
-			  @RequestParam(value="numPerpage", defaultValue="5") int numPerpage,							
+			  @RequestParam(value="numPerpage", defaultValue="10") int numPerpage,							
 			  Model m) {
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
@@ -458,7 +459,7 @@ public class AttendanceController {
 	  @GetMapping("/businessTripList")
 	  public String selectBusinessTrip(
 			  @RequestParam(value="cPage",defaultValue="1") int cPage,
-			  @RequestParam(value="numPerpage", defaultValue="5") int numPerpage,							
+			  @RequestParam(value="numPerpage", defaultValue="10") int numPerpage,							
 			  Model m) {
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  

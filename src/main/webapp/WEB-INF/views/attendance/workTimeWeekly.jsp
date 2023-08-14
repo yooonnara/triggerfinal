@@ -54,18 +54,16 @@
 						        const cMonth=today.getMonth();
 						        const cYear=today.getFullYear();
 	
-						        let i=1;//날짜증가
-						        let weekCount=1;//주자추가
+						        let i=1;
+						        let weekCount=1;
 						        $("#accordion").html("");
 						        while(true){
-						          const todayStart=new Date(cYear,cMonth,i++); //이번달 시작날짜
-						          const week=todayStart.getDay(); //이번달 시작 요일 0:일요일 ~
-						          
+						          const todayStart=new Date(cYear,cMonth,i++);
+						          const week=todayStart.getDay(); 
 						          if(todayStart.getMonth()!=cMonth){ 
 						            break;
 						          }     
-						          
-						          if(weekCount==1||(week==6 && (i!=30&&i!=31))){ //토요일이거나 30일이나 31일이 아닐때 
+						          if(weekCount==1||(week==6 && (i!=30&&i!=31))){ 
 						        	const card=$("#targetcard").clone().show();
 						          	card.removeAttr("id");
 						          	card.find("div.bbtn>button").text((weekCount)+'주차').attr({
@@ -78,7 +76,7 @@
 						          }
 						          addWeekDay(week,todayStart);
 						        }
-						        //해당주차에 날짜출력해주는 함수
+						        //해당 주차 날짜출력
 						        function addWeekDay(weekNo,targetDay){
 						          const week=$("#container .week");
 						          const weekname=["일","월","화","수","목","금","토"];
@@ -129,7 +127,7 @@
                                     1주차
                                     </button>
                                 </div> 
-                                <div id="timetxt">누적 근무 시간<strong>8h 30m 00s</strong></div>
+                               <!--  <div id="timetxt">누적 근무 시간<strong>8h 30m 00s</strong></div> -->
                                 </h5>
                               </div>
                           

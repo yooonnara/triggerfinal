@@ -35,7 +35,7 @@
 				<div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전사원 연차 현황</h1>
-                    <div class="adminDayOff-container "> 
+                    <div class="adminDayOff-container" > 
                     <!-- 검색 & 부여 버튼 -->
                     <div class="row justify-content-between" id="big-search" >
                     
@@ -177,6 +177,7 @@
                                     <td>${ad.emp.enrollDate }</td>
                                     <td>
                                     	<c:if test="${ad.emp.resignDate == null}">-</c:if>
+                                    	<c:if test="${ad.emp.resignDate != null}">${ad.emp.resignDate }</c:if>
                                     </td>
                                     <td>${ad.totalDoCount }</td>
                                     <td>${ad.usedDoCount }</td>

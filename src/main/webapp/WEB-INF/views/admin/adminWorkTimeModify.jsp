@@ -37,7 +37,7 @@
                     <h1 class="h3 text-dark my-5">전사원 근태 현황
                   <p class="mt-2 text-secondary" style="font-size:17px">출퇴근 변경</p> 
                     </h1>
-                    <div class="adminDayOff-container "> 
+                    <div class="adminDayOff-container" > 
                   
                    
     
@@ -116,9 +116,6 @@
 								
 								const length = ad[0].reContent.length;
 								$(".textCount").text(length + '자');	
-								
-								
-								
 								$("#adminWkModify").modal("show");
 							},
 							error:function(){

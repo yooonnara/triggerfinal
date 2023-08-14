@@ -15,10 +15,11 @@ public interface BoardDao {
 	int CommunityCount(SqlSession session);
 	List<Employee> communityWrite(SqlSession session,int no);
 	int insertCommunityWrite(SqlSession session, Board b);
-	int insertBoardImg(SqlSession session, int no);
+	int insertBoardImg(SqlSession session, Board b);
 	Board selectCommunityById(SqlSession session, int no);
 	List<BoardComment> selectCommentAll(SqlSession session, int no);
 	Board communityModifyList(SqlSession session, Map<String,Object> param);
+	int communityDelete(SqlSession session, Map param);
 	int communityModifySubmit(SqlSession session, Map param);
 	int commentWrite(SqlSession session, Map<String,Object> param);
 	List<BoardComment> selectComment(SqlSession session,Map<String,Object> param);

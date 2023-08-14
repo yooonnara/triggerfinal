@@ -85,10 +85,10 @@ public class BoardController {
 	public String insertCommunityWrite(Board b, MultipartFile[] upFile, HttpSession session,Model m) {
 		if(upFile != null) {	
 		for(MultipartFile mf : upFile) {
-			if(!mf.isEmpty()) { //첨부파일이 있으면
+			if(!mf.isEmpty()) { 
 				String path= session.getServletContext().getRealPath("/resources/upload/board/");
-				String oriName = mf.getOriginalFilename(); //원본 이름 -> 지정 이름
-				String ext = oriName.substring(oriName.lastIndexOf(".")); //.jpeg 뒷부분 가져온다
+				String oriName = mf.getOriginalFilename();
+				String ext = oriName.substring(oriName.lastIndexOf(".")); 
 				Date today = new Date(System.currentTimeMillis());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS"); 
 				int randomNum = (int)(Math.random()*1000)+1;
@@ -101,14 +101,13 @@ public class BoardController {
 					e.printStackTrace();
 				}
 				
-				//원래이름 및 저장이름 저장
 				BoardImg file = BoardImg.builder().fileName(oriName).saveFileName(reName).build();
 				b.getFile().add(file);
+				
 			}
 		}
 	}
 	try {
-		//System.out.println(b.getFile().size());
 		service.insertCommunityWrite(b);
 	}catch(RuntimeException e) {
 		e.printStackTrace();
@@ -119,6 +118,7 @@ public class BoardController {
 	m.addAttribute("msg","글쓰기 등록 성공!");
 		return "redirect:/community";
 	}
+	
 	
 	//상세보기
 	@GetMapping("/board/communityView.do")
@@ -131,6 +131,18 @@ public class BoardController {
 		return "board/communityView";
 	}
 	
+	//삭제
+	@RequestMapping("/board/communityDelete.do")
+	public String communityDelete(@RequestParam Map param, Model m) {
+		int result = service.communityDelete(param);
+		if(result > 0) {
+			m.addAttribute("msg","게시물이 삭제 되었습니다.");
+			m.addAttribute("loc", "/community");
+			return "common/msg";
+		}
+		
+		return "redirect:/community";
+	}
 	
 	//수정
 	@RequestMapping("/board/communityModify.do")

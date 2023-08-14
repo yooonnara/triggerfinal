@@ -34,8 +34,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertBoardImg(SqlSession session, int no) {
-		return session.insert("board.insertBoardImg",no);
+	public int insertBoardImg(SqlSession session, Board b) {
+		return session.insert("board.insertBoardImg", b);
 	}
 
 	@Override
@@ -52,6 +52,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Board communityModifyList(SqlSession session, Map<String, Object> param) {
 		return session.selectOne("board.communityModifyList",param);
+	}
+	
+	@Override
+	public int communityDelete(SqlSession session, Map param) {
+		return session.delete("board.communityDelete", param);
 	}
 
 	@Override

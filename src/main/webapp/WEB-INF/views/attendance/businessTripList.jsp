@@ -119,7 +119,7 @@
                 			
                 		})
                 	})
-                	
+                	<!-- 출장 취소 조회 -->
                 	function checkCancel(){
                 		$.ajax({
                 			url:"/checkCancelList",
@@ -136,8 +136,8 @@
                 					const $title = $("<td>").text(d[i]["title"]);
                 					const $appStatus = $("<td>").text("취소");
                 					
-                					$tr.append($name).append($deptTitle).append($createDate).append($startDate).append($title).append($appStatus).append($td);
-                					
+                					$tr.append($name).append($deptTitle).append($createDate).append($startDate)
+                						.append($title).append($appStatus).append($td);
                 					$("#bt-tbody").append($tr);
                 				}
                 			},

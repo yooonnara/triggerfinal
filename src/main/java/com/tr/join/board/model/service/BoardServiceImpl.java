@@ -46,7 +46,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		if(result>0) {
 			if(b.getFile().size()>0) {
-					result=dao.insertBoardImg(session,b.getNo());
+					result=dao.insertBoardImg(session,b);
 					if(result!=1) throw new RuntimeException("첨부파일 형식이 올바르지 않습니다.");
 			}
 		}
@@ -68,6 +68,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board communityModifyList(Map<String, Object> param) {
 		return dao.communityModifyList(session, param);
+	}
+
+	
+	@Override
+	public int communityDelete(Map param) {
+		return dao.communityDelete(session, param);
 	}
 
 	@Override

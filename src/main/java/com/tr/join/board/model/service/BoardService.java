@@ -16,6 +16,7 @@ public interface BoardService {
 	Board selectCommunityById(int no);
 	List<BoardComment> selectCommentAll(int no);
 	Board communityModifyList(Map<String,Object> param);
+	int communityDelete(Map param);
 	int communityModifySubmit(Map param);
 	int commentWrite(Map<String,Object> param);
 	List<BoardComment> selectComment(Map<String,Object> param);
