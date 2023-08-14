@@ -20,6 +20,7 @@ public interface AdminEmployeeDao {
 	int checkDuplicationId(SqlSessionTemplate session, String id);
 	
 	List<Employee> selectEmployeeAll(SqlSessionTemplate session, Map<String,Object> param);
+	
 
 	int insertEmployee(SqlSessionTemplate session, Map param);
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tr.join.board.model.dao.BoardDao;
 import com.tr.join.board.model.vo.Board;
 import com.tr.join.board.model.vo.BoardComment;
+import com.tr.join.board.model.vo.BoardImg;
 import com.tr.join.employee.model.vo.Employee;
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -46,8 +47,11 @@ public class BoardServiceImpl implements BoardService {
 		
 		if(result>0) {
 			if(b.getFile().size()>0) {
-					result=dao.insertBoardImg(session,b);
+				for(BoardImg i : b.getFile()) {
+					i.setBoardNo(b.getNo());
+					result=dao.insertBoardImg(session,i);
 					if(result!=1) throw new RuntimeException("첨부파일 형식이 올바르지 않습니다.");
+				}	
 			}
 		}
 		return result;

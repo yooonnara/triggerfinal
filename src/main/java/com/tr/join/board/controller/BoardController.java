@@ -1,22 +1,27 @@
 package com.tr.join.board.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.board.model.service.BoardService;
@@ -80,9 +85,10 @@ public class BoardController {
 	}
 	
 	
-	//작성값 전송
+	//작성 전송(사진 첨부) 
 	@RequestMapping("/board/insertCommunityWrite")
 	public String insertCommunityWrite(Board b, MultipartFile[] upFile, HttpSession session,Model m) {
+		
 		if(upFile != null) {	
 		for(MultipartFile mf : upFile) {
 			if(!mf.isEmpty()) { 
@@ -91,19 +97,16 @@ public class BoardController {
 				String ext = oriName.substring(oriName.lastIndexOf(".")); 
 				Date today = new Date(System.currentTimeMillis());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS"); 
-				int randomNum = (int)(Math.random()*1000)+1;
+				int randomNum = (int)(Math.random()*10000)+1;
 				String reName = sdf.format(today)+"_"+randomNum + ext;
-				
 				//파일 업로드
 				try {
 					mf.transferTo(new File(path + reName));
 				}catch(IOException e) {
 					e.printStackTrace();
 				}
-				
 				BoardImg file = BoardImg.builder().fileName(oriName).saveFileName(reName).build();
 				b.getFile().add(file);
-				
 			}
 		}
 	}
@@ -115,10 +118,40 @@ public class BoardController {
 		m.addAttribute("loc", "/communityWrite");
 		return "common/msg";
 	}
-	m.addAttribute("msg","글쓰기 등록 성공!");
+		m.addAttribute("msg","글쓰기 등록 성공!");
 		return "redirect:/community";
 	}
 	
+	//파일 다운로드
+	@RequestMapping("/board/fileDownload")
+	public void fileDownload(String oriname, String rename, OutputStream out,
+			@RequestHeader(value="user-agent") String header, HttpSession session, HttpServletResponse res) {
+		
+		String path = session.getServletContext().getRealPath("/resources/upload/board/");
+		File downloadFile = new File(path+rename);
+		try(FileInputStream fis=new FileInputStream(downloadFile);
+				BufferedInputStream bis=new BufferedInputStream(fis);
+				BufferedOutputStream bos=new BufferedOutputStream(out)) {
+			
+			boolean isMS=header.contains("Trident")||header.contains("MSIE");
+			String ecodeRename="";
+			if(isMS) {
+				ecodeRename=URLEncoder.encode(oriname,"UTF-8");
+				ecodeRename=ecodeRename.replaceAll("\\+","%20");
+			}else {
+				ecodeRename=new String(oriname.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			res.setContentType("application/octet-stream;charset=utf-8");
+			res.setHeader("Content-Disposition","attachment;filename=\""+ecodeRename+"\"");
+			int read=-1;
+			while((read=bis.read())!=-1) {
+				bos.write(read);
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+		
 	
 	//상세보기
 	@GetMapping("/board/communityView.do")
@@ -160,7 +193,7 @@ public class BoardController {
 		int result = service.communityModifySubmit(param);
 		
 		if(result > 0) {
-			m.addAttribute("msg","수정 완료!");
+			m.addAttribute("msg","게시물이 수정되었습니다.");
 			m.addAttribute("loc", "/community");
 			return "common/msg";
 		}
@@ -184,14 +217,7 @@ public class BoardController {
 	}
 	
 	
-//	@RequestMapping("/board/comment")
-//	 
-//	@ResponseBody private Map<String, Object> commentInsert(){
-//	
-//	Map<String,Object> cParam=new HashMap(); List<BoardComment> comment =
-//	service.selectComment(); cParam.put("comment",comment);
-//	
-//	return cParam; }
+
 	
 	
 	

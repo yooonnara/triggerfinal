@@ -55,6 +55,7 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 		return dao.selectEmployeeAll(session, param);
 	}
 	
+
 	@Override
 	public int selectEmployeeCount() {
 		return dao.selectEmployeeCount(session);

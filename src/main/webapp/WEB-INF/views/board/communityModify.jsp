@@ -28,7 +28,7 @@
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 					<!-- smartEditor -->
-					<script type="text/javascript" src="/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>		
+					<script type="text/javascript" src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>		
 				</div>
 				<!-- 상단바 종료 End of Topbar -->
 
@@ -100,14 +100,13 @@
 			<!-- smartEditor -->
 			<script>
 				let oEditors = [];
-					nhn.husky.EZCreator.createInIFrame({
-				    oAppRef : oEditors,
-				    elPlaceHolder : "contents",
-					sSkinURI: "/smartEditor/SmartEditor2Skin.html",
-					fCreator : "createSEditor2"
-					})
-				
-				//textarea에 쓴 내용 전송하기
+				nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceHolder : "contents",
+				sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
+				fCreator : "createSEditor2"
+				})
+					
 				$("#cmmForm").on('submit',function(e){
 					oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 				      
@@ -116,9 +115,7 @@
 				        $('#title').focus();
 				        return false;
 				    } 
-				      
 				    var contents = $("#contents").val();
-					
 				    if( contents.length < 1 || contents == null || contents == '&nbsp;')  {
 					    alert('내용을 입력해 주세요.');
 					    oEditors.getById["contents"].exec("FOCUS"); 

@@ -68,7 +68,7 @@
                                     <col width="40%" />
                                     <col width="15%" />
                                     <col width="15%" />
-                                    <col width="10%" />
+                                   <%--  <col width="10%" /> --%>
                                     <col width="20%" />
                                 </colgroup>
 
@@ -79,7 +79,7 @@
                                         <th>작성자</th>
                                         <th>첨부파일</th>
                                         <th>작성일</th>
-                                        <th>조회수</th>
+                                    <!--     <th>조회수</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,7 +95,7 @@
                                         	</c:if>
                                         </td>
                                         <td>${b.emp.dateCreated }</td>
-                                        <td>${b.views }</td>
+                                        <%-- <td>${b.views }</td> --%>
                                     </tr>
                                  	</c:forEach>
                                     </c:if>

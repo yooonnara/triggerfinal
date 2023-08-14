@@ -27,5 +27,5 @@ public class Board {
 	private Date dateDeleted; //삭제일
 	
 	private Employee emp;
-	private List<BoardImg> file = new ArrayList(); //boardImgt와 종속관계 
+	private List<BoardImg> file = new ArrayList(); 
 }

@@ -70,20 +70,38 @@
 									<tr>
 										<td class="text-center align-middle"><span>첨부파일</span></td>
 										<td>
-										<c:if test="${board.file[0].saveFileName != null}">
-											<img src="${path }/upload/board/${board.file[0].saveFileName}">
+										<c:if test="${not empty board.file and board.file[0].boardNo!=0}">
+										<c:forEach var="f" items="${board.file }">
+											<%-- <img src="${path }/upload/board/${board.file[0].saveFileName}"  --%>
+											<button type="button" class="btn" 
+											onclick="fileDownload('${f.fileName}','${f.saveFileName}');">
+											${f.fileName }</button>
+										</c:forEach>
 										</c:if>	
 										</td>
 									</tr>
 									<tr>
 										<td class="text-center" id="cwTd" colspan="2">
 											<textarea name="contents" id="contents" class="bg-light mt-3"  style="width:800px; border:none; resize:none;">${board.content }</textarea>
+											<c:if test="${not empty board.file and board.file[0].boardNo!=0}">
+											<img src="${path }/resources/upload/board/${board.file[0].saveFileName}"/>
+											</c:if>
 										</td>
-										
 									</tr>
 								</tbody>
 							</table>
 						</div>
+						
+						<script>
+							function fileDownload(oriName, reName){
+								location.assign("${path}/board/fileDownload?oriname="+oriName+"&rename="+reName);
+							};
+						</script>
+						
+						
+						
+						
+						
 						<!-- 댓글 부분 -->
 						<div class="board-container">
 							<table id="commTable" class="table table-sm shadow table-hover text-center">
@@ -128,9 +146,7 @@
 			</div>
 
 			<script>
-				//댓글 전송하기
 				$("#comment-form").on('submit',function(e){
-				  
 				    var name = $("#name").val();
 				    var boardNo = $("#boardNo").val();
 				    var empNo = $("#empNo").val();

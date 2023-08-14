@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.tr.join.board.model.vo.Board;
 import com.tr.join.board.model.vo.BoardComment;
+import com.tr.join.board.model.vo.BoardImg;
 import com.tr.join.employee.model.vo.Employee;
 
 public interface BoardDao {
@@ -15,7 +16,7 @@ public interface BoardDao {
 	int CommunityCount(SqlSession session);
 	List<Employee> communityWrite(SqlSession session,int no);
 	int insertCommunityWrite(SqlSession session, Board b);
-	int insertBoardImg(SqlSession session, Board b);
+	int insertBoardImg(SqlSession session, BoardImg b);
 	Board selectCommunityById(SqlSession session, int no);
 	List<BoardComment> selectCommentAll(SqlSession session, int no);
 	Board communityModifyList(SqlSession session, Map<String,Object> param);

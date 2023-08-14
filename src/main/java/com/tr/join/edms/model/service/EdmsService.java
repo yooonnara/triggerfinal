@@ -42,11 +42,18 @@ public interface EdmsService {
  
  List<Edms> search(Edms edms);
  
+ //이용자 계정 ajax 출력하기 
+ 
+ List<Edms> eSearch(Edms edms);
  //어드민 연차 검색하기 
  List<Edms> adminVcSelect();
  
  //어드민 승인하기 
  
  int updateAppStatus(Map<String,Integer> ajaxNumber);
+ 
+ Edms selectByVcNo(int no);
+ 
+ List<Edms> searchVc(Edms edms);
  
 }

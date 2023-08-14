@@ -1,9 +1,16 @@
 package com.tr.join.employee.model.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
@@ -26,15 +34,31 @@ public class EmployeeController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	@GetMapping("/main") 
+	public String mainPage() {
+		return "mainpage"; 
+	}
 	
 	@GetMapping("/")
 	public String loginPage() {
 		return "login/login";
 	}
+	
+	// 로그인 - 아이디 저장
+	@PostMapping("/successLogin")
+	public String cookieResolve(String userId, @RequestParam(name = "saveId", required = false) String saveId,
+			HttpServletResponse response) {
 
-	@GetMapping("/main") 
-	 public String mainPage() { 
-		return "mainpage"; 
+		if ("on".equals(saveId)) { // 아이디 저장 버튼을 체크했을 때
+			Cookie cookie = new Cookie("userId", userId);
+			cookie.setMaxAge(7 * 24 * 60 * 60); // 일주일
+			response.addCookie(cookie);
+		} else { // 체크하지 않았을 때
+			Cookie cookie = new Cookie("userId", "");
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+		}
+		return "redirect:/main";
 	}
 	
 	// 마이페이지 정보 불러오기
@@ -49,11 +73,45 @@ public class EmployeeController {
 		return "mypage/mypage";
 	}
 	
-	// 마이페이지 수정하기
+	// 마이페이지 수정하기 (이전 프로필 사진 삭제하기)
 	@PostMapping("/updateEmployee")
-	public String updateEmployee(@RequestParam Map param) { 
+	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session, Model m) { 
+		// 파일업로드
+		// 절대경로 가져오기
+		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
+		if (upFile != null && !upFile.isEmpty()) {
+			String oriName = upFile.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			Date today = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rdn = (int) (Math.random() * 10000) + 1;
+			String rename = sdf.format(today) + "_" + rdn + ext;
+			try {
+				upFile.transferTo(new File(path, rename));
+				param.put("empImg", rename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			param.put("empImg", param.get("oldImg"));
+		}
+		System.out.println(param);
 		int result = service.updateEmployee(param);
-		return "redirect:/mypage";
+		
+		String msg,loc;
+		if(result>0) {
+		msg="기본정보가 수정되었습니다.";
+		loc="/mypage";
+//			Employee loginEmp =(Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			loginEmp.set
+		}else {
+			msg="수정에 실패했습니다. 다시 시도해 주세요.";
+			loc="/mypage";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
 	// 비밀번호 변경 페이지
@@ -65,7 +123,7 @@ public class EmployeeController {
 	
 	// 비밀번호 수정하기
 	@PostMapping("/updatePassword")
-	public String updatePassword(@RequestParam Map param) { 
+	public String updatePassword(@RequestParam Map param, Model m) { 
 		// 로그인한 현재 유저 정보 (세션에 저장된 정보)
 		Employee sessionEmp = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		param.put("emp_id", sessionEmp.getId());
@@ -77,7 +135,19 @@ public class EmployeeController {
 		
 		int result = service.updatePassword(param);
 		
-		return "redirect:/mypagePassword";
+		String msg,loc;
+		if(result>0) {
+		msg="비밀번호가 수정되었습니다. 다시 로그인해 주세요.";
+		loc="/";
+		}else {
+			msg="수정에 실패했습니다. 다시 시도해 주세요.";
+			loc="/mypagePassword";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
+		
 	}
 	
 	// 현재 비밀번호와 입력한 비밀번호의 일치여부 확인
@@ -97,10 +167,8 @@ public class EmployeeController {
 //		System.out.println("디비에 저장된 비밀번호는 " + dbEmp.getPassword());
 		
 		if(password != null && passwordEncoder.matches(password, dbEmp.getPassword()) == true) {
-			System.out.println("일치");
 			return 1;
 		} else {
-			System.out.println("불일치");
 			return 0;
 		}
 	}

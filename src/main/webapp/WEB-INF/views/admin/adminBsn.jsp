@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<!-- 헤드 태그 -->
+<div id="headTag">
+	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+</div>
 
 <body id="page-top">
 
@@ -96,7 +99,7 @@
              		            },
              		            	
              		            error:function(){
-             		           		console.log("ajax 통신시실패");
+             		           		console.log("ajax 통신 실패하였습니다.");
              		           	}
              		            
              		           })
@@ -116,18 +119,19 @@
 
                             <!-- 테이블 칸 크기 -->
                             <colgroup>
-                                	<col width="10%" />
+                                  <col width="10%" />
+                                    <col width="10%" />
+                                    <col width="10%" />
+                                     <col width="10%" />
+                                    <col width="10%" />
                                     <col width="15%" />
                                     <col width="10%" />
-                                    <col width="10%" />
                                     <col width="15%" />
-                                    <col width="10%" />
-                                    <col width="25%" />
                             </colgroup>
 						
                             <thead>
                                 <tr class="bg-dark text-white">
-                                    <th>문서번호</th>
+                                    <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
                                     <th>직급</th>
@@ -215,7 +219,7 @@
 		            		
 		            		let appStatus="";
 		            		switch(f[i]["appStatus"]){
-		            		case -1 :appStatus="전체";break;
+		            		//case -1 :appStatus="전체";break;
 		            		case 0 :appStatus="대기";break;
 		            		case 1 :appStatus="승인";break;
 		            		case 2:appStatus="반려";break;

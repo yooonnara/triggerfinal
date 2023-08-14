@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
 
 public interface EdmsDao {
@@ -17,6 +18,7 @@ public interface EdmsDao {
 	 * ;
 	 */
 		int insertbsn(SqlSession session, Edms e);
+		int insertAttachment(SqlSession session, Attachment a);
 		
 		List<Edms> selectBsnAll(SqlSession session, Map<String,Object> param);
 		
@@ -49,11 +51,22 @@ public interface EdmsDao {
 		
 		//어드민 계정 연차 출력하기 
 		List<Edms> adminVcSelect(SqlSession session);
+		//어드민 계정 상세 view 출력하기 
 		
+		Edms selectByVcNo(SqlSession session, int no);
+		
+		//어드민 계정 연차 ajax로 검색하기 
+		List<Edms> searchVc(SqlSession session, Edms edms);
+		
+		//이용자 계정 ajax 검색하기 
+		List<Edms> selecteSearch(SqlSession session, Edms edms);
 		
 		//어드민 계정 출장 승인하기 
 		
 		int updateAppStatus(SqlSession session, Map<String,Integer> ajaxNumber);
+		
+		
+		
 
 
 }

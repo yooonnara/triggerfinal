@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tr.join.board.model.vo.Board;
 import com.tr.join.board.model.vo.BoardComment;
+import com.tr.join.board.model.vo.BoardImg;
 import com.tr.join.employee.model.vo.Employee;
 
 @Repository
@@ -34,7 +35,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertBoardImg(SqlSession session, Board b) {
+	public int insertBoardImg(SqlSession session, BoardImg b) {
 		return session.insert("board.insertBoardImg", b);
 	}
 

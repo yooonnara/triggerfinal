@@ -1,14 +1,29 @@
 package com.tr.join.edms.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.common.PageFactory;
 import com.tr.join.edms.model.service.EdmsService;
+import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
 import com.tr.join.employee.model.service.EmployeeService;
 import com.tr.join.employee.model.vo.Employee;
@@ -34,40 +50,107 @@ public class EdmsController {
 		this.empService=empService;
 		this.service=service;
 	}
+	
+	
 
-	//출장 폼 제출
 	
 	@PostMapping("/insertbsn")
-	public String insertbsn(Edms e, MultipartFile[] upFile ,Model model) {
-		int result = service.insertbsn(e);
-		//파일 업로드 하기 
-		for(MultipartFile f :upFile) {
-			log.debug(f.getOriginalFilename());
+	public String insertbsn(Edms e, MultipartFile[] upFile ,HttpSession session, Model model) {
+		
+		log.info("{}",e);
+		log.info("{}",upFile);
+		
+		//절대 경로 가져오기 
+		String path =session.getServletContext().getRealPath("/resources/upload/edms/");
+		if(upFile!=null) {				
+			for(MultipartFile mf:upFile) {
+				if(!mf.isEmpty()) {
+					String oriName=mf.getOriginalFilename();
+					String ext=oriName.substring(oriName.lastIndexOf("."));
+					Date today=new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn=(int)(Math.random()*10000)+1;
+					String rename=sdf.format(today)+"_"+rdn+ext;
+					
+					try {
+						mf.transferTo(new File(path+rename));
+					}catch(IOException e1) {
+						e1.printStackTrace();
+					}
+					
+					Attachment file=Attachment.builder()
+							.originalFilename(oriName)
+							.renamedFilename(rename)
+							.build();
+					
+					e.getFile().add(file);
+		
+				}
+			}
 		}
-		/*
-		 * log.debug(upFile.getOriginalFilename()); log.debug("()",upFile.getSize());
-		 */
+		try {
+			service.insertbsn(e);
+		}catch(RuntimeException e1) {
+			e1.printStackTrace();
+			for(Attachment a : e.getFile()) {
+				File delFile=new File(path+a.getRenamedFilename());
+				delFile.delete();
+			}
+			
+			model.addAttribute("msg","출장신청이 실패되었습니다.");
+			model.addAttribute("loc","/edms/bsnRequest");
+			
+			return "common/msg";
 		
-		
-		String msg,loc;
-		if(result>0) {
-		msg="연차/출장 신청이 완료되었습니다.";
-		loc="/";
-		}else {
-			msg="연차/충장신청이 실패되었습니다.";
-			loc="/edms/bsnRequest";
 		}
-		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
-		
-		return "common/msg";
-		
-		
+		return "redirect:/edms/bsnList";
 	
 		//System.out.println(result);
 		//출장 insertform
 		
 	}
+	
+	
+	
+	
+	
+	//파일 다운로드 하는 메소드 
+	@RequestMapping("/filedownload")
+	public void fileDown(String oriname, String rename, OutputStream out,
+			@RequestHeader(value="user-agent") String header,
+			HttpSession session,
+			HttpServletResponse res) {
+		
+		String path=session.getServletContext().getRealPath("/resources/upload/edms/");
+		File downloadFile=new File(path+rename);
+		try(FileInputStream fis=new FileInputStream(downloadFile);
+				BufferedInputStream bis=new BufferedInputStream(fis);
+				BufferedOutputStream bos=new BufferedOutputStream(out)) {
+			
+			boolean isMS=header.contains("Trident")||header.contains("MSIE");
+			String ecodeRename="";
+			if(isMS) {
+				ecodeRename=URLEncoder.encode(oriname,"UTF-8");
+				ecodeRename=ecodeRename.replaceAll("\\+","%20");
+			}else {
+				ecodeRename=new String(oriname.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			res.setContentType("application/octet-stream;charset=utf-8");
+			res.setHeader("Content-Disposition","attachment;filename=\""+ecodeRename+"\"");
+			
+			int read=-1;
+			while((read=bis.read())!=-1) {
+				bos.write(read);
+			}
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+
+
 	
  //연차 신청하는 폼 작성하기 
 		//@RequestMapping(value="/insertVc ", method=RequestMethod.POST)
@@ -106,7 +189,8 @@ public class EdmsController {
 	
 	
 	//전체 출력하기
-	
+	//map<string,object>로 바꿈
+	//return map.of("",,"",);
 		@GetMapping("/bsnList")
 		public String selectBsnAll(@RequestParam(value="cPage", defaultValue="1") int cPage,
 					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
@@ -117,7 +201,7 @@ public class EdmsController {
 			m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "/bsnList"));
 			m.addAttribute("totalData",totalData);
 			m.addAttribute("edms",list);
-			
+			//페이지 바도 처리해줘야함 
 			list.forEach(System.out::println);
 			//System.out.println(m);
 			return "edms/bsnList" ;
@@ -177,17 +261,57 @@ public class EdmsController {
 		return ("admin/adminBnsView");
 	}
 	
+	
+	@GetMapping("/adminVcView")
+	public String selectByVcNo(Model m, int no) {
+		m.addAttribute("edms",service.selectByVcNo(no));
+		System.out.println(m);
+		System.out.println(no);
+		return("admin/adminVcView");
+	}
+	
 	//에이젝스 검색 기능 구현 
 	
 	@GetMapping("/adminBsn/search")
 	@ResponseBody
-	private List<Edms> search(@RequestParam("category") String category, 
+	public List<Edms> search(@RequestParam("category") String category, 
 			@RequestParam("keyword") String keyword, Model m)throws Exception{
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
-	List<Edms> search =service.search(edms);
+		List<Edms> search =service.search(edms);
 		return search;
+	}
+	
+	//에이젝스 이용자 검색 기능 
+	
+	@GetMapping("/bsnList/eSearch")
+	@ResponseBody
+	public List<Edms> eSearch(@RequestParam("category") String category,
+			@RequestParam("keyword") String keyword, Model m) throws Exception{
+		Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		m.addAttribute("loginEmp",loginEmp);
+		
+		Edms edms = new Edms();
+		edms.setCategory(category);
+		edms.setKeyword(keyword);
+		edms.setEmpNo(loginEmp.getNo());
+		List<Edms> eSearch =service.eSearch(edms);
+		return eSearch;
+	}
+	
+	//연차 에이젝스 검색 기능 
+	@GetMapping("/adminVc/searchVc")
+	@ResponseBody
+	public List<Edms>searchVc(@RequestParam("category") String category,
+			@RequestParam("keyword") String keyword, Model m) throws Exception{
+		
+		Edms edms= new Edms();
+		edms.setCategory(category);
+		edms.setKeyword(keyword);
+		List<Edms> searchVc=service.searchVc(edms);
+		return searchVc;
+		
 	}
 	
 	
@@ -197,11 +321,12 @@ public class EdmsController {
 	int result=service.updateAppStatus(Map.of("no",no,"appStatus",appStatus));
 	String msg,loc;
 	if(result>0) {
-		msg="승인완료";
-	loc="/";
-	}else {
-	msg="승인이 실패되었습니다";
+		msg="승인 완료되었습니다.";
 	loc="/edms/adminBsn";
+	}else {
+	msg="승인이 반려되었습니다.";
+	loc=
+	"/admin";
 }
 m.addAttribute("msg",msg);
 m.addAttribute("loc",loc);

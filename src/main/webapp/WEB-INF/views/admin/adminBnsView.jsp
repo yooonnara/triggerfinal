@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<!-- 헤드 태그 -->
+<div id="headTag">
+	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+</div>
 
 <body id="page-top">
 
@@ -104,10 +107,10 @@
                             </tbody> 
 						</table>
 						
-						<div class="btn-click">
+						<div class="btn-click col text-center pb-5">
                                   <button type="button" class="btn btn-dark" id="vcButton1" onclick="changeResult('${edms.no }',1);">결재승인</button>
                       		 <button type="button" class="btn btn-danger" id="button2" onclick="changeResult('${edms.no }',2);">승인 반려</button>
-                        <button class="btn btn-secondary" id="button3" onclick="button1_click();">취소</button>
+                        <button class="btn btn-secondary" type="button" id="button3" onclick="location.href='${path }/edms/adminBsn'">취소</button>
                         </div>
 						</form>
 					</div>
@@ -118,6 +121,7 @@
                   	function changeResult(edmsNo,appStatus){
                   		location.replace('${pathContext.request.contextPath}/edms/adminBsnView/statuschange?no='+edmsNo+"&appStatus="+appStatus);
                   	}
+                  	
                   </script>
            
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
@@ -137,43 +141,30 @@
 
            </div>
            <!-- Footer -->
-           <div id="footer">
+       
+            <div id="footer">
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
             </div>
             <!-- End of Footer -->
- </div>
-       
+
+        </div>
         <!-- End of Content Wrapper -->
 
-  </div>
+    </div>
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
-      <i class="fas fa-angle-up"></i>
-   </a>
-   
+		<i class="fas fa-angle-up"></i>
+	</a>
 
-  
+    <!-- 부트스트랩 스크립트 -->
+	<div id="bootstrap">
+		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+	</div>
 
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 </body>
 
 </html>
+
+

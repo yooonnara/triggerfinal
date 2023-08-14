@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-
 <ul
 	class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion h-100"
 	id="accordionSidebar">
@@ -27,12 +25,12 @@
 	<!-- 내 정보 사이드바 -->
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-		aria-controls="collapseTwo"> <i class="bi bi-person-fill"></i> <span>멤버관리</span>
+		aria-controls="collapseTwo"> <i class="bi bi-person-fill"></i> <span>사원관리</span>
 	</a>
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="${path }/adminEmployee">멤버 통합관리</a>
+				<a class="collapse-item" href="${path }/adminEmployee">사원 통합관리</a>
 
 			</div>
 		</div></li>
@@ -46,10 +44,9 @@
 		<div id="collapseUtilities" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="${path }/adminWorkTime">멤버 근태 현황</a> 
+				<a class="collapse-item" href="${path }/adminWorkTime">전사원 근태 현황</a> 
 				<a href="${path }/adminWorkTimeModify"><h6 class="collapse-header">- 출·퇴근 시간 변경</h6></a>
-				<a class="collapse-item" href="${path }/adminDayoff">멤버 연차 관리</a>
-				<a class="collapse-item" href="${path }/adminBusinessTrip">멤버 출장 관리</a>
+				<a class="collapse-item" href="${path }/adminDayoff">전사원 연차 현황</a>
 			</div>
 		</div>
 	</li>
@@ -66,7 +63,6 @@
                 <a class="collapse-item">결재 문서 관리</a>
                 <a href="${path }/edms/adminVc"><h6 class="collapse-header">- 연차 문서 관리</h6></a>
                 <a href="${path }/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
-                <a class="collapse-item" href="#">결재 문서 현황</a>
             </div>
         </div>
     </li>

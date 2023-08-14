@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 
 <body id="page-top">
 
@@ -48,7 +48,6 @@
 											<h5>총 계정 수</h5><h6>3명</h6>
 										</div>
 										<div class="col-auto">
-											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
 										</div>
 									</div>
 								</div>

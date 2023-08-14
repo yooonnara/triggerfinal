@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<!-- 헤드 태그 -->
+<div id="headTag">
+	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+</div>
 
 <body id="page-top">
+
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -28,10 +33,7 @@
                 </div>
                 <!-- 상단바 종료 End of Topbar -->
 
-            <!-- 수정할 컨테이너 Begin Page Content -->
-            <div class="container-fluid pl-5 pr-5">
-            
-            
+  	
             
             <!-- 수정할 컨테이너 Begin Page Content -->
 				<div class="container-fluid pl-5 pr-5">
@@ -104,7 +106,9 @@
                             </tbody> 
 						</table>
 						
-						<div class="btn-click">
+						
+						
+						<div class="btn-click col text-center pb-5">
                                   <button class="btn btn-dark" id="button1" onclick="button1_click();">결재승인</button>
                       		 <button class="btn btn-danger" id="button2" onclick="button2_click();">승인 반려</button>
                         <button class="btn btn-secondary" id="button3" onclick="button1_click();">취소</button>

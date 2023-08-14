@@ -20,7 +20,7 @@
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 					<!-- smartEditor -->
-					<script type="text/javascript" src="/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>		
+					<script type="text/javascript" src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>		
 				</div>
 				<!-- 수정할 컨테이너 Begin Page Content -->
                 <div class="container-fluid pl-5 pr-5">
@@ -57,7 +57,7 @@
 										<td class="text-center align-middle" id="cwTd" colspan="2">
 											<div id="smarteditor" class="editor-area">
 												<!--에디터가 들어가는 영역입니다.-->
-												<textarea name="content" id="content" rows="20" cols="10" style="width:1300px"></textarea>
+												<textarea name="contents" id="contents" rows="20" cols="10" style="width:1300px"></textarea>
 											</div>
 										</td>
 									</tr>
@@ -88,7 +88,7 @@
 					nhn.husky.EZCreator.createInIFrame({
 				    oAppRef : oEditors,
 				    elPlaceHolder : "contents",
-					sSkinURI: "/smartEditor/SmartEditor2Skin.html",
+					sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
 					fCreator : "createSEditor2"
 					})
 				

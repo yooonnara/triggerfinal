@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
+
+<!-- 헤드 태그 -->
+<div id="headTag">
+	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+</div>
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -32,7 +38,7 @@
 				<div class="container-fluid pl-5 pr-5">
 
 					<!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark mt-5 mb-5">내 정보 수정</h1>
+					<h1 class="h3 text-dark mt-5 mb-5">전자결재현황</h1>
 
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-6 d-flex justify-content-center bg-white shadow mb-3 pt-3">
@@ -96,7 +102,18 @@
 	                         <td>출장/연차 종료일</td>      
                              <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" value="${edms.endDate }" readonly></td>
                             </tr>
-       
+                            <tr>
+                            	<td>첨부파일</td>
+                            	<td>
+                            	 <c:if test="${not empty edms.file }">
+							      <c:forEach var="f" items="${edms.file }">
+							         <button type="button"  class="btn btn-primary ml-5 mb-1" 
+							         onclick="fn_fileDownload('${f.originalFilename}','${f.renamedFilename }');">
+							           ${f.originalFilename }</button>
+							        </c:forEach>
+							     </c:if>
+							     </td>
+							    </tr>
                             </tbody> 
 								</table>
 								 <div class="button-footer d-flex justify-content-around mb-4">
@@ -108,9 +125,17 @@
 					</div>
 					
 				</div>
+				
+				
+				<script>
+				function fn_fileDownload(oriName,reName){
+					location.assign("${path}/edms/filedownload?oriname="+oriName+"&rename="+reName);
+				};
+				</script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 			</div>
 
+			
 			<!-- Footer -->
 				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 			<!-- End of Footer -->
@@ -125,91 +150,10 @@
 	<a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
-
-<%-- <!-- 폼조회 모달-->
-        <div id="viewEdms">
-            <div class="modal fade text-center" id="viewEdmsModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">전자 결재 조회</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body px-3 py-3">
-                            <form class="user">
-                                <table class="table text-dark table-borderless">
-                                    <tbody class="text-left">
-                                        <tr class="text-center">
-                                            <td colspan='2'>
-                                            <c:if test="${not emty
- 									 <tr>
-                                        <td class="align-middle">기안일</td>
-                                        <td>
-                                            <input type="date" class="form-control mr-5 my-1"name="userId" id="" placeholder="" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle">사원번호</td>
-                                        <td><input class="form-control ml-5 mb-1" type="text"
-                               				value="${loginEmp.no }" placeholder="" readonly></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle">이름</td>
-                                       <td><input class="form-control ml-5 mb-1" type="text"
-                            				value="${loginEmp.name }"   placeholder="" readonly></td>
-                                    </tr>
-                              
-                                    <tr>
-                                        <td class="align-middle">부서</td>
-                                           <td><input class="form-control ml-5 mb-1" type="text"
-                             				 value="${loginEmp. }"   placeholder="개발팀" readonly></td>  
-                                    </tr>
-                                    <tr>
-	                                     <td class="align-middle">직급</td>
-	                                     <td><input class="form-control ml-5 mb-1" type="text"
-	                               			 placeholder="대리" readonly></td>
-                               		 </tr>
-                               		 <tr>
-                                    <td class="from-group align-middle">제목</td> 
-                                        <td> <textarea class="form-control mr-5 my-1" name="title" id="" rows="1" placeholder="" readonly><c:out value="${ed.title}</textarea></td>
-                                    </tr>
-                               		 <tr>
-                                    	<td class="from-group align-middle">신청내용</td>
-                                       <td><textarea class="form-control mr-5 my-1" name="content" id="" rows="4" placeholder="" readonly></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle">출장기간-시작일</td>
-                                        <td><input type="date" class="form-control mr-5 my-1" name="startDate" id="" placeholder="" readonly></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle">출장기간-종료일</td>
-                                        <td> <input type="date" class="form-control mr-5 my-1" name="endDate" id="" placeholder="" readonly> </td>
-                                    </tr>
-                                      <tr>
-	                                        <td class="align-middle">첨부파일</td>
-	                                        <td> <input type="file" class="form-control mr-5 my-1" name="userId" id="" placeholder="" readonly></td>
-                                       </tr>
-                                  </table> 
-                                 </tbody> 
-                                </table>
-                            </form>
-                        </div>
-                        <div class="modal-footer mr-3">  <a class="btn btn-primary" href="#">목록</a>
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
- --%>
-         
-         
-         
+	
+<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
 </body>
 
 </html>
+

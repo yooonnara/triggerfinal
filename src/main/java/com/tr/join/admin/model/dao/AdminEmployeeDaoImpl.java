@@ -44,6 +44,7 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		return session.selectList("adminEmployee.selectEmployeeAll",null,rb);
 	}
+	
 
 	@Override
 	public int selectEmployeeCount(SqlSessionTemplate session) {
@@ -57,7 +58,7 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 
 	@Override
 	public int updateEmployees(SqlSessionTemplate session, Map param) {
-		return session.update("adminEmployee.updateEmployees");
+		return session.update("adminEmployee.updateEmployees", param);
 	}
 
 	@Override
