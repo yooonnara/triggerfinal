@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-<script type="text/javascript" src="/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
 
 <body id="page-top">
 
@@ -36,8 +37,7 @@
 					<h1 class="h3 text-dark mt-5 mb-5">공지사항 작성</h1>
 
 					<div class="notice-container">
-
-
+					<form action="" method="post" id="noticeForm">
 						<!-- 등록 버튼 -->
 						<div class="board-btn">
 							<button class="btn btn-primary btn-sm float-right mb-3">저장</button>
@@ -79,17 +79,16 @@
 									<tr>
 										<th class="text-center align-middle">내용</th>
 										<td>
-											<form action="" method="">
-												<div id="smarteditor" class="editor-area">
-													<!--에디터가 들어가는 영역입니다.-->
-													<textarea name="contents" id="contents"></textarea>
-												</div>
-											</form>
+											<div id="smarteditor" class="editor-area">
+												<!--에디터가 들어가는 영역입니다.-->
+												<textarea name="contents" id="contents"></textarea>
+											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
+					</form>
 					</div>
 				</div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
@@ -102,7 +101,7 @@
 				nhn.husky.EZCreator.createInIFrame({
 			    oAppRef : oEditors,
 			    elPlaceHolder : "contents",
-				sSkinURI: "/smartEditor/SmartEditor2Skin.html",
+				sSkinURI: "${path }/resources/smarteditor2/SmartEditor2Skin.html",
 				fCreator : "createSEditor2",
 				htParams: { fOnBeforeUnload : function(){}}
 				})

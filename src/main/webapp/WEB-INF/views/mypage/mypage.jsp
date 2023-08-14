@@ -149,7 +149,7 @@
 	
 <script>
 
-$("#profileImg").on('click', function() {
+$(".box > img, .box > i").on('click', function() {
 	$('#upFile').click();
 })
 
