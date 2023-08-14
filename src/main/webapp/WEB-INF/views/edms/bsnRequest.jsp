@@ -6,6 +6,7 @@
 <div id="headTag">
 	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 </div>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
