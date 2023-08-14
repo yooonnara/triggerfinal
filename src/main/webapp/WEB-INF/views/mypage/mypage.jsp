@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
 <link href="${path }/resources/css/nara.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -37,18 +38,25 @@
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
-							<form class="user" name="myPagefrm" id="myPagefrm" action="${path }/updateEmployee" method="post">
+							<form class="user" name="myPagefrm" id="myPagefrm" action="${path }/updateEmployee" method="post" enctype="multipart/form-data">
 								<table class="table mt-5 mb-5 text-dark table-borderless">
 									<tbody class="text-left">
 										<tr class="text-center">
 											<td colspan='2'>
 												<div class="box" style="cursor: pointer">
-													<img src="${path }/resources/img/user_profile.png" 
-														class="profile rounded enter-block profile_img"
-														style="width: 80px; height: 80px" id="profile_img">
-													<i class="bi bi-gear-fill profile_img"></i>
-													<input id="profile_img_file" type="file" accept=".jpg, .png" style="display: none;">
+												<c:if test="${empInfo.empImg == null}">
+													<img src="${path }/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
+														 id="profileImg">
+												</c:if>
+												<c:if test="${empInfo.empImg != null}">
+													<img src="${path}/resources/upload/employee/${empInfo.empImg}" class="profile rounded enter-block profile_img rounded-circle"
+														 id="profileImg">
+												</c:if>
+													<i class="bi bi-gear-fill profile_img "></i>
+													<input onchange="PreviewImage()" method="multipart/form-data" id="upFile" name="upFile" type="file" accept="image/*" style="display: none;">
+													<input type="hidden" name="oldImg" value="${empInfo.empImg}">
 												</div>
+												
 											</td>
 										</tr>
 										<tr>
@@ -141,9 +149,21 @@
 	
 <script>
 
-$(".profile_img").on('click', function() {
-	$('#profile_img_file').click();
+$("#profileImg").on('click', function() {
+	$('#upFile').click();
 })
+
+function PreviewImage() {
+        // 파일리더 생성 
+        var preview = new FileReader();
+        preview.onload = function (e) {
+        // img id 값 
+        document.getElementById("profileImg").src = e.target.result;
+    };
+    // input id 값 
+    preview.readAsDataURL(document.getElementById("upFile").files[0]);
+ };
+ 
 
 //저장 버튼 눌렀을 때 값 전체 검사
 function checkMyPageFrm(){

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:set var="path" value="${pageContext.request.contextPath }"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -9,11 +11,13 @@
         <i class="fa fa-bars"></i>
     </button>
     
-    <!-- 관리자페이지 이동 -->
+    <!-- 사원페이지 이동 -->
 	<div class="input-group" style="justify-content: right">
-		<a href="${path }/main">
-			<span class="mr-2 d-none d-lg-inline small text-dark">사원 페이지</span>
-		</a>
+	    <c:if test="${loginEmployee.accStatus == 1}">
+	            <a href="${path}/main">
+	                <span class="mr-2 d-none d-lg-inline small text-primary">사원 페이지</span>
+	            </a>
+	    </c:if>
 	</div>
 
     <!-- 로그인 프로필 시작 Topbar Navbar -->
@@ -25,8 +29,13 @@
 		<li class="nav-item dropdown no-arrow">
 			<a class="nav-link dropdown-toggle" href="#" id="userDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">이름</span>
-				<img class="img-profile rounded-circle" src="${path }/resources/img/undraw_profile.svg">
+				<span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.name}님, 환영합니다!</span>
+				<c:if test="${loginEmployee.empImg == null}">
+					<img class="img-profile rounded-circle" src="${path}/resources/img/user_profile.png">
+				</c:if>	
+				<c:if test="${loginEmployee.empImg != null}">
+					<img class="img-profile rounded-circle" src="${path}/resources/upload/employee/${loginEmployee.empImg}">
+				</c:if>	
 			</a> 
 			
 			<!-- Dropdown - User Information -->

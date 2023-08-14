@@ -1,10 +1,17 @@
 package com.tr.join.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.admin.model.service.AdminEmployeeService;
-import com.tr.join.attendance.model.vo.DayOff;
 import com.tr.join.common.PageFactory;
 import com.tr.join.employee.model.vo.Department;
 import com.tr.join.employee.model.vo.Employee;
@@ -40,7 +47,7 @@ public class AdminEmployeeController {
 		return "admin/adminMain";
 	}
 	
-	// 멤버 통합관리 (페이징)
+	// 사원통합관리(페이징)
 	@GetMapping("/adminEmployee")
 	public String adminEmployeePage(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 									@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, 
@@ -58,16 +65,45 @@ public class AdminEmployeeController {
 		return "admin/adminEmployee";
 	}
 	
-	// 멤버 생성하기
-	@RequestMapping("/admin/insertEmployee") // @Validated 추가하기
-	public String insertEmployee(@RequestParam Map param) { 
+	// 사원생성
+	@RequestMapping("/admin/insertEmployee")
+	public String insertEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session, Model m) { 
 		//패스워드를 암호화해서 처리
 		String oriPassword = (String)param.get("pwd1");
 		String encodePassword = passwordEncoder.encode(oriPassword);
 		param.put("password", encodePassword);
-
+		
+		// 파일업로드
+		// 절대경로 가져오기
+		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
+		if (upFile != null && !upFile.isEmpty()) {
+			String oriName = upFile.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			Date today = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rdn = (int) (Math.random() * 10000) + 1;
+			String rename = sdf.format(today) + "_" + rdn + ext;
+			try {
+				upFile.transferTo(new File(path, rename));
+				param.put("empImg", rename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		int result = service.insertEmployee(param);
-		return "redirect:/adminEmployee";
+
+		String msg,loc;
+		if(result>0) {
+		msg="사원이 생성되었습니다.";
+		loc="/adminEmployee";
+		}else {
+			msg="생성에 실패했습니다. 다시 시도해 주세요.";
+			loc="/adminEmployee";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
 	
@@ -101,7 +137,7 @@ public class AdminEmployeeController {
 	// 변환된 숫자를 +1
 	// 100 미만이면 0+숫자를 스트링으로
 	// 10 미만이면 00 + 숫자를 스트링으로 0** 형식을 만들고
-	// J를 붙여서 RETURN 해줌
+	// J를 붙여서 return 해줌
 	@GetMapping("/admin/ajax/makeEmpNum")
 	@ResponseBody
 	public String makeEmpNum() {
@@ -110,7 +146,7 @@ public class AdminEmployeeController {
 		String empNum = "";
 		try{
             int tmp = Integer.parseInt(lastEmpNum); // 첫번째 값 버린 숫자를 int로 변환
-    		tmp += 1; // 마지막 숫자에 +1 을 한다.
+    		tmp += 1; // 마지막 숫자에 +1 하기
     		if(10 > tmp) {
     			empNum = "J00" + tmp; 
     		} else if (100 > tmp) {
@@ -124,25 +160,59 @@ public class AdminEmployeeController {
 		return empNum;
 	}
 	
-	// 멤버수정
+	// 사원수정
 	@PostMapping("/admin/updateEmployees")
-	public String updateEmployee(@RequestParam Map param) { 
+	public String updateEmployee(@RequestParam Map param, MultipartFile upFile, HttpSession session, Model m) { 
+		// 파일업로드
+		// 절대경로 가져오기
+		String path = session.getServletContext().getRealPath("/resources/upload/employee/");
+		if (upFile != null && !upFile.isEmpty()) {
+			String oriName = upFile.getOriginalFilename();
+			String ext = oriName.substring(oriName.lastIndexOf("."));
+			Date today = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rdn = (int) (Math.random() * 10000) + 1;
+			String rename = sdf.format(today) + "_" + rdn + ext;
+			try {
+				upFile.transferTo(new File(path, rename));
+				param.put("empImg", rename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			param.put("empImg", param.get("oldImg"));
+		}
+		
+		System.out.println(param);
+				
 		int result = service.updateEmployees(param);
-		return "redirect:/adminEmployee";
+		
+		String msg,loc;
+		if(result>0) {
+		msg="사원정보가 수정되었습니다.";
+		loc="/adminEmployee";
+		}else {
+			msg="수정에 실패했습니다. 다시 시도해 주세요.";
+			loc="/adminEmployee";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
-	// 멤버삭제
+	// 사원삭제
 	@RequestMapping("/admin/ajax/deleteEmployee")
 	@ResponseBody
-	public String deleteEmployee(Employee e, @RequestParam(value = "empList[]") ArrayList<Integer> empList) {
+	public int deleteEmployee(Employee e, @RequestParam(value = "empList[]") ArrayList<Integer> empList) {
 		System.out.println(empList);
-		int result = 1;
+		int result = 0;
 		for (int i = 0; i < empList.size(); i++) {
 			e.setNo(empList.get(i));
-			result = result * service.deleteEmployee(e);
+			result += service.deleteEmployee(e);
 		}
 
-		return result > 0 ? "success" : "fail";
+		return result ;
 	}
 	
 	

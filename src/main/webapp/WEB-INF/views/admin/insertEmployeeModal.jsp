@@ -1,29 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="insertEmployee">
 	<div class="modal fade text-center" id="insertEmployeeModal"
-		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		tabindex="-1" role="dialog" aria-labelledby="empModalTitle"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-dark text-white">
-					<h5 class="modal-title" id="exampleModalLabel">멤버 생성</h5>
+					<h5 class="modal-title" id="empModalTitle">사원 생성</h5>
 					<button class="close text-white" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" name="frm" class="user" action="${path}/admin/insertEmployee" method="post">
+					<form id="frm" name="frm" class="user" action="${path}/admin/insertEmployee" enctype="multipart/form-data" method="post">
 						<table class="table text-dark table-borderless">
 							<tbody class="text-left">
 								<tr class="text-center">
 									<td colspan='2'>
 										<div class="box" style="cursor: pointer">
-											<img src="${path }/resources/img/user_profile.png" 
-												class="profile rounded enter-block profile_img"
-												style="width: 80px; height: 80px" id="profile_img">
+											<img src="${path }/resources/img/user_profile.png" id="profileImg" 
+													class="profile rounded enter-block profile_img rounded-circle">
 											<i class="bi bi-gear-fill profile_img"></i>
-											<input id="profile_img_file" type="file" accept=".jpg, .png" style="display: none;">
+											<input onchange="PreviewImage()" id="upFile" name="upFile" type="file" accept="image/*" style="display: none;">
+											<input type="hidden" id="oldImg" name="oldImg" value="">
 										</div>
 									</td>
 								</tr>
@@ -78,7 +78,7 @@
 								<tr>
 									<th class="align-middle">계정상태</th>
 									<td>
-										<select id="acc_status" name="acc_status" onclick="checkAccStatus(this.value)" class="form-control" aria-label="Default select example">
+										<select id="acc_status" name="acc_status" onChange="checkAccStatus(this.value)" class="form-control" aria-label="Default select example">
 											<option value="" selected>선택</option>
 											<option value="1">정상</option>
 											<option value="2">중지</option>
@@ -159,10 +159,20 @@
 <script type="text/javascript" src="${path}/resources/js/employee.js"></script>
 <script>
 
-$(".profile_img").on('click', function() {
-	$('#profile_img_file').click();
+$("#profileImg").on('click', function() {
+	$('#upFile').click();
 })
 
+function PreviewImage() {
+        // 파일리더 생성 
+        var preview = new FileReader();
+        preview.onload = function (e) {
+        // img id 값 
+        document.getElementById("profileImg").src = e.target.result;
+    };
+    // input id 값 
+    preview.readAsDataURL(document.getElementById("upFile").files[0]);
+ };
 
 
 $("#enroll_date").change(e=>{
@@ -186,19 +196,19 @@ function checkInsertFrm(){
 	}
 	
 	// 아이디	
- 	if(checkId($("#emp_id").val()) == false){
+ 	if(is_update == false && checkId($("#emp_id").val()) == false){
 		$("#emp_id").focus();
 		return false;
 	}
 	
 	// 비밀번호
-	if(checkPwd1($("#pwd1").val()) == false){
+	if(is_update == false && checkPwd1($("#pwd1").val()) == false){
 		$("#pwd1").focus();
 		return false;
 	}
 	
 	// 비밀번호 확인
-	if(checkPwd2($("#pwd2").val()) == false){
+	if(is_update == false && checkPwd2($("#pwd2").val()) == false){
 		$("#pwd2").focus();
 		return false;
 	}
@@ -249,6 +259,11 @@ function checkInsertFrm(){
 
 function frmSubmit(){
 	if(confirm('저장하시겠습니까?')){
+		if(is_update == true){
+			$('#frm').attr('action', "${path}/admin/updateEmployees");
+		} else {
+			$('#frm').attr('action', "${path}/admin/insertEmployee");
+		}
 		$('#frm').submit();
 		
 	}

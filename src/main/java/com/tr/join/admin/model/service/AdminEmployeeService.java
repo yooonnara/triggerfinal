@@ -20,6 +20,7 @@ public interface AdminEmployeeService {
 	
 	List<Employee> selectEmployeeAll(Map<String,Object> param);
 	
+	
 	int insertEmployee(Map param);
 	
 	int selectEmployeeCount();

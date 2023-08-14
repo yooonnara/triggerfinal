@@ -26,43 +26,23 @@ public class Employee implements UserDetails{
 	
 	private int no;
 	private String empNum; // 사번
-	
-//	@NotEmpty(message = "아이디를 입력해 주세요.")
-//	@Size(min=4, message = "아이디를 4글자 이상 입력해 주세요.")
 	private String id;
-	
-//	@NotEmpty(message = "비밀번호를 입력해 주세요.")
-//	@Pattern(regexp = "(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}"
-//			,message = "비밀번호는 8~16글자로 입력해 주세요.(영문자, 숫자, 특수문자 포함)")
 	private String password;
-	
 	private String name;
-	
 	private String gender;
-	
 	private String phone;
-	
-//	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")
 	private String email;
-	
 	private Date dateCreated; // 등록일
 	private Date dateModefied; // 수정일
-	
 	private Date enrollDate; // 입사일
 	private Date resignDate; // 퇴사일
-	
 	private int accStatus; // 계정상태
-	
 	private int type; // 관리자 여부
-	
 	private int deptNo;
-	
 	private String deptTitle;
-	
 	private int jobNo;
-	
 	private String jobTitle;
-	
+	private String empImg;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
