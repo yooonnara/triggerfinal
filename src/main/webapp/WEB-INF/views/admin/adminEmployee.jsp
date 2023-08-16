@@ -195,6 +195,7 @@
    </a>
 <script>
 var is_update = false;
+
 // 체크박스
 $(function() {
 	$("#chkAll").click(function() {

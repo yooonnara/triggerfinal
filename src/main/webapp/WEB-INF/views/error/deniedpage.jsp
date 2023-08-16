@@ -30,8 +30,8 @@
 					 <!-- 404 Error Text -->
                     <div class="text-center">
                         <div class="error mx-auto" data-text="403">403</div><br>
-                        <p class="lead text-gray-800 mb-5">접근이 거부되었습니다 :(</p>
-                        <p class="text-gray-500 mb-0">자세한 사항은 관리자에게 문의해 주시기 바랍니다.</p>
+                        <p class="lead text-gray-800 mb-5">접근이 거부되었습니다.</p>
+                        <p class="text-gray-500 mb-1">자세한 사항은 관리자에게 문의해 주시기 바랍니다.</p>
                         <a href="${path }/main"><span class="text-primary">&larr; 메인페이지로 돌아가기</span></a>
                     </div>
 				</div>
