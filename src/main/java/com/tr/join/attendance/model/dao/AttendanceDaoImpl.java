@@ -73,21 +73,29 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		 int cPage=(int)param.get("cPage");
 		 int numPerpage=(int)param.get("numPerpage");
 		 RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
-		 return session.selectList("attendance.selectWorkTimeAll",param);
+		 return session.selectList("attendance.selectWorkTimeAll",param,rb);
 	 }
 	 
 	@Override
-	 public int selectWorkTimeCount(SqlSession session){
-		 return session.selectOne("attendance.selectWorkTimeCount");
+	 public int selectWorkTimeCount(SqlSession session, int no){
+		 return session.selectOne("attendance.selectWorkTimeCount", no);
 	 }
 	 
 	 //근태 리스트 검색 기능(근태 상태)
 	 @Override
 	 public List<Attendance> searchWorkTimeByStatus(SqlSession session,Map<String,Object> ajaxParam){
-		 return session.selectList("attendance.searchWorkTimeByStatus",ajaxParam);
+		 int cPage=(int)ajaxParam.get("cPage");
+		 int numPerpage=(int)ajaxParam.get("numPerpage");
+		 RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		 return session.selectList("attendance.searchWorkTimeByStatus",ajaxParam ,rb);
 	 }
 	 
-	 //근태 시작일~종료일 검색 기능
+	 @Override
+	public int searchWorkTimeCount(SqlSession session, Map<String, Object> ajaxParam) {
+		return session.selectOne("attendance.searchWorkTimeCount", ajaxParam);
+	}
+
+	//근태 시작일~종료일 검색 기능
 	 @Override
 	 public List<Attendance> ajaxworkTimeByDate(SqlSession session, Map<String,Object> ajSearchParam){
 		 return session.selectList("attendance.ajaxworkTimeByDate",ajSearchParam);
@@ -154,14 +162,32 @@ public class AttendanceDaoImpl implements AttendanceDao {
 
 	
 	@Override
-	 public List<DayOff> selectDayoffAll(SqlSession session, int no){
-		 return session.selectList("attendance.selectDayoffAll",no);
+	 public List<DayOff> selectDayoffAll(SqlSession session, Map<String,Object> param){
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("attendance.selectDayoffAll",param,rb);
 	 }
 	 
+	
 	 @Override
-	 public List<DayOff> selectAdminDayoffAll(SqlSession session){
-		 return session.selectList("attendance.selectAdminDayoffAll");
+	public int dayoffAllCount(SqlSession session, int no) {
+		return session.selectOne("attendance.dayoffAllCount", no);
+	}
+
+	@Override
+	 public List<DayOff> selectAdminDayoffAll(SqlSession session,Map<String,Object> param){
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("attendance.selectAdminDayoffAll",param,rb);
 	 }
+	
+
+	@Override
+	public int AdminDayoffCount(SqlSession session) {
+		return session.selectOne("attendance.AdminDayoffCount");
+	}
 
 	@Override
 	public int adminResetAll(SqlSession session) {
@@ -194,8 +220,11 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	
 
 	@Override
-	public List<Edms> selectBusinessTrip(SqlSession session, int no) {
-		return session.selectList("attendance.selectBusinessTrip",no);
+	public List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("attendance.selectBusinessTrip",param,rb);
 	}
 
 	@Override

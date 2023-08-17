@@ -59,10 +59,11 @@
                                         <td class="border-right">사용 연차</td>
                                         <td class="border-right">잔여 연차</td>
                                     </tr>
+                                    <tr>
                                         <td class="border-right" id="df-num">${dayoff.get(0).totalDoCount }</td>
                                         <td class="border-right" id="df-num">${dayoff.get(0).usedDoCount }</td>
                                         <td class="border-right" id="df-num">
-                                        	<c:if test="${dayoff.get(0).remainDoCount < 0}">0</c:if>
+                                        	<c:if test="${dayoff.get(0).remainDoCount < 0}">*</c:if>
                                         	<c:if test="${dayoff.get(0).remainDoCount > 0}">${dayoff.get(0).remainDoCount}</c:if>
                                         </td>
                                     </tr>
@@ -119,30 +120,11 @@
                             </tbody>
                         </table>
                     </div>
-                        <!-- 페이징 -->
-                        <div class="pasing-area">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-4">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>                       
+                    
+                    <!-- 페이징 -->
+				        <div class="pasing-area">
+				        	<c:out value="${pageBar }" escapeXml="false"/>
+				        </div>           
                     </div>
                 </div>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->

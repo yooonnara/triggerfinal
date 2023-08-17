@@ -33,7 +33,7 @@
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 ml-1 mb-5">출장 현황</h1>
 
-                    <div class="businessTripList-container "> <!-- ex) board-container 등으로 클래스 이름 수정하고 작업하기 -->
+                    <div class="businessTripList-container ">
                         <!-- 출장신청 개수 -->
                         <div class="row justify-content-between">
                         	<p class="ml-2 col-3 float-left">출장신청
@@ -95,6 +95,12 @@
                             </tbody>
                         </table>
                 </div>
+                <!-- 페이징 -->
+		        <div class="pasing-area">
+		        	<c:out value="${pageBar }" escapeXml="false"/>
+		        </div>
+		        
+		        
                 <script>
                 	function cancelBtn(no){
                 		if(confirm("출장신청을 삭제하시겠습니까?")){
@@ -113,7 +119,7 @@
                 			
                 		})
                 	})
-                	
+                	<!-- 출장 취소 조회 -->
                 	function checkCancel(){
                 		$.ajax({
                 			url:"/checkCancelList",
@@ -130,8 +136,8 @@
                 					const $title = $("<td>").text(d[i]["title"]);
                 					const $appStatus = $("<td>").text("취소");
                 					
-                					$tr.append($name).append($deptTitle).append($createDate).append($startDate).append($title).append($appStatus).append($td);
-                					
+                					$tr.append($name).append($deptTitle).append($createDate).append($startDate)
+                						.append($title).append($appStatus).append($td);
                 					$("#bt-tbody").append($tr);
                 				}
                 			},
@@ -143,7 +149,7 @@
                 </script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
 				<!-- 출장신청 삭제 모달-->
-                <!-- <div id="cancel-businessTrip">
+                <div id="cancel-businessTrip">
                     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -158,7 +164,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div> -
 			</div>
 
 

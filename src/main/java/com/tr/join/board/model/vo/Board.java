@@ -1,6 +1,8 @@
 package com.tr.join.board.model.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.tr.join.employee.model.vo.Employee;
 
@@ -25,4 +27,5 @@ public class Board {
 	private Date dateDeleted; //삭제일
 	
 	private Employee emp;
+	private List<BoardImg> file = new ArrayList(); 
 }

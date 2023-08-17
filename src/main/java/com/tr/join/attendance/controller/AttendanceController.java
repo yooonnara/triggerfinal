@@ -99,6 +99,7 @@ public class AttendanceController {
 		 Attendance week = service.selectWeekWorkTime(loginNo.getNo()); //이번주 누적 근무 시간
 		 Attendance overWeek = service.selectOverWorkTime(loginNo.getNo()); //이번주 초과 근무 시간
 		 Attendance remainWeek = service.selectRemainTime(loginNo.getNo()); //이번주 잔여 근무 시간
+		 System.out.println(remainWeek);
 		 Attendance month = service.selectMonthTime(loginNo.getNo()); //이번달 누적 근무 시간
 		 
 		 m.addAttribute("week",week);
@@ -123,6 +124,7 @@ public class AttendanceController {
 		  System.out.println(m);
 		  return "attendance/workTimeWeekly";
 	  }
+	  
 	  @GetMapping("/workTimeWeeklyData")
 	  @ResponseBody
 	  public List<Attendance> workTimeWeeklyData() {
@@ -155,21 +157,22 @@ public class AttendanceController {
 	  //근태 일자별 리스트 
 	  @GetMapping("/workTimeList")
 	  public String selectWorkTimeAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
-										@RequestParam(value="numPerpage", defaultValue="5") int numPerpage, 
+										@RequestParam(value="numPerpage", defaultValue="10") int numPerpage, 
 										Model m) {
 		  
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
 		  List<Attendance> wt=service.selectWorkTimeAll(Map.of("loginNo",loginNo.getNo(),"cPage",cPage,"numPerpage",numPerpage));
 		  
-		  int totalData=service.selectWorkTimeCount();  //전체 자료수
+		  int totalData=service.selectWorkTimeCount(loginNo.getNo());  //전체 자료수
 		  
-		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
-		  m.addAttribute("wt",wt);
+		  //m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/WorkTimeList"));
+		  //ajax페이징 적용 
+		  m.addAttribute("pageBar", PageFactory.getAjaxPage(cPage, numPerpage, totalData, "/ajaxworkTime",-1));
 		  m.addAttribute("totalData",totalData);
-		  
-		  System.out.println(wt);
-		  //System.out.println(totalData);
+		  m.addAttribute("wt",wt);
+		  System.out.println(totalData);
+		  //System.out.println(wt);
 		  return "attendance/workTimeList";
 		  
 	  }
@@ -178,18 +181,25 @@ public class AttendanceController {
 	  //ajax 근태 상태 검색
 	  @GetMapping("/ajaxworkTime")
 	  @ResponseBody 
-	  public List<Attendance> searchWorkTimeByStatus(int searchNum) {
+	  public Map<String,Object> searchWorkTimeByStatus(@RequestParam(name="cPage", defaultValue="1") int cPage,
+			  @RequestParam(name="numPerpage", defaultValue="10") int numPerpage,
+			  int searchNum) {
 		  
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
 		  Map<String,Object> ajaxParam=new HashMap(); 
 		  ajaxParam.put("searchNum",searchNum); 
 		  ajaxParam.put("loginNo",loginNo.getNo()); 
+		  ajaxParam.put("cPage",cPage); 
+		  ajaxParam.put("numPerpage",numPerpage); 
+		  
 		  List<Attendance> wtajax = service.searchWorkTimeByStatus(ajaxParam);
+		  int totalData=service.searchWorkTimeCount(ajaxParam);
+		  String pageBar=PageFactory.getAjaxPage(cPage, numPerpage, totalData, "/ajaxworkTime", searchNum);
 		  
 		  System.out.println(wtajax);
-		  
-		  return wtajax;
+		  //데이터가 두개일 때 
+		  return Map.of("wtajax",wtajax,"pageBar",pageBar);
 	  }
 	  
 	  //ajax 근태 (시작일~종료일)기간 검색
@@ -247,17 +257,27 @@ public class AttendanceController {
 	  @GetMapping("/adminWorkTime")
 	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
 										@RequestParam(value="numPerpage", defaultValue="10") int numPerpage, 
-										Model m) {
+										Model m, @RequestParam Map<String, Object> param) {
 		  
-		  List<Attendance> att=service.selectAttendanceAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
-		  int totalData=service.selectAttendanceCount();  //전체 자료수
+		String url = "adminWorkTime";
+			
+		if(param.get("keyfield") != null) {
+			url += "&keyfield="+(String)param.get("keyfield");
+		}
+		if(param.get("keyword") != null) {
+			url += "&keyword="+(String)param.get("keyword");
+		}
+			
+		param.put("cPage",cPage);
+		param.put("numPerpage", numPerpage);
+		List<Attendance> att=service.selectAttendanceAll(param);
+		int totalData=service.selectAttendanceCount();  
 		  
-		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
-		  m.addAttribute("att",att);
-		  m.addAttribute("totalData",totalData);
-		  //System.out.println(m);
-		  
-		  return "admin/adminWorkTime";
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("att",att);  
+		System.out.println(att);
+		return "admin/adminWorkTime";
 	  }
 	  
 	  
@@ -338,24 +358,35 @@ public class AttendanceController {
 	  
 	  
 	  @GetMapping("/dayoffList")
-	  public String selectDayoffAll(Model m) {
+	  public String selectDayoffAll(
+			  @RequestParam(value="cPage",defaultValue="1") int cPage,
+			  @RequestParam(value="numPerpage", defaultValue="10") int numPerpage,							
+			  Model m) {
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
-		  List<DayOff> dayoff = service.selectDayoffAll(loginNo.getNo());
+		  List<DayOff> dayoff = service.selectDayoffAll(Map.of("loginNo",loginNo.getNo(),"cPage",cPage,"numPerpage",numPerpage));
+		  int totalData = service.dayoffAllCount(loginNo.getNo());
 		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/dayoffList"));
 		  m.addAttribute("dayoff",dayoff);
-		  System.out.println(m);
+		  m.addAttribute("totalData",totalData);
+		  System.out.println(totalData);
 		  
 		 return "attendance/dayoffList";
 	  }
 	  
 	  //연차 관리자
 	  @GetMapping("/adminDayoff")
-	  public String selectAdminDayoffAll(Model m) {
-
-		  List<DayOff> dayoff = service.selectAdminDayoffAll();
+	  public String selectAdminDayoffAll( 
+			  @RequestParam(value="cPage",defaultValue="1") int cPage,
+			  @RequestParam(value="numPerpage", defaultValue="8") int numPerpage,							
+			  Model m) {
+		  List<DayOff> dayoff = service.selectAdminDayoffAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
+		  int totalData = service.AdminDayoffCount();
+		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminDayoff"));
 		  m.addAttribute("adminDayoff",dayoff);
-		  //System.out.println(m);
+		  m.addAttribute("totalData",totalData);
 		  
 		  return "admin/adminDayoff";
 	  }
@@ -409,14 +440,13 @@ public class AttendanceController {
 	  }
 	  
 	     @RequestMapping("/admin/adminDayoffCalendar")
-	       @ResponseBody
-	       public ModelAndView pageCalendar(ModelAndView m) {
+	     @ResponseBody
+	     public ModelAndView pageCalendar(ModelAndView m) {
 	          
+	     //m.addAttribute("dayoffData",cParam); //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
+	     m.setViewName("/admin/adminDayoffCalendar");
 	          
-	         //m.addAttribute("dayoffData",cParam); //내가 받아온 값을 화면으로 출력하고 싶으면 model을 써야 한다. 
-	          m.setViewName("/admin/adminDayoffCalendar");
-	          
-	          return m;
+	     return m;
 	       }
 	     
 	  
@@ -437,15 +467,19 @@ public class AttendanceController {
 //----------출장-----------------
 	  
 	  @GetMapping("/businessTripList")
-	  public String selectBusinessTrip(Model m) {
+	  public String selectBusinessTrip(
+			  @RequestParam(value="cPage",defaultValue="1") int cPage,
+			  @RequestParam(value="numPerpage", defaultValue="10") int numPerpage,							
+			  Model m) {
 		  Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
-		  List<Edms> edms = service.selectBusinessTrip(loginNo.getNo());
-		  int count = service.BusinessTripCount(loginNo.getNo());
-				
+		  List<Edms> edms = service.selectBusinessTrip(Map.of("loginNo",loginNo.getNo(),"cPage",cPage,"numPerpage",numPerpage));
+		  int totalData = service.BusinessTripCount(loginNo.getNo());
+		  
+		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/businessTripList"));
 		  m.addAttribute("edms",edms);
-		  m.addAttribute("count",count);
-		  System.out.println(m);
+		  m.addAttribute("totalData",totalData);
+		  //System.out.println(m);
 		  
 		 return "attendance/businessTripList";
 	  }
@@ -501,13 +535,7 @@ public class AttendanceController {
 
 	  
 
-//	
-//	@GetMapping("/adminDayoffCalendar")
-//		public String adminDayoffCalendar() {
-//		return "admin/adminDayoffCalendar";
-//	}
-//	
-	
+
 	
 
 

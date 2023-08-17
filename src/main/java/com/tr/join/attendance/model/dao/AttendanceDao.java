@@ -27,8 +27,8 @@ public interface AttendanceDao {
 	 List<Attendance> workTimeWeekly(SqlSession session, int no);
 	 //근태 일자별 리스트
 	 List<Attendance> selectWorkTimeAll(SqlSession session, Map<String,Object> param);
-	 int selectWorkTimeCount(SqlSession session);
-	 
+	 int selectWorkTimeCount(SqlSession session, int no);
+	 int searchWorkTimeCount(SqlSession session, Map<String,Object> ajaxParam);
 	 //검색 기능 - 근태 상태에 따라
 	 List<Attendance> searchWorkTimeByStatus(SqlSession session, Map<String,Object> ajaxParam);
 	 
@@ -50,8 +50,10 @@ public interface AttendanceDao {
 	 int adminModifyWorktimeSubmit(SqlSession session, WorkTime w);
 	 int wtModifyReturn(SqlSession session, WorkTime w);
 //---------------연차
-	 List<DayOff> selectDayoffAll(SqlSession session, int no);
-	 List<DayOff> selectAdminDayoffAll(SqlSession session);
+	 List<DayOff> selectDayoffAll(SqlSession session,Map<String,Object> param);
+	 int dayoffAllCount(SqlSession session, int no);
+	 List<DayOff> selectAdminDayoffAll(SqlSession session,Map<String,Object> param);
+	 int AdminDayoffCount(SqlSession session);
 	 int adminResetAll(SqlSession session);
 	 int adminCheckReset(SqlSession session, DayOff d);
 	 List<DayOff> ajaxDfSearch(SqlSession session, Map<String, String> dfSearch);
@@ -59,7 +61,7 @@ public interface AttendanceDao {
 	 List<Edms> workCalendarDayoff(SqlSession session);
 
 //---------------출장
-	 List<Edms> selectBusinessTrip(SqlSession session, int no);
+	 List<Edms> selectBusinessTrip(SqlSession session, Map<String,Object> param);
 	 int BusinessTripCount(SqlSession session, int no);
 	 int deleteBusinessTrip(SqlSession session, int btNo);
 	 List<Edms> checkCancelList(SqlSession session, Map<String,Object> cancelParam);

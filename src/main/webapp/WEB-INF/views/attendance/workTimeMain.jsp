@@ -3,12 +3,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
-<div id="headTag">
+<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
    <!-- 풀캘린더 -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     <!-- 풀캘린더 언어 CDN -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-</div>
+
 <body id="page-top">
    <div id="wrapper">
       <div id="sidebar">
