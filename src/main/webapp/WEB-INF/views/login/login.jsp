@@ -133,7 +133,7 @@
          }
     	
     	$.ajax({
-    		url:"${path}/sendMail/passwordCheck",
+    		url:"${path}/sendMail/idCheck",
     		type:"post",
     		data:{id : empId}, // 비밀번호를 찾을 아이디
     		success:function(data){
@@ -149,25 +149,19 @@
         });
     }
     
-    function authNumCheck() {
+    function authNumCheck(){
     	var enteredAuthNum = $("#authenticationNumber").val();
 
         if (!enteredAuthNum) {
             alert("인증번호를 입력해 주세요.");
             return;
         }
-
-        if (!enteredAuthNum) {
-            alert("인증번호를 입력해 주세요.");
-        } else {
-        	console.log(data)
-            alert("이메일 발송실패");
-        }
-
+        // 입력한 아이디가 다른 경우
+   	
         $.ajax({
-            url: "${path}/authNumcheck",
+            url: "${path}/sendMail/authNumcheck",
             type: "post",
-            data: { authNum: enteredAuthNum },
+            data: { authNum: enteredAuthNum }, // Sending the entered authentication number
             success: function (data) {
                 if (data === true) {
                     $("#authenticationNumber").prop("readonly", true);
@@ -175,10 +169,13 @@
                 } else {
                     alert("인증번호가 올바르지 않습니다.");
                 }
+            },
+            error: function () {
+                alert("인증번호 확인 중에 오류가 발생했습니다.");
             }
         });
     }
-    
+   /*  
     function changePassword() {
         var newPassword = $("#newPassword").val();
         var checkNewPassword = $("#checkNewPassword").val();
@@ -200,14 +197,35 @@
             success: function (data) {
                 if (data === "성공") {
                     alert("비밀번호를 변경했습니다.");
-                    // Optionally, you can close the modal or redirect to another page
                 } else {
                     alert("비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
                 }
             }
         });
+    } */
+</script>
+
+<script>
+$(document).ready(function() {
+    $("#userId").val(Cookies.get('key'));      
+    if ($("#userId").val() !== "") {
+        $("#saveId").prop("checked", true);  // Change this line
     }
 
+    $("#saveId").change(function() {
+        if ($("#saveId").is(":checked")) {
+            Cookies.set('key', $("#userId").val(), { expires: 7 });
+        } else {
+            Cookies.remove('key');
+        }
+    });
+
+    $("#userId").keyup(function() {
+        if ($("#saveId").is(":checked")) {
+            Cookies.set('key', $("#userId").val(), { expires: 7 });
+        }
+    });
+});
 
 </script>
 

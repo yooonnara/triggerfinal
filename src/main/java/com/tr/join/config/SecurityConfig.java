@@ -47,13 +47,6 @@ public class SecurityConfig{
 				.and()
 				.exceptionHandling().accessDeniedPage("/deniedpage")
 				.and()
-				.rememberMe()  // 자동 로그인 설정
-					//.key("hayden") //쿠키에 사용되는 값을 암호화하기 위한 키(key)값
-					.rememberMeParameter("saveId")
-					.userDetailsService(provider) //DataSource 추가
-					.tokenValiditySeconds(604800) //토큰 유지 시간(초단위) - 일주일
-					.alwaysRemember(false)
-				.and()
 				.logout()
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/")
@@ -63,7 +56,6 @@ public class SecurityConfig{
 				.authenticationProvider(provider)
 				.headers().frameOptions().disable()
 				.and()
-				
 				.build();
 	}
 	
@@ -80,5 +72,7 @@ public class SecurityConfig{
 		repo.setDataSource(dataSource);
 		return repo;
 	}
+	
+	
 	
 }

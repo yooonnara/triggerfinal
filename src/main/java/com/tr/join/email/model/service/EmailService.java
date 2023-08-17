@@ -67,6 +67,8 @@ public class EmailService {
 	}
 
 	private String sendContextMessage(String msg) {
-		return "<h2>인증코드 : " + msg + "</h2>";
+		return "<h2>인증코드 : " + msg + "</h2><br>"
+				+"<h4>위 인증코드를 비밀번호 변경 페이지에 입력해 주시기 바랍니다.</h4>"
+				+"<h4>인증 완료 후 <span style='color:#428EFF'>새로운 비밀번호</span>로 변경 가능합니다.</h4>";
     }
 }

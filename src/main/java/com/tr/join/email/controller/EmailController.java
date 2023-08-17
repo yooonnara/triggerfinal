@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tr.join.email.entity.EmailMessage;
@@ -27,7 +28,7 @@ public class EmailController {
 	}
 	
 	// 회원가입 이메일 인증 - 요청 시 body로 인증번호 반환하도록 작성하였음
-    @PostMapping("/passwordCheck")
+    @PostMapping("/idCheck")
     public String sendJoinMail(String id, HttpSession session) {
     	
     	Employee searchEmp=empService.selectEmployeeById(id);
@@ -49,15 +50,22 @@ public class EmailController {
     
     }
     @PostMapping("/authNumcheck")
-    public boolean authNumCheck(String authNum, HttpSession session) {
+    public boolean authNumCheck(@RequestParam String authNum, HttpSession session) {
     	
-    	if(Objects.equals(session.getAttribute("authNum"),authNum)) {
-    		session.removeAttribute("authNum");
-    		return true;
-    	}
-    	return false;
+    	 String storedAuthNum = (String) session.getAttribute("authNum");
+//    	 if (storedAuthNum != null && storedAuthNum.equals(authNum))
+    	 if (Objects.equals(session.getAttribute("authNum"),authNum)) {
+             session.removeAttribute("authNum");
+             return true;
+         }
+         return false;
+     }
+    
+    @PostMapping("/changePassword")
+    public boolean changePassword() {
+    	  return true;
     }
     
-   
     
-}
+ }
+
