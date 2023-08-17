@@ -74,6 +74,11 @@ public class BoardDaoImpl implements BoardDao {
 	public List<BoardComment> selectComment(SqlSession session,Map<String,Object> param) {
 		return session.selectList("board.selectComment",param);
 	}
+
+	@Override
+	public Board selectBoardAll(SqlSession session, Map<String, Object> param) {
+		return session.selectOne("board.selectBoardAll",param);
+	}
 	
 	
 	

@@ -94,6 +94,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardComment> selectComment(Map<String,Object> param) {
 		return dao.selectComment(session,param);
 	}
+
+	@Override
+	public Board selectBoardAll(Map<String, Object> param) {
+		return dao.selectBoardAll(session, param);
+	}
 	
 	
 	

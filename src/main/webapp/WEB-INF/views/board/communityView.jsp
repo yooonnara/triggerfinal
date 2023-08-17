@@ -147,16 +147,26 @@
 
 			<script>
 				$("#comment-form").on('submit',function(e){
-				    var name = $("#name").val();
+				   /*  var name = $("#name").val();
 				    var boardNo = $("#boardNo").val();
 				    var empNo = $("#empNo").val();
-				    var comment = $("#comment").val();
+				    var comment = $("#comment").val(); */
+				    
+				    $.ajax({
+				    	url:"/board/commentWrite",
+				    	data: {"name":name, "boardNo":boardNo,"empNo":empNo,"comment":comment
+				    	}
+				    	success:function(c){
+				    		console.log(c);
+				    		
+				    	}
+				    })
 			   });
+			</script>	
+			
+		<!-- 	<script>
 				
-
-				
-				
-			/* 	function submitComm(){
+				function submitComm(){
 					$.ajax({
 						url:"/board/commentWrite",
 						data:{
@@ -183,11 +193,11 @@
     					}
          
 					})
-				} */
+				} 
 				
 			
 					
-			</script>
+			</script> -->
 
 
 

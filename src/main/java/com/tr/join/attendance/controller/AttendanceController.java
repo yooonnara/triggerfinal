@@ -257,17 +257,27 @@ public class AttendanceController {
 	  @GetMapping("/adminWorkTime")
 	  public String selectAttendanceAll(@RequestParam(value="cPage",defaultValue="1") int cPage, 
 										@RequestParam(value="numPerpage", defaultValue="10") int numPerpage, 
-										Model m) {
+										Model m, @RequestParam Map<String, Object> param) {
 		  
-		  List<Attendance> att=service.selectAttendanceAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
-		  int totalData=service.selectAttendanceCount();  //전체 자료수
+		String url = "adminWorkTime";
+			
+		if(param.get("keyfield") != null) {
+			url += "&keyfield="+(String)param.get("keyfield");
+		}
+		if(param.get("keyword") != null) {
+			url += "&keyword="+(String)param.get("keyword");
+		}
+			
+		param.put("cPage",cPage);
+		param.put("numPerpage", numPerpage);
+		List<Attendance> att=service.selectAttendanceAll(param);
+		int totalData=service.selectAttendanceCount();  
 		  
-		  m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
-		  m.addAttribute("att",att);
-		  m.addAttribute("totalData",totalData);
-		  //System.out.println(m);
-		  
-		  return "admin/adminWorkTime";
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/adminWorkTime"));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("att",att);  
+		System.out.println(att);
+		return "admin/adminWorkTime";
 	  }
 	  
 	  

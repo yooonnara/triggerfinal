@@ -52,21 +52,33 @@ public class BoardController {
 	}
 	
 	//자유게시판
+	
 	@GetMapping("/community")
 	public String selectCommunityAll(
 			@RequestParam(value="cPage",defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="8") int numPerpage,				
-			Model m) {
-		Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+			Model m, @RequestParam Map<String, Object> param) {
 		
-		List<Board> board = service.selectCommunityAll(Map.of("loginNo",loginNo.getNo(),"cPage",cPage,"numPerpage",numPerpage));
+		String url = "community";
+		
+		if(param.get("keyfield") != null) {
+			url += "&keyfield="+(String)param.get("keyfield");
+		}
+		if(param.get("keyword") != null) {
+			url += "&keyword="+(String)param.get("keyword");
+		}
+		System.out.println(url);
+		
+		Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		param.put("loginNo",loginNo);
+		param.put("cPage",cPage);
+		param.put("numPerpage", numPerpage);
+		List<Board> board = service.selectCommunityAll(param);
 		int totalData = service.CommunityCount();
 		
 		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "/community"));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("board",board);
-		
-		System.out.println(board);
 		
 		return "board/community";
 	}
@@ -85,7 +97,7 @@ public class BoardController {
 	}
 	
 	
-	//작성 전송(사진 첨부) 
+	//게시물 작성(사진 첨부) 
 	@RequestMapping("/board/insertCommunityWrite")
 	public String insertCommunityWrite(Board b, MultipartFile[] upFile, HttpSession session,Model m) {
 		
@@ -212,6 +224,7 @@ public class BoardController {
 		List<BoardComment> comment = service.selectComment(param);
 		m.addAttribute("result",result);
 		m.addAttribute("comment",comment);
+		m.addAttribute("board", service.selectBoardAll(param));
 		
 		return "board/communityView";
 	}

@@ -54,6 +54,10 @@
                             </label>
                         </div>
                       
+                      
+                     
+                            
+                            
                       <!-- datepicker -->
 						<script>	
 			                $(function(){
@@ -103,12 +107,34 @@
                       
                         <!-- 근태 시작~종료일 검색 버튼 -->
                         <div class="dateSearch-search float-right mb-3 mr-3">
-	              			<button class="float-right btn btn-dark btn-sm">검색</button>
+	              			<!-- <button class="float-right btn btn-dark btn-sm">검색</button>
 	              			<input type="text"  placeholder="종료일" class="float-right mr-1 endDate" id="datepicker2">
-	              			<input type="text"  placeholder="시작일" class="float-right mr-1 startDate" id="datepicker1">
+	              			<input type="text"  placeholder="시작일" class="float-right mr-1 startDate" id="datepicker1"> -->
+	              			 <!-- 검색창 -->
+                           
+                                <form action="" method="get" id="searchForm">
+                                    <div class="search-area d-flex">
+                                        <select name="keyfield" aria-label="Default select example" class="mr-1">
+                                        	<option <c:if test="${keyfield == 'name' }">selected</c:if> value="name">이름</option>
+                                            <option <c:if test="${keyfield == 'empno' }">selected</c:if> value="empno">사번</option>
+                                            <option <c:if test="${keyfield == 'dept' }">selected</c:if> value="dept">부서</option>
+                                            
+                                        </select>
+                                        <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1" value="${keyword}">
+                                        <button type="submit" class="btn btn-dark btn-sm">검색</button>
+                                    </div>
+                                </form>
+                      
+                          
                         </div>
                     </div>
-                    
+                      
+                            <script>
+                            	function dropdownSearch(searchId,value){
+                            		$('#'+searchId).val(value);
+                            		$('#searchForm').submit();
+                            	}
+                            </script>
                     
                     
                     <!-- 테이블 -->

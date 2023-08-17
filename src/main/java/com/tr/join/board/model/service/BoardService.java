@@ -20,4 +20,5 @@ public interface BoardService {
 	int communityModifySubmit(Map param);
 	int commentWrite(Map<String,Object> param);
 	List<BoardComment> selectComment(Map<String,Object> param);
+	Board selectBoardAll(Map<String,Object> param);
 }

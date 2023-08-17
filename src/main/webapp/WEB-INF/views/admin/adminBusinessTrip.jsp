@@ -54,6 +54,7 @@
                             <a href="#" class="btn btn-dark btn-sm mr-2">결제 대기</a>
                             <a href="#" class="btn btn-dark btn-sm">승인</a>
                         </div>
+                        
                    	<script>
                    		$("#BtSearch button").click(e=>{
                    			$.ajax({
@@ -75,18 +76,17 @@
                    						const $startDate = $("<td>").text(bt[i]["startDate"]).text("~").text(bt[i]["endDate"]);
                    						const $title = $("<td>").text(bt[i]["title"]);
                    						const $appStatus = $("<td>").text(bt[i]["appStatus"]);
-                   						$tr.append($no).append($empNo).append($deptTitle).append($jobTitle).append($name).append($startDate).append($title).append($appStatus);
+                   						$tr.append($no).append($empNo).append($deptTitle).append($jobTitle).append($name)
+                   						.append($startDate).append($title).append($appStatus);
                    						
                    						$("#btTable").append($tr);
                    					}
                    				},
                    				error:function(){
-            						console.log("ajax 통신 실패");
+            						console.log("출장 리스트 통신 실패");
             					}
                    			})
                    		})
-                   	
-                   	
                    	</script>               
                     </div>   
                     <!-- 사용 내역 테이블 -->

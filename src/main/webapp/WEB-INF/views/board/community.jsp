@@ -41,18 +41,34 @@
                         <div class="search-write-area row mb-3">
                             <!-- 검색창 -->
                             <div class="search-area float-start col-8">
-                                <form>
+                                <form action="" method="get" id="searchForm">
                                     <div class="search-area d-flex">
-                                        <select name="notice-search" aria-label="Default select example" class="mr-1">
-                                            <option selected value="1">제목</option>
-                                            <option value="2">내용</option>
-                                            <option value="3">작성자</option>
+                                        <select name="keyfield" aria-label="Default select example" class="mr-1">
+                                            <option <c:if test="${keyfield == 'title' }">selected</c:if> value="title">제목</option>
+                                            <option <c:if test="${keyfield == 'content' }">selected</c:if> value="content">내용</option>
+                                            <option <c:if test="${keyfield == 'writer' }">selected</c:if> value="writer">작성자</option>
                                         </select>
-                                        <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1">
-                                        <button type="button" class="btn btn-primary btn-sm ">검색</button>
+                                        <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1" value="${keyword}">
+                                        <button type="submit" class="btn btn-primary btn-sm">검색</button>
                                     </div>
                                 </form>
                             </div>
+                            
+                            <script>
+                            	function dropdownSearch(searchId,value){
+                            		$('#'+searchId).val(value);
+                            		$('#searchForm').submit();
+                            	}
+                            </script>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <!-- 작성하기 버튼 -->
                             <div class="wirte-area col-4">
                                 <a href="${path }/communityWrite" class="btn btn-primary btn-sm float-right">글쓰기</a>

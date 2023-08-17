@@ -24,4 +24,5 @@ public interface BoardDao {
 	int communityModifySubmit(SqlSession session, Map param);
 	int commentWrite(SqlSession session, Map<String,Object> param);
 	List<BoardComment> selectComment(SqlSession session,Map<String,Object> param);
+	Board selectBoardAll(SqlSession session, Map<String,Object> param);
 }
