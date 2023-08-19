@@ -55,7 +55,7 @@
 						</div>
 
                     <div class="notice-container row justify-content-center mb-5">
-	                    <img src="${path }/resources/img/undraw_office.svg" style="width: 50%">
+	                    <img src="${pageContext.request.contextPath}/resources/img/undraw_office.svg" style="width: 50%">
 	                </div>
 	                    <p class="text-center">
 	                    JOIN OFFICE 를 통해

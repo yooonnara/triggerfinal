@@ -7,7 +7,7 @@
 <c:set var="keyword" value="${param.keyword}" />
 <c:set var="searchAccStatus" value="${param.searchAccStatus}" />
 <c:set var="searchAccType" value="${param.searchAccType}" />
-<c:set var="baseUrl" value="${path}/adminEmployee?keyfield=${keyfield}&keyword=${keyword}&cPage=${cPage}" />
+<c:set var="baseUrl" value="${pageContext.request.contextPath}/adminEmployee?keyfield=${keyfield}&keyword=${keyword}&cPage=${cPage}" />
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -224,7 +224,7 @@ function deleteEmployee(){
 		console.log(empList);
 		
 		$.ajax({
-			url:"/admin/ajax/deleteEmployee",
+			url:"${pageContext.request.contextPath}/admin/ajax/deleteEmployee",
 			type : 'post',
 			data:{
 				empList : empList
@@ -309,7 +309,7 @@ $('#insertEmployee').on('shown.bs.modal', function(e) {
 		
   		var empimg = button.data('empimg');
   		if(empimg != null && empimg != ''){
-			$('#profileImg').attr('src','${path}/resources/upload/employee/'+empimg);
+			$('#profileImg').attr('src','${pageContext.request.contextPath}/resources/upload/employee/'+empimg);
 			$('#oldImg').val(empimg);
   		}
   		
@@ -342,7 +342,7 @@ $("#enroll_date").change(e=>{
 
 function getDept(deptNo) {
     $.ajax({
-        url: "${path}/admin/ajax/getDept",
+        url: "${pageContext.request.contextPath}/admin/ajax/getDept",
         success: data => {
             $('#dept').empty();
             const basicOption = $("<option></option>").attr("value", "").text("선택");
@@ -363,7 +363,7 @@ function getDept(deptNo) {
 
 function getJob(jobNo) {
     $.ajax({
-        url: "${path}/admin/ajax/getJob",
+        url: "${pageContext.request.contextPath}/admin/ajax/getJob",
         success: data => {
             $('#job').empty();
             const basicOption = $("<option></option>").attr("value", "").text("선택");
@@ -384,7 +384,7 @@ function getJob(jobNo) {
 // 사번 자동생성
 function makeEmpNum(){
 	$.ajax({
-		url: "${path}/admin/ajax/makeEmpNum",
+		url: "${pageContext.request.contextPath}/admin/ajax/makeEmpNum",
 		success: data => {
 			$('#emp_num').val(data);
 		}
@@ -394,7 +394,7 @@ function makeEmpNum(){
 function frmReset(){
 	$('#frm')[0].reset();
 	$('.check-msg').hide();
-	$('#profileImg').attr('src','${path}/resources/img/user_profile.png');
+	$('#profileImg').attr('src','${pageContext.request.contextPath}/resources/img/user_profile.png');
 	$('#emp_id').prop("readonly", false); 
 }
 

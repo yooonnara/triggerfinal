@@ -20,9 +20,9 @@
                             <div class="col-lg-5">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <img src="${path }/resources/img/logo.png" class="w-100 my-4">
+                                        <img src="${pageContext.request.contextPath}/resources/img/logo.png" class="w-100 my-4">
                                     </div>
-                                    <form class="user" action="${path }/login" method='post'>
+                                    <form class="user" action="${pageContext.request.contextPath}/login" method='post'>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 name="userId" id="userId" aria-describedby="emailHelp" placeholder="아이디">
@@ -78,7 +78,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-						<button class="btn btn-primary" type="button" onclick="sendEamil()">다음</button>
+						<button class="btn btn-primary" type="button" onclick="sendEmail()">다음</button>
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
     </div>
 
     <script>
-    function sendEamil(){
+    function sendEmail(){
     	 var empId = $("#changePwCheckId").val();
 
          if (!empId) {
@@ -133,7 +133,7 @@
          }
     	
     	$.ajax({
-    		url:"${path}/sendMail/idCheck",
+    		url:"${pageContext.request.contextPath}/sendMail/idCheck",
     		type:"post",
     		data:{id : empId}, // 비밀번호를 찾을 아이디
     		success:function(data){
@@ -143,7 +143,7 @@
     				$('#authenticationNumberModal').modal('show');
                 } else {
                 	console.log(data)
-                    alert("이메일 발송실패");
+                    alert("인증코드 발송이 실패하였습니다. 다시 시도해 주세요.");
                 }
             }
         });
@@ -153,13 +153,13 @@
     	var enteredAuthNum = $("#authenticationNumber").val();
 
         if (!enteredAuthNum) {
-            alert("인증번호를 입력해 주세요.");
+            alert("인증코드를 입력해 주세요.");
             return;
         }
         // 입력한 아이디가 다른 경우
    	
         $.ajax({
-            url: "${path}/sendMail/authNumcheck",
+            url: "${pageContext.request.contextPath}/sendMail/authNumcheck",
             type: "post",
             data: { authNum: enteredAuthNum }, // Sending the entered authentication number
             success: function (data) {
@@ -167,11 +167,11 @@
                     $("#authenticationNumber").prop("readonly", true);
                     $("#changePw").show();
                 } else {
-                    alert("인증번호가 올바르지 않습니다.");
+                    alert("인증코드가 올바르지 않습니다.");
                 }
             },
             error: function () {
-                alert("인증번호 확인 중에 오류가 발생했습니다.");
+                alert("인증코드 확인 중에 오류가 발생했습니다.");
             }
         });
     }
@@ -205,6 +205,8 @@
     } */
 </script>
 
+
+<!-- 아이디 저장 -->
 <script>
 $(document).ready(function() {
     $("#userId").val(Cookies.get('key'));      

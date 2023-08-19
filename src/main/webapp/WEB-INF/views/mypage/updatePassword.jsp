@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/nara.css" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 <body id="page-top">
 
@@ -38,7 +38,7 @@
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
-							<form class="user" name="passwordFrm" id="passwordFrm" action="${path }/updatePassword" method="post">
+							<form class="user" name="passwordFrm" id="passwordFrm" action="${pageContext.request.contextPath}/updatePassword" method="post">
 								<table class="mt-5 mb-5 table table-borderless text-dark">
 									<tbody class="text-left">
 										<tr>
@@ -99,7 +99,7 @@
 	
 	
 	
-<script type="text/javascript" src="${path}/resources/js/employee.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/employee.js"></script>
 	
 <script>
 
