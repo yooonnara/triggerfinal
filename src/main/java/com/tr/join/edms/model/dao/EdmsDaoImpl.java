@@ -41,14 +41,10 @@ public class EdmsDaoImpl implements EdmsDao {
 		int numPerpage=(int)param.get("numPerpage");
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		
-		return session.selectList("edms.selectBsnAll",param);
+		return session.selectList("edms.selectBsnAll",param,rb);
 	}
 	
-	@Override
-	public int selectEdmsCount(SqlSession session) {
-		
-		return session.selectOne("edms.selectEdmsCount");
-	}
+
 
 	@Override
 	public Edms selectByNo(SqlSession session, int no) {
@@ -70,10 +66,36 @@ public class EdmsDaoImpl implements EdmsDao {
 	//어드민 계정 구현하기 리스트 출력하기 
 	
 	@Override
-	public List<Edms> adminBsnSelect(SqlSession session) {
+	public List<Edms> adminBsnSelect(SqlSession session,Map<String,Object> param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb= new RowBounds((cPage-1)*numPerpage,numPerpage);
 		// TODO Auto-generated method stub
-		return session.selectList("edms.adminBsnSelect");
+		return session.selectList("edms.adminBsnSelect",param,rb);
 	}
+	
+	
+
+	
+	
+	
+	@Override
+	public int selectAdminCount(SqlSession session, Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("edms.selectAdminCount",param);
+	}
+
+
+
+
+	@Override
+	public int deleteEdms(SqlSession session, Edms e) {
+		// TODO Auto-generated method stub
+		return session.delete("edms.deleteEdms",e);
+	}
+
+
+
 
 	@Override
 	public Edms selectByBsnNo(SqlSession session, int no) {
@@ -82,21 +104,61 @@ public class EdmsDaoImpl implements EdmsDao {
 	}
 
 	@Override
-	public List<Edms> searchEdmsByStatus(SqlSession session, Map<String,Object> ajaxParam) {
+	public List<Edms> searchEdmsByStatus(SqlSession session, Map<String,Object> ajaxParam,Map<String,Integer> page) {
 		// TODO Auto-generated method stub
-		return session.selectList("edms.searchEdmsByStatus",ajaxParam);
+		int cPage=page.get("cPage");
+		int numPerpage=page.get("numPerpage");
+		RowBounds rb= new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("edms.searchEdmsByStatus",ajaxParam,rb );
 	}
+	
+	
 
 	@Override
-	public List<Edms> selectResearch(SqlSession session, Edms edms){
+	public int selectajCount(SqlSession session, Map<String, Object> ajaxParam) {
 		// TODO Auto-generated method stub
-		return session.selectList("edms.selectResearch",edms);
+		return session.selectOne("edms.selectajCount",ajaxParam);
 	}
 
+	
+
+
+
 	@Override
-	public List<Edms> adminVcSelect(SqlSession session) {
+	public List<Edms> vcEdmsByStatus(SqlSession session, Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return session.selectList("edms.adminVcSelect");
+		return session.selectList("edms.vcEdmsByStatus",param);
+	}
+
+
+
+
+	@Override
+	public List<Edms> selectResearch(SqlSession session, Edms edms,Map<String, Integer> page){
+		int cPage=page.get("cPage");
+		int numPerpage=page.get("numPerpage");
+		RowBounds rb= new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("edms.selectResearch",edms,rb);
+	}
+	
+	
+
+	@Override
+	public int selectajaxCount(SqlSession session, Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("edms.selectajaxCount",param);
+	}
+
+
+
+
+	@Override
+	public List<Edms> adminVcSelect(SqlSession session, Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb= new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("edms.adminVcSelect",param,rb);
 	}
 
 	@Override
@@ -126,10 +188,30 @@ public class EdmsDaoImpl implements EdmsDao {
 	//이용자 계정 ajax로 검색하기 
 
 	@Override
-	public List<Edms> selecteSearch(SqlSession session, Edms edms) {
+	public List<Edms> selecteSearch(SqlSession session, Edms edms,Map<String,Integer> page) {
 		// TODO Auto-generated method stub
-		return session.selectList("edms.selecteSearch",edms);
+		int cPage=page.get("cPage");
+		int numPerpage=page.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("edms.selecteSearch",edms,rb);
 	}
+
+
+	@Override
+	public int selectSearchCount(SqlSession session,Map<String,Object> param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("edms.selectSearchCount",param);
+	}
+
+
+
+
+	@Override
+	public int selectCount(SqlSession session, Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("edms.selectCount",param);
+	}
+	
 	
 	
 	

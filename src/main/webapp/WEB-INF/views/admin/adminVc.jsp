@@ -83,7 +83,7 @@
                         				let appStatus="";
                         				switch (n[i]["appStatus"]){
                         				case 0 : appStatus ="대기";break;
-                        				case 1 : appStatus="대기";break;
+                        				case 1 : appStatus="승인";break;
                         				case 2 : appStatus="반려";break; 
                         				}
                         				
@@ -101,32 +101,40 @@
                         
                         </script> 
                                 <div class="btn-member col-4" id="vcBtnAll">
-                                    <button type="button" class="btn btn-dark btn-sm  ml-1 float-right" value="-1">전체</button>
-                                     <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="0">대기</button>
-                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="1">승인</button>
-                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="2">반려</button>
+                                    <button type="button" id="btn1" class="btn btn-dark btn-sm  ml-1 float-right" value="-1">전체</button>
+                                     <button type="button" id="btn2" class="btn btn-outline-dark btn-sm ml-1 float-right" value="0">대기</button>
+                                      <button type="button" id="btn3" class="btn btn-outline-dark btn-sm ml-1 float-right" value="1">승인</button>
+                                      <button type="button" id="btn4" class="btn btn-outline-dark btn-sm ml-1 float-right" value="2">반려</button>
                                       
                                 </div>
                             </div>
                        
                             <!-- 검색하기 버튼 -->
                             <script>
-                            $("vcBtnAll button").click(e=>{
+                            //function vcFnc(){
+                            $("#vcBtnAll button").click(e=>{
                             	$.ajax({
                             		url:"${pageContext.request.contextPath}/edms/adminVc/btn",
-                            		data: {"searchVcBtn":e.target.value},
+                            		data: {"searchNum":e.target.value},
                             		success:function(f){
                             		$("#edms-vc").html("");
                             		console.log(e.target.value);
                             		console.log(f);
                             		for(let i=0; i<f.length; i++){
                             			const $tr=$("<tr>");
+                            			const $checkboxCell = $("<td>").addClass("align-middle");
+             		                    const $checkbox = $("<input>").attr({
+             		                        type: "checkbox",
+             		                        name: "chk",
+             		                        value: f[i]["no"]
+             		                    });
+             		                   $checkboxCell.append($checkbox);
                             			const $no=$("<td>").text(f[i]["no"]);
                             			const $createDate=$("<td>").text(f[i]["createDate"]);
-                            			const $deptTitle=$("<td>").text(f[i][emp]["deptTitle"]);
-                            			const $jobTitle=$("<td>").text(f[i][emp]["jobTitle"]);
-                            			const $name=$("<td>").text(f[i][emp]["name"]);
-                            			const $title=$("<td>").text(f[i][emp]["name"]);
+                            			const $deptTitle=$("<td>").text(f[i]['emp']["deptTitle"]);
+                            			const $jobTitle=$("<td>").text(f[i]['emp']["jobTitle"]);
+                            			const $name=$("<td>").text(f[i]['emp']["name"]);
+                            			const $title=$("<td>").text(f[i]['emp']["name"]);
                             			let type="";
                             			switch(f[i]["type"]){
                             			case 0: type="연차" ;break;
@@ -138,13 +146,21 @@
                             			switch(f[i]["appStatus"]){
                             			case 0: appStatus="대기" ;break;
                             			case 1:appStatus="승인" ;break;
-                            			case 2:
+                            			case 2:appStatus="반려";break
                             			}
-                            		}
-                            		}
-                            	})
-                            })
-                            	
+                            			const $appStatus=$("<td>").text(appStatus);
+                            			$tr.append($checkboxCell).append($no).append($createDate).append($deptTitle).append($jobTitle).
+                        				append($name).append($title).append($type).append($appStatus);
+                        				$("#edms-vc").append($tr);
+                        			}
+                        	},
+                        	error:function(){
+                        		console.log("에이젝스 통신 실패");
+                        	}
+                        	})
+                            });
+                        //}
+                            		
                             
                             </script>
                             
@@ -154,7 +170,8 @@
 
                                 <!-- 테이블 칸 크기 -->
                                <colgroup>
-                                  <col width="10%" />
+                                 <col width="5%" />
+                                  <col width="5%" />
                                     <col width="10%" />
                                     <col width="10%" />
                                      <col width="10%" />
@@ -166,6 +183,7 @@
 						
                             <thead>
                                 <tr class="bg-dark text-white">
+                                <th class="align-middle"><input type="checkbox" id ="chkAll" name="chkAll"></th>
                                     <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
@@ -180,6 +198,7 @@
                                 <c:if test="${not empty edms}">
                                 <c:forEach var="e" items="${edms}">
                                   <tr>
+                                    <td class="align-middle"><input type="checkbox" name="chk" value="${a.no }"></td>
                                 	<td>${e.no }</td>
                                     <td>${e.createDate }</td> 
                                     <td>${e.emp.deptTitle }</td>
@@ -206,7 +225,34 @@
                             </tbody> 
                         </table>
                     </div>
-
+							  <div class="btn-edms mt-2 btn-edms wirte-area ml-1 float-right mt-3 ">
+                                <a href="#" class="btn btn-danger " name="delete-btn" 
+                                	onclick="deleteVcBtn()">삭제
+                                </a>
+                     </div>
+                     
+                     
+                     
+                     <script>
+                     //체크 박스 
+                     $(function(){
+                    	 $("#chkAll").click(function(){
+                    		 if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked",true);
+                    		 else $("input [name=chk]").prop("checked",false);
+                    		 
+                    	 });
+                    	 $("input[name=chk]").click(function(){
+                    		 var total=$("input[name=chk]").length;
+                    		 var checked= $("input[name=chk]:checked").length;
+                    		 
+                    		 if(total !=checked)  $("#chkAll").prop("checked", false);
+                    		else $("#chkAll").prop("checked", true);
+                    	 
+                    	 });
+                    	
+                    });
+                     
+                     </script>
 
  
               <!-- 페이징 -->
