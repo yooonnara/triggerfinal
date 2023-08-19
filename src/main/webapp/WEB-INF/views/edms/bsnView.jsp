@@ -43,7 +43,7 @@
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-6 d-flex justify-content-center bg-white shadow mb-3 pt-3">
 
-							<form class="user" name="bsView" action="${path }/selectByNo" >
+							<form class="user" name="bsView" action="${pageContext.request.contextPath}/selectByNo" >
 								<table class="table-sm mt-5 mb-5">
 									<tbody class="text-left">
 										
@@ -117,7 +117,7 @@
                             </tbody> 
 								</table>
 								 <div class="button-footer d-flex justify-content-around mb-4">
-						<button type="button" class="align-text-bottom btn btn-primary" onclick="location.href='${path }/edms/bsnList'"; >목록</button>
+						<button type="button" class="align-text-bottom btn btn-primary" onclick="location.href='${pathContext.request.contextPath}/edms/bsnList'"; >목록</button>
 						 <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->	
 					</div>
 							</form>
@@ -129,7 +129,7 @@
 				
 				<script>
 				function fn_fileDownload(oriName,reName){
-					location.assign("${path}/edms/filedownload?oriname="+oriName+"&rename="+reName);
+					location.assign("${pageContext.request.contextPath}/edms/filedownload?oriname="+oriName+"&rename="+reName);
 				};
 				</script>
 				<!-- 수정할 컨테이너 종료 End of Main Content -->

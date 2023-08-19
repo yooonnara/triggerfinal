@@ -104,6 +104,18 @@
 	                         <td>출장/연차 종료일</td>      
                              <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" value="${edms.endDate }" readonly></td>
                             </tr>
+                              <tr>
+                            	<td>첨부파일</td>
+                            	<td>
+                            	 <c:if test="${not empty edms.file }">
+							      <c:forEach var="f" items="${edms.file }">
+							         <button type="button"  class="btn btn-primary ml-5 mb-1" 
+							         onclick="fn_fileDownload('${f.originalFilename}','${f.renamedFilename }');">
+							           ${f.originalFilename }</button>
+							        </c:forEach>
+							     </c:if>
+							     </td>
+							    </tr>
                             </tbody> 
 						</table>
 						
@@ -119,9 +131,13 @@
 			      </div>
                   <script>
                   	function changeResult(edmsNo,appStatus){
-                  		location.replace('${pathContext.request.contextPath}/edms/adminBsnView/statuschange?no='+edmsNo+"&appStatus="+appStatus);
+                  		location.replace('${pageContext.request.contextPath}/edms/adminBsnView/statuschange?no='+edmsNo+"&appStatus="+appStatus);
                   	}
-                  	
+                	
+    				function fn_fileDownload(oriName,reName){
+    					location.assign("${pageContext.request.contextPath}/edms/filedownload?oriname="+oriName+"&rename="+reName);
+    				};
+    				
                   </script>
            
 				<!-- 수정할 컨테이너 종료 End of Main Content -->

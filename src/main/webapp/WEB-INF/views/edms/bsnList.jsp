@@ -152,7 +152,7 @@
                                     <td>${e.emp.deptTitle }</td>
                                     <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.name }</td>
-                                    <td><a href="${path }/edms/edmsView?no=${e.no}">${e.title }</a></td>
+                                    <td><a href="${pageContext.request.contextPath }/edms/edmsView?no=${e.no}">${e.title }</a></td>
                                     <td>
                                     <c:choose>
                                     	<c:when test="${e.type==0 }">연차</c:when>
@@ -161,7 +161,7 @@
                                     </c:choose>
                                     </td>
                                   <td>
-                                  <a href="${path }/edms/edmsView?no=${e.no}" >
+                                  <a href="${pageContext.request.contextPath }/edms/edmsView?no=${e.no}" >
                                   	<c:if test="${e.appStatus==0 }">대기</c:if>
                                   	<c:if test="${e.appStatus==1 }">승인</c:if>
                                   	<c:if test="${e.appStatus==2 }">반려</c:if>
@@ -182,7 +182,7 @@
 						function fn_paging(no,numPerpage,category,keyword){
 							console.log(no);
 							$.ajax({
-								url:"${path}/edms/bsnList/eSearch",
+								url:"${pageContext.request.contextPath }/edms/bsnList/eSearch",
 								data:{cPage:no,numPerpage:numPerpage,category:category,keyword:keyword},
 								success:function(e){
 									$("#em-sts").html("");

@@ -164,7 +164,7 @@
                                     </c:choose>
                                     </td>
                                   <td >
-                                  <a href="/edms/adminVcView?no=${e.no}" > 
+                                  <a href="${pageContext.request.contextPath}/edms/adminVcView?no=${e.no}" > 
                                   	<c:if test="${e.appStatus==0 }">결재대기</c:if>
                                   	<c:if test="${e.appStatus==1 }">승인</c:if>
                                   	<c:if test="${e.appStatus==2 }">반려</c:if>

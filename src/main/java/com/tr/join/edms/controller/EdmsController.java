@@ -91,27 +91,37 @@ public class EdmsController {
 				}
 			}
 		}
-		try {
-			service.insertbsn(e);
-		}catch(RuntimeException e1) {
-			e1.printStackTrace();
-			for(Attachment a : e.getFile()) {
-				File delFile=new File(path+a.getRenamedFilename());
-				delFile.delete();
-			}
-			
-			model.addAttribute("msg","출장신청이 실패되었습니다.");
-			model.addAttribute("loc","/edms/bsnRequest");
-			
-			return "common/msg";
-		
+		  try {
+		        int result = service.insertbsn(e); // Assume service.insertbsn(e) returns the result
+		        if (result > 0) {
+		            model.addAttribute("msg", "출장신청이 완료되었습니다.");
+		            model.addAttribute("loc", "/edms/bsnList");
+		        } else {
+		            for (Attachment a : e.getFile()) {
+		                File delFile = new File(path + a.getRenamedFilename());
+		                delFile.delete();
+		            }
+
+		            model.addAttribute("msg", "출장신청이 완료되었습니다.");
+		            model.addAttribute("loc", "/edms/bsnRequest");
+		        }
+
+		        return "common/msg";
+		    } catch (RuntimeException e1) {
+		        e1.printStackTrace();
+		        for (Attachment a : e.getFile()) {
+		            File delFile = new File(path + a.getRenamedFilename());
+		            delFile.delete();
+		        }
+
+		        model.addAttribute("msg", "출장신청이 실패되었습니다.");
+		        model.addAttribute("loc", "/edms/bsnRequest");
+
+		        return "common/msg";
+		    }
 		}
-		return "redirect:/edms/bsnList";
-	
-		//System.out.println(result);
-		//출장 insertform
 		
-	}
+	
 	
 	
 	
