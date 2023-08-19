@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="${path }/resources/js/jquery-3.7.0.min.js"></script>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/nara.css" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 <body id="page-top">
 
@@ -38,18 +38,18 @@
 					<div class="mypage-area row mb-3 justify-content-center">
 						<div class="mypage-container col-8 d-flex justify-content-center bg-white shadow mb-3">
 
-							<form class="user" name="myPagefrm" id="myPagefrm" action="${path }/updateEmployee" method="post" enctype="multipart/form-data">
+							<form class="user" name="myPagefrm" id="myPagefrm" action="${pageContext.request.contextPath}/updateEmployee" method="post" enctype="multipart/form-data">
 								<table class="table mt-5 mb-5 text-dark table-borderless">
 									<tbody class="text-left">
 										<tr class="text-center">
 											<td colspan='2'>
 												<div class="box" style="cursor: pointer">
 												<c:if test="${empInfo.empImg == null}">
-													<img src="${path }/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
+													<img src="${pageContext.request.contextPath}/resources/img/user_profile.png" class="profile rounded enter-block profile_img rounded-circle"
 														 id="profileImg">
 												</c:if>
 												<c:if test="${empInfo.empImg != null}">
-													<img src="${path}/resources/upload/employee/${empInfo.empImg}" class="profile rounded enter-block profile_img rounded-circle"
+													<img src="${pageContext.request.contextPath}/resources/upload/employee/${empInfo.empImg}" class="profile rounded enter-block profile_img rounded-circle"
 														 id="profileImg">
 												</c:if>
 													<i class="bi bi-gear-fill profile_img "></i>
@@ -145,7 +145,7 @@
 	
 	
 	
-<script type="text/javascript" src="${path}/resources/js/employee.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/employee.js"></script>
 	
 <script>
 

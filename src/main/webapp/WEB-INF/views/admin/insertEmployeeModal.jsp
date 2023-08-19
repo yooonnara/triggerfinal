@@ -13,13 +13,13 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" name="frm" class="user" action="${path}/admin/insertEmployee" enctype="multipart/form-data" method="post">
+					<form id="frm" name="frm" class="user" action="${pageContext.request.contextPath}/admin/insertEmployee" enctype="multipart/form-data" method="post">
 						<table class="table text-dark table-borderless">
 							<tbody class="text-left">
 								<tr class="text-center">
 									<td colspan='2'>
 										<div class="box" style="cursor: pointer">
-											<img src="${path }/resources/img/user_profile.png" id="profileImg" 
+											<img src="${pageContext.request.contextPath}/resources/img/user_profile.png" id="profileImg" 
 													class="profile rounded enter-block profile_img rounded-circle">
 											<i class="bi bi-gear-fill profile_img"></i>
 											<input onchange="PreviewImage()" id="upFile" name="upFile" type="file" accept="image/*" style="display: none;">
@@ -156,7 +156,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="${path}/resources/js/employee.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/employee.js"></script>
 <script>
 
 $("#profileImg").on('click', function() {
@@ -260,9 +260,9 @@ function checkInsertFrm(){
 function frmSubmit(){
 	if(confirm('저장하시겠습니까?')){
 		if(is_update == true){
-			$('#frm').attr('action', "${path}/admin/updateEmployees");
+			$('#frm').attr('action', "${pageContext.request.contextPath}/admin/updateEmployees");
 		} else {
-			$('#frm').attr('action', "${path}/admin/insertEmployee");
+			$('#frm').attr('action', "${pageContext.request.contextPath}/admin/insertEmployee");
 		}
 		$('#frm').submit();
 		

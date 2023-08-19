@@ -5,7 +5,7 @@
 	<!-- 사이드바 화이트 로고 Sidebar - Brand -->
 	<a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 my-5" href="">
 		<div class="logo-area">
-			<img src="${path }/resources/img/logo2.png" class="mw-100">
+			<img src="${pageContext.request.contextPath}/resources/img/logo2.png" class="mw-100">
 		</div>
 	</a>
 
@@ -14,7 +14,7 @@
 
 	<!-- Nav Item - Dashboard -->
 	<li class="nav-item active"><a class="nav-link"
-		href="${path }/admin/adminMain"> <i class="bi bi-house-door-fill"></i> <span>홈</span></a>
+		href="${pageContext.request.contextPath}/admin/adminMain"> <i class="bi bi-house-door-fill"></i> <span>홈</span></a>
 	</li>
 
 	<!-- Divider -->
@@ -28,7 +28,7 @@
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="${path }/admin/adminEmployee">사원 통합관리</a>
+				<a class="collapse-item" href="${pageContext.request.contextPath}/admin/adminEmployee">사원 통합관리</a>
 
 			</div>
 		</div></li>
@@ -42,9 +42,9 @@
 		<div id="collapseUtilities" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="${path }/adminWorkTime">전사원 근태 현황</a> 
+				<a class="collapse-item" href="${pageContext.request.contextPath}/adminWorkTime">전사원 근태 현황</a> 
 				<a href="${path }/adminWorkTimeModify"><h6 class="collapse-header">- 출·퇴근 시간 변경</h6></a>
-				<a class="collapse-item" href="${path }/adminDayoff">전사원 연차 현황</a>
+				<a class="collapse-item" href="${pageContext.request.contextPath}/adminDayoff">전사원 연차 현황</a>
 			</div>
 		</div>
 	</li>
@@ -59,8 +59,8 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item">결재 문서 관리</a>
-                <a href="${path }/edms/adminVc"><h6 class="collapse-header">- 연차 문서 관리</h6></a>
-                <a href="${path }/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
+                <a href="${pageContext.request.contextPath}/edms/adminVc"><h6 class="collapse-header">- 연차 문서 관리</h6></a>
+                <a href="$${pageContext.request.contextPath}/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
             </div>
         </div>
     </li>
@@ -94,7 +94,7 @@
 	<!-- Sidebar Message -->
 	<div class="sidebar-card d-none d-lg-flex">
 		<img class="sidebar-card-illustration mb-2"
-			src="${path }/resources/img/undraw_team.svg" alt="...">
+			src="${pageContext.request.contextPath}/resources/img/undraw_team.svg" alt="...">
 		<p class="text-center mb-2">
 			<strong>JOIN OFFICE</strong> 를 통해<br>효율적이고 편리한<br> 업무관리를
 			시작해 보세요!<br>
