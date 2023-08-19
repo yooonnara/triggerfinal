@@ -37,7 +37,7 @@
                     <h1 class="h3 text-dark my-5">전사원 근태 현황
                   <p class="mt-2 text-secondary" style="font-size:17px">출퇴근 변경</p> 
                     </h1>
-                    <div class="adminDayOff-container "> 
+                    <div class="adminDayOff-container" > 
                   
                    
     
@@ -116,9 +116,6 @@
 								
 								const length = ad[0].reContent.length;
 								$(".textCount").text(length + '자');	
-								
-								
-								
 								$("#adminWkModify").modal("show");
 							},
 							error:function(){
@@ -152,7 +149,27 @@
 			           		})
 			           	})
 		           </script>
-		            
+		             <!-- 페이징 -->
+                        <div class="pasing-area">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center mt-4">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item">
+                                    <li class="page-item">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
 		            
 		            
 		            

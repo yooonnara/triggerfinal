@@ -42,14 +42,10 @@ public class SecurityConfig{
 				.authorizeHttpRequests()
 					.antMatchers("/resources/**").permitAll()
 					.antMatchers("/").permitAll()
-					.antMatchers("/**").hasAnyAuthority("ADMIN","USER")
+					.antMatchers("/admin/*").hasAuthority("ADMIN")
+					.antMatchers("/**").hasAnyAuthority("ADMIN","USER") // 넓은 범위가 가장 아래 있어야 함
 				.and()
-				.rememberMe()  // 자동 로그인 설정
-					//.key("hayden") //쿠키에 사용되는 값을 암호화하기 위한 키(key)값
-					.rememberMeParameter("saveId")
-					.userDetailsService(provider) //DataSource 추가
-					.tokenValiditySeconds(604800) //토큰 유지 시간(초단위) - 일주일
-					.alwaysRemember(false)
+				.exceptionHandling().accessDeniedPage("/deniedpage")
 				.and()
 				.logout()
 					.logoutUrl("/logout")
@@ -76,5 +72,7 @@ public class SecurityConfig{
 		repo.setDataSource(dataSource);
 		return repo;
 	}
+	
+	
 	
 }

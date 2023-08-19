@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -29,9 +29,9 @@
                 <!-- 수정할 컨테이너 Begin Page Content -->
                 <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
-                    <h1 class="h3 text-dark mt-5 mb-5">HOME</h1>
+                  <!--   <h1 class="h3 text-dark mt-5 mb-5">HOME</h1> -->
                     
-                    <!-- <div class="col-12 mb-5 pb-5">
+                    <div class="col-12 mb-5 pb-5 mt-5">
 							<div class="card border-left-dark shadow h-100 py-2">
 								<div class="card-body">
 									<div class="no-gutters align-items-center d-flex text-center">
@@ -39,10 +39,10 @@
 											<h5 class="">사이트명</h5><h6>JOIN OFFICE</h6>
 										</div>
 										<div class="col-3">
-											<h5>사이트 URL</h5><h6>join_offce.com</h6>
+											<h5>사이트 URL</h5><h6>www.joinoffce.com</h6>
 										</div>
 										<div class="col-3">
-											<h5>담당자</h5><h6>로그인한 관리자 아이디</h6>
+											<h5>담당자</h5><h6>윤나라</h6>
 										</div>
 										<div class="col-3">
 											<h5>총 계정 수</h5><h6>3명</h6>
@@ -52,7 +52,7 @@
 									</div>
 								</div>
 							</div>
-						</div> -->
+						</div>
 
                     <div class="notice-container row justify-content-center mb-5">
 	                    <img src="${path }/resources/img/undraw_office.svg" style="width: 50%">

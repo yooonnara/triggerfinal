@@ -38,7 +38,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider,UserDeta
 		
 		Employee loginEmp = dao.selectEmployeeById(session,id);
 		if(loginEmp == null || !encoder.matches(password, loginEmp.getPassword())) {
-			throw new BadCredentialsException("로그인실패");
+			throw new BadCredentialsException("로그인에 실패하였습니다. 다시 시도해 주세요.");
 		}
 		return new UsernamePasswordAuthenticationToken(loginEmp, loginEmp.getPassword(),loginEmp.getAuthorities());
 	}

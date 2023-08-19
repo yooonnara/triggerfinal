@@ -42,13 +42,13 @@ public class AdminEmployeeDaoImpl implements AdminEmployeeDao {
 		int cPage=(int)param.get("cPage");
 		int numPerpage=(int)param.get("numPerpage");
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
-		return session.selectList("adminEmployee.selectEmployeeAll",null,rb);
+		return session.selectList("adminEmployee.selectEmployeeAll",param,rb);
 	}
 	
 
 	@Override
-	public int selectEmployeeCount(SqlSessionTemplate session) {
-		return session.selectOne("adminEmployee.selectEmployeeCount");
+	public int selectEmployeeCount(SqlSessionTemplate session, Map<String,Object> param) {
+		return session.selectOne("adminEmployee.selectEmployeeCount", param);
 	}
 
 	@Override

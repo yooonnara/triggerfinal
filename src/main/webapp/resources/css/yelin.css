@@ -334,8 +334,7 @@
     #accordionTable th{
         border-top:none;
     }
-
-    #accordionTable th:last-child{
-       margin:100px;
-       
-    }
+    
+    #commTable>tr{
+		border:1px;
+	}

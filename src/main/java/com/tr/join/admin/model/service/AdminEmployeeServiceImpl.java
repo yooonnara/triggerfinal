@@ -57,8 +57,8 @@ public class AdminEmployeeServiceImpl implements AdminEmployeeService {
 	
 
 	@Override
-	public int selectEmployeeCount() {
-		return dao.selectEmployeeCount(session);
+	public int selectEmployeeCount(Map<String,Object> param) {
+		return dao.selectEmployeeCount(session, param);
 		
 	}
 

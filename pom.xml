@@ -122,6 +122,15 @@
          <artifactId>spring-boot-devtools</artifactId>
       </dependency>
       
+      <!-- gmail 메일발송 하기 -->
+      <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-mail</artifactId>
+	  </dependency>
+
+		
+
+      
    </dependencies>
 
    <build>

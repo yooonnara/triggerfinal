@@ -30,8 +30,8 @@ public interface AttendanceService {
 	List<Attendance> workTimeWeekly(int no);
 	//근태 일자별 리스트
 	List<Attendance> selectWorkTimeAll(Map<String,Object> param);
-	int selectWorkTimeCount();
-	
+	int selectWorkTimeCount(int no);
+	int searchWorkTimeCount(Map<String,Object> ajaxParam);
 	//근태 상태로 검색
 	List<Attendance> searchWorkTimeByStatus(Map<String,Object> ajaxParam);
 	
@@ -55,9 +55,11 @@ public interface AttendanceService {
 	int wtModifyReturn(WorkTime w);
 	
 //---------------연차---------------------
-	List<DayOff> selectDayoffAll(int no);
+	List<DayOff> selectDayoffAll(Map<String,Object> param);
+	int dayoffAllCount(int no);
 	//관리자
-	List<DayOff> selectAdminDayoffAll();
+	List<DayOff> selectAdminDayoffAll(Map<String,Object> param);
+	int AdminDayoffCount();
 	int adminResetAll();
 	int adminCheckReset(DayOff d);
 	List<DayOff> ajaxDfSearch(Map<String,String> dfSearch);
@@ -65,7 +67,7 @@ public interface AttendanceService {
 	List<Edms> workCalendarDayoff();
 	
 //-----------출장-------------------------
-	List<Edms> selectBusinessTrip(int no);
+	List<Edms> selectBusinessTrip(Map<String,Object> param);
 	int BusinessTripCount(int no);
 	//출장 삭제
 	int deleteBusinessTrip(int btNo);

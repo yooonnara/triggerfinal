@@ -70,10 +70,7 @@
                          url:"/att/dayoffCalendar",
                          
                          success:function(model){
-                            //console.log(model.dayoffInfo[0].emp.name);
                             console.log(model.dayoffInfo[0].emp.name);
-                            //console.log(model.dayoffInfo[0].startDate);
-                            //console.log(model.attInfo[1].attDate.replace(".","-")); //2023.07.29
                               for(i=0; i<model.dayoffInfo.length;i++){
                                   calendar.addEvent({
                                  title: "[" + model.dayoffInfo[i].emp.name + "] " + model.dayoffInfo[i].detailType , 
@@ -83,9 +80,9 @@
                                  textColor:'rgb(255, 255, 255)'
                                 })
                               } 
-                      }, //success 닫기
+                      }, 
                          error:function(){
-                           console.log("근태캘린더 ajax통신 실패");
+                           console.log("연차캘린더 통신 실패");
                         }
                       })
                    })
