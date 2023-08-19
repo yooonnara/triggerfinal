@@ -189,7 +189,7 @@ public class EdmsServiceImpl implements EdmsService {
 	@Override
 	public List<Edms> adminVcSelect(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return dao.adminVcSelect(session, param);
+		return dao.adminVcSelect(session,param);
 	}
 
 

@@ -109,57 +109,8 @@
                                 </div>
                             </div>
                        
-                            <!-- 검색하기 버튼 -->
-                            <script>
-                            //function vcFnc(){
-                            $("#vcBtnAll button").click(e=>{
-                            	$.ajax({
-                            		url:"${pageContext.request.contextPath}/edms/adminVc/btn",
-                            		data: {"searchNum":e.target.value},
-                            		success:function(f){
-                            		$("#edms-vc").html("");
-                            		console.log(e.target.value);
-                            		console.log(f);
-                            		for(let i=0; i<f.length; i++){
-                            			const $tr=$("<tr>");
-                            			const $checkboxCell = $("<td>").addClass("align-middle");
-             		                    const $checkbox = $("<input>").attr({
-             		                        type: "checkbox",
-             		                        name: "chk",
-             		                        value: f[i]["no"]
-             		                    });
-             		                   $checkboxCell.append($checkbox);
-                            			const $no=$("<td>").text(f[i]["no"]);
-                            			const $createDate=$("<td>").text(f[i]["createDate"]);
-                            			const $deptTitle=$("<td>").text(f[i]['emp']["deptTitle"]);
-                            			const $jobTitle=$("<td>").text(f[i]['emp']["jobTitle"]);
-                            			const $name=$("<td>").text(f[i]['emp']["name"]);
-                            			const $title=$("<td>").text(f[i]['emp']["name"]);
-                            			let type="";
-                            			switch(f[i]["type"]){
-                            			case 0: type="연차" ;break;
-                            			case 1: type="출장" ;break;
-                            			}
-                            			const $type=$("<td>").text(type);
-                            			
-                            			let appStatus="";
-                            			switch(f[i]["appStatus"]){
-                            			case 0: appStatus="대기" ;break;
-                            			case 1:appStatus="승인" ;break;
-                            			case 2:appStatus="반려";break
-                            			}
-                            			const $appStatus=$("<td>").text(appStatus);
-                            			$tr.append($checkboxCell).append($no).append($createDate).append($deptTitle).append($jobTitle).
-                        				append($name).append($title).append($type).append($appStatus);
-                        				$("#edms-vc").append($tr);
-                        			}
-                        	},
-                        	error:function(){
-                        		console.log("에이젝스 통신 실패");
-                        	}
-                        	})
-                            });
-                        //}
+                           
+                        
                             		
                             
                             </script>
@@ -259,6 +210,57 @@
                         <div class="pasing-area">
                     	    <c:out value="${pageBar }" escapeXml="false"/>
                         </div>
+                        
+                         <!-- 검색하기 버튼 -->
+                            <script>
+                            //function vcFnc(){
+                            $("#vcBtnAll button").click(e=>{
+                            	$.ajax({
+                            		url:"${pageContext.request.contextPath}/edms/adminVc/btn",
+                            		data: {"searchNum":e.target.value},
+                            		success:function(f){
+                            		$("#edms-vc").html("");
+                            		console.log(e.target.value);
+                            		console.log(f);
+                            		for(let i=0; i<f.length; i++){
+                            			const $tr=$("<tr>");
+                            			const $checkboxCell = $("<td>").addClass("align-middle");
+             		                    const $checkbox = $("<input>").attr({
+             		                        type: "checkbox",
+             		                        name: "chk",
+             		                        value: f[i]["no"]
+             		                    });
+             		                   $checkboxCell.append($checkbox);
+                            			const $no=$("<td>").text(f[i]["no"]);
+                            			const $createDate=$("<td>").text(f[i]["createDate"]);
+                            			const $deptTitle=$("<td>").text(f[i]['emp']["deptTitle"]);
+                            			const $jobTitle=$("<td>").text(f[i]['emp']["jobTitle"]);
+                            			const $name=$("<td>").text(f[i]['emp']["name"]);
+                            			const $title=$("<td>").text(f[i]['emp']["name"]);
+                            			let type="";
+                            			switch(f[i]["type"]){
+                            			case 0: type="연차" ;break;
+                            			case 1: type="출장" ;break;
+                            			}
+                            			const $type=$("<td>").text(type);
+                            			
+                            			let appStatus="";
+                            			switch(f[i]["appStatus"]){
+                            			case 0: appStatus="대기" ;break;
+                            			case 1:appStatus="승인" ;break;
+                            			case 2:appStatus="반려";break
+                            			}
+                            			const $appStatus=$("<td>").text(appStatus);
+                            			$tr.append($checkboxCell).append($no).append($createDate).append($deptTitle).append($jobTitle).
+                        				append($name).append($title).append($type).append($appStatus);
+                        				$("#edms-vc").append($tr);
+                        			}
+                        	},
+                        	error:function(){
+                        		console.log("에이젝스 통신 실패");
+                        	}
+                        	})
+                            });
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
