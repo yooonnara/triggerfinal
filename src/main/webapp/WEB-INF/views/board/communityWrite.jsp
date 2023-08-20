@@ -26,19 +26,18 @@
                 <div class="container-fluid pl-5 pr-5">
 					<h1 class="h3 text-dark mt-5 mb-5">자유게시판 작성</h1>
 					<div class="notice-container">
-
+						<form id="cmForm" name="cmForm" action="${pageContext.request.contextPath }/board/insertCommunityWrite" method="post" >
 						<div class="board-container"  style="width:1200px;margin:auto">
 							<table class="table table-sm shadow table-hover text-center">
 								<colgroup>
 									<col width="15%" />
 									<col width="85%" />
 								</colgroup>
-								<form id="cmForm" name="cmForm" action="${pageContext.request.contextPath }/board/insertCommunityWrite" method="post" enctype="multipart/form-data" >
 								<tbody>
 									<tr>
 										<td class="text-center align-middle">작성자</td>
-										<input name="empNo" value="${emp.get(0).no}" hidden>
 										<td><input name="writer" value="${emp.get(0).name }" class="bg-light" style="border:none;width:500px"></td>
+										<td><input name="empNo" value="${emp.get(0).no}" type="hidden"></td>
 									</tr>
 									<tr>
 										<td class="text-center align-middle">제목</td>
@@ -57,7 +56,7 @@
 										<td class="text-center align-middle" id="cwTd" colspan="2">
 											<div id="smarteditor" class="editor-area">
 												<!--에디터가 들어가는 영역입니다.-->
-												<textarea name="contents" id="contents" rows="20" cols="10" style="width:1300px"></textarea>
+												<textarea name="content" id="contents" rows="20" cols="10" style="width:1300px;"></textarea>
 											</div>
 										</td>
 									</tr>
@@ -85,14 +84,13 @@
 			<!-- smartEditor -->
 			<script>
 				let oEditors = [];
-					nhn.husky.EZCreator.createInIFrame({
-				    oAppRef : oEditors,
-				    elPlaceHolder : "contents",
-					sSkinURI: "${pageContext.request.contextPath }/resources/smarteditor2/SmartEditor2Skin.html",
-					fCreator : "createSEditor2"
-					})
-				
-				//textarea에 쓴 내용 전송하기
+				nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceHolder : "contents",
+				sSkinURI: "${pageContext.request.contextPath }/resources/smarteditor2/SmartEditor2Skin.html",
+				fCreator : "createSEditor2"
+				})
+					
 				$("#cmForm").on('submit',function(e){
 					oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 				      
@@ -101,9 +99,7 @@
 				        $('#title').focus();
 				        return false;
 				    } 
-				      
 				    var contents = $("#contents").val();
-					
 				    if( contents.length < 1 || contents == null || contents == '&nbsp;')  {
 					    alert('내용을 입력해 주세요.');
 					    oEditors.getById["contents"].exec("FOCUS"); 

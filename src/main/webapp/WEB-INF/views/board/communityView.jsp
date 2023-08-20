@@ -82,7 +82,7 @@
 									</tr>
 									<tr>
 										<td class="text-center" id="cwTd" colspan="2">
-											<textarea name="contents" id="contents" class="bg-light mt-3"  style="width:800px; border:none; resize:none;">${board.content }</textarea>
+											<textarea name="contents" id="contents" class="bg-light mt-3" style="width:800px; border:none; resize:none;" readonly>${board.content }</textarea>
 											<c:if test="${not empty board.file and board.file[0].boardNo!=0}">
 											<img src="${pageContext.request.contextPath }/resources/upload/board/${board.file[0].saveFileName}"/>
 											</c:if>
