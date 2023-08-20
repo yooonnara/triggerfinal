@@ -44,11 +44,11 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attPages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="bi bi-pencil-square"></i>
-            <span>근태현황</span>
+            <span>근태관리</span>
         </a>
         <div id="attPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${pageContext.request.contextPath}/workTimeMain">출퇴근 등록</a>
+                <a class="collapse-item">근태 현황</a>
                 <a href="${pageContext.request.contextPath}/workTimeWeekly"><h6 class="collapse-header">- 주차별 근태 조회</h6></a>
                 <a href="${pageContext.request.contextPath}/workTimeList"><h6 class="collapse-header">- 일자별 근태 조회</h6></a>
                 <a href="${pageContext.request.contextPath}/wtModifyList"><h6 class="collapse-header">- 출퇴근 시간 변경 조회</h6></a>
