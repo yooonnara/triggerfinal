@@ -87,12 +87,29 @@ public class AttendanceController {
 		 calendarParam.put("tripInfo",tripInfo);
 			
 		 
-		 System.out.println(tripInfo);
+		 //System.out.println(tripInfo);
 		 return calendarParam;
 	 }
 	 
 	  //근태 누적/초과/잔여 시간
-	  @GetMapping("/workTimeMain")
+//	  @GetMapping("/workTimeMain")
+//	  public String workingTime(Model m) { 
+//		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		  
+//		 Attendance week = service.selectWeekWorkTime(loginNo.getNo()); //이번주 누적 근무 시간
+//		 Attendance overWeek = service.selectOverWorkTime(loginNo.getNo()); //이번주 초과 근무 시간
+//		 Attendance remainWeek = service.selectRemainTime(loginNo.getNo()); //이번주 잔여 근무 시간
+//		 System.out.println(remainWeek);
+//		 Attendance month = service.selectMonthTime(loginNo.getNo()); //이번달 누적 근무 시간
+//		 
+//		 m.addAttribute("week",week);
+//		 m.addAttribute("overWeek",overWeek);
+//		 m.addAttribute("remainWeek",remainWeek);
+//		 m.addAttribute("month",month);
+//		 System.out.println(month); 
+//		  
+//		 return "attendance/workTimeMain";
+	  @GetMapping("/main")
 	  public String workingTime(Model m) { 
 		 Employee loginNo=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		  
@@ -108,9 +125,12 @@ public class AttendanceController {
 		 m.addAttribute("month",month);
 		 System.out.println(month); 
 		  
-		 return "attendance/workTimeMain";
+		 return "mainpage";
+	  
+	  }
+	  
 		
-		 }
+		 
 		
 	  
 	  //근태 주차별 리스트 

@@ -34,10 +34,6 @@ public class EmployeeController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	@GetMapping("/main") 
-	public String mainPage() {
-		return "mainpage"; 
-	}
 	
 	@GetMapping("/")
 	public String loginPage() {
