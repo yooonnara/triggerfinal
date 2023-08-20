@@ -71,7 +71,7 @@
                             
                             <!-- 작성하기 버튼 -->
                             <div class="wirte-area col-4">
-                                <a href="${path }/communityWrite" class="btn btn-primary btn-sm float-right">글쓰기</a>
+                                <a href="${pageContext.request.contextPath }/communityWrite" class="btn btn-primary btn-sm float-right">글쓰기</a>
                             </div>
                         </div>
 
@@ -103,11 +103,11 @@
                                 	<c:forEach var="b" items="${board }">
                                     <tr>
                                         <td>${b.no }</td>
-                                        <td><a href="${path }/board/communityView.do?no=${b.no}">${b.title }</a></td>
+                                        <td><a href="${pageContext.request.contextPath }/board/communityView.do?no=${b.no}">${b.title }</a></td>
                                         <td>${b.writer }</td>
                                         <td>
                                         	<c:if test="${not empty b.file and b.file[0].boardNo!=0}">
-                                        		<img src="${path }/resources/img/file_icon.png" width="30" height="30" alt="첨부파일사진">
+                                        		<img src="${pageContext.request.contextPath }/resources/img/file_icon.png" width="30" height="30" alt="첨부파일사진">
                                         	</c:if>
                                         </td>
                                         <td>${b.emp.dateCreated }</td>
