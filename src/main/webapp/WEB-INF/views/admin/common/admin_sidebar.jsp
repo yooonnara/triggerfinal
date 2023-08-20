@@ -60,13 +60,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item">결재 문서 관리</a>
                 <a href="${pageContext.request.contextPath}/edms/adminVc"><h6 class="collapse-header">- 연차 문서 관리</h6></a>
-                <a href="$${pageContext.request.contextPath}/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
+                <a href="${pageContext.request.contextPath}/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
             </div>
         </div>
     </li>
 
 	<!-- 커뮤니티 사이드바 -->
-	<li class="nav-item"><a class="nav-link collapsed" href="#"
+	<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#collapseCommunity"
 		aria-expanded="true" aria-controls="collapseCommunity"> <i
 			class="bi bi-chat-square-text-fill"></i> <span>게시판 관리</span>
@@ -78,7 +78,7 @@
 					class="collapse-item" href="">공지사항 관리</a> <a class="collapse-item"
 					href="">자유게시판 관리</a>
 			</div>
-		</div></li>
+		</div></li> -->
 
 
 	<!-- 커뮤니티 아래 흰색 선 Divider -->

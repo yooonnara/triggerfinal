@@ -132,25 +132,25 @@ public class EmployeeController {
 		// 로그인한 현재 유저 정보 (세션에 저장된 정보)
 		Employee sessionEmp = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		param.put("emp_id", sessionEmp.getId());
-		
-		String newPassword = (String)param.get("pwd1");
+
+		String newPassword = (String) param.get("pwd1");
 		newPassword = passwordEncoder.encode(newPassword);
-		
+
 		param.put("password", newPassword);
-		
+
 		int result = service.updatePassword(param);
-		
-		String msg,loc;
-		if(result>0) {
-		msg="비밀번호가 수정되었습니다. 다시 로그인해 주세요.";
-		loc="/";
-		}else {
-			msg="수정에 실패했습니다. 다시 시도해 주세요.";
-			loc="/mypagePassword";
+
+		String msg, loc;
+		if (result > 0) {
+			msg = "비밀번호가 수정되었습니다. 다시 로그인해 주세요.";
+			loc = "/";
+		} else {
+			msg = "수정에 실패했습니다. 다시 시도해 주세요.";
+			loc = "/mypagePassword";
 		}
-		m.addAttribute("msg",msg);
-		m.addAttribute("loc",loc);
-		
+		m.addAttribute("msg", msg);
+		m.addAttribute("loc", loc);
+
 		return "common/msg";
 		
 	}

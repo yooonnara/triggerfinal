@@ -41,7 +41,7 @@
                                                     &#124; &nbsp;</label>
                                                 <label class="">
                                                     <a href="#" data-toggle="modal" data-target="#passwordModal" class="text-primary">
-                                                    	비밀번호 찾기
+                                                       비밀번호 찾기
                                                     </a>
                                                     </label>
                                             </div>
@@ -78,7 +78,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-						<button class="btn btn-primary" type="button" onclick="sendEmail()">다음</button>
+                  <button class="btn btn-primary" type="button" onclick="sendEmail()">다음</button>
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                     </div>
                 </div>
@@ -101,71 +101,75 @@
                     <div class="modal-body">
                         <p>인증코드가 발송되었습니다.<br>
                         아래 인증코드를 입력하신 후 새로운 비밀번호를 생성해 주세요.<br>
-						<form class="user">
+                  <form class="user">
                             <div class="form-group">
-                            	<div class="row">
-	                                <input type="text" class="col-9 ml-3 form-control form-control-user" id="authenticationNumber" placeholder="인증코드">&nbsp;&nbsp;
-	                                <button class="col-2 btn btn-outline-danger" onclick="authNumCheck()">인증</button><br>
-	                            </div>
+                               <div class="row">
+                                   <input type="text" class="col-9 ml-3 form-control form-control-user" id="authenticationNumber" placeholder="인증코드">&nbsp;&nbsp;
+                                   <button class="col-2 btn btn-outline-danger" onclick="authNumCheck()">인증</button><br>
+                               </div>
                                 <div id="changePw" style="display:none">
-	                                비밀번호 변경하기
-	                                <input type="password" class="form-control form-control-user" id="newPassword" placeholder="새로운 비밀번호">
-	                                <input type="password" class="form-control form-control-user" id="checkNewPassword" placeholder="비밀번호 확인">
-                            	</div>
+                                   비밀번호 변경하기
+                                   <input type="password" class="form-control form-control-user" id="newPassword" placeholder="새로운 비밀번호">
+                                   <input type="password" class="form-control form-control-user" id="checkNewPassword" placeholder="비밀번호 확인">
+                               </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                  		<button class="btn btn-secondary" href="#passwordModal" data-toggle="modal">이전</button>
-                        <button class="btn btn-primary" type="button">확인</button>
+                        <button class="btn btn-secondary" href="#passwordModal" data-toggle="modal">이전</button>
+                        <button class="btn btn-primary" type="button" onclick="changePassword()" >확인</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
+<script>
+    var authNumCheckFlag = false; // 인증번호 성공 여부 초기값은 false
+
     function sendEmail(){
-    	 var empId = $("#changePwCheckId").val();
+        var empId = $("#changePwCheckId").val();
 
          if (!empId) {
              alert("아이디를 입력해 주세요.");
              return;
          }
-    	
-    	$.ajax({
-    		url:"${pageContext.request.contextPath}/sendMail/idCheck",
-    		type:"post",
-    		data:{id : empId}, // 비밀번호를 찾을 아이디
-    		success:function(data){
-    			if (data === "성공") { // 성공했을 경우 다음 모달로 넘어가기
-    				console.log(data)
-    				$('#passwordModal').modal('hide');
-    				$('#authenticationNumberModal').modal('show');
+       
+       $.ajax({
+          url:"${pageContext.request.contextPath}/sendMail/idCheck",
+          type:"post",
+          data:{id : empId}, // 비밀번호를 찾을 아이디
+          success:function(data){
+             if (data === "성공") { // 성공했을 경우 다음 모달로 넘어가기
+                console.log(data)
+                $('#passwordModal').modal('hide');
+                $('#authenticationNumberModal').modal('show');
                 } else {
-                	console.log(data)
-                    alert("인증코드 발송이 실패하였습니다. 다시 시도해 주세요.");
+                   console.log(data)
+                   alert("인증코드 발송이 실패하였습니다. 다시 시도해 주세요.");
                 }
             }
         });
     }
     
     function authNumCheck(){
-    	var enteredAuthNum = $("#authenticationNumber").val();
+       var enteredAuthNum = $("#authenticationNumber").val();
 
         if (!enteredAuthNum) {
             alert("인증코드를 입력해 주세요.");
             return;
         }
         // 입력한 아이디가 다른 경우
-   	
+      
         $.ajax({
             url: "${pageContext.request.contextPath}/sendMail/authNumcheck",
             type: "post",
             data: { authNum: enteredAuthNum }, // Sending the entered authentication number
             success: function (data) {
-                if (data === true) {
+                console.log(data);
+                if (parseInt(data) > 0 ) {
                     $("#authenticationNumber").prop("readonly", true);
                     $("#changePw").show();
+                    authNumCheckFlag = true; // 인증번호 성공 여부 true로 변경
                 } else {
                     alert("인증코드가 올바르지 않습니다.");
                 }
@@ -175,8 +179,13 @@
             }
         });
     }
-   /*  
+   
     function changePassword() {
+        var empId = $("#changePwCheckId").val();
+        if(empId != '' || !authNumCheckFlag){
+            alert('인증 후 이용해주세요.');
+            return;
+        }
         var newPassword = $("#newPassword").val();
         var checkNewPassword = $("#checkNewPassword").val();
 
@@ -188,26 +197,28 @@
             alert("비밀번호가 일치하지 않습니다.");
             return;
         }
-
+        
         // 비밀번호 변경 처리 추가
         $.ajax({
-            url: "${path}/changePassword",
+            url: "${pageContext.request.contextPath}/sendMail/changePassword",
             type: "post",
-            data: { newPassword: newPassword },
+            data: { 
+                password: newPassword,
+                id : empId
+             },
             success: function (data) {
-                if (data === "성공") {
+                console.log(data);
+                
+                if (parseInt(data) > 0) {
                     alert("비밀번호를 변경했습니다.");
+                    window.location.reload(); // 새로고침
                 } else {
                     alert("비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
                 }
             }
         });
-    } */
-</script>
+    } 
 
-
-<!-- 아이디 저장 -->
-<script>
 $(document).ready(function() {
     $("#userId").val(Cookies.get('key'));      
     if ($("#userId").val() !== "") {
@@ -234,7 +245,7 @@ $(document).ready(function() {
 
 
 
-	<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+   <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 
 </body>
 
