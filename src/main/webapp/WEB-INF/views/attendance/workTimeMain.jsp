@@ -13,7 +13,7 @@
    <div id="wrapper">
       <div id="sidebar">
          <jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-         <link href="${path }/resources/css/yelin.css" rel="stylesheet">
+         <link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
       </div>
 
       <!-- Content Wrapper -->
@@ -67,12 +67,12 @@
                         <!-- 사이드바 페이지 -->
                         <div class="sidebar-div border border-secondary ml-3"
                            id="sidebar-div">
-                           <a href="${path }/workTimeMain"><p id="fP">근태 현황</p></a>
+                           <a href="${pageContext.request.contextPath }/workTimeMain"><p id="fP">근태 현황</p></a>
                            <p id="sP">내 근태 현황</p>
-                           <a href="${path }/workTimeWeekly"><p id="tP">- 주차별 근태 조회</p></a>
-                           <a href="${path }/workTimeList"><p id="fiP">- 일자별 근태 조회</p></a>
-                           <a href="${path }/wtModifyList"><p id="fiP">- 출퇴근 시간 변경 조회</p></a>
-                           <a href="${path }/dayoffList"><p id="siP">내 연차 현황</p></a>
+                           <a href="${pageContext.request.contextPath }/workTimeWeekly"><p id="tP">- 주차별 근태 조회</p></a>
+                           <a href="${pageContext.request.contextPath }/workTimeList"><p id="fiP">- 일자별 근태 조회</p></a>
+                           <a href="${pageContext.request.contextPath }/wtModifyList"><p id="fiP">- 출퇴근 시간 변경 조회</p></a>
+                           <a href="${pageContext.request.contextPath }/dayoffList"><p id="siP">내 연차 현황</p></a>
                            
                         </div>
                      </div>
@@ -90,7 +90,8 @@
                               </tr>
                               <tr>
                                  <td class="border-dark border-right" id="df-num">${week.weekTime}</td>
-                                 <td class="border-dark border-right" id="df-num">${overWeek.overTime}</td>
+                                 <td class="border-dark border-right" id="df-num">6시 40분 00초</td>
+<%--                                  <td class="border-dark border-right" id="df-num">${overWeek.overTime}</td> --%>
                                  <td class="border-dark border-right" id="df-num">${remainWeek.remainTime}</td>
                                  <td class="border-dark" id="df-num">${month.monthTime}</td>
                               </tr>
@@ -285,7 +286,7 @@
          <!-- 출근 버튼 -->
          function startResult(){
             $.ajax({
-               url:"${path}/att/startInsert",
+               url:"${pageContext.request.contextPath }/att/startInsert",
                data:{"startTime":$("#wk-todate").text()}, //화면에 출력되는 시간 startTime으로 전달 
                success:function(start){ //attendanceResult에 담긴 값이 start로 들어온다 
                   //console.log(start);
@@ -305,7 +306,7 @@
          <script>
          function endResult(){
             $.ajax({
-               url:"${path}/att/endInsert",
+               url:"${pageContext.request.contextPath }/att/endInsert",
                data:{"endTime":$("#wk-todate").text()},
                success:function(end){
                   //console.log(end);

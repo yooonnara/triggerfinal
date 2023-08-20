@@ -28,7 +28,7 @@
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 					<!-- smartEditor -->
-					<script type="text/javascript" src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>		
+					<script type="text/javascript" src="${pageContext.request.contextPath }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>		
 				</div>
 				<!-- 상단바 종료 End of Topbar -->
 
@@ -53,7 +53,7 @@
 									<col width="15%" />
 									<col width="85%" />
 								</colgroup>
-								<form id="cmmForm" name="cmmForm" action="${path }/board/communityModifySubmit" method="post">
+								<form id="cmmForm" name="cmmForm" action="${pageContext.request.contextPath }/board/communityModifySubmit" method="post">
 								<tbody>
 									<tr>
 										<input name="no" value="${board.no }" hidden>
@@ -103,7 +103,7 @@
 				nhn.husky.EZCreator.createInIFrame({
 				oAppRef : oEditors,
 				elPlaceHolder : "contents",
-				sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
+				sSkinURI: "${pageContext.request.contextPath }/resources/smarteditor2/SmartEditor2Skin.html",
 				fCreator : "createSEditor2"
 				})
 					

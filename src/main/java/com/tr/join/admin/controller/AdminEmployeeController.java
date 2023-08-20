@@ -43,7 +43,9 @@ public class AdminEmployeeController {
 	
 	// 메인
 	@RequestMapping("/admin/adminMain")
-	public String adminPage() {
+	public String adminPage(Model m) {
+		Employee sessionEmp = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		m.addAttribute("sessionEmp",sessionEmp);
 		return "admin/adminMain";
 	}
 	

@@ -133,6 +133,7 @@
              alert("아이디를 입력해 주세요.");
              return;
          }
+         // 입력한 아이디가 다른 경우
        
        $.ajax({
           url:"${pageContext.request.contextPath}/sendMail/idCheck",
@@ -158,7 +159,8 @@
             alert("인증코드를 입력해 주세요.");
             return;
         }
-        // 입력한 아이디가 다른 경우
+        // 인증코드가 다를 경우
+       
       
         $.ajax({
             url: "${pageContext.request.contextPath}/sendMail/authNumcheck",
