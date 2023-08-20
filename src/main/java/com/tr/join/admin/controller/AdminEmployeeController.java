@@ -123,10 +123,10 @@ public class AdminEmployeeController {
 		String msg,loc;
 		if(result>0) {
 		msg="사원이 생성되었습니다.";
-		loc="/adminEmployee";
+		loc="/admin/adminEmployee";
 		}else {
 			msg="생성에 실패했습니다. 다시 시도해 주세요.";
-			loc="/adminEmployee";
+			loc="/admin/adminEmployee";
 		}
 		m.addAttribute("msg",msg);
 		m.addAttribute("loc",loc);
@@ -220,10 +220,10 @@ public class AdminEmployeeController {
 		String msg,loc;
 		if(result>0) {
 		msg="사원정보가 수정되었습니다.";
-		loc="/adminEmployee";
+		loc="/admin/adminEmployee";
 		}else {
 			msg="수정에 실패했습니다. 다시 시도해 주세요.";
-			loc="/adminEmployee";
+			loc="/admin/adminEmployee";
 		}
 		m.addAttribute("msg",msg);
 		m.addAttribute("loc",loc);

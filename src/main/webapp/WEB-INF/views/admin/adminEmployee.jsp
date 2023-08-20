@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="${path }/resources/css/nara.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/nara.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
@@ -232,7 +232,7 @@ function deleteEmployee(){
 			success:function(result){
 				if (result > 0) {
 	                alert("사원이 삭제되었습니다.");
-					location.replace("/adminEmployee");
+					location.replace("/admin/adminEmployee");
 				}else {
 	                alert("삭제에 실패했습니다. 다시 시도해 주세요.");
 	            }
