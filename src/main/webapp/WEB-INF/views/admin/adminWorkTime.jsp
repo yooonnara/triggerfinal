@@ -35,7 +35,7 @@
               <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전사원 근태 현황</h1>
-                    <div class="adminWorkingTimeList-container" style="width:1100px">  
+                    <div class="adminWorkingTimeList-container">  
                     <!-- 근무상태 검색 & 시작및종료일 검색 버튼 영역 -->
                     <div class="row justify-content-between" id="big-search">
                         <!-- 근무상태 검색 버튼 -->
