@@ -155,7 +155,7 @@
                                     <td>${e.emp.deptTitle }</td>
                                     <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.name }</td>
-                                    <td><a href="${path }/edms/edmsView?no=${e.no}">${e.title }</a></td>
+                                    <td><a href="${pageContext.request.contextPath }/edms/edmsView?no=${e.no}">${e.title }</a></td>
                                     <td>
                                     <c:choose>
                                     	<c:when test="${e.type==0 }">연차</c:when>

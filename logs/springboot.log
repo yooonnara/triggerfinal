@@ -10628,3 +10628,21 @@ Caused by: java.io.FileNotFoundException: class path resource [com/tr/join/admin
 	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174) ~[spring-context-5.3.29.jar:5.3.29]
 	... 18 common frames omitted
 
+2023-08-20 19:50:58.483  INFO 17320 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Starting Gdj64JoinFinalApplication using Java 17.0.7 on DESKTOP-M8CTEFU with PID 17320 (C:\Users\user\git\triggerfinal\target\classes started by user in C:\Users\user\git\triggerfinal)
+2023-08-20 19:50:58.484  INFO 17320 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-08-20 19:51:00.393  INFO 17320 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-08-20 19:51:00.454  INFO 17320 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 0 JDBC repository interfaces.
+2023-08-20 19:51:00.555  WARN 17320 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.tr.join]' package. Please check your configuration.
+2023-08-20 19:51:00.799  INFO 17320 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-20 19:51:00.800  INFO 17320 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-20 19:51:00.800  INFO 17320 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.79]
+2023-08-20 19:51:01.852  INFO 17320 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-08-20 19:51:01.858  INFO 17320 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2023-08-20 19:51:01.858  INFO 17320 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3344 ms
+2023-08-20 19:51:02.282  INFO 17320 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7dc30ccb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1c3bf30f, org.springframework.security.web.context.SecurityContextPersistenceFilter@4f816c91, org.springframework.security.web.header.HeaderWriterFilter@28221bdf, org.springframework.security.web.authentication.logout.LogoutFilter@26cf18b4, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6b115105, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2d8f6f4a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e47f09f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6aa18b7f, org.springframework.security.web.session.SessionManagementFilter@1d5e5383, org.springframework.security.web.access.ExceptionTranslationFilter@2af56d5e, org.springframework.security.web.access.intercept.AuthorizationFilter@2317baa5]
+2023-08-20 19:51:02.483  INFO 17320 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-08-20 19:51:02.611  INFO 17320 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-08-20 19:51:02.633  INFO 17320 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-08-20 19:51:02.652  INFO 17320 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-20 19:51:02.659  INFO 17320 --- [restartedMain] com.tr.join.Gdj64JoinFinalApplication    : Started Gdj64JoinFinalApplication in 4.391 seconds (JVM running for 830.779)
+2023-08-20 19:51:02.663  INFO 17320 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
