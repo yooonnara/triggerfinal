@@ -16,7 +16,7 @@
 		<!-- 사이드바 시작 Sidebar -->
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
+			<link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
 		</div>
 		<!-- 사이드바 종료 End of Sidebar -->
 
@@ -317,7 +317,7 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <form action="${path }/workTimeModify" class="dayOff"  onsubmit="return confirm('출퇴근 시간 변경을 신청하시겠습니까?')" method="post">
+                                <form action="${pageContext.request.contextPath}/workTimeModify" class="dayOff"  onsubmit="return confirm('출퇴근 시간 변경을 신청하시겠습니까?')" method="post">
                                 <!-- Modal body -->        
                                 <div class="modal-body">
                                     <table id="workTimeTable" style="width:400px;" class="table table-borderless text-dark">

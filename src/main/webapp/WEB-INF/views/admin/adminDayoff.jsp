@@ -92,7 +92,7 @@
                    
                    <script>
                    		function openCalendar(){
-                   			var url = "${path}/admin/adminDayoffCalendar"
+                   			var url = "${pageContext.request.contextPath }/admin/adminDayoffCalendar"
                    			var name = "adminDayoffCalendar"
                    			var option = "width=1000, height=730, top=10, location=no"
                    			window.open(url,name,option);
@@ -157,7 +157,7 @@
                             </colgroup>
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th><input type="checkbox"></th>
+                                    <th class="align-middle"><input type="checkbox"></th>
                                     <th>이름</th>
                                     <th>부서</th>
                                     <th>입사일</th>
@@ -171,7 +171,7 @@
 	                            <c:if test="${not empty adminDayoff }">
 	                            <c:forEach var="ad" items="${adminDayoff }">
                                 <tr>
-                                    <td><input type="checkbox" name="ck" value="${ad.no }"></td>
+                                    <td class="align-middle"><input type="checkbox" name="ck" value="${ad.no }"></td>
                                     <td>${ad.emp.name }</td>
                                     <td>${ad.emp.deptTitle}</td>
                                     <td>${ad.emp.enrollDate }</td>
@@ -237,7 +237,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="frm" name="frm" class="dayOff"  action="${path }/admin/insertDayoff" method="post">
+                                    <form id="frm" name="frm" class="dayOff"  action="${pageContext.request.contextPath }/admin/insertDayoff" method="post">
                                         <!--  class="table-bordered" -->
                                         <table id="dayOffTable" class="table table-borderless text-dark">
                                             <colgroup>

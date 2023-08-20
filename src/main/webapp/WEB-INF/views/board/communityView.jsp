@@ -44,11 +44,11 @@
 					<!-- 삭제/수정 버튼 -->
 					<c:if test="${loginNo == board.empNo}">
 						<div class="float-left">
-						<a href="${path }/board/communityModify.do?no=${board.no}"  class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</a>
-						<a href="${path }/board/communityDelete.do?no=${board.no}" class="btn btn-secondary mt-3 btn-sm mb-3">삭제하기</a>
+						<a href="${pageContext.request.contextPath }/board/communityModify.do?no=${board.no}"  class="btn btn-primary ml-2 mt-3 mr-3 float-right btn-sm mb-3">수정하기</a>
+						<a href="${pageContext.request.contextPath }/board/communityDelete.do?no=${board.no}" class="btn btn-secondary mt-3 btn-sm mb-3">삭제하기</a>
 						</div>
 					</c:if>	
-						<a href="${path }/community" class="btn btn-secondary float-right mt-3 btn-sm mb-3">목록</a>
+						<a href="${pageContext.request.contextPath }/community" class="btn btn-secondary float-right mt-3 btn-sm mb-3">목록</a>
 
 
 						<div class="board-container">
@@ -84,7 +84,7 @@
 										<td class="text-center" id="cwTd" colspan="2">
 											<textarea name="contents" id="contents" class="bg-light mt-3"  style="width:800px; border:none; resize:none;">${board.content }</textarea>
 											<c:if test="${not empty board.file and board.file[0].boardNo!=0}">
-											<img src="${path }/resources/upload/board/${board.file[0].saveFileName}"/>
+											<img src="${pageContext.request.contextPath }/resources/upload/board/${board.file[0].saveFileName}"/>
 											</c:if>
 										</td>
 									</tr>
@@ -94,7 +94,7 @@
 						
 						<script>
 							function fileDownload(oriName, reName){
-								location.assign("${path}/board/fileDownload?oriname="+oriName+"&rename="+reName);
+								location.assign("${pageContext.request.contextPath }/board/fileDownload?oriname="+oriName+"&rename="+reName);
 							};
 						</script>
 						
@@ -112,7 +112,7 @@
 									<col width="10%" />
 								</colgroup>
 								<th class="text-left">댓글 작성</th>
-								<form name="comment-form" action="${path }/board/commentWrite" method="post">	
+								<form name="comment-form" action="${pageContext.request.contextPath }/board/commentWrite" method="post">	
 									<tbody>
 									<c:if test="${not empty comment }">
 									<c:forEach var="c" items="${comment }">
@@ -147,12 +147,12 @@
 
 			<script>
 				$("#comment-form").on('submit',function(e){
-				   /*  var name = $("#name").val();
+				   		var name = $("#name").val();
 				    var boardNo = $("#boardNo").val();
 				    var empNo = $("#empNo").val();
-				    var comment = $("#comment").val(); */
+				    var comment = $("#comment").val();
 				    
-				    $.ajax({
+				    /* $.ajax({
 				    	url:"/board/commentWrite",
 				    	data: {"name":name, "boardNo":boardNo,"empNo":empNo,"comment":comment
 				    	}
@@ -160,7 +160,7 @@
 				    		console.log(c);
 				    		
 				    	}
-				    })
+				    }) */
 			   });
 			</script>	
 			

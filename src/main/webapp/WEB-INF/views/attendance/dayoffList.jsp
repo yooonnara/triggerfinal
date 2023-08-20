@@ -15,7 +15,7 @@
 		<!-- 사이드바 시작 Sidebar -->
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
+			<link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
 		</div>
 
 		<div id="content-wrapper" class="d-flex flex-column">

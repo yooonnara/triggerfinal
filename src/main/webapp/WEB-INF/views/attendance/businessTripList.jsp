@@ -55,7 +55,7 @@
                                 <col style="width:80px">
                                 <col style="width:100px">
                             </colgroup>
-                            <thead class="bg-primary">
+                            <thead class="bg-primary text-white">
                                 <tr>
                                     <th>이름</th>
                                     <th>부서</th>

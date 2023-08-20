@@ -20,7 +20,7 @@
 				<div id="topbar">
 					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 					<!-- smartEditor -->
-					<script type="text/javascript" src="${path }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>		
+					<script type="text/javascript" src="${pageContext.request.contextPath }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>		
 				</div>
 				<!-- 수정할 컨테이너 Begin Page Content -->
                 <div class="container-fluid pl-5 pr-5">
@@ -33,7 +33,7 @@
 									<col width="15%" />
 									<col width="85%" />
 								</colgroup>
-								<form id="cmForm" name="cmForm" action="${path }/board/insertCommunityWrite" method="post" enctype="multipart/form-data" >
+								<form id="cmForm" name="cmForm" action="${pageContext.request.contextPath }/board/insertCommunityWrite" method="post" enctype="multipart/form-data" >
 								<tbody>
 									<tr>
 										<td class="text-center align-middle">작성자</td>
@@ -88,7 +88,7 @@
 					nhn.husky.EZCreator.createInIFrame({
 				    oAppRef : oEditors,
 				    elPlaceHolder : "contents",
-					sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
+					sSkinURI: "${pageContext.request.contextPath }/resources/smarteditor2/SmartEditor2Skin.html",
 					fCreator : "createSEditor2"
 					})
 				
