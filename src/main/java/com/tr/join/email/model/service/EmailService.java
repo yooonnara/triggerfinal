@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class EmailService {
 
-    private final JavaMailSender javaMailSender;
+	private final JavaMailSender javaMailSender;
     private final EmployeeService employeeService;
 
     
