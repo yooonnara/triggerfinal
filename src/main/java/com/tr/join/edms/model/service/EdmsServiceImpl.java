@@ -171,6 +171,13 @@ public class EdmsServiceImpl implements EdmsService {
 	
 
 	@Override
+	public int selectSearchCt(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return dao.selectSearchCt(session,param);
+	}
+
+
+	@Override
 	public int selectSearchCount(Map<String,Object> param) {
 		// TODO Auto-generated method stub
 		return dao.selectSearchCount(session,param);
@@ -229,9 +236,9 @@ public class EdmsServiceImpl implements EdmsService {
 
 	//연차 페이지 ajax로 검색하기 
 	@Override
-	public List<Edms> searchVc(Edms edms) {
+	public List<Edms> searchVc(Edms edms,Map<String,Integer> page) {
 		// TODO Auto-generated method stub
-		return dao.searchVc(session,edms);
+		return dao.searchVc(session,edms,page);
 	}
 	
 	

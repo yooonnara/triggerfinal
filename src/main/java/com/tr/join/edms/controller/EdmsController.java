@@ -174,10 +174,10 @@ public class EdmsController {
 		
 		String msg,loc;
 		if (result>0){
-				msg="연차신정완료";
-				loc="/main";
+				msg="연차신청이 완료되었습니다 :)";
+				loc="/edms/bsnList";
 			}else {
-				msg="연차신청실패";
+				msg="연차신청이 실패되었습니다 :(";
 				loc="/edms/vcRequest";
 			}
 			m.addAttribute("msg",msg);
@@ -282,7 +282,9 @@ public class EdmsController {
 		return("admin/adminVcView");
 	}
 	
-	//어드민 연차 출력하기 
+
+			
+			//어드민 연차 출력하기 
 			@GetMapping("/adminVc")
 			public String adminVcSelect(@RequestParam(value="cPage", defaultValue="1") int cPage,
 					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m) {
@@ -294,7 +296,7 @@ public class EdmsController {
 					m.addAttribute("pageBar", PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminVc", param));
 					m.addAttribute("totalData",totalData);
 					m.addAttribute("edms",edms);
-				
+					
 					edms.forEach(System.out::println);
 					return "admin/adminVc";
 				}
@@ -418,6 +420,9 @@ public class EdmsController {
 		
 	
 	
+
+	
+	
 	//에이젝스 이용자 검색 기능 
 	
 	@GetMapping("/bsnList/eSearch")
@@ -460,30 +465,33 @@ public class EdmsController {
 	
 	
 	
-	//@RequestMapping("/paging")
-	//public String paging(@RequestParam(value="cPage",defaultValue="1")int cPage,
-	//		@RequestParam(value="numPerpage",defaultValue="5")int numPerpage) {
-	//	List<Edms> list=service.selectPage(cPage,numPerpage);
-	//	return "";
-	//}
-	
-	
-	
-	
-	
 	//연차 에이젝스 검색 기능 
 	@GetMapping("/adminVc/searchVc")
 	@ResponseBody
-	public List<Edms>searchVc(@RequestParam("category") String category,
+	public Map<String,Object> searchVc(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,
+			@RequestParam("category") String category,
 			@RequestParam("keyword") String keyword, Model m) throws Exception{
 		
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
+		Map<String,Integer> page=Map.of("cPage",cPage,"numPerpage",numPerpage);
+		List<Edms> searchVc =service.searchVc(edms,page);
+		Map<String,Object> param=new HashMap();
+		param.put("cPage",cPage);
+		param.put("numPerpage",numPerpage);
+		param.put("category",category);
+		param.put("keyword",keyword);
+		int totalData=service.selectSearchCt(param);
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("edms",searchVc);
+	String pageBar=PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminVc/searchVc",param);
 		
+		//페이지 바도 처리해줘야함 
+	searchVc.forEach(System.out::println);
 		
-		List<Edms> searchVc=service.searchVc(edms);
-		return searchVc;
+		return Map.of("edms",searchVc,"pageBar",pageBar);
 		
 	}
 	
@@ -493,14 +501,19 @@ public class EdmsController {
 	public String updateAppStatus(int no, int appStatus,Model m){
 	int result=service.updateAppStatus(Map.of("no",no,"appStatus",appStatus));
 	String msg,loc;
-	if(result>0) {
-		msg="승인 완료되었습니다.";
-	loc="/edms/adminBsn";
-	}else {
-	msg="승인이 반려되었습니다.";
-	loc=
-	"/admin";
-}
+	   if (result > 0) {
+	        if (appStatus == 1) {
+	            msg = "승인 완료되었습니다.";
+	        } else if (appStatus == 2) {
+	            msg = "승인이 반려되었습니다.";
+	        } else {
+	            msg = "상태가 변경되었습니다.";
+	        }
+	        loc = "/edms/adminBsn";
+	    } else {
+	        msg = "처리에 실패하였습니다.";
+	        loc = "/admin";
+	    }
 m.addAttribute("msg",msg);
 m.addAttribute("loc",loc);
 

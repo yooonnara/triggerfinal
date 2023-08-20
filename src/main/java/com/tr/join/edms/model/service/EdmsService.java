@@ -49,6 +49,8 @@ public interface EdmsService {
  
  int selectSearchCount(Map<String,Object> param);
  
+ int selectSearchCt(Map<String,Object> param);
+ 
  int selectCount(Map<String,Object> param);
  int selectajCount(Map<String,Object> ajaxParam);
  
@@ -62,7 +64,7 @@ public interface EdmsService {
  
  Edms selectByVcNo(int no);
  
- List<Edms> searchVc(Edms edms);
+ List<Edms> searchVc(Edms edms,Map<String,Integer> page);
 
 int deleteEdms(Edms e);
 int deleteVcBtn(Edms e);

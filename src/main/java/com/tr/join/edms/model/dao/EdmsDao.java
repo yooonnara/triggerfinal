@@ -54,6 +54,7 @@ public interface EdmsDao {
 		
 		int selectajaxCount(SqlSession session,Map<String,Object> param );
 		
+		int selectSearchCt(SqlSession session,Map<String,Object> param );
 		
 		//어드민 계정 연차 출력하기 
 		List<Edms> adminVcSelect(SqlSession session, Map<String,Object> param);
@@ -62,7 +63,7 @@ public interface EdmsDao {
 		Edms selectByVcNo(SqlSession session, int no);
 		
 		//어드민 계정 연차 ajax로 검색하기 
-		List<Edms> searchVc(SqlSession session, Edms edms);
+		List<Edms> searchVc(SqlSession session, Edms edms,Map<String,Integer> page);
 		
 		//이용자 계정 ajax 검색하기 
 		List<Edms> selecteSearch(SqlSession session, Edms edms,Map<String,Integer> page);
