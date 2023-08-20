@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
-<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -42,10 +41,10 @@
 											<h5>사이트 URL</h5><h6>www.joinoffce.com</h6>
 										</div>
 										<div class="col-3">
-											<h5>담당자</h5><h6>윤나라</h6>
+											<h5>담당자</h5><h6>${sessionEmp.name}</h6>
 										</div>
 										<div class="col-3">
-											<h5>총 계정 수</h5><h6>3명</h6>
+											<h5>총 계정 수</h5><h6>19명</h6>
 										</div>
 										<div class="col-auto">
 										</div>
