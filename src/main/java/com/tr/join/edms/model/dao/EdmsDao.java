@@ -79,6 +79,7 @@ public interface EdmsDao {
 		
 		int deleteEdms(SqlSession session, Edms e);
 		
+		int deleteVcBtn(SqlSession session, Edms e);
 
 
 }

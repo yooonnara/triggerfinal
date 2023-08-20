@@ -198,6 +198,15 @@ public class EdmsServiceImpl implements EdmsService {
 		// TODO Auto-generated method stub
 		return dao.deleteEdms(session, e);
 	}
+	
+	
+
+
+	@Override
+	public int deleteVcBtn(Edms e) {
+		// TODO Auto-generated method stub
+		return dao.deleteVcBtn(session, e);
+	}
 
 
 	@Override

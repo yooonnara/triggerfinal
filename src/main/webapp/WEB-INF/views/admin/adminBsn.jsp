@@ -105,7 +105,7 @@
                             <c:forEach var="a" items="${edms}">
                                 <tr>
                                  <td class="align-middle"><input type="checkbox" name="chk" value="${a.no }"></td>
-                                	<td>${a.no }</td>
+                                	 <td> ${pageStartRowNum}</td>
                                     <td>${a.createDate }</td> 
                                     <td>${a.emp.deptTitle }</td>
                                     <td>${a.emp.jobTitle }</td>
@@ -119,13 +119,14 @@
                                     </c:choose>
                                     </td>
                                   <td >
-                                  <a href="/edms/adminBnsView?no=${a.no}" > 
+                                  <a href="${pageContext.request.contextPath}/edms/adminBnsView?no=${a.no}" > 
                                   	<c:if test="${a.appStatus==0 }">결재대기</c:if>
                                   	<c:if test="${a.appStatus==1 }">승인</c:if>
                                   	<c:if test="${a.appStatus==2 }">반려</c:if>
                                   </a>
                                </td>                                 
                                 </tr>
+                                <c:set var="pageStartRowNum" value="${pageStartRowNum-1}"></c:set>
                                 </c:forEach>
                                 </c:if>
                             </tbody> 
@@ -197,7 +198,7 @@
                         function fn_paging(cPage,numPerpage,category,keyword){
                         	console.log(cPage);
                         	$.ajax({
-                        		url:"${path}/edms/adminBsn/search",
+                        		url:"${pageContext.request.contextPath}/edms/adminBsn/search",
                         		data:{cPage:cPage,numPerpage:numPerpage,category:category,keyword:keyword},
                         		success:function(w){
                             		$("#edms-std").html("");

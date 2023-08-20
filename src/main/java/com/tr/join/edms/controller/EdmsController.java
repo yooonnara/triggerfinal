@@ -217,6 +217,8 @@ public class EdmsController {
 			m.addAttribute("pageBar",PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/bsnList",param));
 			m.addAttribute("totalData",totalData);
 			m.addAttribute("edms",list);
+			int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+			m.addAttribute("pageStartRowNum", pageStartRowNum);
 			//페이지 바도 처리해줘야함 
 			list.forEach(System.out::println);
 			//System.out.println(m);
@@ -249,7 +251,18 @@ public class EdmsController {
 			return result ;
 		}
 		
-		
+		//어드민 연차 체크리스트 삭제하기
+		@RequestMapping("/ajax/deleteVcBtn")
+		@ResponseBody
+		public int deleteVcBtn(Edms e, @RequestParam(value="edmsVcList[]") ArrayList<Integer> edmsVcList) {
+			System.out.println(edmsVcList);
+			int result=0;
+			for(int i=0; i<edmsVcList.size(); i++) {
+				e.setNo(edmsVcList.get(i));
+				result +=service.deleteVcBtn(e);
+			}
+			return result ;
+		}
 		
 	
 	@GetMapping("/adminBnsView")
@@ -281,7 +294,7 @@ public class EdmsController {
 					m.addAttribute("pageBar", PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminVc", param));
 					m.addAttribute("totalData",totalData);
 					m.addAttribute("edms",edms);
-					
+				
 					edms.forEach(System.out::println);
 					return "admin/adminVc";
 				}
@@ -321,6 +334,8 @@ public class EdmsController {
 				m.addAttribute("pageBar", PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminBsn", param));
 				m.addAttribute("totalData",totalData);
 				m.addAttribute("edms",edms);
+				int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+				m.addAttribute("pageStartRowNum", pageStartRowNum);
 				edms.forEach(System.out::println);
 				//System.out.println(m);
 				return "admin/adminBsn";
@@ -348,6 +363,8 @@ public class EdmsController {
 	int totalData=service.selectajCount(ajaxParam);
 	m.addAttribute("totalData", totalData);
 	m.addAttribute("ajaxParam", searchEdmsByStatus);
+	int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+	m.addAttribute("pageStartRowNum", pageStartRowNum);
 	String pageBar=PageFactoryEdms.getAjaxPaging(cPage, numPerpage, totalData, "/adminBsn",ajaxParam);
 	
 	//페이지 바도 처리해줘야함 
@@ -386,6 +403,8 @@ public class EdmsController {
 		//m.addAttribute("pageBar",PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/bsnList/eSearch",param));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("edms",search);
+		int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+		m.addAttribute("pageStartRowNum", pageStartRowNum);
 		String pageBar=PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminBsn",param);
 		
 		//페이지 바도 처리해줘야함 
@@ -461,6 +480,8 @@ public class EdmsController {
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
+		
+		
 		List<Edms> searchVc=service.searchVc(edms);
 		return searchVc;
 		

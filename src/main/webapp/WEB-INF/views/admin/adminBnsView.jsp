@@ -122,7 +122,7 @@
 						<div class="btn-click col text-center pb-5">
                                   <button type="button" class="btn btn-dark" id="vcButton1" onclick="changeResult('${edms.no }',1);">결재승인</button>
                       		 <button type="button" class="btn btn-danger" id="button2" onclick="changeResult('${edms.no }',2);">승인 반려</button>
-                        <button class="btn btn-secondary" type="button" id="button3" onclick="location.href='${path }/edms/adminBsn'">취소</button>
+                        <button class="btn btn-secondary" type="button" id="button3" onclick="location.href='${pageContext.request.contextPath }/edms/adminBsn'">취소</button>
                         </div>
 						</form>
 					</div>
@@ -130,15 +130,10 @@
 			
 			      </div>
                   <script>
-                  	function changeResult(edmsNo,appStatus){
-                  		location.replace('${pageContext.request.contextPath}/edms/adminBsnView/statuschange?no='+edmsNo+"&appStatus="+appStatus);
-                  	}
-                	
-    				function fn_fileDownload(oriName,reName){
-    					location.assign("${pageContext.request.contextPath}/edms/filedownload?oriname="+oriName+"&rename="+reName);
-    				};
-    				
-                  </script>
+				function fn_fileDownload(oriName,reName){
+					location.assign("${pageContext.request.contextPath}/edms/filedownload?oriname="+oriName+"&rename="+reName);
+				};
+				</script>
            
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
             </div>

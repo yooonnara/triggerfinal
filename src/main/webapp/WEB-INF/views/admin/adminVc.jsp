@@ -67,6 +67,13 @@
                         			console.log(n);
                         			for(let i=0; i<n.length;i++){
                         				const $tr=$("<tr>");
+                                    const $checkboxCell = $("<td>").addClass("align-middle");
+             		                    const $checkbox = $("<input>").attr({
+             		                        type: "checkbox",
+             		                        name: "chk",
+             		                        value: n[i]["no"]
+             		                    });
+                                         $checkboxCell.append($checkbox);
                         				const $no=$("<td>").text(n[i]["no"]);
                         				const $createDate=$("<td>").text(n[i]["createDate"]);
                         				const $deptTitle=$("<td>").text(n[i]['emp']["deptTitle"]);
@@ -88,7 +95,7 @@
                         				}
                         				
                         				const $appStatus=$("<td>").text(appStatus);
-                        				$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).
+                                            $tr.append($checkboxCell).append($no).append($createDate).append($deptTitle).append($jobTitle).
                         				append($name).append($title).append($type).append($appStatus);
                         				$("#edms-vc").append($tr);
                         			}
@@ -185,26 +192,54 @@
                      
                      
                      <script>
-                     //체크 박스 
-                     $(function(){
-                    	 $("#chkAll").click(function(){
-                    		 if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked",true);
-                    		 else $("input [name=chk]").prop("checked",false);
-                    		 
-                    	 });
-                    	 $("input[name=chk]").click(function(){
-                    		 var total=$("input[name=chk]").length;
-                    		 var checked= $("input[name=chk]:checked").length;
-                    		 
-                    		 if(total !=checked)  $("#chkAll").prop("checked", false);
-                    		else $("#chkAll").prop("checked", true);
-                    	 
-                    	 });
-                    	
-                    });
-                     
-                     </script>
-
+                        //체크 박스 
+                        $(function(){
+                            $("#chkAll").click(function(){
+                                if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked",true);
+                                else $("input [name=chk]").prop("checked",false);
+                                
+                            });
+                            $("input[name=chk]").click(function(){
+                                var total=$("input[name=chk]").length;
+                                var checked= $("input[name=chk]:checked").length;
+                                
+                                if(total !=checked)  $("#chkAll").prop("checked", false);
+                               else $("#chkAll").prop("checked", true);
+                            
+                            });
+                        });
+                              //선택삭제 
+                            function deleteVcBtn(){
+                                if(confirm("삭제하시겠습니까?")){
+                                var edmsVcList = [];
+                                $("td>input[type=checkbox]:checked").each(function(){
+                                    var chk =$(this).val();//사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
+                                    edmsVcList.push(chk); //배열에 추가해주고 값을 넘긴다. 
+                                });
+                                console.log(edmsVcList);
+                                
+                            $.ajax({
+                                url:"${pageContext.request.contextPath}/edms/ajax/deleteVcBtn",
+                                type : 'post',
+                                data:{
+                                    edmsVcList : edmsVcList
+                                },
+                                success:function(result){
+                                    if (result>0) {
+                                        alert("게시물이 삭제되었습니다.");
+                                        location.replace("${pageContext.request.contextPath}/edms/adminVc");
+                                        }else{
+                                            alert("삭제에 실패했습니다:( 다시 시도해주세요.");
+                                        }
+                                    },
+                                    error:function(){
+                                        alert("오류가 발생했습니다, 다시 시도해주세요");
+                                    }
+                            })
+                            }
+                        }
+                        </script>
+                        
  
               <!-- 페이징 -->
                         <div class="pasing-area">
@@ -261,7 +296,9 @@
                         	}
                         	})
                             });
-                    </div>
+                            </script>
+                  
+                </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 
@@ -290,9 +327,7 @@
 	<div id="bootstrap">
 		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 	</div>
-<!-- datepicker -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 </body>
 
 </html>

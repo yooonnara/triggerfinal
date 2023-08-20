@@ -94,6 +94,13 @@ public class EdmsDaoImpl implements EdmsDao {
 		return session.delete("edms.deleteEdms",e);
 	}
 
+	
+	@Override
+	public int deleteVcBtn(SqlSession session, Edms e) {
+		// TODO Auto-generated method stub
+		return session.delete("edms.deleteVcBtn", e);
+	}
+
 
 
 

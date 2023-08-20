@@ -105,13 +105,10 @@
                             </tr>
                             </tbody> 
 						</table>
-						
-						
-						
-						<div class="btn-click col text-center pb-5">
-                                  <button class="btn btn-dark" id="button1" onclick="button1_click();">결재승인</button>
-                      		 <button class="btn btn-danger" id="button2" onclick="button2_click();">승인 반려</button>
-                        <button class="btn btn-secondary" id="button3" onclick="button1_click();">취소</button>
+					<div class="btn-click col text-center pb-5">
+                                  <button type="button" class="btn btn-dark" id="vcButton1" onclick="changeResult('${edms.no }',1);">결재승인</button>
+                      		 <button type="button" class="btn btn-danger" id="button2" onclick="changeResult('${edms.no }',2);">승인 반려</button>
+                        <button class="btn btn-secondary" type="button" id="button3" onclick="location.href='${pageContext.request.contextPath }/edms/adminVc'">취소</button>
                         </div>
 						</form>
 					</div>

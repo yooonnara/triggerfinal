@@ -60,7 +60,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item">결재 문서 관리</a>
                 <a href="${pageContext.request.contextPath}/edms/adminVc"><h6 class="collapse-header">- 연차 문서 관리</h6></a>
-                <a href="$${pageContext.request.contextPath}/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
+                <a href="${pageContext.request.contextPath}/edms/adminBsn"><h6 class="collapse-header">- 출장 문서 관리</h6></a>
             </div>
         </div>
     </li>

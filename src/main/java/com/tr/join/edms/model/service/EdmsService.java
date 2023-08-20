@@ -65,6 +65,7 @@ public interface EdmsService {
  List<Edms> searchVc(Edms edms);
 
 int deleteEdms(Edms e);
+int deleteVcBtn(Edms e);
 
 List<Edms> vcEdmsByStatus(Map<String, Object> param);
  

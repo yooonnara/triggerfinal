@@ -146,13 +146,16 @@
                             <tbody id="em-sts">
                             <c:if test="${not empty edms}">
                             <c:forEach var="e" items="${edms}">
+                  
                                 <tr onclick="edmsList(${e.no});">
-                                	<td>${e.no}</td>
+                                
+                                <td> ${pageStartRowNum}</td>
+                                	
                                     <td>${e.createDate }</td> 
                                     <td>${e.emp.deptTitle }</td>
                                     <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.name }</td>
-                                    <td><a href="${pageContext.request.contextPath }/edms/edmsView?no=${e.no}">${e.title }</a></td>
+                                    <td><a href="${path }/edms/edmsView?no=${e.no}">${e.title }</a></td>
                                     <td>
                                     <c:choose>
                                     	<c:when test="${e.type==0 }">연차</c:when>
@@ -161,13 +164,14 @@
                                     </c:choose>
                                     </td>
                                   <td>
-                                  <a href="${pageContext.request.contextPath }/edms/edmsView?no=${e.no}" >
+                                  <a href="${path }/edms/edmsView?no=${e.no}" >
                                   	<c:if test="${e.appStatus==0 }">대기</c:if>
                                   	<c:if test="${e.appStatus==1 }">승인</c:if>
                                   	<c:if test="${e.appStatus==2 }">반려</c:if>
                                   </a>
                                </td>                                 
                                 </tr>
+                                <c:set var="pageStartRowNum" value="${pageStartRowNum-1}"></c:set>
                                 </c:forEach>
                                 </c:if>
                             </tbody> 
@@ -179,7 +183,80 @@
                     <c:out value="${pageBar}" escapeXml="false" />   
                     </div>
                     <script>
-						function fn_paging(no,numPerpage,category,keyword){
+                    function fn_paging(no, numPerpage, category, keyword) {
+                        $.ajax({
+                            url: "${pageContext.request.contextPath }/edms/bsnList/eSearch",
+                            data: { cPage: no, numPerpage: numPerpage, category: category, keyword: keyword },
+                            success: function(response) {
+                                // 서버로부터 받은 데이터를 변수에 저장
+                                const data = response;
+
+                                // 저장된 데이터를 이용하여 테이블 내용 및 페이지바를 갱신하는 함수 호출
+                                updateTableAndPageBar(data);
+                            },
+                            error: function() {
+                                console.log("연차 출장 페이징 처리 통신 실패");
+                            }
+                        });
+                    }
+                    
+                    function updateTableAndPageBar(data) {
+                        // 테이블 내용을 갱신하는 부분
+                        const $tableBody = $("#em-sts");
+                        $tableBody.empty(); // 기존 내용 비우기
+
+                        data.edms.forEach(edms => {
+                            const $tr = $("<tr>");
+                            const $no=$("<td>").text(edms.emp.no);
+							const $createDate=$("<td>").text(edms.createDate);
+							const $deptTitle=$("<td>").text(edms.emp.deptTitle);
+							const $jobTitle=$("<td>").text(edms.emp.jobTitle);
+							const $name=$("<td>").text(edms.emp.name);
+							const $title=$("<td>").text(edms.title);
+							let type="";
+							switch (edms.type){
+							case 0: type="연차" ;break;
+            				case 1: type="출장" ;break;
+							}
+							const $type=$("<td>").text(type);
+							let appStatus="";
+							switch (edms.appStatus){
+							case -1: appStatus="전체" ;break;
+            				case 0: appStatus="대기" ;break;
+            				case 1:appStatus="승인" ;break;
+            				case 2:appStatus="반려" ;break;
+							}
+							const $appStatus=$("<td>").text(appStatus);
+							$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).append($name).append($title).append($type).append($appStatus);
+
+                            // 클릭 이벤트 등록
+                            $tr.on("click", function() {
+                                edmsList(edms.no);
+                            });
+
+                            $tableBody.append($tr);
+                        });
+
+                        // 페이지바를 갱신하는 부분
+                        $(".pasing-area").html(data.pageBar);
+                    }
+                    
+                 // 검색 버튼 클릭시 호출하는 함수
+                    function eSearch() {
+                        const category = $("select[name=category]").val();
+                        const keyword = $("input[name=keyword]").val();
+                        fn_paging(1, 5, category, keyword);
+                        // 페이지를 1로 초기화하여 검색 결과를 보여줍니다.
+                    }
+
+                    // 페이지 번호를 클릭할 때 호출하는 함수
+                    function goToPage() {
+                        const category = $("select[name=category]").val();
+                        const keyword = $("input[name=keyword]").val();
+                        fn_paging(no, 5, category, keyword);
+                    }
+                    
+						/* function fn_paging(no,numPerpage,category,keyword){
 							console.log(no);
 							$.ajax({
 								url:"${pageContext.request.contextPath }/edms/bsnList/eSearch",
@@ -211,6 +288,9 @@
 									}
 									const $appStatus=$("<td>").text(appStatus);
 									$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).append($name).append($title).append($type).append($appStatus);
+									$tr.on("click", function() {
+								        edmsList(edms.no); // 클릭 이벤트 등록
+								    });
 									$("#em-sts").append($tr);
 										
 	
@@ -245,8 +325,10 @@
 					    function eSearch() {
 					        const category = $("select[name=category]").val();
 					        const keyword = $("input[name=keyword]").val();
-					        fn_paging(1, 5, category, keyword); // 페이지를 1로 초기화하여 검색 결과를 보여줍니다.
-					    }
+					        fn_paging(1, 5, category, keyword);
+					       // 페이지를 1로 초기화하여 검색 결과를 보여줍니다.
+					    } */
+					   
                     </script>                    
                     
                 </div>
