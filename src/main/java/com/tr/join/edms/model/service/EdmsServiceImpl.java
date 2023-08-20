@@ -67,10 +67,7 @@ public class EdmsServiceImpl implements EdmsService {
 	}
 	
 	
-	@Override
-	public int selectEdmsCount() {
-		return dao.selectEdmsCount(session);
-	}
+
 	
 	//전체 view 페이지 보기 
 	
@@ -96,13 +93,24 @@ public class EdmsServiceImpl implements EdmsService {
 
 
 	@Override
-	public List<Edms> adminBsnSelect() {
+	public List<Edms> adminBsnSelect(Map<String,Object> param) {
 		// TODO Auto-generated method stub
-		return dao.adminBsnSelect(session);
+		return dao.adminBsnSelect(session,param);
 	}
 	
-	//어드민 계정 출장 view로 상세 화면 출력하기 
 	
+	
+	
+	
+
+	
+	@Override
+	public int selectAdminCount(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return dao.selectAdminCount(session,param);
+	}
+
+	//어드민 계정 출장 view로 상세 화면 출력하기 
 	@Override
 	public Edms selectByBsnNo(int no) {
 		// TODO Auto-generated method stub
@@ -111,36 +119,94 @@ public class EdmsServiceImpl implements EdmsService {
 
 	//어드민 계정 ajax 이용하기 
 	@Override
-	public List<Edms> searchEdmsByStatus(Map<String,Object> ajaxParam) {
+	public List<Edms> searchEdmsByStatus(Map<String,Object> ajaxParam,Map<String,Integer> page) {
 		// TODO Auto-generated method stub
-		return dao.searchEdmsByStatus(session, ajaxParam);
+		return dao.searchEdmsByStatus(session, ajaxParam,page);
 	}
 	
 	
 	//어드민 계정 ajax 검색하기 
 	@Override
-	public List<Edms> search(Edms edms){
+	public List<Edms> search(Edms edms,Map<String,Integer> page){
 		// TODO Auto-generated method stub
-		return dao.selectResearch(session,edms);
+		return dao.selectResearch(session,edms,page);
+	}
+	
+	
+
+	@Override
+	public int selectajCount(Map<String, Object> ajaxParam) {
+		// TODO Auto-generated method stub
+		return dao.selectajCount(session,ajaxParam);
+	}
+	
+	
+	
+
+
+	@Override
+	public List<Edms> vcEdmsByStatus(Map<String, Object> param) {
+		
+		return dao.vcEdmsByStatus(session,param);
+	}
+
+
+	@Override
+	public int selectajaxCount(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return dao.selectajaxCount(session,param);
 	}
 	
 	//이용자 계정 ajax 검색하기 
+
+
+	@Override
+	public List<Edms> eSearch(Edms edms,Map<String,Integer> page) {
+		// TODO Auto-generated method stub
+		return dao.selecteSearch(session,edms,page);
+	}
+
 	
+	
+	
+
 	@Override
-	public List<Edms> eSearch(Edms edms) {
+	public int selectSearchCount(Map<String,Object> param) {
 		// TODO Auto-generated method stub
-		return dao.selecteSearch(session,edms);
+		return dao.selectSearchCount(session,param);
+	}
+
+	
+	
+
+	@Override
+	public int selectCount(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return dao.selectSearchCount(session, param);
 	}
 
 
 	@Override
-	public List<Edms> adminVcSelect() {
+	public List<Edms> adminVcSelect(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return dao.adminVcSelect(session);
+		return dao.adminVcSelect(session,param);
 	}
 
 
+	@Override
+	public int deleteEdms(Edms e) {
+		// TODO Auto-generated method stub
+		return dao.deleteEdms(session, e);
+	}
+	
+	
 
+
+	@Override
+	public int deleteVcBtn(Edms e) {
+		// TODO Auto-generated method stub
+		return dao.deleteVcBtn(session, e);
+	}
 
 
 	@Override

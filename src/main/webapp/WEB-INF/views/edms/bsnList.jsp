@@ -63,10 +63,10 @@
                             </form>
                         </div>
                         
-                        <script>
+                        <!-- <script>
                         function eSearch(){
                         	$.ajax({
-                        		url: "${pageContext.request.contextPath}/edms/bsnList/eSearch",
+                        		url: "${path}/edms/bsnList/eSearch",
                         		data: $("form[name=asearch-form]").serialize(),
                         		success:function(f){
                         			$("#em-sts").html("");//리셋 
@@ -107,7 +107,7 @@
                         
                         
                         </script>
-                        
+                         -->
                         
                         
                     <!--     작성하기 버튼
@@ -146,13 +146,16 @@
                             <tbody id="em-sts">
                             <c:if test="${not empty edms}">
                             <c:forEach var="e" items="${edms}">
-                                <tr>
-                                	<td>${e.no}</td>
+                  
+                                <tr onclick="edmsList(${e.no});">
+                                
+                                <td> ${pageStartRowNum}</td>
+                                	
                                     <td>${e.createDate }</td> 
                                     <td>${e.emp.deptTitle }</td>
                                     <td>${e.emp.jobTitle }</td>
                                     <td>${e.emp.name }</td>
-                                    <td><a href="${path }/edms/edmsView?no=${e.no}">${e.title }</a></td>
+                                    <td><a href="${pageContext.request.contextPath }/edms/edmsView?no=${e.no}">${e.title }</a></td>
                                     <td>
                                     <c:choose>
                                     	<c:when test="${e.type==0 }">연차</c:when>
@@ -168,6 +171,7 @@
                                   </a>
                                </td>                                 
                                 </tr>
+                                <c:set var="pageStartRowNum" value="${pageStartRowNum-1}"></c:set>
                                 </c:forEach>
                                 </c:if>
                             </tbody> 
@@ -176,9 +180,157 @@
 
                     <!-- 페이징 -->
                     <div class="pasing-area">
-                    <c:out value="${pageBar }" escapeXml="false"/>
-                       
+                    <c:out value="${pageBar}" escapeXml="false" />   
                     </div>
+                    <script>
+                    function fn_paging(no, numPerpage, category, keyword) {
+                        $.ajax({
+                            url: "${pageContext.request.contextPath }/edms/bsnList/eSearch",
+                            data: { cPage: no, numPerpage: numPerpage, category: category, keyword: keyword },
+                            success: function(response) {
+                                // 서버로부터 받은 데이터를 변수에 저장
+                                const data = response;
+
+                                // 저장된 데이터를 이용하여 테이블 내용 및 페이지바를 갱신하는 함수 호출
+                                updateTableAndPageBar(data);
+                            },
+                            error: function() {
+                                console.log("연차 출장 페이징 처리 통신 실패");
+                            }
+                        });
+                    }
+                    
+                    function updateTableAndPageBar(data) {
+                        // 테이블 내용을 갱신하는 부분
+                        const $tableBody = $("#em-sts");
+                        $tableBody.empty(); // 기존 내용 비우기
+
+                        data.edms.forEach(edms => {
+                            const $tr = $("<tr>");
+                            const $no=$("<td>").text(edms.emp.no);
+							const $createDate=$("<td>").text(edms.createDate);
+							const $deptTitle=$("<td>").text(edms.emp.deptTitle);
+							const $jobTitle=$("<td>").text(edms.emp.jobTitle);
+							const $name=$("<td>").text(edms.emp.name);
+							const $title=$("<td>").text(edms.title);
+							let type="";
+							switch (edms.type){
+							case 0: type="연차" ;break;
+            				case 1: type="출장" ;break;
+							}
+							const $type=$("<td>").text(type);
+							let appStatus="";
+							switch (edms.appStatus){
+							case -1: appStatus="전체" ;break;
+            				case 0: appStatus="대기" ;break;
+            				case 1:appStatus="승인" ;break;
+            				case 2:appStatus="반려" ;break;
+							}
+							const $appStatus=$("<td>").text(appStatus);
+							$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).append($name).append($title).append($type).append($appStatus);
+
+                            // 클릭 이벤트 등록
+                            $tr.on("click", function() {
+                                edmsList(edms.no);
+                            });
+
+                            $tableBody.append($tr);
+                        });
+
+                        // 페이지바를 갱신하는 부분
+                        $(".pasing-area").html(data.pageBar);
+                    }
+                    
+                 // 검색 버튼 클릭시 호출하는 함수
+                    function eSearch() {
+                        const category = $("select[name=category]").val();
+                        const keyword = $("input[name=keyword]").val();
+                        fn_paging(1, 5, category, keyword);
+                        // 페이지를 1로 초기화하여 검색 결과를 보여줍니다.
+                    }
+
+                    // 페이지 번호를 클릭할 때 호출하는 함수
+                    function goToPage() {
+                        const category = $("select[name=category]").val();
+                        const keyword = $("input[name=keyword]").val();
+                        fn_paging(no, 5, category, keyword);
+                    }
+                    
+						/* function fn_paging(no,numPerpage,category,keyword){
+							console.log(no);
+							$.ajax({
+								url:"${pageContext.request.contextPath }/edms/bsnList/eSearch",
+								data:{cPage:no,numPerpage:numPerpage,category:category,keyword:keyword},
+								success:function(e){
+									$("#em-sts").html("");
+									console.log(e);
+									const list=e.edms;
+									list.forEach(edms=>{
+									const $tr=$("<tr>");
+									const $no=$("<td>").text(edms.emp.no);
+									const $createDate=$("<td>").text(edms.createDate);
+									const $deptTitle=$("<td>").text(edms.emp.deptTitle);
+									const $jobTitle=$("<td>").text(edms.emp.jobTitle);
+									const $name=$("<td>").text(edms.emp.name);
+									const $title=$("<td>").text(edms.title);
+									let type="";
+									switch (edms.type){
+									case 0: type="연차" ;break;
+                    				case 1: type="출장" ;break;
+									}
+									const $type=$("<td>").text(type);
+									let appStatus="";
+									switch (edms.appStatus){
+									case -1: appStatus="전체" ;break;
+                    				case 0: appStatus="대기" ;break;
+                    				case 1:appStatus="승인" ;break;
+                    				case 2:appStatus="반려" ;break;
+									}
+									const $appStatus=$("<td>").text(appStatus);
+									$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).append($name).append($title).append($type).append($appStatus);
+									$tr.on("click", function() {
+								        edmsList(edms.no); // 클릭 이벤트 등록
+								    });
+									$("#em-sts").append($tr);
+										
+	
+									});
+									
+// 									const input = $("#em-sts td>input[type=text]");
+									
+// 									$("#em-sts td>input[type=hidden]").val(e[0].no);
+									
+// 									$(input[0]).val(e[0].no);
+// 									$(input[1]).val(e[1].createDate);
+// 									$(input[2]).val(e[2].emp.deptTitle);
+// 									$(input[3]).val(e[3].emp.jobTitle);
+// 									$(input[4]).val(e[4].emp.name);
+// 									$(input[5]).val(e[5].title);
+// 									$(input[6]).val(e[6].type);
+// 									$(input[7]).val(e[7].appStatus);
+									
+									
+									//페이지 바 처리하기 
+									$(".pasing-area").html(e.pageBar);	
+								},
+								error:function(){
+									console.log("연차 출장 페이징 처리 통신 실패")
+								}
+							});
+							
+						}
+						
+
+					    // 검색 버튼 클릭시 호출하는 함수
+					    function eSearch() {
+					        const category = $("select[name=category]").val();
+					        const keyword = $("input[name=keyword]").val();
+					        fn_paging(1, 5, category, keyword);
+					       // 페이지를 1로 초기화하여 검색 결과를 보여줍니다.
+					    } */
+					   
+                    </script>                    
+                    
                 </div>
             </div>
             <!-- 수정할 컨테이너 종료 End of Main Content -->

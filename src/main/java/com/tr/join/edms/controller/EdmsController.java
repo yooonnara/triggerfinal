@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tr.join.common.PageFactory;
+import com.tr.join.common.PageFactoryEdms;
 import com.tr.join.edms.model.service.EdmsService;
 import com.tr.join.edms.model.vo.Attachment;
 import com.tr.join.edms.model.vo.Edms;
@@ -88,27 +91,37 @@ public class EdmsController {
 				}
 			}
 		}
-		try {
-			service.insertbsn(e);
-		}catch(RuntimeException e1) {
-			e1.printStackTrace();
-			for(Attachment a : e.getFile()) {
-				File delFile=new File(path+a.getRenamedFilename());
-				delFile.delete();
-			}
-			
-			model.addAttribute("msg","출장신청이 실패되었습니다.");
-			model.addAttribute("loc","/edms/bsnRequest");
-			
-			return "common/msg";
-		
+		  try {
+		        int result = service.insertbsn(e); // Assume service.insertbsn(e) returns the result
+		        if (result > 0) {
+		            model.addAttribute("msg", "출장신청이 완료되었습니다.");
+		            model.addAttribute("loc", "/edms/bsnList");
+		        } else {
+		            for (Attachment a : e.getFile()) {
+		                File delFile = new File(path + a.getRenamedFilename());
+		                delFile.delete();
+		            }
+
+		            model.addAttribute("msg", "출장신청이 완료되었습니다.");
+		            model.addAttribute("loc", "/edms/bsnRequest");
+		        }
+
+		        return "common/msg";
+		    } catch (RuntimeException e1) {
+		        e1.printStackTrace();
+		        for (Attachment a : e.getFile()) {
+		            File delFile = new File(path + a.getRenamedFilename());
+		            delFile.delete();
+		        }
+
+		        model.addAttribute("msg", "출장신청이 실패되었습니다.");
+		        model.addAttribute("loc", "/edms/bsnRequest");
+
+		        return "common/msg";
+		    }
 		}
-		return "redirect:/edms/bsnList";
-	
-		//System.out.println(result);
-		//출장 insertform
 		
-	}
+	
 	
 	
 	
@@ -195,20 +208,23 @@ public class EdmsController {
 		public String selectBsnAll(@RequestParam(value="cPage", defaultValue="1") int cPage,
 					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m){
 			Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			List<Edms> list=service.selectBsnAll(Map.of("loginEmp",loginEmp.getName(),"cPage",cPage,"numPerpage",numPerpage));
-			int totalData=service.selectEdmsCount();
+			Map<String,Object> param=Map.of("empNo",loginEmp.getNo(),"loginEmp",loginEmp.getName(),"cPage",cPage,"numPerpage",numPerpage);
+			List<Edms> list=service.selectBsnAll(param);
+			//int totalData=service.selectSearchCount(param);
+			int totalData=service.selectCount(param);
+			
 			//페이징처리 
-			m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "/bsnList"));
+			m.addAttribute("pageBar",PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/bsnList",param));
 			m.addAttribute("totalData",totalData);
 			m.addAttribute("edms",list);
+			int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+			m.addAttribute("pageStartRowNum", pageStartRowNum);
 			//페이지 바도 처리해줘야함 
 			list.forEach(System.out::println);
 			//System.out.println(m);
 			return "edms/bsnList" ;
 			
-		}
-	
-		
+		}	
 	//전체 화면창 보여주기 
 	
 	@GetMapping("/edmsView")
@@ -219,37 +235,33 @@ public class EdmsController {
 				return "edms/bsnView";
 }
 	
-	//어드민 출장 출력하기 
 	
-		@GetMapping("/adminBsn")
-		public String adminBsnSelect(Model m) {
-			List<Edms> edms=service.adminBsnSelect();
-			m.addAttribute("edms",edms);
-			edms.forEach(System.out::println);
-			//System.out.println(m);
-			return "admin/adminBsn";
+		
+		//어드민 출장 체크리스트 삭제하기 
+		
+		@RequestMapping("/ajax/deleteEdms")
+		@ResponseBody
+		public int deleteEdms(Edms e, @RequestParam(value="edmsList[]") ArrayList<Integer> edmsList) {
+			System.out.println(edmsList);
+			int result=0;
+			for(int i=0; i<edmsList.size(); i++) {
+				e.setNo(edmsList.get(i));
+				result +=service.deleteEdms(e);
+			}
+			return result ;
 		}
 		
-		//어드민 연차 출력하기 
-		@GetMapping("/adminVc")
-		public String adminVcSelect(Model m) {
-			List<Edms> edms=service.adminVcSelect();
-				m.addAttribute("edms",edms);
-				edms.forEach(System.out::println);
-				return "admin/adminVc";
-			}
-		
-		
-	
-		//ajax 결재 상태 검색 
-		@GetMapping("/adminBsn/select")
+		//어드민 연차 체크리스트 삭제하기
+		@RequestMapping("/ajax/deleteVcBtn")
 		@ResponseBody
-		public List<Edms> searchEdmsByStatus(int searchNum){
-			Map<String,Object> ajaxParam= new HashMap();
-			ajaxParam.put("searchNum", searchNum);
-			List<Edms> list= service.searchEdmsByStatus(ajaxParam);
-			
-			return list;
+		public int deleteVcBtn(Edms e, @RequestParam(value="edmsVcList[]") ArrayList<Integer> edmsVcList) {
+			System.out.println(edmsVcList);
+			int result=0;
+			for(int i=0; i<edmsVcList.size(); i++) {
+				e.setNo(edmsVcList.get(i));
+				result +=service.deleteVcBtn(e);
+			}
+			return result ;
 		}
 		
 	
@@ -270,35 +282,194 @@ public class EdmsController {
 		return("admin/adminVcView");
 	}
 	
+	//어드민 연차 출력하기 
+			@GetMapping("/adminVc")
+			public String adminVcSelect(@RequestParam(value="cPage", defaultValue="1") int cPage,
+					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m) {
+				
+				
+				Map<String,Object> param=Map.of("cPage",cPage,"numPerpage",numPerpage);
+				List<Edms> edms=service.adminVcSelect(param);
+					int totalData=service.selectAdminCount(param);
+					m.addAttribute("pageBar", PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminVc", param));
+					m.addAttribute("totalData",totalData);
+					m.addAttribute("edms",edms);
+				
+					edms.forEach(System.out::println);
+					return "admin/adminVc";
+				}
+	
+	//ajax 버튼 상태 검색 
+	@GetMapping("adminVc/btn")
+	@ResponseBody 
+	public List<Edms> vcEdmsByStatus(int searchNum){
+		Map<String,Object> param= new HashMap();
+		param.put("searchNum", searchNum);
+		List<Edms> list=service.vcEdmsByStatus(param);
+		return list;
+	}
+	
+	/*
+	 * //ajax 결재 상태 검색
+	 * 
+	 * @GetMapping("/adminBsn/select")
+	 * 
+	 * @ResponseBody public List<Edms> searchEdmsByStatus(int searchNum){
+	 * Map<String,Object> ajaxParam= new HashMap(); 
+	 * ajaxParam.put("searchNum",
+	 * searchNum); List<Edms> list= service.searchEdmsByStatus(ajaxParam);
+	 * 
+	 * return list; }
+	 */
+	
+	//어드민 출장 전체출력하기 
+	
+			@GetMapping("/adminBsn")
+			public String adminBsnSelect(@RequestParam(value="cPage", defaultValue="1") int cPage,
+					@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,Model m) {
+				Map<String,Object> param=Map.of("cPage",cPage,"numPerpage",numPerpage);
+				
+				List<Edms> edms=service.adminBsnSelect(param);
+				int totalData=service.selectAdminCount(param);
+				m.addAttribute("pageBar", PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminBsn", param));
+				m.addAttribute("totalData",totalData);
+				m.addAttribute("edms",edms);
+				int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+				m.addAttribute("pageStartRowNum", pageStartRowNum);
+				edms.forEach(System.out::println);
+				//System.out.println(m);
+				return "admin/adminBsn";
+			}
+	
+
+	
+	//ajax 결재상태 버튼 검색 페이징 처리 
+	@GetMapping("/adminBsn/select")
+	@ResponseBody
+	public Map<String,Object> searchEdmsByStatus(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage,
+			@RequestParam int searchNum,Model m)throws Exception{
+		
+		
+	Map<String,Object> ajaxParam =new HashMap<>();
+	
+	
+	Map<String,Integer> page=Map.of("cPage",cPage,"numPerpage",numPerpage);
+	List<Edms> searchEdmsByStatus=service.searchEdmsByStatus(ajaxParam,page);
+		
+	ajaxParam.put("cPage",cPage);
+	ajaxParam.put("numPerpage",numPerpage);
+	ajaxParam.put("searchNum", searchNum);
+	int totalData=service.selectajCount(ajaxParam);
+	m.addAttribute("totalData", totalData);
+	m.addAttribute("ajaxParam", searchEdmsByStatus);
+	int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+	m.addAttribute("pageStartRowNum", pageStartRowNum);
+	String pageBar=PageFactoryEdms.getAjaxPaging(cPage, numPerpage, totalData, "/adminBsn",ajaxParam);
+	
+	//페이지 바도 처리해줘야함 
+	searchEdmsByStatus.forEach(System.out::println);
+	
+
+	
+	return Map.of("ajaxParam",searchEdmsByStatus,"pageBar",pageBar);
+	
+	
+	}
+
+	
 	//에이젝스 검색 기능 구현 
 	
 	@GetMapping("/adminBsn/search")
 	@ResponseBody
-	public List<Edms> search(@RequestParam("category") String category, 
-			@RequestParam("keyword") String keyword, Model m)throws Exception{
+	public Map<String,Object> search(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,
+			@RequestParam("category") String category,
+			@RequestParam("keyword") String keyword, Model m) throws Exception{
+		
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
-		List<Edms> search =service.search(edms);
-		return search;
+		
+		Map<String,Integer> page=Map.of("cPage",cPage,"numPerpage",numPerpage);
+		List<Edms> search =service.search(edms,page);
+		Map<String,Object> param=new HashMap();
+		
+		param.put("cPage",cPage);
+		param.put("numPerpage", numPerpage);
+		param.put("category", category);
+		param.put("keyword", keyword);
+		int totalData=service.selectajaxCount(param);
+		//m.addAttribute("pageBar",PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/bsnList/eSearch",param));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("edms",search);
+		int pageStartRowNum = totalData - (cPage-1)*numPerpage;
+		m.addAttribute("pageStartRowNum", pageStartRowNum);
+		String pageBar=PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/adminBsn",param);
+		
+		//페이지 바도 처리해줘야함 
+		search.forEach(System.out::println);
+		
+	
+		
+		return Map.of("edms",search,"pageBar",pageBar);
 	}
+	
+		
+	
 	
 	//에이젝스 이용자 검색 기능 
 	
 	@GetMapping("/bsnList/eSearch")
 	@ResponseBody
-	public List<Edms> eSearch(@RequestParam("category") String category,
+	public Map<String,Object> eSearch(@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5")int numPerpage,
+			@RequestParam("category") String category,
 			@RequestParam("keyword") String keyword, Model m) throws Exception{
 		Employee loginEmp=(Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginEmp",loginEmp);
 		
+	
 		Edms edms = new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
 		edms.setEmpNo(loginEmp.getNo());
-		List<Edms> eSearch =service.eSearch(edms);
-		return eSearch;
+		
+		Map<String,Integer> page=Map.of("cPage",cPage,"numPerpage",numPerpage);
+		List<Edms> eSearch =service.eSearch(edms,page);
+		Map<String,Object> param=new HashMap();
+		
+		param.put("cPage",cPage);
+		param.put("numPerpage",numPerpage);
+		param.put("category",category);
+		param.put("keyword",keyword);
+		param.put("empNo",loginEmp.getNo());
+		int totalData=service.selectSearchCount(param);
+		//m.addAttribute("pageBar",PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/bsnList/eSearch",param));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("edms",eSearch);
+		String pageBar=PageFactoryEdms.getAjaxPageNo(cPage, numPerpage, totalData, "/bsnList/eSearch",param);
+		
+		//페이지 바도 처리해줘야함 
+		eSearch.forEach(System.out::println);
+		
+	
+		
+		return Map.of("edms",eSearch,"pageBar",pageBar);
 	}
+	
+	
+	
+	//@RequestMapping("/paging")
+	//public String paging(@RequestParam(value="cPage",defaultValue="1")int cPage,
+	//		@RequestParam(value="numPerpage",defaultValue="5")int numPerpage) {
+	//	List<Edms> list=service.selectPage(cPage,numPerpage);
+	//	return "";
+	//}
+	
+	
+	
+	
 	
 	//연차 에이젝스 검색 기능 
 	@GetMapping("/adminVc/searchVc")
@@ -309,6 +480,8 @@ public class EdmsController {
 		Edms edms= new Edms();
 		edms.setCategory(category);
 		edms.setKeyword(keyword);
+		
+		
 		List<Edms> searchVc=service.searchVc(edms);
 		return searchVc;
 		

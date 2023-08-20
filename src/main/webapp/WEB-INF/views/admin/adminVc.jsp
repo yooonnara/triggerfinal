@@ -67,6 +67,13 @@
                         			console.log(n);
                         			for(let i=0; i<n.length;i++){
                         				const $tr=$("<tr>");
+                                    const $checkboxCell = $("<td>").addClass("align-middle");
+             		                    const $checkbox = $("<input>").attr({
+             		                        type: "checkbox",
+             		                        name: "chk",
+             		                        value: n[i]["no"]
+             		                    });
+                                         $checkboxCell.append($checkbox);
                         				const $no=$("<td>").text(n[i]["no"]);
                         				const $createDate=$("<td>").text(n[i]["createDate"]);
                         				const $deptTitle=$("<td>").text(n[i]['emp']["deptTitle"]);
@@ -83,12 +90,12 @@
                         				let appStatus="";
                         				switch (n[i]["appStatus"]){
                         				case 0 : appStatus ="대기";break;
-                        				case 1 : appStatus="대기";break;
+                        				case 1 : appStatus="승인";break;
                         				case 2 : appStatus="반려";break; 
                         				}
                         				
                         				const $appStatus=$("<td>").text(appStatus);
-                        				$tr.append($no).append($createDate).append($deptTitle).append($jobTitle).
+                                            $tr.append($checkboxCell).append($no).append($createDate).append($deptTitle).append($jobTitle).
                         				append($name).append($title).append($type).append($appStatus);
                         				$("#edms-vc").append($tr);
                         			}
@@ -101,50 +108,17 @@
                         
                         </script> 
                                 <div class="btn-member col-4" id="vcBtnAll">
-                                    <button type="button" class="btn btn-dark btn-sm  ml-1 float-right" value="-1">전체</button>
-                                     <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="0">대기</button>
-                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="1">승인</button>
-                                      <button type="button" class="btn btn-outline-dark btn-sm ml-1 float-right" value="2">반려</button>
+                                    <button type="button" id="btn1" class="btn btn-dark btn-sm  ml-1 float-right" value="-1">전체</button>
+                                     <button type="button" id="btn2" class="btn btn-outline-dark btn-sm ml-1 float-right" value="0">대기</button>
+                                      <button type="button" id="btn3" class="btn btn-outline-dark btn-sm ml-1 float-right" value="1">승인</button>
+                                      <button type="button" id="btn4" class="btn btn-outline-dark btn-sm ml-1 float-right" value="2">반려</button>
                                       
                                 </div>
                             </div>
                        
-                            <!-- 검색하기 버튼 -->
-                            <script>
-                            $("vcBtnAll button").click(e=>{
-                            	$.ajax({
-                            		url:"${pageContext.request.contextPath}/edms/adminVc/btn",
-                            		data: {"searchVcBtn":e.target.value},
-                            		success:function(f){
-                            		$("#edms-vc").html("");
-                            		console.log(e.target.value);
-                            		console.log(f);
-                            		for(let i=0; i<f.length; i++){
-                            			const $tr=$("<tr>");
-                            			const $no=$("<td>").text(f[i]["no"]);
-                            			const $createDate=$("<td>").text(f[i]["createDate"]);
-                            			const $deptTitle=$("<td>").text(f[i][emp]["deptTitle"]);
-                            			const $jobTitle=$("<td>").text(f[i][emp]["jobTitle"]);
-                            			const $name=$("<td>").text(f[i][emp]["name"]);
-                            			const $title=$("<td>").text(f[i][emp]["name"]);
-                            			let type="";
-                            			switch(f[i]["type"]){
-                            			case 0: type="연차" ;break;
-                            			case 1: type="출장" ;break;
-                            			}
-                            			const $type=$("<td>").text(type);
-                            			
-                            			let appStatus="";
-                            			switch(f[i]["appStatus"]){
-                            			case 0: appStatus="대기" ;break;
-                            			case 1:appStatus="승인" ;break;
-                            			case 2:
-                            			}
-                            		}
-                            		}
-                            	})
-                            })
-                            	
+                           
+                        
+                            		
                             
                             </script>
                             
@@ -154,7 +128,8 @@
 
                                 <!-- 테이블 칸 크기 -->
                                <colgroup>
-                                  <col width="10%" />
+                                 <col width="5%" />
+                                  <col width="5%" />
                                     <col width="10%" />
                                     <col width="10%" />
                                      <col width="10%" />
@@ -166,6 +141,7 @@
 						
                             <thead>
                                 <tr class="bg-dark text-white">
+                                <th class="align-middle"><input type="checkbox" id ="chkAll" name="chkAll"></th>
                                     <th>번호</th>
                                     <th>기안일</th>
                                     <th>부서</th>
@@ -180,6 +156,7 @@
                                 <c:if test="${not empty edms}">
                                 <c:forEach var="e" items="${edms}">
                                   <tr>
+                                    <td class="align-middle"><input type="checkbox" name="chk" value="${a.no }"></td>
                                 	<td>${e.no }</td>
                                     <td>${e.createDate }</td> 
                                     <td>${e.emp.deptTitle }</td>
@@ -194,7 +171,7 @@
                                     </c:choose>
                                     </td>
                                   <td >
-                                  <a href="/edms/adminVcView?no=${e.no}" > 
+                                  <a href="${pageContext.request.contextPath}/edms/adminVcView?no=${e.no}" > 
                                   	<c:if test="${e.appStatus==0 }">결재대기</c:if>
                                   	<c:if test="${e.appStatus==1 }">승인</c:if>
                                   	<c:if test="${e.appStatus==2 }">반려</c:if>
@@ -206,14 +183,122 @@
                             </tbody> 
                         </table>
                     </div>
-
-
+							  <div class="btn-edms mt-2 btn-edms wirte-area ml-1 float-right mt-3 ">
+                                <a href="#" class="btn btn-danger " name="delete-btn" 
+                                	onclick="deleteVcBtn()">삭제
+                                </a>
+                     </div>
+                     
+                     
+                     
+                     <script>
+                        //체크 박스 
+                        $(function(){
+                            $("#chkAll").click(function(){
+                                if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked",true);
+                                else $("input [name=chk]").prop("checked",false);
+                                
+                            });
+                            $("input[name=chk]").click(function(){
+                                var total=$("input[name=chk]").length;
+                                var checked= $("input[name=chk]:checked").length;
+                                
+                                if(total !=checked)  $("#chkAll").prop("checked", false);
+                               else $("#chkAll").prop("checked", true);
+                            
+                            });
+                        });
+                              //선택삭제 
+                            function deleteVcBtn(){
+                                if(confirm("삭제하시겠습니까?")){
+                                var edmsVcList = [];
+                                $("td>input[type=checkbox]:checked").each(function(){
+                                    var chk =$(this).val();//사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
+                                    edmsVcList.push(chk); //배열에 추가해주고 값을 넘긴다. 
+                                });
+                                console.log(edmsVcList);
+                                
+                            $.ajax({
+                                url:"${pageContext.request.contextPath}/edms/ajax/deleteVcBtn",
+                                type : 'post',
+                                data:{
+                                    edmsVcList : edmsVcList
+                                },
+                                success:function(result){
+                                    if (result>0) {
+                                        alert("게시물이 삭제되었습니다.");
+                                        location.replace("${pageContext.request.contextPath}/edms/adminVc");
+                                        }else{
+                                            alert("삭제에 실패했습니다:( 다시 시도해주세요.");
+                                        }
+                                    },
+                                    error:function(){
+                                        alert("오류가 발생했습니다, 다시 시도해주세요");
+                                    }
+                            })
+                            }
+                        }
+                        </script>
+                        
  
               <!-- 페이징 -->
                         <div class="pasing-area">
                     	    <c:out value="${pageBar }" escapeXml="false"/>
                         </div>
-                    </div>
+                        
+                         <!-- 검색하기 버튼 -->
+                            <script>
+                            //function vcFnc(){
+                            $("#vcBtnAll button").click(e=>{
+                            	$.ajax({
+                            		url:"${pageContext.request.contextPath}/edms/adminVc/btn",
+                            		data: {"searchNum":e.target.value},
+                            		success:function(f){
+                            		$("#edms-vc").html("");
+                            		console.log(e.target.value);
+                            		console.log(f);
+                            		for(let i=0; i<f.length; i++){
+                            			const $tr=$("<tr>");
+                            			const $checkboxCell = $("<td>").addClass("align-middle");
+             		                    const $checkbox = $("<input>").attr({
+             		                        type: "checkbox",
+             		                        name: "chk",
+             		                        value: f[i]["no"]
+             		                    });
+             		                   $checkboxCell.append($checkbox);
+                            			const $no=$("<td>").text(f[i]["no"]);
+                            			const $createDate=$("<td>").text(f[i]["createDate"]);
+                            			const $deptTitle=$("<td>").text(f[i]['emp']["deptTitle"]);
+                            			const $jobTitle=$("<td>").text(f[i]['emp']["jobTitle"]);
+                            			const $name=$("<td>").text(f[i]['emp']["name"]);
+                            			const $title=$("<td>").text(f[i]['emp']["name"]);
+                            			let type="";
+                            			switch(f[i]["type"]){
+                            			case 0: type="연차" ;break;
+                            			case 1: type="출장" ;break;
+                            			}
+                            			const $type=$("<td>").text(type);
+                            			
+                            			let appStatus="";
+                            			switch(f[i]["appStatus"]){
+                            			case 0: appStatus="대기" ;break;
+                            			case 1:appStatus="승인" ;break;
+                            			case 2:appStatus="반려";break
+                            			}
+                            			const $appStatus=$("<td>").text(appStatus);
+                            			$tr.append($checkboxCell).append($no).append($createDate).append($deptTitle).append($jobTitle).
+                        				append($name).append($title).append($type).append($appStatus);
+                        				$("#edms-vc").append($tr);
+                        			}
+                        	},
+                        	error:function(){
+                        		console.log("에이젝스 통신 실패");
+                        	}
+                        	})
+                            });
+                            </script>
+                  
+                </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
 
@@ -242,9 +327,7 @@
 	<div id="bootstrap">
 		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
 	</div>
-<!-- datepicker -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 </body>
 
 </html>

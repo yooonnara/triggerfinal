@@ -13,7 +13,7 @@
     <!-- 사원페이지 이동 -->
 	<div class="input-group" style="justify-content: right">
 	    <c:if test="${loginEmployee.accStatus == 1}">
-	            <a href="${path}/main">
+	            <a href="${pageContext.request.contextPath}/main">
 	                <span class="mr-2 d-none d-lg-inline small text-primary">사원 페이지</span>
 	            </a>
 	    </c:if>
@@ -30,10 +30,10 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
 				<span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.name}님, 환영합니다!</span>
 				<c:if test="${loginEmployee.empImg == null}">
-					<img class="img-profile rounded-circle" src="${path}/resources/img/user_profile.png">
+					<img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/img/user_profile.png">
 				</c:if>	
 				<c:if test="${loginEmployee.empImg != null}">
-					<img class="img-profile rounded-circle" src="${path}/resources/upload/employee/${loginEmployee.empImg}">
+					<img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/upload/employee/${loginEmployee.empImg}">
 				</c:if>	
 			</a> 
 			
@@ -41,7 +41,7 @@
 			<div
 				class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 				aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="${path }/mypage"> <i
+				<a class="dropdown-item" href="${pageContext.request.contextPath}/mypage"> <i
 					class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 기본정보
 				</a>
 				<div class="dropdown-divider"></div>
@@ -71,7 +71,7 @@
 			</div>
 			<div class="modal-body">정말 로그아웃 하시겠습니까?</div>
 			<div class="modal-footer">
-				<a href="${path }/logout" class="btn btn-dark">로그아웃</a>
+				<a href="${pageContext.request.contextPath}/logout" class="btn btn-dark">로그아웃</a>
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
 			</div>
 		</div>
