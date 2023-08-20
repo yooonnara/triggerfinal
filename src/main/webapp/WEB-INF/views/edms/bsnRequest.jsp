@@ -41,7 +41,7 @@
         <div class="vcRequest-area row mt-6 mb-6">
             <div class="mypage-container col-12 d-flex justify-content-center">
 
-                <form class="vc shadow px-5 py-5" name="bsninsertForm" id="alarm" action="${path }/edms/insertbsn" method="post" enctype="multipart/form-data" >
+                <form class="vc shadow px-5 py-5" name="bsninsertForm" id="alarm" action="${pageContext.request.contextPath }/edms/insertbsn" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
                     <table class="table-sm ml-1 mr-5">
                       <input type="hidden" name="type" value="1"/> 
                       <!--0은연차이고 1은 출장  -->
@@ -114,7 +114,7 @@
                     </table>
                     <div class="req-btn d-flex justify-content-around pt-5"  id="notice" >
                         <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->
-                        <input type="submit" class="align-text-bottom btn btn-primary"  onsubmit="notice();" value="등록">
+                        <input type="submit" class="align-text-bottom btn btn-primary"   value="등록">
                     </div>
                 </form>
             </div>
@@ -122,14 +122,17 @@
         
  <script>
  
- var formElements=$("alarm");
- function notice(){
-	 if(formElements>=''){
-		 alert("공백인 문항이 있습니다")
-		 
-	 };
-	 
- }
+ function validateForm() {
+	    var inputs = document.querySelectorAll('.vc input[type="text"], .vc textarea');
+	    for (var i = 0; i < inputs.length; i++) {
+	        if (inputs[i].value.trim() === '') {
+	            alert("모든 문항을 작성해주세요.");
+	            return false; // 폼 제출 중단
+	        }
+	    }
+	    return true; // 모든 필드가 작성되었으므로 폼 제출 진행
+	}
+ 
     function checkDate(t) {
         if ($('#startDate').val() == '') {
             $('.startDateMsg').show();

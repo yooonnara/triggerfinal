@@ -105,7 +105,7 @@
                             <tr>
                             	<td>첨부파일</td>
                             	<td>
-                            	 <c:if test="${not empty edms.file }">
+                            	<c:if test="${not empty edms.file }">
 							      <c:forEach var="f" items="${edms.file }">
 							         <button type="button"  class="btn btn-primary ml-5 mb-1" 
 							         onclick="fn_fileDownload('${f.originalFilename}','${f.renamedFilename }');">
@@ -125,8 +125,7 @@
 					</div>
 					
 				</div>
-				
-				
+
 				<script>
 				function fn_fileDownload(oriName,reName){
 					location.assign("${pageContext.request.contextPath}/edms/filedownload?oriname="+oriName+"&rename="+reName);

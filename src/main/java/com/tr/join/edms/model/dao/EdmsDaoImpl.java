@@ -186,9 +186,12 @@ public class EdmsDaoImpl implements EdmsDao {
 	//어드민 계정 연차 ajax로 출력하기 
 
 	@Override
-	public List<Edms> searchVc(SqlSession session, Edms edms) {
+	public List<Edms> searchVc(SqlSession session, Edms edms,Map<String,Integer> page) {
 		// TODO Auto-generated method stub
-		return session.selectList("edms.searchVc",edms);
+		int cPage=page.get("cPage");
+		int numPerpage=page.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("edms.searchVc",edms,rb);
 	}
 
 
@@ -202,6 +205,16 @@ public class EdmsDaoImpl implements EdmsDao {
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		return session.selectList("edms.selecteSearch",edms,rb);
 	}
+
+
+	
+	@Override
+	public int selectSearchCt(SqlSession session, Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("edms.selectSearchCt",param);
+	}
+
+
 
 
 	@Override

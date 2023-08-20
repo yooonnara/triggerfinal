@@ -42,7 +42,7 @@
         <div class="vcRequest-area row mt-6 mb-6">
             <div class="mypage-container col-12 d-flex justify-content-center">
 
-                <form class="vc shadow px-5 py-5" name="vcInsertForm" action="${path }/edms/insertVc" method="post">
+                <form class="vc shadow px-5 py-5" name="vcInsertForm" id="alarm" action="${pageContext.request.contextPath }/edms/insertVc" method="post" onsubmit="return validateForm();">
 					
                     <table class="table-sm ml-1 mr-5">
                     <input type="hidden" name="type" value="0"/>
@@ -103,7 +103,7 @@
                              <td> <input type="date" class="form-control ml-5 mb-1" name="endDate" id="endDate" ></td>
                         </tr>    
                     </table>
-   							<div class="req-btn d-flex justify-content-around pt-5  ">
+   							<div class="req-btn d-flex justify-content-around pt-5  id="notice" >
                         <!-- <button class="align-text-bottom btn btn-primary " onclick="location.assign('{path}/edms/bsnView)';">등록</button> -->
                         <input type="submit" class="align-text-bottom btn btn-primary"  onsubmit="vcInsert();" value="등록">
                     </div>
@@ -115,16 +115,18 @@
       <!-- 수정할 컨테이너 종료 End of Main Content -->
          </div>
 <script>
-document.querySelect('form[name="vcInsertForm"]').addEventListener('submit',function(event){
-	//필수 입력값 가져오기 
-	var detailType=document.getElementById('detailType').value;
-	var title= document.getElementById('title').value;
-	var content =document.getElementById('content').value;
-	var starDate=document.getElementById
-})
 
 
-
+function validateForm() {
+    var inputs = document.querySelectorAll('.vc input[type="text"], .vc textarea');
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].value.trim() === '') {
+            alert("모든 문항을 작성해주세요.");
+            return false; // 폼 제출 중단
+        }
+    }
+    return true; // 모든 필드가 작성되었으므로 폼 제출 진행
+}
 
 
 const startDateInput = document.querySelector('[name="startDate"]');

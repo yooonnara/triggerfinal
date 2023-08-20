@@ -120,7 +120,12 @@
 				<!-- 수정할 컨테이너 종료 End of Main Content -->
             </div>
             
+          <script>
+          function changeResult(edmsNo,appStatus){
+        		location.replace('${pageContext.request.contextPath}/edms/adminVcView/Vcstatuschange?no='+edmsNo+"&appStatus="+appStatus);
+        	}
           
+          </script>
             
             
                       <!-- 페이징 -->
