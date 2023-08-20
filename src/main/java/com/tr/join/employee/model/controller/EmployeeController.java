@@ -40,6 +40,11 @@ public class EmployeeController {
 		return "login/login";
 	}
 	
+	@GetMapping("/main")
+	public String main() {
+		return "mainpage";
+	}
+	
 	// 로그인 - 아이디 저장
 	@PostMapping("/successLogin")
 	public String cookieResolve(String userId, @RequestParam(name = "saveId", required = false) String saveId,
