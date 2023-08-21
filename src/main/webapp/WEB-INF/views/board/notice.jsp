@@ -81,10 +81,73 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td><a href="">제목입니다.</a></td>
+                                        <td>21</td>
+                                        <td><a href="">워크샵 일정 안내</a></td>
+                                        <td>윤나라</td>
+                                        <td>8</td>
+                                        <td>2023-08-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td><a href="">탕비실 간식 목록</a></td>
+                                        <td>윤나라</td>
+                                        <td>12</td>
+                                        <td>2023-08-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                        <td><a href="">사우회 납입금액 변경</a></td>
+                                        <td>윤나라</td>
+                                        <td>5</td>
+                                        <td>2023-08-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td><a href="">8/22 의자 교체 예정입니다.</a></td>
+                                        <td>윤나라</td>
+                                        <td>8</td>
+                                        <td>2023-08-18</td>
+                                    </tr>
+                                    <tr>
+                                        <td>17</td>
+                                        <td><a href="">연차 소진 관련 공지</a></td>
+                                        <td>윤나라</td>
+                                        <td>13</td>
+                                        <td>2023-08-18</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td><a href="">8/14 창립기념일 근무시간 안내</a></td>
+                                        <td>윤나라</td>
+                                        <td>20</td>
+                                        <td>2023-08-14</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td><a href="">거래처 휴가 일정 공유</a></td>
+                                        <td>윤나라</td>
+                                        <td>5</td>
+                                        <td>2023-08-09</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td><a href="">상반기 인센티브 지급 안내</a></td>
                                         <td>윤나라</td>
                                         <td>22</td>
+                                        <td>2023-07-22</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td><a href="">8월 연봉협상 대상자 공지</a></td>
+                                        <td>윤나라</td>
+                                        <td>10</td>
+                                        <td>2023-07-22</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td><a href="">시간 외 근무 신청 안내</a></td>
+                                        <td>윤나라</td>
+                                        <td>7</td>
                                         <td>2023-07-22</td>
                                     </tr>
                                 </tbody>

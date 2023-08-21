@@ -76,7 +76,7 @@
     </li>
 
     <!-- 커뮤니티 사이드바 -->
-    <%-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCommunity"
             aria-expanded="true" aria-controls="collapseCommunity">
             <i class="bi bi-chat-square-text-fill"></i>
@@ -90,8 +90,7 @@
                 <a class="collapse-item" href="${pageContext.request.contextPath}/community">자유게시판</a>
             </div>
         </div>
-    </li> --%>
-
+    </li>
 
     <!-- 커뮤니티 아래 흰색 선 Divider -->
     <hr class="sidebar-divider d-none d-md-block">
