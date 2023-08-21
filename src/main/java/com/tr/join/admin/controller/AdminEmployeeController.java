@@ -171,7 +171,7 @@ public class AdminEmployeeController {
 	@GetMapping("/admin/ajax/makeEmpNum")
 	@ResponseBody
 	public String makeEmpNum() {
-		String lastEmpNum = service.makeEmpNum(); // 마지막 값 가져오기 => 쿼리를 통해서 가져와라
+		String lastEmpNum = service.makeEmpNum(); // 마지막 값 가져오기 => 쿼리를 통해서 가져오기
 		lastEmpNum = lastEmpNum.substring(1); // 첫번째값(J) 지우기
 		String empNum = "";
 		try{

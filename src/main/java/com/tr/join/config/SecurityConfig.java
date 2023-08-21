@@ -41,7 +41,6 @@ public class SecurityConfig{
 				.and()
 				.authorizeHttpRequests()
 					.antMatchers("/resources/**").permitAll()
-					.antMatchers("/sendMail").permitAll() // 추가?
 					.antMatchers("/").permitAll()
 					.antMatchers("/admin/*").hasAuthority("ADMIN")
 					.antMatchers("/**").hasAnyAuthority("ADMIN","USER") // 넓은 범위가 가장 아래 있어야 함
