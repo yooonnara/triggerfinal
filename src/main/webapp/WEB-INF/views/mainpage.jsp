@@ -1,134 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
 <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 <!-- 풀캘린더 -->
 <script
-	src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+   src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 <!-- 풀캘린더 언어 CDN -->
 <script
-	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+   src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
 <body id="page-top">
-	<div id="wrapper">
-		<div id="sidebar">
-			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-			<link
-				href="${pageContext.request.contextPath }/resources/css/yelin.css"
-				rel="stylesheet">
-		</div>
+   <div id="wrapper">
+      <div id="sidebar">
+         <jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
+         <link
+            href="${pageContext.request.contextPath }/resources/css/yelin.css"
+            rel="stylesheet">
+      </div>
 
-		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column">
-			<!-- Main Content -->
-			<div id="content">
-				<!-- 상단바 시작 -->
-				<div id="topbar">
-					<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
-				</div>
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+         <!-- Main Content -->
+         <div id="content">
+            <!-- 상단바 시작 -->
+            <div id="topbar">
+               <jsp:include page="/WEB-INF/views/common/topbar.jsp" />
+            </div>
 
 
-				<!-- 수정할 컨테이너 Begin Page Content -->
-				<div class="container-fluid">
-					<!-- 타이틀 Page Heading -->
-					<h1 class="h3 text-dark ml-5"></h1>
+            <!-- 수정할 컨테이너 Begin Page Content -->
+            <div class="container-fluid">
+               <!-- 타이틀 Page Heading -->
+               <h1 class="h3 text-dark ml-5"></h1>
 
-					<div class="workingTimeMain-container">
-						<div class="full-div row">
-							<div class="left-div mt-2">
-								<!-- 현재시간과 출퇴근 버튼창 -->
-								<div class="button-div border border-secondary ml-3 "
-									id="wtm-button">
-									<p id="wk-title">근태 관리</p>
-									<p id="wk-date"></p>
-									<p id="wk-todate"></p>
+               <div class="workingTimeMain-container">
+                  <div class="full-div row">
+                     <div class="left-div mt-2">
+                        <!-- 현재시간과 출퇴근 버튼창 -->
+                        <div class="button-div border border-secondary ml-3 "
+                           id="wtm-button">
+                           <p id="wk-title">근태 관리</p>
+                           <p id="wk-date"></p>
+                           <p id="wk-todate"></p>
 
-									<div class="startendTable">
-										<table id="startTimes">
-											<tr>
-												<td>출근 시간</td>
-												<td id="startResult"></td>
-											</tr>
-											<tr>
-												<td>퇴근 시간</td>
-												<td id="endResult"></td>
-												<!-- 끝나는 시간이 비어있지 않을 떄, 출력 
+                           <div class="startendTable">
+                              <table id="startTimes">
+                                 <tr>
+                                    <td>출근 시간</td>
+                                    <td id="startResult"></td>
+                                 </tr>
+                                 <tr>
+                                    <td>퇴근 시간</td>
+                                    <td id="endResult"></td>
+                                    <!-- 끝나는 시간이 비어있지 않을 떄, 출력 
                                        아닐 때, 끝나는 시간 출력
                                      -->
 
-											</tr>
-										</table>
-									</div>
-									<div class="startendBtn mt-4">
-										<button class="btn btn-primary btn-sm mr-2" id="startBtn"
-											onclick="startResult();">출근</button>
-										<button class="btn btn-primary btn-sm" id="endBtn"
-											onclick="endResult();">퇴근</button>
-									</div>
-								</div>
-								<!-- 사이드바 페이지 -->
-								<div class="col ml-2">
-									<div class="card border-left-primary shadow h-100 py-2 bg-light">
-										<div class="card-body">
-											<div class="row no-gutters align-items-center">
-												<div class="col mr-2">
-													<p class="h6 mb-0 font-weight-bold text-gray-800">결재현황</p>
-													<br>
-													<div
-														class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-														대기</div>
-													<div
-														class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-														승인</div>
-													<div
-														class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-														반려</div>
+                                 </tr>
+                              </table>
+                           </div>
+                           <div class="startendBtn mt-4">
+                              <button class="btn btn-primary btn-sm mr-2" id="startBtn"
+                                 onclick="startResult();">출근</button>
+                              <button class="btn btn-primary btn-sm" id="endBtn"
+                                 onclick="endResult();">퇴근</button>
+                           </div>
+                        </div>
+                        <!-- 사이드바 페이지 -->
+                        <div class="col ml-2">
+                           <div class="card border-left-primary shadow h-100 py-2 bg-light">
+                              <div class="card-body">
+                                 <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                       <p class="h6 mb-0 font-weight-bold text-gray-800">결재현황</p>
+                                       <br>
+                                       <div
+                                          class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                          대기</div>
+                                       <div
+                                          class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                          승인</div>
+                                       <div
+                                          class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                          반려</div>
 
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="right-div mt-2" id="rightDiv">
-								<!-- 오늘 날짜 -->
-								<h3
-									class="row justify-content-center text-dark font-weight-bold mb-4"
-									id="main-date"></h3>
-								<!-- 누적 시간 테이블 -->
-								<div class="row justify-content-center mb-5" id="timeTable">
-									<table id="timeMain">
-										<tr>
-											<td class="border-dark border-right" id="weekWork">이번주
-												누적</td>
-											<td class="border-dark border-right">이번주 초과</td>
-											<td class="border-dark border-right">이번주 잔여</td>
-											<td class="border-dark ">이번달 누적</td>
-										</tr>
-										<tr>
-											<td class="border-dark border-right" id="df-num">${week.weekTime}</td>
-											<td class="border-dark border-right" id="df-num">6시 40분
-												00초</td>
-											<td class="border-dark border-right" id="df-num">${remainWeek.remainTime}</td>
-											<td class="border-dark" id="df-num">${month.monthTime}</td>
-										</tr>
-									</table>
-								</div>
-								<div class="wt-calender border border-secondary" id="calendar"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                                    </div>
+                                    <div class="col-auto">
+                                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="right-div mt-2" id="rightDiv">
+                        <!-- 오늘 날짜 -->
+                        <h3
+                           class="row justify-content-center text-dark font-weight-bold mb-4"
+                           id="main-date"></h3>
+                        <!-- 누적 시간 테이블 -->
+                        <div class="row justify-content-center mb-5" id="timeTable">
+                           <table id="timeMain">
+                              <tr>
+                                 <td class="border-dark border-right" id="weekWork">이번주
+                                    누적</td>
+                                 <td class="border-dark border-right">이번주 초과</td>
+                                 <td class="border-dark border-right">이번주 잔여</td>
+                                 <td class="border-dark ">이번달 누적</td>
+                              </tr>
+                              <tr>
+                                 <td class="border-dark border-right" id="df-num">47시 57분 29초</td>
+                                 <td class="border-dark border-right" id="df-num">6시 40분
+                                    00초</td>
+                                 <td class="border-dark border-right" id="df-num">3시 14분 00초</td>
+                                 <td class="border-dark" id="df-num">181시 57분 34초</td>
+                              </tr>
+                           </table>
+                        </div>
+                        <div class="wt-calender border border-secondary" id="calendar"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
 
 
-			<!-- 캘린더  -->
-			<script>
+         <!-- 캘린더  -->
+         <script>
              document.addEventListener('DOMContentLoaded', function() {
                var calendarEl = document.getElementById('calendar');
                var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -167,7 +167,7 @@
                    
                    $(function(){
                       $.ajax({
-                         url:"/att/workCalendar",
+                         url:"${pageContext.request.contextPath }/att/workCalendar",
                          success:function(model){
                             console.log(model.attInfo[0].status);
                             console.log(model.tripInfo[0].endDate);
@@ -272,8 +272,8 @@
              });
            </script>
 
-			<!-- 오늘 날짜와 시간 출력 -->
-			<script>
+         <!-- 오늘 날짜와 시간 출력 -->
+         <script>
               $(function(){
                   var today = new Date();
                   var year = today.getFullYear();
@@ -288,7 +288,7 @@
                   $("#main-date").text(mainDate);
               })
           </script>
-			<script>
+         <script>
                setInterval(()=>{
                   const date = new Date();
                   $("#wk-todate").text(changeDouble(date.getHours())+":"
@@ -303,8 +303,8 @@
                }
          </script>
 
-			<!-- 근태 출퇴근 버튼 -->
-			<script>
+         <!-- 근태 출퇴근 버튼 -->
+         <script>
          <!-- 출근 버튼 -->
          function startResult(){
             $.ajax({
@@ -324,8 +324,8 @@
             })
          }
          </script>
-			<!-- 퇴근 버튼 -->
-			<script>
+         <!-- 퇴근 버튼 -->
+         <script>
          function endResult(){
             $.ajax({
                url:"${pageContext.request.contextPath }/att/endInsert",
@@ -347,22 +347,22 @@
 
 
 
-			<!-- Footer -->
-			<div id="footer">
-				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-			</div>
-			<!-- End of Footer -->
+         <!-- Footer -->
+         <div id="footer">
+            <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+         </div>
+         <!-- End of Footer -->
 
-		</div>
-		<!-- End of Content Wrapper -->
+      </div>
+      <!-- End of Content Wrapper -->
 
-	</div>
-	<!-- End of Page Wrapper -->
+   </div>
+   <!-- End of Page Wrapper -->
 
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"
-		style="display: list-item"> <i class="fas fa-angle-up"></i>
-	</a>
+   <!-- Scroll to Top Button-->
+   <a class="scroll-to-top rounded" href="#page-top"
+      style="display: list-item"> <i class="fas fa-angle-up"></i>
+   </a>
 
 
 
