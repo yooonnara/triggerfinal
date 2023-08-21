@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
 <div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+   <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 </div>
 
 <body id="page-top">
@@ -32,180 +32,226 @@
 
 
               <!-- 수정할 컨테이너 Begin Page Content -->
-              <div class="container-fluid pl-5 pr-5">
+            <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
-                    <h1 class="h3 text-dark mt-5 mb-5">전사원 근태 현황</h1>
-                    <div class="adminWorkingTimeList-container">  
-                    <!-- 근무상태 검색 & 시작및종료일 검색 버튼 영역 -->
-                    <div class="row justify-content-between" id="big-search">
-                        <!-- 근무상태 검색 버튼 -->
-                        <div class="btn-group-toggle float-left mb-3 col-4" data-toggle="buttons">근무 상태
-                            <label class="btn btn-outline-dark active ml-2">
-                              <input type="radio" name="options" id="option1" checked>전체
-                            </label>
-                            <label class="btn btn-outline-dark">
-                              <input type="radio" name="options" id="option2">정상
-                            </label>
-                            <label class="btn btn-outline-dark">
-                              <input type="radio" name="options" id="option3">지각
-                            </label>
-                            <label class="btn btn-outline-dark">
-                                <input type="radio" name="options" id="option3">결근
-                            </label>
-                        </div>
-                      
-                      
-                     
-                            
-                            
-                      <!-- datepicker -->
-						<script>	
-			                $(function(){
-			                    
-			                    $("#datepicker1").datepicker({
-			                        changeMonth: true, 
-			                        changeYear: true,
-			                        nextText: '다음 달',
-			                        prevText: '이전 달',
-			                        dateFormat: "yy-mm-dd",
-			                        yearRange: 'c-50:c+20',
-			                        showButtonPanel: true, 
-			                        currentText: '오늘 날짜',
-			                        closeText: '닫기',
-			                        showAnim: "slide",
-			                        showMonthAfterYear: true, 
-			                        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-			                        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], 
-			                        onSelect: function(selected){
-			                            $("#datepicker2").datepicker("option", "minDate", selected);
-			                        }
-			                    });	
-			                    
-			                    $("#datepicker2").datepicker({
-			                        changeMonth: true, 
-			                        changeYear: true,
-			                        minDate: '0',
-			                        nextText: '다음 달',
-			                        prevText: '이전 달',
-			                        dateFormat: "yy-mm-dd",
-			                        yearRange: 'c-50:c+20',
-			                        showButtonPanel: true, 
-			                        currentText: '오늘 날짜',
-			                        closeText: '닫기',
-			                        showAnim: "slide",
-			                        showMonthAfterYear: true, 
-			                        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-			                        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], 
-			                        onSelect: function(selected){
-			                            $("#datepicker1").datepicker("option", "maxDate", selected);
-			                        }
-			                    });	
-			                    
-			                });
-		                
-		                </script> 
-                      
-                        <!-- 근태 시작~종료일 검색 버튼 -->
-                        <div class="dateSearch-search float-right mb-3 mr-3">
-	              			<!-- <button class="float-right btn btn-dark btn-sm">검색</button>
-	              			<input type="text"  placeholder="종료일" class="float-right mr-1 endDate" id="datepicker2">
-	              			<input type="text"  placeholder="시작일" class="float-right mr-1 startDate" id="datepicker1"> -->
-	              			 <!-- 검색창 -->
-                           
-                                <form action="" method="get" id="searchForm">
-                                    <div class="search-area d-flex">
-                                        <select name="keyfield" aria-label="Default select example" class="mr-1">
-                                        	<option <c:if test="${keyfield == 'name' }">selected</c:if> value="name">이름</option>
-                                            <option <c:if test="${keyfield == 'empno' }">selected</c:if> value="empno">사번</option>
-                                            <option <c:if test="${keyfield == 'dept' }">selected</c:if> value="dept">부서</option>
-                                            
-                                        </select>
-                                        <input type="text" name="keyword" placeholder="검색어를 입력해 주세요" class="mr-1" value="${keyword}">
-                                        <button type="submit" class="btn btn-dark btn-sm">검색</button>
-                                    </div>
-                                </form>
-                      
-                          
-                        </div>
-                    </div>
-                      
-                            <script>
-                            	function dropdownSearch(searchId,value){
-                            		$('#'+searchId).val(value);
-                            		$('#searchForm').submit();
-                            	}
-                            </script>
-                    
-                    
-                    <!-- 테이블 -->
+                    <h1 class="h3 text-dark my-5">전사원 근태 현황
+                  <p class="mt-2 text-secondary" style="font-size:17px">출퇴근 변경</p> 
+                    </h1>
+                    <div class="adminDayOff-container" > 
+                    <!-- 사용 내역 테이블 -->
                     <div id="big-table">
-                        <table class="table table-sm shadow table-hover text-center" >
+                        <table class="table text-center table-sm">
                             <colgroup>
-                                <col style="width:80px">
-                                <col style="width:70px">
-                                <col style="width:70px">
-                                <col style="width:70px">
+                                <col style="width:130px">
                                 <col style="width:100px">
-                                <col style="width:70px">
-                                <col style="width:70px">
-                                <col style="width:100px">
-                                <col style="width:80px">
+                                <col style="width:130px">
+                                <col style="width:130px">
+                                <col style="width:130px">
                             </colgroup>
                             <!-- table-active -->
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th>근무일자</th>
+                                    <th>번호</th>
+                                    <th>이름</th>
                                     <th>사번</th>
                                     <th>부서</th>
                                     <th>직급</th>
-                                    <th>이름</th>
-                                    <th>출근시간</th>
-                                    <th>퇴근 시간</th>
-                                    <th>총 근무시간</th>
-                                    <th>근무 상태</th>
+                                    <th>조정일</th>
+                                    <th>내용</th>
+                                    <th>진행상황</th>
                                 </tr>
                             </thead>
-                            
-                            <tbody>
-                            <c:if test="${not empty att }">
-                            	<c:forEach var="a" items="${att }">
-                                <tr>
-                                	<td>${a.attDate }</td>
-                                    <td>${a.emp.empNum }</td>
-                                    <td>${a.emp.deptTitle}</td>
-                                    <td>${a.emp.jobTitle }</td>
-                                    <td>${a.emp.name }</td>
-                                    <td>${a.startTime}</td>
-                                    <td>${a.endTime}</td>
-                                    <td>${a.attTime }</td>
-                                    <td>
-                                    	<c:if test="${a.status == '0'}">정상 출근</c:if>
-                                    	<c:if test="${a.status == '1'}">출근</c:if>
-                                    	<c:if test="${a.status == '2'}">지각</c:if>
-                                    	<c:if test="${a.status == '3'}">조퇴</c:if>
-                                    	<c:if test="${a.status == '4'}">결근</c:if>
-                                    </td>
-                                </tr>
+                            <tbody class="bg-white" id="wk-tbody">
+                            <c:if test="${not empty adminWk }">
+                               <c:forEach var="ad" items="${adminWk }">
+                                <tr onclick="workDetail(${ad.wtNo});">
+                                    <td>${ad.wtNo }</td>
+                                    <td>${ad.emp.name }</td>
+                                    <td>${ad.emp.empNum }</td>
+                                    <td>${ad.emp.deptTitle }</td>
+                                    <td>${ad.emp.jobTitle }</td>
+                                    <td>${ad.wtDate }</td>
+                                    <td>${ad.reContent }</td>
+                                    <td>${ad.appStatus }</td>
+                                </tr> 
                                 </c:forEach>
-                            </c:if>
-                            
-                                
-                               
+                              </c:if>
                             </tbody>
                         </table>
                     </div>
-                        <!-- 페이징 -->
-                        <div class="pasing-area">
-                        	<c:out value="${pageBar }" escapeXml="false"/>
-                       	</div>
+                    
+                     <!-- 페이징 -->
+                  <div class="pasing-area">
+                     <c:out value="${pageBar }" escapeXml="false"/>
+                  </div>
+                  <script>
+                     function workDetail(no){
+                        console.log(no);
+                        $.ajax({
+                        url:"${pageContext.request.contextPath }/adminWkDetail",
+                        data:{
+                           wtNo:no
+                        },
+                     success:function(ad){
+                        console.log(ad); 
+                        const input = $("#adWkTable td>input[type=text]");
+                        const hidden = $("#adWkTable td>input[type=hidden]");
+                        const textarea =$("<textarea>");
+                        $(hidden[0]).val(ad[0].wtNo);
+                        $(hidden[1]).val(ad[0].att.no);
+                        $(input[0]).val(ad[0].att.attDate);
+                        $(input[1]).val(ad[0].att.startTime);
+                        $(input[2]).val(ad[0].att.endTime);
+                        $(input[3]).val(ad[0].reStartTime);
+                        $(input[4]).val(ad[0].reEndTime);
+                        $("#adWkTable td>textarea").html(ad[0].reContent);
                         
-                       
+                        const length = ad[0].reContent.length;
+                        $(".textCount").text(length + '자');   
+                        $("#adminWkModify").modal("show");
+                     },
+                     error:function(){
+                        console.log("근태 ajax 통신실패");
+                     }
+                  })
+                     }
+                  </script>
+                  <script>
+                    $(function(){
+                       $("#wtSubmit").click(function(){
+                          
+                          const input = $("#adWkTable td>input[type=text]");
+                        const hidden = $("#adWkTable td>input[type=hidden]");
+                        
+                          if(confirm("출퇴근 시간변경을 승인하시겠습니까?")){
+                             location.href='wtModifySubmit?wtNo=' + $("#adWkTable input[name=wtNo]").val()
+                                   + '&reStartTime=' + $("#adWkTable input[name=reStartTime]").val()
+                                   + '&reEndTime=' +$("#adWkTable input[name=reEndTime]").val()
+                                   + '&no=' +$("#adWkTable input[name=attNo]").val();
+                          }
+                       })
+                    })
+                 </script>
+                 <script>
+                       $(function(){
+                          $("#wtReturn").click(function(){
+                             if(confirm("출퇴근 시간변경을 반려하시겠습니까?")){
+                                location.href='${pageContext.request.contextPath }wtModifyReturn?wtNo=' + $("#adWkTable input[name=wtNo]").val();
+                             }
+                          })
+                       })
+                 </script>
+                   <!-- 페이징 -->
+                        <div class="pasing-area">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center mt-4">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item">
+                                    <li class="page-item">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                  
+                  
+                  
+                  <!-- 출퇴근 시간 변경 Modal -->
+                 <div id="adminWorkTime">
+                    <div class="modal fade text-center" id="adminWkModify" tabindex="-1" role="dialog"
+                        aria-activedescendant="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-dark text-white">
+                                    <h5 class="modal-title" id="exampleModalLabel">출퇴근 시간 변경</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <!-- Modal body -->        
+                                <div class="modal-body">
+                                    <table id="adWkTable" style="width:430px;" class="table table-borderless text-dark">
+                                            <colgroup>
+                                                <col style="width:40%">
+                                                <col style="width:60%">
+                                            </colgroup>
+                                            <tr>
+                                                <th class="align-middle">수정할 날짜</th>
+                                                <td class="font-weight-bold">
+                                                   <input type="hidden" class="form-control inputSize" name="wtNo">
+                                                   <input type="hidden" name="attNo">
+                                                   <input type="text" class="form-control inputSize" name="workDate" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">지정 출근 시간</th>
+                                                <td class="font-weight-bold">
+                                                   <input type="text" class="form-control inputSize" name="workStart" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">지정 퇴근 시간</th>
+                                                <td>
+                                                    <input type="text" class="form-control inputSize" name="workDate" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr id="adtr">
+                                                <th class="align-middle" >수정할 출근 시간</th>
+                                                <td>
+                                                    <input type="text" class="form-control inputSize" name="reStartTime" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle">수정할 퇴근 시간</th>
+                                                <td>
+                                                    <input type="text" class="form-control inputSize" name="reEndTime" readonly>
+                                                </td>
+                                            </tr>
+                                            <tr id="adtr">
+                                                <th class="align-middle" id="thwd" >신청 사유</th>
+                                               <td id="adtd">
+                                                  <span>/100자</span><span class="textCount font-weight-bold"></span>
+                                                    <textarea class="form-control inputSize" name="reContent" rows="3" maxlength="99" style="resize: none;" readonly></textarea>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="wtSubmit" class="btn btn-primary">승인</button>
+                                    <button type="button" id="wtReturn" class="btn btn-warning">반려</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+                  
+                  
+                  
+                  
+                  
+                  
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
-
+                
+               
+                
+                
+                
             </div>
             <!-- Footer -->
+            
+
             <div id="footer">
                 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
             </div>
@@ -219,15 +265,15 @@
 
     <!-- Scroll to Top Button-->
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
-		<i class="fas fa-angle-up"></i>
-	</a>
+      <i class="fas fa-angle-up"></i>
+   </a>
 
     <!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+   <div id="bootstrap">
+      <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+   </div>
+
 </body>
 
 </html>
+

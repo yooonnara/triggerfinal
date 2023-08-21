@@ -43,7 +43,7 @@
          aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="${pageContext.request.contextPath}/adminWorkTime">전사원 근태 현황</a> 
-            <a href="${path }/adminWorkTimeModify"><h6 class="collapse-header">- 출·퇴근 시간 변경</h6></a>
+            <a href="${pageContext.request.contextPath}/adminWorkTimeModify"><h6 class="collapse-header">- 출·퇴근 시간 변경</h6></a>
             <a class="collapse-item" href="${pageContext.request.contextPath}/adminDayoff">전사원 연차 현황</a>
          </div>
       </div>

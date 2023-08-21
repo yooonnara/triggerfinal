@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 헤드 태그 -->
 <div id="headTag">
-	<jsp:include page="/WEB-INF/views/common/headTag.jsp" />
+   <jsp:include page="/WEB-INF/views/common/headTag.jsp" />
 </div>
 
 <body id="page-top">
@@ -32,7 +32,7 @@
 
 
               <!-- 수정할 컨테이너 Begin Page Content -->
-				<div class="container-fluid pl-5 pr-5">
+            <div class="container-fluid pl-5 pr-5">
                     <!-- 타이틀 Page Heading -->
                     <h1 class="h3 text-dark mt-5 mb-5">전사원 연차 현황</h1>
                     <div class="adminDayOff-container" > 
@@ -41,44 +41,44 @@
                     
                         <!-- 사원명 부서명 검색 버튼 -->
                         <div class="float-left mb-3 col-5" id="dayOffSearch">
-                        	<input type="text" placeholder="사원명" id="searchEmp" name="name">
+                           <input type="text" placeholder="사원명" id="searchEmp" name="name">
                             <input type="text" id="searchDep" placeholder="부서명" name="dept">    
                             <button class="btn btn-dark btn-sm searchDF">검색</button>
-                    	</div>                
+                       </div>                
                         <script>
-                        	$("#dayOffSearch button").click(e=>{
-                        		$.ajax({
-                       				url:"${pageContext.request.contextPath }/ajaxDfSearch",
-                       				data:{
-                       					searchEmp:$("#dayOffSearch input[id=searchEmp]").val(),
-                       					searchDep:$("#dayOffSearch input[id=searchDep]").val()
-                       				},
-                       				success:function(df){
-                       					console.log(df[0]);
-                       					$("#dftable").html("");
-                       					for(let i=0;i<df.length;i++){
-                       						const $tr = $("<tr>");
-                       						const $td = $("<td>");
-                       						const $name = $("<td>").text(df[i]["emp"]["name"]);
-                       						const $deptTitle = $("<td>").text(df[i]["emp"]["deptTitle"]);
-                       						const $enrollDate = $("<td>").text(df[i]["emp"]["enrollDate"]);
-                       						const $resignDate = $("<td>").text(df[i]["emp"]["resignDate"]);
-                       						const $total =  $("<td>").text(df[i]["totalDoCount"]);
-                       						const $used =  $("<td>").text(df[i]["usedDoCount"]);
-                       						const $remain =  $("<td>").text(df[i]["remainDoCount"]);
-                       						
-                       						
-                       						$tr.append($tr).append($td).append($name).append($deptTitle).append($enrollDate).append($resignDate).append($total).append($used).append($remain);
-                       						
-                       						$("#dftable").append($tr);
-                       					}
-                       				},
-                       				error:function(){
-                						console.log("ajax 통신 실패");
-                					}
-                        	})
+                           $("#dayOffSearch button").click(e=>{
+                              $.ajax({
+                                   url:"${pageContext.request.contextPath }/ajaxDfSearch",
+                                   data:{
+                                      searchEmp:$("#dayOffSearch input[id=searchEmp]").val(),
+                                      searchDep:$("#dayOffSearch input[id=searchDep]").val()
+                                   },
+                                   success:function(df){
+                                      console.log(df[0]);
+                                      $("#dftable").html("");
+                                      for(let i=0;i<df.length;i++){
+                                         const $tr = $("<tr>");
+                                         const $td = $("<td>");
+                                         const $name = $("<td>").text(df[i]["emp"]["name"]);
+                                         const $deptTitle = $("<td>").text(df[i]["emp"]["deptTitle"]);
+                                         const $enrollDate = $("<td>").text(df[i]["emp"]["enrollDate"]);
+                                         const $resignDate = $("<td>").text(df[i]["emp"]["resignDate"]);
+                                         const $total =  $("<td>").text(df[i]["totalDoCount"]);
+                                         const $used =  $("<td>").text(df[i]["usedDoCount"]);
+                                         const $remain =  $("<td>").text(df[i]["remainDoCount"]);
+                                         
+                                         
+                                         $tr.append($tr).append($td).append($name).append($deptTitle).append($enrollDate).append($resignDate).append($total).append($used).append($remain);
+                                         
+                                         $("#dftable").append($tr);
+                                      }
+                                   },
+                                   error:function(){
+                                  console.log("ajax 통신 실패");
+                               }
+                           })
                         })
-                        	
+                           
                         </script>
                         
                          <!-- 연차부여 버튼 -->
@@ -91,51 +91,51 @@
                    </div>    
                    
                    <script>
-                   		function openCalendar(){
-                   			var url = "${pageContext.request.contextPath }/admin/adminDayoffCalendar"
-                   			var name = "adminDayoffCalendar"
-                   			var option = "width=1000, height=730, top=10, location=no"
-                   			window.open(url,name,option);
-                   		};
+                         function openCalendar(){
+                            var url = "${pageContext.request.contextPath }/admin/adminDayoffCalendar"
+                            var name = "adminDayoffCalendar"
+                            var option = "width=1000, height=730, top=10, location=no"
+                            window.open(url,name,option);
+                         };
                    </script>
                    
                     
                     <script>
-                    	
-                    	function updateResetAll(){
-                    		if(confirm("전사원 연차 리셋하시겠습니까?")){
-                    			location.href='/amdin/adminResetAll';
-                    		}
-                    	};
+                       
+                       function updateResetAll(){
+                          if(confirm("전사원 연차 리셋하시겠습니까?")){
+                             location.href='${pageContext.request.contextPath }/amdin/adminResetAll';
+                          }
+                       };
                     
-                    	function updateReset(){
-                    		if(confirm("선택 사원의 연차를 리셋하시겠습니까?")){
-                    			var dfList = [];
-                    			$("td>input[type=checkbox]:checked").each(function(){
-                    				var ck = $(this).val(); //사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
-                    				dfList.push(ck); //배열에 추가해주고 값을 넘긴다.
-                    			})
-                    			
-                    			$.ajax({
-                    				url:"${pageContext.request.contextPath }/admin/checkReset",
-                    				data:{
-                    					dfList:dfList
-                    				},
-                    				success:function(result){
-                    					console.log(result);
-                    					if(result == "success"){
-                    						alert("연차 리셋되었습니다.");
-                    						location.replace("/adminDayoff");
-                    					}
-                    				},
-                    				
-                    				error:function(){
-                    					 console.log("ajax 연차 리셋 통신실패");
-                    				}
-                    			})
-                    			
-                    		}
-                    	}
+                       function updateReset(){
+                          if(confirm("선택 사원의 연차를 리셋하시겠습니까?")){
+                             var dfList = [];
+                             $("td>input[type=checkbox]:checked").each(function(){
+                                var ck = $(this).val(); //사용자가 선택한 버튼의 no값이 ck에 담기도록 반복문을 돌린다. 
+                                dfList.push(ck); //배열에 추가해주고 값을 넘긴다.
+                             })
+                             
+                             $.ajax({
+                                url:"${pageContext.request.contextPath }/admin/checkReset",
+                                data:{
+                                   dfList:dfList
+                                },
+                                success:function(result){
+                                   console.log(result);
+                                   if(result == "success"){
+                                      alert("연차 리셋되었습니다.");
+                                      location.replace("${pageContext.request.contextPath }/adminDayoff");
+                                   }
+                                },
+                                
+                                error:function(){
+                                    console.log("ajax 연차 리셋 통신실패");
+                                }
+                             })
+                             
+                          }
+                       }
                     </script>
                     
                     
@@ -168,64 +168,64 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white" id="dftable">
-	                            <c:if test="${not empty adminDayoff }">
-	                            <c:forEach var="ad" items="${adminDayoff }">
+                               <c:if test="${not empty adminDayoff }">
+                               <c:forEach var="ad" items="${adminDayoff }">
                                 <tr>
                                     <td class="align-middle"><input type="checkbox" name="ck" value="${ad.no }"></td>
                                     <td>${ad.emp.name }</td>
                                     <td>${ad.emp.deptTitle}</td>
                                     <td>${ad.emp.enrollDate }</td>
                                     <td>
-                                    	<c:if test="${ad.emp.resignDate == null}">-</c:if>
-                                    	<c:if test="${ad.emp.resignDate != null}">${ad.emp.resignDate }</c:if>
+                                       <c:if test="${ad.emp.resignDate == null}">-</c:if>
+                                       <c:if test="${ad.emp.resignDate != null}">${ad.emp.resignDate }</c:if>
                                     </td>
                                     <td>${ad.totalDoCount }</td>
                                     <td>${ad.usedDoCount }</td>
                                     <td>
-                                    	<c:if test="${ad.remainDoCount <= 0}">*</c:if>
-                                    	<c:if test="${ad.remainDoCount > 0}">${ad.remainDoCount }</c:if>
+                                       <c:if test="${ad.remainDoCount <= 0}">*</c:if>
+                                       <c:if test="${ad.remainDoCount > 0}">${ad.remainDoCount }</c:if>
                                     </td>
                                 </tr>
-	                            </c:forEach>
-	                          	</c:if>
+                               </c:forEach>
+                                </c:if>
                             </tbody>
                         </table>
                     </div>
                     <button class="btn btn-secondary btn-sm mr-2" type="button" onclick="openCalendar();">캘린더 보기</button>
                         <!-- 페이징 -->
-	                       <div class="pasing-area">
-					        	<c:out value="${pageBar }" escapeXml="false"/>
-					        </div>   
+                          <div class="pasing-area">
+                          <c:out value="${pageBar }" escapeXml="false"/>
+                       </div>   
                     </div>
                 </div>
                 <!-- 수정할 컨테이너 종료 End of Main Content -->
                 
                 <!-- 선택 사원 연차 부여 -->
                 <script>
-	                function dayoffUpdate (){
-	            		const inputData = $("td>input[type=checkbox]:checked").parents("tr").find("td")
-	            		const data = $("#dayOffTable td");
-	            		const input = $("#dayOffTable td>input[type=text]");
-	            	
-	            		console.log(data);
-	            		
-	            		//$(data[0]).text($(inputData[1]).text());
-	            		//$(data[1]).text($(inputData[2]).text());
-	            		//$(data[2]).text($(inputData[3]).text());
-	            		//console.log($(inputData[1]).text());
-	            		$(input[0]).val($(inputData[1]).text());
-	            		$(input[1]).val($(inputData[2]).text());
-	            		$(input[2]).val($(inputData[3]).text());
-	            		$("#insertDayOffModal").modal("show");
-	            	}
-	            	function insertDayoff(){
-	            		$('#frm').submit();
-	            	}
+                   function dayoffUpdate (){
+                     const inputData = $("td>input[type=checkbox]:checked").parents("tr").find("td")
+                     const data = $("#dayOffTable td");
+                     const input = $("#dayOffTable td>input[type=text]");
+                  
+                     console.log(data);
+                     
+                     //$(data[0]).text($(inputData[1]).text());
+                     //$(data[1]).text($(inputData[2]).text());
+                     //$(data[2]).text($(inputData[3]).text());
+                     //console.log($(inputData[1]).text());
+                     $(input[0]).val($(inputData[1]).text());
+                     $(input[1]).val($(inputData[2]).text());
+                     $(input[2]).val($(inputData[3]).text());
+                     $("#insertDayOffModal").modal("show");
+                  }
+                  function insertDayoff(){
+                     $('#frm').submit();
+                  }
                 </script>
                 
                 
                 <!-- 연차 조정 modal창 -->
-				<div id="insertDayOff">
+            <div id="insertDayOff">
                     <div class="modal fade text-center" id="insertDayOffModal" tabindex="-1" role="dialog"
                         aria-activedescendant="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -247,19 +247,19 @@
                                             <tr>
                                                 <th class="align-middle">이름</th>
                                                 <td class="font-weight-bold">
-                                                	<input type="text" class="form-control inputSize" name="emp_name" readonly>
+                                                   <input type="text" class="form-control inputSize" name="emp_name" readonly>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th class="align-middle">부서</th>
                                                 <td class="font-weight-bold">
-                                                	<input type="text" class="form-control inputSize" name="dept_type" readonly>
+                                                   <input type="text" class="form-control inputSize" name="dept_type" readonly>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th class="align-middle">입사일</th>
                                                 <td class="font-weight-bold">
-                                                	<input type="text" class="form-control inputSize" name="enroll_date" readonly>
+                                                   <input type="text" class="form-control inputSize" name="enroll_date" readonly>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -308,16 +308,15 @@
 
     <!-- Scroll to Top Button-->
    <a class="scroll-to-top rounded" href="#page-top" style="display: list-item"> 
-		<i class="fas fa-angle-up"></i>
-	</a>
+      <i class="fas fa-angle-up"></i>
+   </a>
 
     <!-- 부트스트랩 스크립트 -->
-	<div id="bootstrap">
-		<jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
-	</div>
+   <div id="bootstrap">
+      <jsp:include page="/WEB-INF/views/common/bootstrapScript.jsp" />
+   </div>
 
 </body>
 
 </html>
-
 
