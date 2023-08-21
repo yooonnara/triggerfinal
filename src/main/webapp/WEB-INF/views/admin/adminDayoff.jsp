@@ -15,7 +15,7 @@
         <!-- 사이드바 시작 Sidebar -->
         <div id="sidebar">
            <jsp:include page="/WEB-INF/views/admin/common/admin_sidebar.jsp"/>
-           <link href="${page }/resources/css/yelin.css" rel="stylesheet">
+           <link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
         </div>
         <!-- 사이드바 종료 End of Sidebar -->
 
@@ -48,7 +48,7 @@
                         <script>
                         	$("#dayOffSearch button").click(e=>{
                         		$.ajax({
-                       				url:"/ajaxDfSearch",
+                       				url:"${pageContext.request.contextPath }/ajaxDfSearch",
                        				data:{
                        					searchEmp:$("#dayOffSearch input[id=searchEmp]").val(),
                        					searchDep:$("#dayOffSearch input[id=searchDep]").val()
@@ -117,7 +117,7 @@
                     			})
                     			
                     			$.ajax({
-                    				url:"/admin/checkReset",
+                    				url:"${pageContext.request.contextPath }/admin/checkReset",
                     				data:{
                     					dfList:dfList
                     				},

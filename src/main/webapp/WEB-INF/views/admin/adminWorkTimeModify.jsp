@@ -96,7 +96,7 @@
 		            	function workDetail(no){
 		            		console.log(no);
 		            		$.ajax({
-								url:"adminWkDetail",
+								url:"${pageContext.request.contextPath }/adminWkDetail",
 								data:{
 									wtNo:no
 								},

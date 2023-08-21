@@ -12,7 +12,7 @@
 		<!-- 사이드바 시작 Sidebar -->
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-			<link href="/resources/css/yelin.css" rel="stylesheet">
+			<link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
 		</div>
 		<!-- 사이드바 종료 End of Sidebar -->
 		<!-- Content Wrapper -->
@@ -105,7 +105,7 @@
 						    
 						    <script> 
 					    	$.ajax({
-					    		url:"/workTimeWeeklyData",
+					    		url:"${pageContext.request.contextPath }/workTimeWeeklyData",
 					    		success:function(w){
 					    			weekcheckTest(w);
 					    		}

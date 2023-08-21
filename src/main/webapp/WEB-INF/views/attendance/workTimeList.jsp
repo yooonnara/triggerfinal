@@ -63,7 +63,7 @@
 						
 						function ajaxWorkTimePage(cPage,numPerpage,searchNum){
 							$.ajax({
-								url:"/ajaxworkTime",
+								url:"${pageContext.request.contextPath }/ajaxworkTime",
 								data:{"cPage":cPage,"numPerpage":numPerpage,"searchNum":searchNum},
 								success:function(data){
 									const d = data['wtajax']
@@ -98,7 +98,7 @@
 						
 						function ajaxWorkTime(e){
 							$.ajax({
-								url: "/ajaxworkTime",
+								url: "${pageContext.request.contextPath }/ajaxworkTime",
 								data: {"searchNum":e.target.value}, 
 								success:function(data){
 									const d = data['wtajax'];
@@ -193,7 +193,7 @@
 					<script>
 					$("#DateSearch button").click(e=>{
 						$.ajax({
-							url:"/ajaxworkTimeSearch",
+							url:"${pageContext.request.contextPath }/ajaxworkTimeSearch",
 							data: {
 								startDate:$("#DateSearch input[name=startDate]").val(),
 								endDate:$("#DateSearch input[name=endDate]").val()
@@ -282,7 +282,7 @@
 						function workDetail(no){
 							console.log(no);
 							$.ajax({
-								url:"workTimeDetail",
+								url:"${pageContext.request.contextPath }/workTimeDetail",
 								data:{
 									attNo:no
 								},
