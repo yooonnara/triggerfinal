@@ -67,7 +67,7 @@
                    $(function(){
                 	   
                       $.ajax({
-                         url:"/att/dayoffCalendar",
+                         url:"${pageContext.request.contextPath }/att/dayoffCalendar",
                          
                          success:function(model){
                             console.log(model.dayoffInfo[0].emp.name);

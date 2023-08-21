@@ -15,7 +15,7 @@
 		<!-- 사이드바 시작 Sidebar -->
 		<div id="sidebar">
 			<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
-			<link href="${page }/resources/css/yelin.css" rel="stylesheet">
+			<link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
 		</div>
 		<!-- 사이드바 종료 End of Sidebar -->
 		<!-- Content Wrapper -->
@@ -105,7 +105,7 @@
                 	function cancelBtn(no){
                 		if(confirm("출장신청을 삭제하시겠습니까?")){
                 			console.log(no);
-                			location.href = '/deleteBT?btNo=' + no;
+                			location.href = '${pageContext.request.contextPath }/deleteBT?btNo=' + no;
                 		}
                 	}
                 	
@@ -114,7 +114,7 @@
                 			$(this).text('승인 신청 조회');
                 		})
                 		$.ajax({
-                			url:"/businessTripList",
+                			url:"${pageContext.request.contextPath }/businessTripList",
                 			
                 			
                 		})
@@ -122,7 +122,7 @@
                 	<!-- 출장 취소 조회 -->
                 	function checkCancel(){
                 		$.ajax({
-                			url:"/checkCancelList",
+                			url:"${pageContext.request.contextPath }/checkCancelList",
                 			success:function(d){
                 				console.log(d);
                 				$("#bt-tbody").html("");

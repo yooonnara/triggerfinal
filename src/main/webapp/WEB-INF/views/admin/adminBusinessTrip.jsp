@@ -15,7 +15,7 @@
         <!-- 사이드바 시작 Sidebar -->
         <div id="sidebar">
            <jsp:include page="/WEB-INF/views/admin/common/admin_sidebar.jsp"/>
-           <link href="${page }/resources/css/yelin.css" rel="stylesheet">
+           <link href="${pageContext.request.contextPath }/resources/css/yelin.css" rel="stylesheet">
         </div>
         <!-- 사이드바 종료 End of Sidebar -->
 
@@ -58,7 +58,7 @@
                    	<script>
                    		$("#BtSearch button").click(e=>{
                    			$.ajax({
-                   				url:"/ajaxBtSearch",
+                   				url:"${pageContext.request.contextPath }/ajaxBtSearch",
                    				data:{
                    					searchEmp:$("#BtSearch input[name=searchEmp]").val(),
                    					searchDep:$("#BtSearch input[name=searchDep]").val()

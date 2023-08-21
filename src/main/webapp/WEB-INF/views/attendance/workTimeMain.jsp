@@ -145,7 +145,7 @@
                    
                    $(function(){
                       $.ajax({
-                         url:"/att/workCalendar",
+                         url:"${pageContext.request.contextPath }/att/workCalendar",
                          success:function(model){
                             console.log(model.attInfo[0].status);
                             console.log(model.tripInfo[0].endDate);
